@@ -1,0 +1,88 @@
+{
+  "version": "2.0.0",
+  "output": {
+    "defaultMode": "aggregated",
+    "allowUserVisibleOnApprovedDoneOnly": true,
+    "explicitUserVisibleSignals": ["progressUpdate", "breakthrough", "rootCause"],
+    "suppressedReason": "user_visible_disabled",
+    "aggregatedReason": "default_aggregate_delivery"
+  },
+  "visibility": {
+    "defaultTaskPolicy": { "userVisible": false, "teamVisible": true },
+    "defaultRequestPolicy": { "userVisible": false, "teamVisible": true }
+  },
+  "pipeline": {
+    "stageRules": {
+      "critic": {
+        "required": false,
+        "skipConditions": [
+          { "when": "riskLevel == low", "reason": "low_risk_skip_critic" }
+        ],
+        "timeout": { "defaultMs": 120000, "maxMs": 300000 },
+        "retry": { "maxAttempts": 1, "backoffMs": 3000 }
+      },
+      "judge": {
+        "required": false,
+        "skipConditions": [
+          { "when": "riskLevel == low", "reason": "low_risk_skip_judge" }
+        ],
+        "timeout": { "defaultMs": 120000, "maxMs": 300000 },
+        "retry": { "maxAttempts": 1, "backoffMs": 3000 }
+      },
+      "executor": {
+        "required": true,
+        "skipConditions": [],
+        "timeout": { "defaultMs": 360000, "maxMs": 600000 },
+        "retry": { "maxAttempts": 2, "backoffMs": 5000 }
+      }
+    },
+    "reviewLoop": {
+      "enabled": true,
+      "maxRevisions": 2,
+      "triggerOnVerdict": ["revise"],
+      "skipOnVerdict": ["approve", "approve_with_notes"],
+      "escalateOnVerdict": ["escalate_human"],
+      "revisionTimeoutMs": 300000
+    },
+    "dynamicReplan": {
+      "enabled": true,
+      "maxDynamicLayers": 3,
+      "maxDynamicWorkItems": 8,
+      "allowedRoles": ["executor"],
+      "requireTLApproval": false
+    }
+  },
+  "singleFlight": {
+    "scopeWindowMs": 1200000,
+    "maxScopeTeamsToScan": 10,
+    "blockTerminalStates": ["done", "cancelled"],
+    "reuseActiveOnly": true,
+    "followUpEventKinds": ["single_flight.hit", "single_flight.follow_up"]
+  },
+  "errorRecovery": {
+    "autoRetry": {
+      "enabled": true,
+      "maxRetries": 2,
+      "retryableErrors": ["timeout", "spawn_failed", "session_failed"],
+      "backoffMs": 5000
+    },
+    "partialSuccess": {
+      "enabled": true,
+      "preserveCompletedResults": true,
+      "retryFailedOnly": true
+    },
+    "degradation": {
+      "enabled": true,
+      "fallbackToNativeChat": true,
+      "fallbackToTLDirect": true
+    }
+  },
+  "history": {
+    "mailboxScanLimit": 400,
+    "routeEventLimit": 80,
+    "routeArtifactLimit": 120,
+    "teamRecentTaskLimit": 50,
+    "activeTaskSummaryLimit": 20,
+    "historyLimit": 100
+  }
+}

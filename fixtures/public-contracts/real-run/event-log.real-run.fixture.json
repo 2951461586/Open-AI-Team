@@ -1,0 +1,757 @@
+[
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216649751
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216649753
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216649754
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216649755
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216649759
+  },
+  {
+    "type": "host.session_bus.appended",
+    "path": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-session-bus.json",
+    "ts": 1775216650102
+  },
+  {
+    "type": "host.desk.note_written",
+    "path": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/desk/notes/host-bootstrap.md",
+    "ts": 1775216650103
+  },
+  {
+    "type": "host.inbox.enqueued",
+    "path": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-inbox.json",
+    "entryId": "inbox:1775216650104:1",
+    "ts": 1775216650112
+  },
+  {
+    "type": "host.outbox.enqueued",
+    "path": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-outbox.json",
+    "entryId": "outbox:1775216650121:1",
+    "ts": 1775216650139
+  },
+  {
+    "type": "host.scheduler.upserted",
+    "jobId": "job:run-2026-04-03_11-44-09-748:bootstrap",
+    "status": "pending",
+    "ts": 1775216650167
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-in:run-2026-04-03_11-44-09-748",
+    "kind": "user_request",
+    "ts": 1775216650177
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-out:run-2026-04-03_11-44-09-748",
+    "kind": "status",
+    "ts": 1775216650182
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216650183
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.lifecycle-core",
+    "kind": "lifecycle",
+    "ts": 1775216650183
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216650183
+  },
+  {
+    "type": "host.dispatch.completed",
+    "dispatchCount": 2,
+    "path": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-dispatch.json",
+    "ts": 1775216650233
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216650422
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216650424
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216650425
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216650427
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216650434
+  },
+  {
+    "type": "member.started",
+    "role": "planner",
+    "workItemId": "w1",
+    "ts": 1775216650696
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033128,
+    "port": 33671,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650842
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "pid": 2033129,
+    "port": 33111,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650854
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "pid": 2033130,
+    "port": 45211,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650858
+  },
+  {
+    "type": "transport.broker.failover.injected",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650872
+  },
+  {
+    "type": "transport.broker.stopped",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033128,
+    "port": 33671,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "reason": "failover_injected",
+    "ts": 1775216650925
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033161,
+    "port": 37269,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650993
+  },
+  {
+    "type": "transport.broker.restarted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033161,
+    "port": 37269,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650993
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "port": 37269,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216651023
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "placementReason": "preferred_node",
+    "ts": 1775216651100
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "attempt": 0,
+    "queueKey": "planner:1775216651029",
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651029,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651050,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:12.250Z",
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651050,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651150,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "durableResultPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216651029_imkuu8.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651150,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "ts": 1775216651186
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216651106
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216651109
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216651109
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216651112
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216651115
+  },
+  {
+    "type": "artifact.plan.writing",
+    "role": "planner",
+    "path": "artifacts/PLAN.md",
+    "ts": 1775216651117
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.thinking",
+    "delta": "开始规划：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n将输出 PLAN.md。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216651117
+  },
+  {
+    "type": "stream.done",
+    "role": "planner",
+    "label": "plan.thinking",
+    "total": 1,
+    "ts": 1775216651120
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216651125
+  },
+  {
+    "type": "tool.executed",
+    "tool": "workspace.snapshot",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "# Plan\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 1,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 2,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 3,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 4,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 5,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 6,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 7,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+    "index": 8,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.done",
+    "role": "planner",
+    "label": "plan.result",
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "member.completed",
+    "role": "planner",
+    "workItemId": "w1",
+    "artifactPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/PLAN.md",
+    "workerPid": 2033172,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "brokerJobId": "job:1775216651029:imkuu8",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "ts": 1775216651186
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w1",
+    "kind": "member.completed",
+    "ts": 1775216651186
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216651187
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216651187
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216651198
+  },
+  {
+    "type": "member.started",
+    "role": "executor",
+    "workItemId": "w2",
+    "ts": 1775216651226
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "port": 33111,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216651254
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651235:ske83p",
+    "schedulerLeaseId": "lease:job:1775216651234:ukayha",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "placementReason": "preferred_node",
+    "ts": 1775216651337
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "attempt": 0,
+    "queueKey": "executor:1775216651259",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651259,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651281,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:12.481Z",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651281,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.expired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652483,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.retried",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "attempt": 1,
+    "retryCount": 1,
+    "reason": "lease_expired",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652492,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652546,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:13.746Z",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652546,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652628,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "durableResultPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216651259_lgj3w1.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652628,
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651235:ske83p",
+    "schedulerLeaseId": "lease:job:1775216651234:ukayha",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "ts": 1775216652660
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216652585
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216652587
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216652588
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216652590
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216652594
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.read_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216652596
+  }
+]

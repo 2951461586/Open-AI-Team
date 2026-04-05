@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-board-payload.schema.json",
+  "title": "Dashboard Board Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "board": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "count": { "type": "number" },
+        "columns": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "dashboard-task-card.schema.json" }
+          }
+        },
+        "queueAddress": { "type": "string" },
+        "viewAddress": { "type": "string" }
+      },
+      "required": ["count", "columns", "queueAddress", "viewAddress"]
+    }
+  },
+  "required": ["ok", "board"]
+}

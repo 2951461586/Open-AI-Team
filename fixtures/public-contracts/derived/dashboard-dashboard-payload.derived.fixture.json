@@ -1,0 +1,46 @@
+{
+  "ok": true,
+  "dashboard": {
+    "count": 1,
+    "totalCount": 1,
+    "cards": [
+      {
+        "taskId": "task:fixture-derived",
+        "teamId": "team:fixture-derived",
+        "title": "derived fixture task",
+        "state": "approved",
+        "updatedAt": 1775362350885,
+        "currentMemberKey": "runtime.node-a",
+        "currentDriver": "judge",
+        "nextBestAction": "run_judge_decision",
+        "latestReviewVerdict": "approve",
+        "latestDecisionType": "approve",
+        "artifactCount": 0,
+        "evidenceCount": 0,
+        "issueCount": 0,
+        "deliverableReady": false,
+        "humanInterventionReady": false,
+        "deliveryStatus": "pending_delivery",
+        "interventionStatus": "no_intervention_needed",
+        "requestedNode": "node-a",
+        "actualNode": "node-a",
+        "degradedReason": "",
+        "sessionMode": "session",
+        "sessionPersistent": true,
+        "sessionFallbackReason": "",
+        "planSummary": "derived fixture plan",
+        "executiveSummary": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+        "protocolSource": "decision"
+      }
+    ],
+    "cursor": 1775362350885,
+    "hasMore": false,
+    "address": "http://127.0.0.1:19090/state/team/dashboard",
+    "viewAddress": "http://127.0.0.1:19090/state/team/dashboard/view"
+  },
+  "boundary": {
+    "access": "dashboard_token",
+    "sensitivity": "medium",
+    "redaction": "dashboard_card_compact"
+  }
+}

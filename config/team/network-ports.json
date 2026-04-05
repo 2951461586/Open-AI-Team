@@ -1,0 +1,53 @@
+{
+  "contract": "team.network.ports.v1",
+  "generatedNote": "Canonical public-safe multi-node inventory. Legacy aliases remain compatibility-only in code, not as primary repo semantics.",
+  "nodes": {
+    "node-a": {
+      "id": "node-a",
+      "host": "127.0.0.1",
+      "services": {
+        "orchestrator": {
+          "bind": "0.0.0.0",
+          "port": 19090,
+          "role": "authority"
+        }
+      },
+      "aliases": ["laoda", "authority"]
+    },
+    "node-b": {
+      "id": "node-b",
+      "host": "worker-b.internal",
+      "services": {
+        "gateway": {
+          "scheme": "https",
+          "port": 443,
+          "baseUrl": "https://worker-b.internal",
+          "role": "planner_executor_observer_gateway",
+          "status": "active"
+        }
+      },
+      "aliases": ["violet", "observer"]
+    },
+    "node-c": {
+      "id": "node-c",
+      "host": "review-c.internal",
+      "services": {
+        "gateway": {
+          "scheme": "https",
+          "port": 443,
+          "baseUrl": "https://review-c.internal",
+          "role": "critic_gateway",
+          "status": "active"
+        }
+      },
+      "aliases": ["lebang", "reviewer"]
+    }
+  },
+  "roleRouting": {
+    "planner": { "preferredNode": "node-b", "executionMode": "remote_session", "entry": "node-b:https" },
+    "executor": { "preferredNode": "node-b", "executionMode": "remote_session", "entry": "node-b:https" },
+    "critic": { "preferredNode": "node-c", "executionMode": "remote_session", "entry": "node-c:https" },
+    "judge": { "preferredNode": "node-a", "executionMode": "local_authority", "entry": "node-a:19090" },
+    "output": { "authorityNode": "node-a", "executionMode": "dashboard_ws_canonical", "entry": "node-a dashboard websocket canonical lane" }
+  }
+}

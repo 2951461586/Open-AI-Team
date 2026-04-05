@@ -1,0 +1,70 @@
+{
+  "contract": "team.governance.query.v1",
+  "version": "v1",
+  "stableEnvelopeFields": ["api", "resource", "query", "links"],
+  "featuredRouteKeys": ["summary", "workbenchPayload", "pipeline", "control", "residents", "dashboard"],
+  "featuredRoutes": {
+    "summary": {
+      "path": "/state/team/summary",
+      "resourceKind": "task_summary",
+      "requiredTopLevel": ["api", "resource", "query", "links", "currentMemberKey", "protocol"]
+    },
+    "workbenchPayload": {
+      "path": "/state/team/workbench",
+      "resourceKind": "task_workbench",
+      "requiredTopLevel": ["api", "resource", "query", "links", "board", "summary"]
+    },
+    "pipeline": {
+      "path": "/state/team/pipeline",
+      "resourceKind": "task_pipeline",
+      "requiredTopLevel": ["api", "resource", "query", "links", "pipeline", "roles"]
+    },
+    "control": {
+      "path": "/state/team/control",
+      "resourceKind": "task_control",
+      "requiredTopLevel": ["api", "resource", "query", "links", "manualActions"]
+    },
+    "residents": {
+      "path": "/state/team/residents",
+      "resourceKind": "resident_registry",
+      "requiredTopLevel": ["api", "resource", "query", "links", "residents", "counts"]
+    },
+    "dashboard": {
+      "path": "/state/team/dashboard",
+      "resourceKind": "task_dashboard",
+      "requiredTopLevel": ["api", "resource", "query", "links", "dashboard"]
+    }
+  },
+  "routes": {
+    "summary": {
+      "path": "/state/team/summary",
+      "resourceKind": "task_summary",
+      "requiredTopLevel": ["api", "resource", "query", "links", "currentMemberKey", "protocol"]
+    },
+    "workbenchPayload": {
+      "path": "/state/team/workbench",
+      "resourceKind": "task_workbench",
+      "requiredTopLevel": ["api", "resource", "query", "links", "board", "summary"]
+    },
+    "pipeline": {
+      "path": "/state/team/pipeline",
+      "resourceKind": "task_pipeline",
+      "requiredTopLevel": ["api", "resource", "query", "links", "pipeline", "roles"]
+    },
+    "control": {
+      "path": "/state/team/control",
+      "resourceKind": "task_control",
+      "requiredTopLevel": ["api", "resource", "query", "links", "manualActions"]
+    },
+    "residents": {
+      "path": "/state/team/residents",
+      "resourceKind": "resident_registry",
+      "requiredTopLevel": ["api", "resource", "query", "links", "residents", "counts"]
+    },
+    "dashboard": {
+      "path": "/state/team/dashboard",
+      "resourceKind": "task_dashboard",
+      "requiredTopLevel": ["api", "resource", "query", "links", "dashboard"]
+    }
+  }
+}

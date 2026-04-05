@@ -1,0 +1,50 @@
+{
+  "schema": "agent-harness-run.v1",
+  "status": "completed",
+  "createdAt": "2026-04-03T11:44:09.750Z",
+  "updatedAt": "2026-04-03T11:44:13.403Z",
+  "runId": "run-2026-04-03_11-44-09-748",
+  "runDir": "/runs/run-2026-04-03_11-44-09-748",
+  "userText": "生成一个开源最小样板。",
+  "manifest": {
+    "id": "ai-team-oss-minimal",
+    "name": "AI Team OSS Minimal Wrapper",
+    "version": "0.12.0"
+  },
+  "contracts": {
+    "host": "agent-harness-host.v1",
+    "bridge": "agent-harness-bridge.v1"
+  },
+  "results": [
+    {
+      "role": "planner",
+      "summary": "plan complete",
+      "artifactPath": "workspace/artifacts/PLAN.md"
+    },
+    {
+      "role": "judge",
+      "summary": "decision complete",
+      "artifactPath": "workspace/artifacts/DECISION.md"
+    }
+  ],
+  "durableArtifacts": [
+    { "path": "workspace/artifacts/PLAN.md", "title": "Plan" },
+    { "path": "workspace/artifacts/DECISION.md", "title": "Decision" }
+  ],
+  "eventLog": [
+    { "type": "plugins.initialized", "ts": 1775216649751 },
+    { "type": "member.completed", "role": "planner", "ts": 1775216651186 }
+  ],
+  "toolRuns": [],
+  "decision": { "status": "approve", "summary": "ready" },
+  "paths": {
+    "statePath": "/runs/run-2026-04-03_11-44-09-748/runtime/run-state.json",
+    "eventLogPath": "/runs/run-2026-04-03_11-44-09-748/runtime/event-log.json",
+    "streamLogPath": "/runs/run-2026-04-03_11-44-09-748/runtime/stream-log.json",
+    "bridgeStatePath": "/runs/run-2026-04-03_11-44-09-748/runtime/bridge/bridge-state.json"
+  },
+  "runtimeEvidence": { "broker": true, "streaming": true },
+  "toolRegistry": ["fs.write_text", "command.exec"],
+  "skillRegistry": ["planning.decomposition", "decision.finalize"],
+  "injectedCapabilities": ["bridge.channel-routing", "shell.observability"]
+}

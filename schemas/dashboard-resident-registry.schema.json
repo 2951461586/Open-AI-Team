@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-resident-registry.schema.json",
+  "title": "Dashboard Resident Registry",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "residents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "role": { "type": "string" },
+          "memberId": { "type": "string" },
+          "status": { "type": "string" },
+          "node": { "type": "string" },
+          "leaseExpiresAt": { "type": ["number", "string", "null"] },
+          "lastHeartbeatAt": { "type": ["number", "string", "null"] },
+          "busy": { "type": "boolean" }
+        }
+      }
+    },
+    "nodes": { "type": ["object", "null"] },
+    "observedAt": { "type": "number" },
+    "counts": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "count": { "type": "number" },
+        "busyCount": { "type": "number" },
+        "activeLeaseCount": { "type": "number" }
+      },
+      "required": ["count", "busyCount", "activeLeaseCount"]
+    },
+    "deployment": { "type": ["object", "null"] }
+  },
+  "required": ["ok", "residents", "counts"]
+}

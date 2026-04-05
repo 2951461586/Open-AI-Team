@@ -1,0 +1,44 @@
+{
+  "contractVersion": "agent-harness-bridge.v1",
+  "updatedAt": "2026-04-03T11:44:13.401Z",
+  "channels": ["local-thread", "telegram-scaffold"],
+  "defaultChannel": "local-thread",
+  "routes": ["local-thread", "telegram-scaffold"],
+  "routeContracts": [
+    {
+      "routeKey": "local-thread",
+      "enabled": true,
+      "allowedRoles": ["planner", "executor", "critic", "judge"],
+      "allowedKinds": ["bootstrap", "status", "route", "user_request", "egress"]
+    }
+  ],
+  "counts": { "ingress": 1, "egress": 2 },
+  "ingress": [
+    {
+      "messageId": "bridge-bootstrap",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "bootstrap ingress",
+      "kind": "bootstrap",
+      "createdAt": "2026-04-03T11:44:10.424Z"
+    }
+  ],
+  "egress": [
+    {
+      "messageId": "bridge-status",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "runtime ready",
+      "kind": "bootstrap",
+      "createdAt": "2026-04-03T11:44:10.425Z"
+    },
+    {
+      "messageId": "bridge-run:run-1:completed",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "run completed",
+      "kind": "run.completed",
+      "createdAt": "2026-04-03T11:44:13.401Z"
+    }
+  ]
+}

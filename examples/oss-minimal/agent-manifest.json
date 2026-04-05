@@ -1,0 +1,172 @@
+{
+  "contractVersion": "agent-manifest.v1",
+  "identity": {
+    "agentId": "agent:ai-team-oss-minimal-wrapper",
+    "displayName": "AI Team OSS Minimal Wrapper"
+  },
+  "id": "ai-team-oss-minimal",
+  "name": "AI Team OSS Minimal Wrapper",
+  "version": "0.12.0",
+  "runtime": {
+    "kind": "standalone-harness",
+    "bootstrap": "./standalone-bootstrap.mjs",
+    "entry": "./run-demo.mjs",
+    "workerEntry": "../../src/agent-harness-core/role-worker.mjs",
+    "brokerEntry": "../../src/agent-harness-core/remote-broker-server.mjs",
+    "transport": "remote-broker-http",
+    "brokerCount": 3,
+    "leaseMs": 1200,
+    "maxAttempts": 2,
+    "healthProbeTimeoutMs": 600,
+    "failoverEnabled": true,
+    "sharedAuthority": {
+      "mode": "shared_fs",
+      "dir": "./.shared",
+      "leaseReapGraceMs": 0,
+      "reapOnResume": true
+    },
+    "clusterNodes": [
+      { "nodeId": "node-a", "region": "local-a", "tier": "control", "roles": ["planner", "critic"] },
+      { "nodeId": "node-b", "region": "local-b", "tier": "worker", "roles": ["executor"] },
+      { "nodeId": "node-c", "region": "local-c", "tier": "decision", "roles": ["judge"] }
+    ]
+  },
+  "hostContract": {
+    "contractVersion": "agent-harness-host.v1",
+    "bootstrapKind": "standalone-broker-productized",
+    "hostAgnostic": true,
+    "requires": {
+      "hostRuntime": false,
+      "hostGateway": false,
+      "hostSessionBus": false,
+      "hostMemory": false
+    }
+  },
+  "providers": {
+    "model": "local-demo-model",
+    "tool": "local-demo-toolkit",
+    "toolRuntime": "local-tool-runtime",
+    "sandbox": "workspace-sandbox-guarded",
+    "memory": "local-demo-memory",
+    "events": "local-demo-eventbus",
+    "artifacts": "local-demo-artifacts",
+    "transport": "standalone-broker-cluster",
+    "backend": "sqlite-state-backend",
+    "host": "local-host-runtime",
+    "command": "guarded-command-runtime",
+    "bridge": "local-bridge-host",
+    "authority": "shared-fs-authority",
+    "shell": "product-shell",
+    "capabilityGate": "role-capability-gate"
+  },
+  "memorySeeds": [
+    {
+      "id": "seed:deer-flow",
+      "title": "Harness-first execution must stay explicit",
+      "text": "DeerFlow-style strong execution bases should keep broker transport, queue, lease, retry, failover, and authority evidence visible in runtime output.",
+      "keywords": ["deer-flow", "harness-first", "broker", "lease", "failover"]
+    },
+    {
+      "id": "seed:openhanako",
+      "title": "Independent agent access should stay first-class",
+      "text": "OpenHanako-style independent agent access requires host-layer, session, desk, plugin, and bridge capabilities to remain explicit rather than hidden behind a single host runtime.",
+      "keywords": ["openhanako", "independent agent", "host-layer", "desk", "plugin", "bridge"]
+    },
+    {
+      "id": "seed:provider-registry",
+      "title": "Provider registry should stay visible",
+      "text": "A strong standalone harness should make provider registry and runtime adapter boundaries explicit in output and review.",
+      "keywords": ["provider registry", "runtime adapter", "standalone harness"]
+    },
+    {
+      "id": "seed:sandbox-tools",
+      "title": "Sandbox and tool runtime need evidence",
+      "text": "Reviewers should expect workspace sandbox, tool runtime evidence, and tool-runs.json rather than only narrative claims.",
+      "keywords": ["sandbox", "tool runtime", "tool-runs.json", "evidence"]
+    },
+    {
+      "id": "seed:replan",
+      "title": "Critic can trigger replan",
+      "text": "If retrieval-backed evidence is missing, critic should return revise and ask executor to补 retrieval evidence before judge finalizes.",
+      "keywords": ["critic", "revise", "replan", "memory retrieval"]
+    },
+    {
+      "id": "seed:streaming",
+      "title": "Streaming should be observable",
+      "text": "A strong harness should expose chunk-level streaming evidence and persist stream events for later inspection and resume.",
+      "keywords": ["stream", "chunk", "stream-events", "resume"]
+    },
+    {
+      "id": "seed:broker",
+      "title": "Broker transport should be visible",
+      "text": "A stronger standalone harness should route execution through a broker job API, keep broker events, and expose remote-style transport evidence in runtime output.",
+      "keywords": ["broker", "transport", "job api", "remote"]
+    },
+    {
+      "id": "seed:lease-retry",
+      "title": "Lease and retry should be observable",
+      "text": "A durable broker should expose lease acquired/expired/released and retry events, and queue state should survive as files under runtime/.",
+      "keywords": ["lease", "retry", "queue", "broker state"]
+    }
+  ],
+  "roles": [
+    {
+      "role": "planner",
+      "displayName": "Planner",
+      "capabilities": ["planning", "decomposition"],
+      "contract": { "version": "planner.plan.v2", "outputType": "team.plan.v2" }
+    },
+    {
+      "role": "executor",
+      "displayName": "Executor",
+      "capabilities": ["analysis", "writing", "implementation"],
+      "contract": { "version": "executor.result.v1", "outputType": "team.execution.v1" }
+    },
+    {
+      "role": "critic",
+      "displayName": "Critic",
+      "capabilities": ["review"],
+      "contract": { "version": "critic.review.v2", "outputType": "team.review.v2" }
+    },
+    {
+      "role": "judge",
+      "displayName": "Judge",
+      "capabilities": ["decision"],
+      "contract": { "version": "judge.decision.v2", "outputType": "team.decision.v2" }
+    }
+  ],
+  "toolRegistry": [
+    { "id": "fs.write_text", "kind": "tool", "note": "write sandboxed text file" },
+    { "id": "fs.append_text", "kind": "tool", "note": "append sandboxed text file" },
+    { "id": "fs.read_text", "kind": "tool", "note": "read sandboxed text file" },
+    { "id": "fs.list", "kind": "tool", "note": "list sandboxed files" },
+    { "id": "text.search", "kind": "tool", "note": "search text in sandboxed files" },
+    { "id": "workspace.snapshot", "kind": "tool", "note": "take workspace snapshot" },
+    { "id": "memory.retrieve", "kind": "tool", "note": "retrieve blackboard / durable memory evidence" },
+    { "id": "command.exec", "kind": "tool", "note": "run allowlisted commands in guarded workspace" }
+  ],
+  "skillRegistry": [
+    { "id": "planning.decomposition", "kind": "skill" },
+    { "id": "execution.delivery", "kind": "skill" },
+    { "id": "review.critique", "kind": "skill" },
+    { "id": "decision.finalize", "kind": "skill" },
+    { "id": "memory.retrieval", "kind": "skill" },
+    { "id": "replan.dynamic-adjustment", "kind": "skill" },
+    { "id": "streaming.incremental-output", "kind": "skill" },
+    { "id": "continuation.resume", "kind": "skill" },
+    { "id": "transport.remote-broker", "kind": "skill" },
+    { "id": "transport.lease-retry", "kind": "skill" },
+    { "id": "transport.multi-broker", "kind": "skill" },
+    { "id": "transport.health-probe", "kind": "skill" },
+    { "id": "transport.failover", "kind": "skill" },
+    { "id": "execution.command-runtime", "kind": "skill" },
+    { "id": "host.inbox-outbox-dispatch", "kind": "skill" },
+    { "id": "backend.sqlite-state", "kind": "skill" },
+    { "id": "cluster.control-plane", "kind": "skill" },
+    { "id": "cluster.distributed-placement", "kind": "skill" },
+    { "id": "cluster.scheduler-dispatch", "kind": "skill" },
+    { "id": "plugins.capability-injection", "kind": "skill" },
+    { "id": "bridge.channel-routing", "kind": "skill" },
+    { "id": "host.session-bus", "kind": "skill" }
+  ]
+}

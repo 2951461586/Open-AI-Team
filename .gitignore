@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Runtime artifacts (never commit)
+run/
+state/
+task_workspaces/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+*.db-shm
+*.db-wal
+
+# Example run outputs
+examples/**/.runs/
+examples/**/.shared/
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Dashboard build outputs
+/dashboard/node_modules/
+/dashboard/.next/
+/dashboard/out/
+/dashboard/.env.local
+/dashboard/serve.log
+/dashboard/tsconfig.tsbuildinfo
+
+# Release staging / bundles
+/.release-artifacts/
+/.release-bundles/

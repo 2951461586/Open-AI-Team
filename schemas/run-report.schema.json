@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/run-report.schema.json",
+  "title": "Agent Harness Run Report",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "runId": { "type": "string" },
+    "runDir": { "type": "string" },
+    "runReportPath": { "type": "string" },
+    "startedAt": { "type": ["string", "number"] },
+    "completedAt": { "type": ["string", "number"] },
+    "status": { "type": "string" },
+    "summary": { "type": "string" },
+    "contracts": { "type": "object" },
+    "hostContract": { "type": "object" },
+    "agentPackage": { "type": "object" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "artifactId": { "type": "string" },
+          "artifactType": { "type": "string" },
+          "title": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    },
+    "metrics": { "type": "object" }
+  }
+}

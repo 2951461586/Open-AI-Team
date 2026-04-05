@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/completion-envelope.schema.json",
+  "title": "Session Completion Envelope",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "mode": { "type": "string" },
+    "filePath": { "type": "string" },
+    "status": { "type": "string" },
+    "error": { "type": "string" },
+    "raw": { "type": "string" },
+    "payload": {
+      "anyOf": [
+        { "$ref": "./completion-result.schema.json" },
+        { "type": "object" },
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    }
+  },
+  "required": ["ok"]
+}

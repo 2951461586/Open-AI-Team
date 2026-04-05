@@ -1,0 +1,69 @@
+{
+  "contractVersion": "agent-manifest.v1",
+  "identity": {
+    "agentId": "agent:sample.third-party-agent",
+    "displayName": "Third-Party Sample Agent"
+  },
+  "id": "sample.third-party-agent",
+  "name": "Third-Party Sample Agent",
+  "version": "0.1.0",
+  "runtime": {
+    "kind": "standalone-harness",
+    "bootstrap": "../../src/agent-harness-core/standalone-product-runtime.mjs",
+    "workerEntry": "../../src/agent-harness-core/role-worker.mjs",
+    "brokerEntry": "../../src/agent-harness-core/remote-broker-server.mjs",
+    "transport": "remote-broker-http",
+    "brokerCount": 1,
+    "leaseMs": 1200,
+    "maxAttempts": 2,
+    "healthProbeTimeoutMs": 600,
+    "failoverEnabled": true,
+    "sharedAuthority": {
+      "mode": "shared_fs",
+      "dir": "./.shared",
+      "leaseReapGraceMs": 0,
+      "reapOnResume": true
+    }
+  },
+  "hostContract": {
+    "contractVersion": "agent-harness-host.v1",
+    "bootstrapKind": "standalone-broker-productized",
+    "hostAgnostic": true,
+    "requires": {
+      "hostRuntime": false,
+      "hostGateway": false,
+      "hostSessionBus": false,
+      "hostMemory": false
+    }
+  },
+  "providers": {
+    "model": "provider.third-party.model",
+    "tool": "provider.third-party.toolkit",
+    "toolRuntime": "provider.third-party.tool-runtime",
+    "sandbox": "provider.third-party.sandbox",
+    "memory": "provider.third-party.memory",
+    "events": "provider.third-party.events",
+    "artifacts": "provider.third-party.artifacts",
+    "transport": "provider.third-party.transport",
+    "backend": "provider.third-party.backend",
+    "host": "provider.third-party.host",
+    "bridge": "provider.third-party.bridge",
+    "authority": "provider.third-party.authority",
+    "shell": "provider.third-party.shell",
+    "capabilityGate": "provider.third-party.capability-gate"
+  },
+  "roles": [
+    {
+      "role": "planner",
+      "displayName": "Planner",
+      "capabilities": ["planning", "decomposition"],
+      "contract": { "version": "planner.plan.v2", "outputType": "team.plan.v2" }
+    },
+    {
+      "role": "executor",
+      "displayName": "Executor",
+      "capabilities": ["analysis", "delivery"],
+      "contract": { "version": "executor.result.v1", "outputType": "team.execution.v1" }
+    }
+  ]
+}

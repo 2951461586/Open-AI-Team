@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-thread-detail-payload.schema.json",
+  "title": "Dashboard Thread Detail Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "thread": { "$ref": "dashboard-thread-summary.schema.json" },
+    "links": { "type": "object" },
+    "boundary": { "type": "object" }
+  },
+  "required": ["ok", "thread"]
+}

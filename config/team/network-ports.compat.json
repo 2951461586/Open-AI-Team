@@ -1,0 +1,82 @@
+{
+  "contract": "team.network.ports.compat.v1",
+  "generatedNote": "Legacy compatibility and investigation-only inventory. Keep for migration assistance only; canonical routing lives in config/team/network-ports.json.",
+  "nodes": {
+    "node-a": {
+      "id": "node-a",
+      "host": "127.0.0.1",
+      "services": {
+        "teamOutputRpc": {
+          "bind": "127.0.0.1",
+          "port": 19100,
+          "path": "/internal/team/output",
+          "status": "compat_only"
+        },
+        "node-bBridgeAlias": {
+          "bind": "127.0.0.1",
+          "port": 19102,
+          "target": "node-b:19100",
+          "kind": "legacy_local_forward",
+          "status": "compat_only"
+        },
+        "node-cBridgeAlias": {
+          "bind": "127.0.0.1",
+          "port": 19104,
+          "target": "node-c:19100",
+          "kind": "legacy_local_forward",
+          "status": "compat_only"
+        },
+        "legacyCompat19100": {
+          "bind": "127.0.0.1",
+          "port": 19100,
+          "status": "legacy_optional",
+          "note": "Historical 19100 compat reference only; current runtime no longer mounts /internal/debate/kick."
+        }
+      },
+      "aliases": ["laoda", "authority"]
+    },
+    "node-b": {
+      "id": "node-b",
+      "host": "worker-b.internal",
+      "services": {
+        "webhookTunnelAlias": {
+          "bind": "127.0.0.1",
+          "port": 19092,
+          "target": "node-a:19090",
+          "kind": "legacy_local_forward",
+          "status": "compat_only"
+        },
+        "legacyCompat19100": {
+          "bind": "127.0.0.1",
+          "port": 19100,
+          "role": "planner_executor_compat",
+          "status": "legacy_optional",
+          "note": "Historical 19100 compat reference only."
+        }
+      },
+      "aliases": ["violet", "observer"]
+    },
+    "node-c": {
+      "id": "node-c",
+      "host": "review-c.internal",
+      "services": {
+        "webhookTunnelAlias": {
+          "bind": "127.0.0.1",
+          "port": 19092,
+          "target": "node-a:19090",
+          "kind": "legacy_local_forward",
+          "status": "compat_only"
+        },
+        "legacyCompat19100": {
+          "bind": "127.0.0.1",
+          "port": 19100,
+          "path": "/internal/team/output",
+          "role": "critic_visible_output_compat",
+          "status": "legacy_optional",
+          "note": "Historical 19100 compat reference only."
+        }
+      },
+      "aliases": ["lebang", "reviewer"]
+    }
+  }
+}

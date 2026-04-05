@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/published-route-catalog.schema.json",
+  "title": "Published Route Catalog",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "contract": { "type": "string" },
+    "version": { "type": "string" },
+    "stableEnvelopeFields": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "featuredRouteKeys": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "featuredRoutes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "$ref": "#/$defs/routeEntryOrNull" },
+        "workbenchPayload": { "$ref": "#/$defs/routeEntryOrNull" },
+        "pipeline": { "$ref": "#/$defs/routeEntryOrNull" },
+        "control": { "$ref": "#/$defs/routeEntryOrNull" },
+        "residents": { "$ref": "#/$defs/routeEntryOrNull" },
+        "dashboard": { "$ref": "#/$defs/routeEntryOrNull" }
+      },
+      "required": ["summary", "workbenchPayload", "pipeline", "control", "residents", "dashboard"]
+    },
+    "routes": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/routeEntry" }
+    }
+  },
+  "required": ["contract", "version", "stableEnvelopeFields", "featuredRouteKeys", "featuredRoutes", "routes"],
+  "$defs": {
+    "routeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string" },
+        "resourceKind": { "type": "string" },
+        "requiredTopLevel": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["path", "resourceKind", "requiredTopLevel"]
+    },
+    "routeEntryOrNull": {
+      "oneOf": [
+        { "$ref": "#/$defs/routeEntry" },
+        { "type": "null" }
+      ]
+    }
+  }
+}

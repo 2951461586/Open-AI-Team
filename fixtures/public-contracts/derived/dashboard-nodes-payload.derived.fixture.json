@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "nodes": {
+    "ts": 1775362350906,
+    "node-a": {
+      "key": "node-a",
+      "label": "node-a",
+      "reachable": true,
+      "latencyMs": 42,
+      "fallbackReady": true,
+      "probe": "control_http",
+      "activeResidentCount": 3,
+      "activeResidentRoles": [
+        "planner",
+        "critic",
+        "judge"
+      ],
+      "stats": {
+        "controlPlaneOk": true,
+        "controlPlaneStatus": "healthy",
+        "host": "node-a-host"
+      },
+      "weight": 1,
+      "pressureReason": "healthy_primary",
+      "recommended": true,
+      "connectivity": {
+        "mode": "local_control_plane",
+        "controlBaseUrl": "",
+        "controlHost": "127.0.0.1",
+        "tailnetHost": "127.0.0.1",
+        "tailnetIp": "",
+        "note": "Local authority/control node"
+      }
+    }
+  },
+  "recommendation": {
+    "selectedNode": "node-a",
+    "degraded": false,
+    "degradedReason": "",
+    "weights": {
+      "node-a": {
+        "weight": 1,
+        "reason": "healthy_primary"
+      }
+    }
+  },
+  "deployment": {
+    "planner": [
+      "node-a"
+    ],
+    "critic": [
+      "node-a"
+    ],
+    "judge": [
+      "node-a"
+    ]
+  }
+}

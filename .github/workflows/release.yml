@@ -1,0 +1,110 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            dashboard/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install root deps
+        run: npm ci
+
+      - name: Install Python deps
+        run: python -m pip install --upgrade pip jsonschema
+
+      - name: Install dashboard deps
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Mainline smoke
+        run: npm run smoke:team
+
+      - name: Public contract validation
+        run: |
+          npm run fixtures:route-derived
+          npm run smoke:public-schemas
+          npm run smoke:dashboard-public-contract
+
+      - name: Dashboard build + bundle scan
+        run: |
+          npm run dashboard:build
+          npm run dashboard:check-bundle
+
+      - name: Export dashboard static site
+        working-directory: dashboard
+        run: npx next export
+
+      - name: OSS minimal validation
+        run: |
+          npm run smoke:oss-minimal
+          npm run demo:oss-minimal
+          npm run validate:agent-package
+
+      - name: Third-party validation
+        run: |
+          npm run validate:third-party-agent
+          npm run smoke:third-party-agent
+
+      - name: Stage release artifacts
+        run: npm run release:stage-artifacts
+
+      - name: Generate release notes
+        run: npm run release:notes
+
+      - name: Pack release bundles
+        run: |
+          rm -rf .release-bundles
+          mkdir -p .release-bundles
+          tar -czf .release-bundles/public-contracts.tar.gz -C .release-artifacts public-contracts
+          tar -czf .release-bundles/dashboard-static-export.tar.gz -C .release-artifacts dashboard-static-export
+          tar -czf .release-bundles/oss-minimal-evidence.tar.gz -C .release-artifacts oss-minimal
+          tar -czf .release-bundles/third-party-agent-sample.tar.gz -C .release-artifacts third-party-agent-sample
+          tar -czf .release-bundles/source-docs.tar.gz -C .release-artifacts source-docs
+          cp .release-artifacts/PROVENANCE.json .release-bundles/PROVENANCE.json
+          cp .release-artifacts/VERSION-STORY.json .release-bundles/VERSION-STORY.json
+          cp .release-artifacts/RELEASE-NOTES.md .release-bundles/RELEASE-NOTES.md
+          (cd .release-bundles && sha256sum *.tar.gz PROVENANCE.json VERSION-STORY.json RELEASE-NOTES.md > SHA256SUMS.txt)
+
+      - name: Upload release bundle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-bundles
+          path: .release-bundles
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: .release-artifacts/RELEASE-NOTES.md
+          files: |
+            .release-bundles/public-contracts.tar.gz
+            .release-bundles/dashboard-static-export.tar.gz
+            .release-bundles/oss-minimal-evidence.tar.gz
+            .release-bundles/third-party-agent-sample.tar.gz
+            .release-bundles/source-docs.tar.gz
+            .release-bundles/PROVENANCE.json
+            .release-bundles/VERSION-STORY.json
+            .release-bundles/RELEASE-NOTES.md
+            .release-bundles/SHA256SUMS.txt

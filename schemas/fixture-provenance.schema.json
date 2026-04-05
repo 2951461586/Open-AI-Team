@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/fixture-provenance.schema.json",
+  "title": "Published Fixture Provenance",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "kind": { "type": "string" },
+    "sourceRunId": { "type": "string" },
+    "sourceRunDir": { "type": "string" },
+    "generationScript": { "type": "string" },
+    "sanitization": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "rootPathReplacement": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "from": { "type": "string" },
+            "to": { "type": "string" }
+          },
+          "required": ["from", "to"]
+        }
+      },
+      "required": ["rootPathReplacement"]
+    },
+    "sampling": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "mode": { "type": "string" },
+          "note": { "type": "string" },
+          "start": { "type": "number" },
+          "limit": { "type": "number" },
+          "nestedCaps": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "start": { "type": "number" },
+                "limit": { "type": "number" }
+              },
+              "required": ["start", "limit"]
+            }
+          }
+        },
+        "required": ["mode"]
+      }
+    },
+    "observedCounts": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "bridgeState": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ingress": { "type": "number" },
+            "egress": { "type": "number" },
+            "routes": { "type": "number" }
+          },
+          "required": ["ingress", "egress", "routes"]
+        },
+        "eventLog": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "count": { "type": "number" }
+          },
+          "required": ["count"]
+        },
+        "runState": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "results": { "type": "number" },
+            "eventLog": { "type": "number" },
+            "toolRuns": { "type": "number" },
+            "durableArtifacts": { "type": "number" }
+          },
+          "required": ["results", "eventLog", "toolRuns", "durableArtifacts"]
+        }
+      },
+      "required": ["bridgeState", "eventLog", "runState"]
+    },
+    "files": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["kind", "sourceRunId", "sourceRunDir", "generationScript", "sanitization", "sampling", "observedCounts", "files"]
+}

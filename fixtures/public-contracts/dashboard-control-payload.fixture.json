@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "taskId": "task:fixture",
+  "state": "blocked",
+  "manualActions": ["retry", "replan", "request_human"],
+  "controlEndpoint": "/internal/team/control",
+  "examples": [
+    { "action": "retry", "taskId": "task:fixture" },
+    { "action": "replan", "taskId": "task:fixture" }
+  ]
+}

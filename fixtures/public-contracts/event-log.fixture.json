@@ -1,0 +1,35 @@
+[
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216649751
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216649753
+  },
+  {
+    "type": "host.inbox.enqueued",
+    "path": "/runs/example/runtime/host-inbox.json",
+    "entryId": "inbox:1",
+    "ts": 1775216650112
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216650183
+  },
+  {
+    "type": "member.completed",
+    "role": "planner",
+    "kind": "member.completed",
+    "messageId": "bridge-member:run:w1",
+    "ts": 1775216651186
+  }
+]

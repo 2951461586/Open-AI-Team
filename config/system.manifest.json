@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "runtime": {
+    "entry": "src/index.mjs",
+    "mode": "production",
+    "primaryProduct": "team"
+  },
+  "products": {
+    "team": {
+      "enabled": true,
+      "status": "primary",
+      "config": {
+        "roles": "config/team/roles.json",
+        "governance": "config/team/governance.json"
+      },
+      "docs": {
+        "gettingStarted": "GETTING-STARTED.md",
+        "architecture": "ARCHITECTURE.md",
+        "api": "docs/api/team-governance-query-api/README.md",
+        "dashboard": "dashboard/README.md"
+      },
+      "scripts": {
+        "smoke": "npm run smoke:team",
+        "batchSmoke": "npm run smoke:team:batch",
+        "acceptance": "npm run acceptance:three-node-live",
+        "dashboardDeepLink": "npm run acceptance:dashboard-rightpanel-deeplink"
+      }
+    },
+    "debate": {
+      "enabled": false,
+      "status": "retired",
+      "note": "Fully retired. All archive/ dirs deleted (git history preserved). 410 tombstones retained.",
+      "tombstones": "src/routes/index-routes-entry.mjs (410 stubs retained)"
+    }
+  },
+  "platform": {
+    "routes": "src/routes",
+    "bootstrap": "src/index-bootstrap.mjs",
+    "env": "src/index-env.mjs",
+    "webhookRouter": "src/webhook-event-router.mjs"
+  },
+  "scripts": {
+    "smokeRoot": "scripts/smoke",
+    "acceptanceRoot": "scripts/acceptance",
+    "acceptanceCanonicalRoot": "scripts/acceptance/canonical",
+    "opsRoot": "scripts/ops"
+  },
+  "docs": {
+    "index": "docs/index.md",
+    "architecture": "ARCHITECTURE.md"
+  }
+}

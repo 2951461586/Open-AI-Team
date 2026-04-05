@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/artifact-manifest.schema.json",
+  "title": "Artifact Manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "artifactId": { "type": "string" },
+    "taskId": { "type": "string" },
+    "title": { "type": "string" },
+    "artifactType": { "type": "string" },
+    "path": { "type": "string" },
+    "workspaceRelativePath": { "type": "string" },
+    "downloadName": { "type": "string" },
+    "mimeType": { "type": "string" },
+    "sizeBytes": { "type": "integer", "minimum": 0 },
+    "createdAt": { "type": ["string", "number"] },
+    "metadata": { "type": "object" }
+  }
+}

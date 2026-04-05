@@ -1,0 +1,129 @@
+{
+  "contractVersion": "agent-package.v2",
+  "identity": {
+    "agentId": "agent:sample.third-party-agent",
+    "displayName": "Third-Party Sample Agent",
+    "persona": {
+      "style": "direct",
+      "tone": "integrator",
+      "mission": "demonstrate a host-neutral independent agent onboarding template"
+    }
+  },
+  "workflowPackId": "workflow.third-party-sample.v1",
+  "policyPackId": "policy.third-party-sample.v1",
+  "memoryPolicy": {
+    "personaSnapshots": true,
+    "durableArtifacts": true,
+    "sharedBlackboard": true
+  },
+  "sandboxPolicy": {
+    "defaultTier": "workspace_guard",
+    "tiers": ["workspace_guard", "process_guard"]
+  },
+  "pluginRefs": [
+    {
+      "pluginId": "plugin.third-party.bridge-core",
+      "kind": "bridge",
+      "enabled": true,
+      "hooks": ["run.created", "member.completed", "run.completed"],
+      "contributes": {
+        "tools": [{ "id": "bridge.route", "kind": "tool", "note": "route message via bridge adapter" }],
+        "skills": [{ "id": "bridge.channel-routing", "kind": "skill" }],
+        "bridgeRoutes": ["local-thread"],
+        "shellCommands": ["routes"]
+      }
+    },
+    {
+      "pluginId": "plugin.third-party.shell-core",
+      "kind": "shell",
+      "enabled": true,
+      "hooks": ["run.created", "resume.started", "member.completed", "run.completed"],
+      "contributes": {
+        "tools": [{ "id": "shell.inspect", "kind": "tool", "note": "inspect shell runtime state" }],
+        "skills": [{ "id": "shell.observability", "kind": "skill" }],
+        "bridgeRoutes": [],
+        "shellCommands": ["capabilities"]
+      }
+    }
+  ],
+  "sessionContract": {
+    "contractVersion": "agent-harness-session.v1",
+    "capabilities": {
+      "spawn": true,
+      "send": true,
+      "list": true,
+      "history": true,
+      "continuation": true,
+      "inbox": true,
+      "outbox": true,
+      "threadBus": true,
+      "agentMessaging": true
+    }
+  },
+  "deskContract": {
+    "contractVersion": "agent-harness-desk.v1",
+    "enabled": true,
+    "features": {
+      "tasks": true,
+      "notes": true,
+      "threads": true,
+      "asyncHandoff": true
+    },
+    "layout": {
+      "root": "workspace/desk",
+      "inbox": "workspace/desk/inbox",
+      "outbox": "workspace/desk/outbox",
+      "notes": "workspace/desk/notes"
+    }
+  },
+  "hostLayerContract": {
+    "contractVersion": "agent-harness-host-layer.v1",
+    "features": {
+      "sessionBus": true,
+      "desk": true,
+      "scheduler": true,
+      "inbox": true,
+      "outbox": true,
+      "dispatch": true,
+      "bridge": true
+    }
+  },
+  "bridgePolicy": {
+    "contractVersion": "agent-harness-bridge.v1",
+    "enabled": true,
+    "channels": ["local-thread"],
+    "defaultChannel": "local-thread",
+    "routeContracts": [
+      { "routeKey": "local-thread", "enabled": true, "allowedRoles": ["planner", "executor"], "allowedKinds": ["bootstrap", "status", "route", "user_request", "egress"] }
+    ]
+  },
+  "runtimeCapabilityPolicy": {
+    "contractVersion": "agent-harness-capability-gate.v1",
+    "defaultInjectedToolAccess": "deny",
+    "roles": {
+      "planner": { "allowInjectedTools": [], "allowBridgeRoutes": ["local-thread"] },
+      "executor": { "allowInjectedTools": ["bridge.route", "shell.inspect"], "allowBridgeRoutes": ["local-thread"] }
+    }
+  },
+  "lifecyclePolicy": {
+    "contractVersion": "agent-harness-lifecycle.v1",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "personaSnapshots": true
+  },
+  "productShell": {
+    "contractVersion": "agent-shell.v1",
+    "onboardingReady": true,
+    "onboardingMode": "productized",
+    "commands": ["status", "package", "plugins", "onboarding", "routes", "capabilities", "doctor"],
+    "activationChecklist": [
+      { "step": "inspect package", "command": "package", "ready": true },
+      { "step": "inspect shell status", "command": "status", "ready": true },
+      { "step": "inspect plugins", "command": "plugins", "ready": true },
+      { "step": "inspect onboarding", "command": "onboarding", "ready": true },
+      { "step": "inspect bridge routes", "command": "routes", "ready": true },
+      { "step": "inspect capability gate", "command": "capabilities", "ready": true },
+      { "step": "run onboarding doctor", "command": "doctor", "ready": true }
+    ]
+  }
+}

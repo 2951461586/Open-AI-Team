@@ -1,0 +1,183 @@
+{
+  "$schema": "team-roles.schema.json",
+  "version": "1.1.0",
+  "description": "Declarative role config with canonical public-safe node IDs. Legacy node aliases remain compatibility inputs only.",
+  "defaults": {
+    "preferredNode": "node-a",
+    "fallbackNode": "node-a",
+    "outwardIdentity": "authority",
+    "model": null,
+    "maxConcurrentTasks": 1,
+    "sessionTimeout": 360000
+  },
+  "roles": {
+    "planner": {
+      "displayName": "规划师",
+      "description": "接收任务，拆解为结构化执行计划",
+      "capabilities": ["planning", "decomposition", "task-design"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate",
+      "baseUrl": "",
+      "apiKey": "",
+      "timeoutMs": 600000,
+      "workspace": "team-agents/planner",
+      "memoryScope": "team/planner",
+      "contract": {
+        "version": "planner.plan.v2",
+        "outputType": "team.plan.v2",
+        "required": ["summary", "steps", "risks"],
+        "successCriteria": ["plan_is_actionable", "steps_are_ordered", "risks_are_explicit"],
+        "evidenceRequirements": ["task_context_cited", "steps_have_exit_criteria", "risks_have_mitigation"]
+      },
+      "prompt": {
+        "system": "你现在扮演 AI Team Runtime 中的 planner 角色。你的唯一任务是输出结构化计划。不要输出解释、不要输出 Markdown、不要输出代码块。只输出合同规定格式的 JSON。",
+        "outputContract": "{\"ok\":true,\"type\":\"team.plan.v2\",\"contractVersion\":\"planner.plan.v2\",\"summary\":\"...\",\"steps\":[...],\"risks\":[...],\"successCriteria\":[...],\"evidenceRequirements\":[...]}"
+      }
+    },
+    "critic": {
+      "displayName": "审查官",
+      "description": "审查计划质量，给出结构化 review 与 issues",
+      "capabilities": ["review", "risk-analysis", "consistency-check"],
+      "preferredNode": "node-c",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate",
+      "baseUrl": "",
+      "apiKey": "",
+      "timeoutMs": 300000,
+      "workspace": "team-agents/critic",
+      "memoryScope": "team/critic",
+      "contract": {
+        "version": "critic.review.v2",
+        "outputType": "team.review.v2",
+        "required": ["verdict", "score", "issues"],
+        "successCriteria": ["verdict_matches_issues", "issues_are_actionable", "review_is_reusable"],
+        "evidenceRequirements": ["issues_reference_location", "severity_is_explicit", "suggestion_is_concrete"]
+      },
+      "prompt": {
+        "system": "你现在扮演 AI Team Runtime 中的 critic 角色。你的任务是审查 planner 的计划，输出结构化 review。verdict 必须为 approve / approve_with_notes / revise 之一。",
+        "outputContract": "{\"ok\":true,\"type\":\"team.review.v2\",\"verdict\":\"...\",\"score\":0.0,\"issues\":[{\"severity\":\"...\",\"location\":\"...\",\"title\":\"...\",\"description\":\"...\",\"suggestion\":\"...\"}]}"
+      }
+    },
+    "judge": {
+      "displayName": "裁决官",
+      "description": "基于 review 结果做最终裁决：approve / revise / escalate",
+      "capabilities": ["decision", "approval", "escalation"],
+      "preferredNode": "node-a",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate",
+      "baseUrl": "",
+      "apiKey": "",
+      "timeoutMs": 300000,
+      "workspace": "team-agents/judge",
+      "memoryScope": "team/judge",
+      "contract": {
+        "version": "judge.decision.v2",
+        "outputType": "team.decision.v2",
+        "required": ["decisionType", "reason", "payload.nextState"],
+        "successCriteria": ["decision_is_terminal_or_actionable", "next_state_is_valid", "reason_is_brief_and_authoritative"],
+        "evidenceRequirements": ["decision_references_review_or_task_state", "next_state_matches_decision"]
+      },
+      "prompt": {
+        "system": "你现在扮演 AI Team Runtime 中的 judge 角色。你的任务是基于 critic 的 review 做最终裁决。decisionType 必须为 approve / revise / cancel / escalate_human 之一。",
+        "outputContract": "{\"ok\":true,\"type\":\"team.decision.v2\",\"decisionType\":\"...\",\"reason\":\"...\",\"payload\":{\"nextState\":\"...\"}}"
+      }
+    },
+    "executor": {
+      "displayName": "执行者",
+      "description": "接收已批准的计划，执行具体任务",
+      "capabilities": ["execution", "implementation", "drafting"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate",
+      "baseUrl": "",
+      "apiKey": "",
+      "timeoutMs": 600000,
+      "workspace": "team-agents/executor",
+      "memoryScope": "team/executor",
+      "contract": {
+        "version": "executor.result.v1",
+        "outputType": "team.result.v1",
+        "required": ["ok", "artifacts"],
+        "successCriteria": ["task_completed", "artifacts_produced"],
+        "evidenceRequirements": ["output_matches_plan"]
+      },
+      "prompt": {
+        "system": "你现在扮演 AI Team Runtime 中的 executor 角色。你的任务是根据已批准的计划执行具体工作，产出可交付物。",
+        "outputContract": "{\"ok\":true,\"type\":\"team.result.v1\",\"artifacts\":[...]}"
+      }
+    },
+    "observer": {
+      "displayName": "观察员",
+      "description": "远端受限观察角色，仅上报心跳、节点健康和观察摘要，不参与普通用户对话",
+      "capabilities": ["heartbeat", "observe", "node-health"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "workspace": "team-agents/observer",
+      "memoryScope": "team/observer"
+    },
+    "monitor": {
+      "displayName": "监视员",
+      "description": "远端受限监控角色，仅做巡检与状态汇报，不直接成为普通主入口",
+      "capabilities": ["monitor", "status-report", "failover-watch"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "workspace": "team-agents/monitor",
+      "memoryScope": "team/monitor"
+    },
+    "output": {
+      "displayName": "输出治理层",
+      "description": "统一调度各角色的运行状态、完成情况与最终对外投递。各角色可产出输出事件，但最终用户可见编排权归 authority。",
+      "capabilities": ["visible-output", "delivery", "publish-summary", "output-governance"],
+      "preferredNode": "node-a",
+      "fallbackNode": "node-a",
+      "authorityNode": "node-a",
+      "producerRoles": ["planner", "critic", "executor", "judge"],
+      "workspace": "shared/artifacts",
+      "memoryScope": "team/runtime"
+    }
+  },
+  "routing": {
+    "mailboxKindToRole": {
+      "task.assign": "planner",
+      "review.request": "critic",
+      "decision.request": "judge",
+      "execute.request": "executor",
+      "output.request": "output",
+      "observer.heartbeat": "observer"
+    }
+  },
+  "nodeMap": {
+    "node-a": {
+      "id": "node-a",
+      "host": "127.0.0.1",
+      "available": true,
+      "role": "authority",
+      "connectivity": "local_control_plane",
+      "description": "Local authority/control node",
+      "aliases": ["laoda", "authority"]
+    },
+    "node-b": {
+      "id": "node-b",
+      "host": "worker-b.internal",
+      "controlBaseUrl": "https://worker-b.internal",
+      "controlPort": 443,
+      "available": true,
+      "role": "planner_executor_observer",
+      "connectivity": "remote_https_gateway",
+      "description": "Remote worker/observer node",
+      "aliases": ["violet", "observer"]
+    },
+    "node-c": {
+      "id": "node-c",
+      "host": "review-c.internal",
+      "controlBaseUrl": "https://review-c.internal",
+      "controlPort": 443,
+      "available": true,
+      "role": "critic_review",
+      "connectivity": "remote_https_gateway",
+      "description": "Remote review/critic node",
+      "aliases": ["lebang", "reviewer"]
+    }
+  }
+}

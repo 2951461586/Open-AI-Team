@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-pipeline-payload.schema.json",
+  "title": "Dashboard Pipeline Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "pipeline": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "taskId": { "type": "string" },
+        "teamId": { "type": "string" },
+        "title": { "type": "string" },
+        "state": { "type": "string" },
+        "phase": { "type": "string" },
+        "phaseProgress": { "type": "number" },
+        "estimatedCompletion": { "type": "string" },
+        "currentMemberKey": { "type": "string" },
+        "protocolSource": { "type": "string" }
+      },
+      "required": ["taskId", "teamId", "state", "phase", "phaseProgress", "estimatedCompletion"]
+    },
+    "roles": { "type": "object" },
+    "revisions": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "count": { "type": "number" },
+        "maxAllowed": { "type": "number" },
+        "nearLimit": { "type": "boolean" },
+        "exceeded": { "type": "boolean" }
+      },
+      "required": ["count", "maxAllowed", "nearLimit", "exceeded"]
+    },
+    "issues": { "type": "object" },
+    "timeline": { "type": "object" },
+    "childTasks": { "type": "array", "items": { "type": "object" } },
+    "executionSurface": { "type": "object" },
+    "memoryLayers": { "type": ["object", "array"] },
+    "artifacts": { "type": "object" },
+    "evidence": { "type": "object" }
+  },
+  "required": ["ok", "pipeline", "roles", "revisions", "issues", "timeline", "childTasks", "executionSurface", "artifacts", "evidence"]
+}

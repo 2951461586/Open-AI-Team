@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-summary-payload.schema.json",
+  "title": "Dashboard Summary Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "taskId": { "type": "string" },
+    "title": { "type": "string" },
+    "state": { "type": "string" },
+    "requestedNode": { "type": "string" },
+    "actualNode": { "type": "string" },
+    "degradedReason": { "type": "string" },
+    "sessionMode": { "type": "string" },
+    "sessionPersistent": { "type": "boolean" },
+    "sessionFallbackReason": { "type": "string" },
+    "sessionKey": { "type": "string" },
+    "sessionsByRole": { "type": "object" },
+    "followupRoute": { "type": "string" },
+    "deliveryStatus": { "type": "string" },
+    "interventionStatus": { "type": "string" },
+    "nextBestAction": { "type": "string" },
+    "executiveSummary": { "type": "string" },
+    "currentMemberKey": { "type": "string" },
+    "protocolSource": { "type": "string" },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "plan": { "type": ["object", "null"] },
+        "review": { "type": ["object", "null"] },
+        "decision": { "type": ["object", "null"] }
+      }
+    },
+    "deliverableReady": { "type": "boolean" },
+    "humanInterventionReady": { "type": "boolean" },
+    "counters": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "artifactCount": { "type": "number" },
+        "evidenceCount": { "type": "number" },
+        "issueCount": { "type": "number" },
+        "revisionCount": { "type": "number" }
+      },
+      "required": ["artifactCount", "evidenceCount", "issueCount", "revisionCount"]
+    },
+    "memoryLayers": { "type": ["object", "array"] }
+  },
+  "required": ["ok", "taskId", "state", "deliveryStatus", "interventionStatus", "counters"]
+}

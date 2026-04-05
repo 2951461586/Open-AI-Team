@@ -1,0 +1,190 @@
+{
+  "ok": true,
+  "board": {
+    "plan": {
+      "planId": "plan:fixture-derived",
+      "taskId": "task:fixture-derived",
+      "authorMemberId": "planner",
+      "memberKey": "planner.node-a",
+      "contractVersion": "planner.plan.v2",
+      "outputType": "team.plan.v2",
+      "version": 1,
+      "summary": "derived fixture plan",
+      "stepCount": 1,
+      "riskCount": 1,
+      "createdAt": 1775362350885,
+      "updatedAt": 1775362350885
+    },
+    "latestReview": {
+      "reviewId": "review:fixture-derived",
+      "taskId": "task:fixture-derived",
+      "targetType": "plan",
+      "targetId": "plan:fixture-derived",
+      "reviewerMemberId": "critic",
+      "memberKey": "critic.node-a",
+      "contractVersion": "critic.review.v2",
+      "outputType": "team.review.v2",
+      "score": 0.91,
+      "verdict": "approve",
+      "issueCount": 1,
+      "issues": [
+        "fixture issue"
+      ],
+      "createdAt": 1775362350886
+    },
+    "latestDecision": {
+      "decisionId": "decision:fixture-derived",
+      "taskId": "task:fixture-derived",
+      "judgeMemberId": "judge",
+      "memberKey": "judge.node-a",
+      "contractVersion": "judge.decision.v2",
+      "outputType": "team.decision.v2",
+      "decisionType": "approve",
+      "reason": "derived fixture approve",
+      "nextState": "done",
+      "createdAt": 1775362350886
+    },
+    "artifactCount": 0,
+    "evidenceCount": 0,
+    "blackboardCount": 0,
+    "mailboxCount": 0,
+    "mailbox": [],
+    "latestReplanMap": null,
+    "memoryLayers": {
+      "layerCount": 3,
+      "working": {
+        "key": "working",
+        "label": "L1 即时工作记忆",
+        "source": "workItem.context + dependency results",
+        "childTaskCount": 0,
+        "dependencyBoundCount": 0,
+        "preview": "当前主要按任务目标直接推进，尚无显式依赖链。"
+      },
+      "shared": {
+        "key": "shared",
+        "label": "L2 任务共享记忆",
+        "source": "blackboard / member findings / signals",
+        "entryCount": 0,
+        "sectionCount": 0,
+        "sections": [],
+        "latest": []
+      },
+      "durable": {
+        "key": "durable",
+        "label": "L3 持久证据记忆",
+        "source": "plans / reviews / decisions / artifacts / evidence",
+        "planPresent": true,
+        "reviewCount": 1,
+        "decisionCount": 1,
+        "artifactCount": 0,
+        "evidenceCount": 0,
+        "latestPlanSummary": "derived fixture plan",
+        "latestReviewSummary": "",
+        "latestDecisionSummary": "derived fixture approve",
+        "latestArtifacts": [],
+        "latestEvidence": []
+      }
+    },
+    "childTasks": []
+  },
+  "summary": {
+    "artifactCount": 0,
+    "evidenceCount": 0,
+    "issueCount": 0,
+    "hasPlan": true,
+    "hasReview": true,
+    "hasDecision": true,
+    "deliverableReady": false,
+    "humanInterventionReady": false,
+    "deliveryStatus": "pending_delivery",
+    "interventionStatus": "no_intervention_needed",
+    "currentDriver": "judge",
+    "nextBestAction": "run_judge_decision",
+    "executiveSummary": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+    "manualActions": [
+      "rerun_judge",
+      "reset_to_planning",
+      "manual_done",
+      "manual_block",
+      "manual_cancel"
+    ],
+    "requestedNode": "node-a",
+    "actualNode": "node-a",
+    "degradedReason": "",
+    "sessionMode": "session",
+    "sessionPersistent": true,
+    "sessionFallbackReason": "",
+    "currentMemberKey": "runtime.node-a",
+    "protocolSource": "decision",
+    "executionSurface": {
+      "childTaskCount": 0,
+      "skillBoundCount": 0,
+      "toolBoundCount": 0,
+      "mcpBoundCount": 0
+    },
+    "memoryLayers": {
+      "layerCount": 3,
+      "working": {
+        "key": "working",
+        "label": "L1 即时工作记忆",
+        "source": "workItem.context + dependency results",
+        "childTaskCount": 0,
+        "dependencyBoundCount": 0,
+        "preview": "当前主要按任务目标直接推进，尚无显式依赖链。"
+      },
+      "shared": {
+        "key": "shared",
+        "label": "L2 任务共享记忆",
+        "source": "blackboard / member findings / signals",
+        "entryCount": 0,
+        "sectionCount": 0,
+        "sections": [],
+        "latest": []
+      },
+      "durable": {
+        "key": "durable",
+        "label": "L3 持久证据记忆",
+        "source": "plans / reviews / decisions / artifacts / evidence",
+        "planPresent": true,
+        "reviewCount": 1,
+        "decisionCount": 1,
+        "artifactCount": 0,
+        "evidenceCount": 0,
+        "latestPlanSummary": "derived fixture plan",
+        "latestReviewSummary": "",
+        "latestDecisionSummary": "derived fixture approve",
+        "latestArtifacts": [],
+        "latestEvidence": []
+      }
+    },
+    "protocol": {
+      "plan": {
+        "memberKey": "planner.node-a",
+        "contractVersion": "planner.plan.v2",
+        "outputType": "team.plan.v2"
+      },
+      "review": {
+        "memberKey": "critic.node-a",
+        "contractVersion": "critic.review.v2",
+        "outputType": "team.review.v2"
+      },
+      "decision": {
+        "memberKey": "judge.node-a",
+        "contractVersion": "judge.decision.v2",
+        "outputType": "team.decision.v2"
+      }
+    }
+  },
+  "summaryLinks": {
+    "governance": "/state/team/governance?taskId=task%3Afixture-derived",
+    "pipeline": "/state/team/pipeline?taskId=task%3Afixture-derived",
+    "control": "/state/team/control?taskId=task%3Afixture-derived",
+    "archive": "/state/team/archive?limit=200"
+  },
+  "currentMemberKey": "runtime.node-a",
+  "boundary": {
+    "access": "dashboard_token",
+    "sensitivity": "medium",
+    "redaction": "workbench_compact"
+  }
+}

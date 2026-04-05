@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-nodes-payload.schema.json",
+  "title": "Dashboard Nodes Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "nodes": {
+      "type": "object",
+      "properties": {
+        "ts": { "type": "number" }
+      },
+      "additionalProperties": {
+        "anyOf": [
+          { "$ref": "dashboard-node-summary.schema.json" },
+          { "type": "number" }
+        ]
+      }
+    },
+    "recommendation": { "type": ["object", "null"] },
+    "deployment": { "type": ["object", "array", "null"] }
+  },
+  "required": ["ok", "nodes"]
+}

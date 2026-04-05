@@ -1,0 +1,58 @@
+{
+  "kind": "published_fixture_provenance",
+  "sourceRunId": "run-2026-04-03_11-44-09-748",
+  "sourceRunDir": "/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748",
+  "generationScript": "scripts/team/team-generate-real-run-published-fixtures.mjs",
+  "sanitization": {
+    "rootPathReplacement": {
+      "from": "/root/.openclaw/workspace/orchestrator",
+      "to": "/workspace/orchestrator"
+    }
+  },
+  "sampling": {
+    "bridge-state.real-run.fixture.json": {
+      "mode": "full_object_copy",
+      "note": "bridge-state kept whole after path sanitization"
+    },
+    "event-log.real-run.fixture.json": {
+      "mode": "array_slice",
+      "start": 0,
+      "limit": 80,
+      "note": "first 80 events from runtime/event-log.json"
+    },
+    "run-state.real-run.fixture.json": {
+      "mode": "full_object_copy_with_nested_caps",
+      "nestedCaps": {
+        "eventLog": {
+          "start": 0,
+          "limit": 60
+        },
+        "toolRuns": {
+          "start": 0,
+          "limit": 20
+        }
+      }
+    }
+  },
+  "observedCounts": {
+    "bridgeState": {
+      "ingress": 1,
+      "egress": 8,
+      "routes": 3
+    },
+    "eventLog": {
+      "count": 80
+    },
+    "runState": {
+      "results": 6,
+      "eventLog": 60,
+      "toolRuns": 20,
+      "durableArtifacts": 6
+    }
+  },
+  "files": [
+    "bridge-state.real-run.fixture.json",
+    "event-log.real-run.fixture.json",
+    "run-state.real-run.fixture.json"
+  ]
+}

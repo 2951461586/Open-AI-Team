@@ -1,0 +1,34 @@
+[
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.thinking",
+    "delta": "开始规划：生成公开最小样板。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216651117
+  },
+  {
+    "type": "stream.done",
+    "role": "planner",
+    "label": "plan.thinking",
+    "total": 1,
+    "ts": 1775216651120
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "# Deliverable\n## Objective\n生成公开最小样板。",
+    "index": 1,
+    "total": 3,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.done",
+    "role": "executor",
+    "label": "deliverable.result",
+    "total": 3,
+    "ts": 1775216652625
+  }
+]

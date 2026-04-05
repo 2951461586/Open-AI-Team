@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-thread-summary.schema.json",
+  "title": "Dashboard Thread Summary",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "threadId": { "type": "string" },
+    "taskId": { "type": "string" },
+    "parentThreadId": { "type": "string" },
+    "threadType": { "type": "string", "enum": ["workspace", "task", "execution", "review", "decision"] },
+    "title": { "type": "string" },
+    "state": { "type": "string" },
+    "phase": { "type": "string" },
+    "owner": { "type": "string" },
+    "goal": { "type": "string" },
+    "blockingIssues": { "type": "number" },
+    "pendingHumanActions": { "type": "number" },
+    "latestDeliverableId": { "type": "string" },
+    "requestedNode": { "type": "string" },
+    "actualNode": { "type": "string" },
+    "degradedReason": { "type": "string" },
+    "sessionKey": { "type": "string" },
+    "sessionsByRole": { "type": "object" },
+    "updatedAt": { "type": "number" }
+  },
+  "required": ["threadId", "taskId", "threadType", "title", "updatedAt"]
+}

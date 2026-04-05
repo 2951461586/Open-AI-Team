@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/team-governance-query-api.schema.json",
+  "title": "Team Governance Query Stable Envelope",
+  "type": "object",
+  "required": ["ok", "api", "resource", "query", "links"],
+  "properties": {
+    "ok": { "const": true },
+    "api": {
+      "type": "object",
+      "required": ["namespace", "contract", "version", "route", "resourceKind", "stable"],
+      "properties": {
+        "namespace": { "const": "team.governance.query" },
+        "contract": { "const": "team.governance.query.v1" },
+        "version": { "const": "v1" },
+        "route": { "type": "string", "minLength": 1 },
+        "resourceKind": { "type": "string", "minLength": 1 },
+        "stable": { "const": true }
+      },
+      "additionalProperties": true
+    },
+    "resource": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "taskId": { "type": "string" },
+        "teamId": { "type": "string" },
+        "state": { "type": "string" },
+        "batchId": { "type": "string" },
+        "count": { "type": "number" },
+        "node": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": {
+        "type": ["string", "number", "boolean", "null"]
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": ["self", "root", "contracts"],
+      "properties": {
+        "self": { "type": "string", "minLength": 1 },
+        "root": { "const": "/state/team" },
+        "contracts": { "const": "/state/team/contracts" }
+      },
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}

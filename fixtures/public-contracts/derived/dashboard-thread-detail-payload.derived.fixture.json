@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "thread": {
+    "threadId": "task:fixture-derived",
+    "taskId": "task:fixture-derived",
+    "threadType": "decision",
+    "title": "derived fixture task",
+    "state": "approved",
+    "phase": "run_judge_decision",
+    "owner": "judge",
+    "goal": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+    "blockingIssues": 0,
+    "pendingHumanActions": 0,
+    "requestedNode": "node-a",
+    "actualNode": "node-a",
+    "degradedReason": "",
+    "sessionKey": "agent:node-a:judge:1",
+    "sessionsByRole": {
+      "judge": "agent:node-a:judge:1"
+    },
+    "updatedAt": 1775362350885
+  },
+  "boundary": {
+    "access": "dashboard_token",
+    "sensitivity": "medium",
+    "redaction": "thread_summary_compact"
+  }
+}

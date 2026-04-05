@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/agent-package.schema.json",
+  "title": "AI Team Harness Agent Package",
+  "type": "object",
+  "required": ["contractVersion", "identity", "sessionContract", "deskContract", "hostLayerContract"],
+  "properties": {
+    "contractVersion": { "type": "string" },
+    "identity": {
+      "type": "object",
+      "required": ["agentId", "displayName"],
+      "properties": {
+        "agentId": { "type": "string" },
+        "displayName": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "sessionContract": { "type": "object" },
+    "deskContract": { "type": "object" },
+    "hostLayerContract": { "type": "object" },
+    "bridgePolicy": { "type": "object" },
+    "runtimeCapabilityPolicy": { "type": "object" },
+    "productShell": { "type": "object" }
+  },
+  "additionalProperties": true
+}

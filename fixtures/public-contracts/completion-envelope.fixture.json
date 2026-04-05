@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "mode": "file_event",
+  "filePath": "/tmp/task/.team-completions/w1__sess_1.json",
+  "status": "done",
+  "raw": "{\n  \"ok\": true,\n  \"status\": \"completed\"\n}",
+  "payload": {
+    "ok": true,
+    "status": "completed",
+    "summary": "completion event arrived",
+    "deliverables": [
+      {
+        "path": "workspace/artifacts/DELIVERABLE.md",
+        "type": "file",
+        "title": "deliverable"
+      }
+    ],
+    "issues": [],
+    "findings": ["event_driven_completion"],
+    "needsReplan": false,
+    "additionalWorkItems": [],
+    "needsHuman": false
+  }
+}

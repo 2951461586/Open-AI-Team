@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-timeline-entry.schema.json",
+  "title": "Dashboard Timeline Entry",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "messageId": { "type": "string" },
+    "kind": { "type": "string" },
+    "fromMemberId": { "type": "string" },
+    "toMemberId": { "type": "string" },
+    "payload": { "type": ["object", "array", "string", "number", "boolean", "null"] },
+    "createdAt": { "type": "number" },
+    "taskId": { "type": "string" },
+    "teamId": { "type": "string" },
+    "status": { "type": "string" },
+    "broadcast": { "type": "boolean" }
+  },
+  "required": ["messageId", "kind", "createdAt", "taskId", "teamId"]
+}

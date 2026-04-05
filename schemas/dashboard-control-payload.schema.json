@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-control-payload.schema.json",
+  "title": "Dashboard Control Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "taskId": { "type": "string" },
+    "state": { "type": "string" },
+    "manualActions": { "type": "array", "items": { "type": "string" } },
+    "controlEndpoint": { "type": "string" },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "action": { "type": "string" },
+          "taskId": { "type": "string" }
+        },
+        "required": ["action", "taskId"]
+      }
+    }
+  },
+  "required": ["ok", "taskId", "state", "manualActions", "controlEndpoint", "examples"]
+}

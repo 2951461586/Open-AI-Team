@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "taskId": "task:fixture-derived",
+  "state": "approved",
+  "manualActions": [
+    "rerun_judge",
+    "reset_to_planning",
+    "manual_done",
+    "manual_block",
+    "manual_cancel"
+  ],
+  "controlEndpoint": "/internal/team/control",
+  "examples": [
+    {
+      "action": "rerun_judge",
+      "taskId": "task:fixture-derived"
+    },
+    {
+      "action": "reset_to_planning",
+      "taskId": "task:fixture-derived"
+    },
+    {
+      "action": "manual_done",
+      "taskId": "task:fixture-derived"
+    },
+    {
+      "action": "manual_block",
+      "taskId": "task:fixture-derived"
+    },
+    {
+      "action": "manual_cancel",
+      "taskId": "task:fixture-derived"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "ai-team-harness",
+  "version": "0.1.0",
+  "description": "Open-source multi-agent execution harness with planning, review, recovery, and evidence-driven delivery.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "smoke:team": "node scripts/smoke/team-mainline.mjs",
+    "smoke:oss-minimal": "node scripts/team/team-oss-minimal-smoke.mjs",
+    "smoke:team:batch": "node scripts/smoke/team-batch.mjs",
+    "smoke:team-roles-config-authority": "node scripts/team/team-roles-config-authority-smoke.mjs",
+    "smoke:public-schemas": "python3 scripts/team/team-public-schema-fixtures-smoke.py",
+    "smoke:dashboard-public-contract": "node scripts/team/team-dashboard-public-contract-smoke.mjs",
+    "smoke:maintainer-private-ops-boundary": "node scripts/team/team-maintainer-private-ops-boundary-smoke.mjs",
+    "smoke:release-engineering": "node scripts/team/team-release-engineering-ci-smoke.mjs",
+    "demo:oss-minimal": "node examples/oss-minimal/run-demo.mjs",
+    "status:oss-minimal": "node examples/oss-minimal/agent-shell.mjs status latest",
+    "doctor:oss-minimal": "node examples/oss-minimal/agent-shell.mjs doctor latest",
+    "validate:agent-package": "node scripts/team/team-agent-package-validate.mjs",
+    "validate:third-party-agent": "node scripts/team/team-agent-package-validate.mjs examples/third-party-agent-sample/agent-package.json",
+    "smoke:third-party-agent": "node scripts/team/team-third-party-agent-template-smoke.mjs",
+    "fixtures:route-derived": "node scripts/team/team-generate-route-derived-fixtures.mjs",
+    "fixtures:real-run-published": "node scripts/team/team-generate-real-run-published-fixtures.mjs",
+    "fixtures:real-run-provenance": "node scripts/team/team-published-fixture-provenance-summary.mjs",
+    "dashboard:build": "cd dashboard && npm ci && npm run build",
+    "dashboard:check-bundle": "cd dashboard && npm run scan:bundle",
+    "release:stage-artifacts": "node scripts/team/team-stage-release-artifacts.mjs",
+    "release:notes": "node scripts/team/team-generate-release-notes.mjs",
+    "acceptance:three-node-live": "node scripts/acceptance/canonical/team-three-node-live.mjs",
+    "acceptance:dashboard-rightpanel-deeplink": "node scripts/acceptance/canonical/team-dashboard-rightpanel-deeplink-smoke.mjs",
+    "smoke:team-node-health-root-fix": "node scripts/smoke/team-node-health-root-fix.mjs"
+  },
+  "keywords": [
+    "multi-agent",
+    "agent-harness",
+    "workflow-orchestration",
+    "broker",
+    "runtime"
+  ],
+  "dependencies": {
+    "@cloudbase/node-sdk": "^3.18.1",
+    "ws": "^8.19.0"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/bridge-state.schema.json",
+  "title": "Runtime Bridge State",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "contractVersion": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "channels": { "type": "array", "items": { "type": "string" } },
+    "defaultChannel": { "type": "string" },
+    "routes": { "type": "array", "items": { "type": "string" } },
+    "routeContracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "routeKey": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "allowedRoles": { "type": "array", "items": { "type": "string" } },
+          "allowedKinds": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["routeKey", "enabled", "allowedRoles", "allowedKinds"]
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "ingress": { "type": "number" },
+        "egress": { "type": "number" }
+      },
+      "required": ["ingress", "egress"]
+    },
+    "ingress": { "$ref": "#/$defs/messageList" },
+    "egress": { "$ref": "#/$defs/messageList" }
+  },
+  "required": ["contractVersion", "updatedAt", "channels", "routes", "counts", "ingress", "egress"],
+  "$defs": {
+    "messageList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "messageId": { "type": "string" },
+          "channel": { "type": "string" },
+          "routeKey": { "type": "string" },
+          "text": { "type": "string" },
+          "kind": { "type": "string" },
+          "createdAt": { "type": "string" }
+        },
+        "required": ["messageId", "channel", "routeKey", "kind", "createdAt"]
+      }
+    }
+  }
+}

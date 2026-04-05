@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/completion-result.schema.json",
+  "title": "TL / Member Completion Result",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "status": { "type": "string" },
+    "summary": { "type": "string" },
+    "message": { "type": "string" },
+    "deliverables": { "type": "array", "items": { "type": ["string", "object"] } },
+    "artifacts": { "type": "array", "items": { "type": ["string", "object"] } },
+    "issues": { "type": "array", "items": { "type": ["string", "object"] } },
+    "findings": { "type": "array", "items": { "type": ["string", "object"] } },
+    "additionalWorkItems": { "type": "array", "items": { "type": ["string", "object"] } },
+    "newWorkItems": { "type": "array", "items": { "type": ["string", "object"] } },
+    "proposedSteps": { "type": "array", "items": { "type": ["string", "object"] } },
+    "replanReason": { "type": "string" },
+    "needsReplan": { "type": "boolean" },
+    "needsHuman": { "type": "boolean" },
+    "outputType": { "type": "string" },
+    "type": { "type": "string" },
+    "contractVersion": { "type": "string" }
+  }
+}

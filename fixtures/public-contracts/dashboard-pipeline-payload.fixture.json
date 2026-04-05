@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "pipeline": {
+    "taskId": "task:fixture",
+    "teamId": "team:fixture",
+    "title": "fixture pipeline",
+    "state": "approved",
+    "phase": "approved",
+    "phaseProgress": 60,
+    "estimatedCompletion": "imminent",
+    "currentMemberKey": "runtime.node-a",
+    "protocolSource": "decision"
+  },
+  "roles": {
+    "planner": { "completed": true, "status": "done", "contractVersion": "planner.plan.v2" },
+    "critic": { "completed": true, "reviewCount": 1, "lastVerdict": "approve", "contractVersion": "critic.review.v2" },
+    "judge": { "completed": true, "decisionCount": 1, "lastDecisionType": "approve", "contractVersion": "judge.decision.v2" }
+  },
+  "revisions": {
+    "count": 0,
+    "maxAllowed": 3,
+    "nearLimit": false,
+    "exceeded": false
+  },
+  "issues": { "total": 1, "critical": 0, "major": 0, "minor": 1, "suggestion": 0 },
+  "timeline": { "createdAt": 1775300000000, "updatedAt": 1775300100000, "lastReviewAt": 1775300050000, "lastDecisionAt": 1775300090000 },
+  "childTasks": [
+    {
+      "taskId": "task:child:1",
+      "parentTaskId": "task:fixture",
+      "title": "child",
+      "state": "done",
+      "role": "planner",
+      "assignmentId": "w1",
+      "acceptance": "done",
+      "deliverables": ["PLAN.md"],
+      "dependencies": [],
+      "executionSurface": { "requiredCapabilities": [], "requiredSkills": [], "requiredTools": [] }
+    }
+  ],
+  "executionSurface": { "childTaskCount": 1, "skillBoundCount": 0, "toolBoundCount": 0, "mcpBoundCount": 0 },
+  "memoryLayers": { "working": true, "shared": true, "durable": true },
+  "artifacts": { "total": 3, "latest": [] },
+  "evidence": { "total": 1, "latest": [] }
+}

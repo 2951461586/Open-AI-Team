@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "board": {
+    "count": 1,
+    "columns": {
+      "planning": [],
+      "review": [],
+      "approved": [
+        {
+          "taskId": "task:fixture-derived",
+          "teamId": "team:fixture-derived",
+          "title": "derived fixture task",
+          "state": "approved",
+          "priority": 9,
+          "updatedAt": 1775362350885,
+          "currentDriver": "judge",
+          "nextBestAction": "run_judge_decision",
+          "latestReviewVerdict": "approve",
+          "latestDecisionType": "approve",
+          "latestReviewProtocol": {
+            "memberKey": "critic.node-a",
+            "contractVersion": "critic.review.v2",
+            "outputType": "team.review.v2"
+          },
+          "latestDecisionProtocol": {
+            "memberKey": "judge.node-a",
+            "contractVersion": "judge.decision.v2",
+            "outputType": "team.decision.v2"
+          },
+          "artifactCount": 0,
+          "evidenceCount": 0,
+          "issueCount": 0,
+          "revisionCount": 0,
+          "deliverableReady": false,
+          "humanInterventionReady": false,
+          "deliveryStatus": "pending_delivery",
+          "interventionStatus": "no_intervention_needed",
+          "requestedNode": "node-a",
+          "actualNode": "node-a",
+          "degradedReason": "",
+          "sessionMode": "session",
+          "sessionPersistent": true,
+          "sessionFallbackReason": "",
+          "sessionKey": "agent:node-a:judge:1",
+          "sessionsByRole": {
+            "judge": "agent:node-a:judge:1"
+          },
+          "planSummary": "derived fixture plan",
+          "executiveSummary": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+          "protocolSource": "decision"
+        }
+      ],
+      "revision": [],
+      "blocked": [],
+      "done": [],
+      "other": []
+    },
+    "queueAddress": "http://127.0.0.1:19090/state/team/queue",
+    "viewAddress": "http://127.0.0.1:19090/state/team/board/view"
+  }
+}

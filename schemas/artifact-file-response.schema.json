@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/artifact-file-response.schema.json",
+  "title": "Artifact File Response",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "artifactId": { "type": "string" },
+    "type": { "type": "string", "enum": ["inline", "file"] },
+    "path": { "type": "string" },
+    "workspacePath": { "type": "string" },
+    "content": { "type": "string" },
+    "contentType": { "type": "string" },
+    "size": { "type": "number" }
+  },
+  "required": ["ok", "artifactId", "type"]
+}

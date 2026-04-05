@@ -1,0 +1,46 @@
+{
+  "contract": "team.network.ports.v1",
+  "generatedNote": "Host-neutral public example inventory for external deployments.",
+  "nodes": {
+    "node-a": {
+      "host": "127.0.0.1",
+      "services": {
+        "orchestrator": {
+          "bind": "0.0.0.0",
+          "port": 19090,
+          "role": "authority"
+        }
+      }
+    },
+    "node-b": {
+      "host": "worker-a.internal",
+      "services": {
+        "gateway": {
+          "scheme": "https",
+          "port": 443,
+          "baseUrl": "https://worker-a.internal",
+          "role": "planner_executor_gateway",
+          "status": "active"
+        }
+      }
+    },
+    "node-c": {
+      "host": "review-a.internal",
+      "services": {
+        "gateway": {
+          "scheme": "https",
+          "port": 443,
+          "baseUrl": "https://review-a.internal",
+          "role": "critic_gateway",
+          "status": "active"
+        }
+      }
+    }
+  },
+  "roleRouting": {
+    "planner": { "preferredNode": "node-b", "executionMode": "remote_session", "entry": "node-b:https" },
+    "executor": { "preferredNode": "node-b", "executionMode": "remote_session", "entry": "node-b:https" },
+    "critic": { "preferredNode": "node-c", "executionMode": "remote_session", "entry": "node-c:https" },
+    "judge": { "preferredNode": "node-a", "executionMode": "local_authority", "entry": "node-a:19090" }
+  }
+}

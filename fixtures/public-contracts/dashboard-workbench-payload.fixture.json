@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "board": {
+    "plan": { "summary": "fixture plan" },
+    "latestReview": { "verdict": "approve_with_notes" },
+    "latestDecision": { "decisionType": "approve" },
+    "artifactCount": 3,
+    "evidenceCount": 1,
+    "blackboardCount": 2,
+    "mailboxCount": 1,
+    "mailbox": [{ "kind": "workitem.started", "fromMemberId": "member:planner" }],
+    "latestReplanMap": {},
+    "memoryLayers": { "working": true, "shared": true, "durable": true },
+    "childTasks": [{ "taskId": "task:child:1", "role": "planner", "state": "done" }]
+  },
+  "summary": {
+    "artifactCount": 3,
+    "evidenceCount": 1,
+    "issueCount": 1,
+    "deliverableReady": true,
+    "humanInterventionReady": false,
+    "deliveryStatus": "deliverable_ready",
+    "interventionStatus": "no_intervention_needed",
+    "currentDriver": "judge",
+    "nextBestAction": "deliver_output",
+    "executiveSummary": "fixture executive summary",
+    "manualActions": ["deliver", "archive"],
+    "requestedNode": "node-a",
+    "actualNode": "node-a",
+    "degradedReason": "",
+    "sessionMode": "session",
+    "sessionPersistent": true,
+    "sessionFallbackReason": "",
+    "currentMemberKey": "runtime.node-a",
+    "protocolSource": "decision",
+    "executionSurface": { "childTaskCount": 1 },
+    "memoryLayers": { "working": true, "shared": true, "durable": true },
+    "protocol": { "plan": {}, "review": {}, "decision": {} }
+  },
+  "summaryLinks": {
+    "governance": "/state/team/governance?taskId=task:fixture",
+    "pipeline": "/state/team/pipeline?taskId=task:fixture",
+    "control": "/state/team/control?taskId=task:fixture",
+    "archive": "/state/team/archive?limit=200"
+  },
+  "currentMemberKey": "runtime.node-a",
+  "boundary": { "access": "dashboard_token", "sensitivity": "medium" }
+}

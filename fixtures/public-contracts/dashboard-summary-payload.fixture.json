@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "taskId": "task:fixture",
+  "title": "fixture summary",
+  "state": "done",
+  "requestedNode": "node-a",
+  "actualNode": "node-a",
+  "degradedReason": "",
+  "sessionMode": "session",
+  "sessionPersistent": true,
+  "sessionFallbackReason": "",
+  "sessionKey": "agent:node-a:planner:1",
+  "sessionsByRole": { "planner": "agent:node-a:planner:1" },
+  "followupRoute": "/state/team/control?taskId=task:fixture",
+  "deliveryStatus": "deliverable_ready",
+  "interventionStatus": "no_intervention_needed",
+  "nextBestAction": "deliver_output",
+  "executiveSummary": "fixture summary ready",
+  "currentMemberKey": "runtime.node-a",
+  "protocolSource": "decision",
+  "protocol": {
+    "plan": { "contractVersion": "planner.plan.v2" },
+    "review": { "contractVersion": "critic.review.v2" },
+    "decision": { "contractVersion": "judge.decision.v2" }
+  },
+  "deliverableReady": true,
+  "humanInterventionReady": false,
+  "counters": {
+    "artifactCount": 3,
+    "evidenceCount": 1,
+    "issueCount": 1,
+    "revisionCount": 0
+  },
+  "memoryLayers": { "working": true, "shared": true, "durable": true }
+}

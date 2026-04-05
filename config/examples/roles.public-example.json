@@ -1,0 +1,57 @@
+{
+  "$schema": "../team-roles.schema.json",
+  "version": "1.0.0",
+  "description": "Host-neutral public example role configuration for AI Team Harness.",
+  "defaults": {
+    "preferredNode": "node-a",
+    "fallbackNode": "node-a",
+    "outwardIdentity": "authority",
+    "model": null,
+    "maxConcurrentTasks": 1,
+    "sessionTimeout": 360000
+  },
+  "roles": {
+    "planner": {
+      "displayName": "Planner",
+      "capabilities": ["planning", "decomposition", "task-design"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate"
+    },
+    "critic": {
+      "displayName": "Critic",
+      "capabilities": ["review", "risk-analysis", "consistency-check"],
+      "preferredNode": "node-c",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate"
+    },
+    "judge": {
+      "displayName": "Judge",
+      "capabilities": ["decision", "approval", "escalation"],
+      "preferredNode": "node-a",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate"
+    },
+    "executor": {
+      "displayName": "Executor",
+      "capabilities": ["execution", "implementation", "drafting"],
+      "preferredNode": "node-b",
+      "fallbackNode": "node-a",
+      "runtime": "session-substrate"
+    }
+  },
+  "nodeMap": {
+    "node-a": {
+      "host": "127.0.0.1",
+      "description": "authority / local control node"
+    },
+    "node-b": {
+      "host": "worker-a.internal",
+      "description": "planner/executor worker node"
+    },
+    "node-c": {
+      "host": "review-a.internal",
+      "description": "critic/review node"
+    }
+  }
+}

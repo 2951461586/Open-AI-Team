@@ -1,0 +1,186 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  mainline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Mainline smoke
+        run: npm run smoke:team
+
+  public-contracts:
+    runs-on: ubuntu-latest
+    needs: mainline
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install
+        run: npm ci
+
+      - name: Install Python deps
+        run: python -m pip install --upgrade pip jsonschema
+
+      - name: Generate derived fixtures
+        run: npm run fixtures:route-derived
+
+      - name: Validate public schemas
+        run: npm run smoke:public-schemas
+
+      - name: Validate dashboard public contracts
+        run: npm run smoke:dashboard-public-contract
+
+      - name: Stage release artifacts (public contracts + docs)
+        run: npm run release:stage-artifacts -- public-contracts source-docs
+
+      - name: Upload public contracts bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-contracts-bundle
+          path: .release-artifacts/public-contracts
+
+      - name: Upload source docs bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-docs-bundle
+          path: .release-artifacts/source-docs
+
+  dashboard-build:
+    runs-on: ubuntu-latest
+    needs: mainline
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install dashboard deps
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Build dashboard
+        working-directory: dashboard
+        run: npm run build
+
+      - name: Scan dashboard bundle residue
+        working-directory: dashboard
+        run: npm run scan:bundle
+
+      - name: Export dashboard static site
+        working-directory: dashboard
+        run: npx next export
+
+      - name: Stage release artifacts (dashboard)
+        run: npm run release:stage-artifacts -- dashboard
+
+      - name: Upload dashboard static export bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-static-export-bundle
+          path: .release-artifacts/dashboard-static-export
+
+  oss-minimal:
+    runs-on: ubuntu-latest
+    needs: mainline
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Smoke oss-minimal
+        run: npm run smoke:oss-minimal
+
+      - name: Demo oss-minimal
+        run: npm run demo:oss-minimal
+
+      - name: Status oss-minimal
+        run: npm run status:oss-minimal
+
+      - name: Doctor oss-minimal
+        run: npm run doctor:oss-minimal
+
+      - name: Validate oss agent package
+        run: npm run validate:agent-package
+
+      - name: Stage release artifacts (oss-minimal)
+        run: npm run release:stage-artifacts -- oss-minimal
+
+      - name: Upload oss-minimal evidence bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: oss-minimal-evidence-bundle
+          path: .release-artifacts/oss-minimal
+
+  third-party-template:
+    runs-on: ubuntu-latest
+    needs: mainline
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate third-party sample
+        run: npm run validate:third-party-agent
+
+      - name: Smoke third-party sample
+        run: npm run smoke:third-party-agent
+
+      - name: Stage release artifacts (third-party sample)
+        run: npm run release:stage-artifacts -- third-party
+
+      - name: Upload third-party agent sample bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: third-party-agent-sample-bundle
+          path: .release-artifacts/third-party-agent-sample

@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "residents": [
+    {
+      "role": "planner",
+      "memberId": "member:planner:1",
+      "status": "active",
+      "node": "node-a",
+      "leaseExpiresAt": 1775300000000,
+      "lastHeartbeatAt": 1775299990000,
+      "busy": false
+    }
+  ],
+  "nodes": {
+    "node-a": { "reachable": true, "label": "Authority" }
+  },
+  "observedAt": 1775300000000,
+  "counts": {
+    "count": 1,
+    "busyCount": 0,
+    "activeLeaseCount": 1
+  },
+  "deployment": {
+    "planner": { "preferredNode": "node-a", "fallbackNode": "node-a" }
+  }
+}

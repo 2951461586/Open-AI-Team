@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-workbench-payload.schema.json",
+  "title": "Dashboard Workbench Payload",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "ok": { "type": "boolean" },
+    "board": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "plan": { "type": ["object", "null"] },
+        "latestReview": { "type": ["object", "null"] },
+        "latestDecision": { "type": ["object", "null"] },
+        "artifactCount": { "type": "number" },
+        "evidenceCount": { "type": "number" },
+        "blackboardCount": { "type": "number" },
+        "mailboxCount": { "type": "number" },
+        "mailbox": { "type": "array", "items": { "type": "object" } },
+        "latestReplanMap": { "type": ["object", "null"] },
+        "memoryLayers": { "type": ["object", "array"] },
+        "childTasks": { "type": "array", "items": { "type": "object" } }
+      },
+      "required": ["artifactCount", "evidenceCount", "childTasks"]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "artifactCount": { "type": "number" },
+        "evidenceCount": { "type": "number" },
+        "issueCount": { "type": "number" },
+        "deliverableReady": { "type": "boolean" },
+        "humanInterventionReady": { "type": "boolean" },
+        "deliveryStatus": { "type": "string" },
+        "interventionStatus": { "type": "string" },
+        "currentDriver": { "type": "string" },
+        "nextBestAction": { "type": "string" },
+        "executiveSummary": { "type": "string" },
+        "manualActions": { "type": "array", "items": { "type": "string" } },
+        "requestedNode": { "type": "string" },
+        "actualNode": { "type": "string" },
+        "degradedReason": { "type": "string" },
+        "sessionMode": { "type": "string" },
+        "sessionPersistent": { "type": "boolean" },
+        "sessionFallbackReason": { "type": "string" },
+        "currentMemberKey": { "type": "string" },
+        "protocolSource": { "type": "string" },
+        "executionSurface": { "type": "object" },
+        "memoryLayers": { "type": ["object", "array"] },
+        "protocol": { "type": "object" }
+      },
+      "required": ["artifactCount", "evidenceCount", "deliveryStatus", "interventionStatus"]
+    },
+    "summaryLinks": { "type": "object" },
+    "currentMemberKey": { "type": "string" },
+    "boundary": { "type": "object" }
+  },
+  "required": ["ok", "board", "summary"]
+}

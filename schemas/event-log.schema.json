@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/orchestrator/schemas/event-log.schema.json",
+  "title": "Runtime Event Log",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+      "type": { "type": "string" },
+      "ts": { "type": "number" },
+      "kind": { "type": "string" },
+      "status": { "type": "string" },
+      "channel": { "type": "string" },
+      "routeKey": { "type": "string" },
+      "messageId": { "type": "string" },
+      "path": { "type": "string" },
+      "role": { "type": "string" },
+      "hook": { "type": "string" },
+      "pluginId": { "type": "string" },
+      "eventKind": { "type": "string" },
+      "title": { "type": "string" },
+      "content": { "type": "string" },
+      "state": { "type": "string" }
+    },
+    "required": ["type", "ts"]
+  }
+}
