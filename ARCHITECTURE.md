@@ -234,11 +234,19 @@ They are not the primary definition authority for the product.
 - `docs/changelog/`
 - selected deployment and investigation notes
 
+### Secondary / background / sample surfaces
+- `fixtures/README.md`
+- `references/README.md`
+- `memory/README.md`
+
 ### Historical docs
 - `docs/archive/`
 
 Rule:
 - current truth lives in `README.md`, `GETTING-STARTED.md`, `ARCHITECTURE.md`, and `docs/architecture/`
+- fixtures are public-safe sample/validation material, not primary source authority
+- references are background context, not repository authority
+- memory is continuity/derived maintainer context, not the public product story
 - maintainer/private operational context should not become the public mental model
 - historical context belongs in archive only
 

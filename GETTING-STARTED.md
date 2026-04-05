@@ -125,6 +125,19 @@ Rule:
 - not part of the default public onboarding path
 - not a substitute for public examples under `config/examples/`
 
+### F) Background / continuity / sample surfaces
+Use these only when you intentionally need context, sample payloads, or derived continuity material.
+
+Examples:
+- `fixtures/README.md`
+- `references/README.md`
+- `memory/README.md`
+
+Rule:
+- useful for examples, background, or continuity
+- not the primary product authority
+- not a replacement for current docs, schemas, or runtime source surfaces
+
 ---
 
 ## 3. Repository Map

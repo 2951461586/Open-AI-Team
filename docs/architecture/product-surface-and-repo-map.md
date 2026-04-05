@@ -139,6 +139,12 @@ Not part of the mainline product story:
 - live production incident notes
 - private deployment specifics
 
+### Secondary / background / sample authority
+Allowed in-tree, but not part of the default first-read product authority:
+- `fixtures/` as public-safe sample/validation material
+- `references/` as comparison/background context
+- `memory/` as continuity and derived maintainer context
+
 ---
 
 ## 5. Release Narrative Rule

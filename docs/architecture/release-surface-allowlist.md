@@ -47,7 +47,13 @@ These paths may stay in the repository during transition, but should not dominat
 - `examples/README.md`
 - `dashboard/README.md`
 - `scripts/README.md`
+- `fixtures/README.md`
 - selected fixture-generation tooling
+
+### Background / non-authority context kept in-tree
+These may remain visible in the repository, but should not be treated as primary product authority:
+- `references/`
+- `memory/`
 
 Rule:
 - allowed in-tree
