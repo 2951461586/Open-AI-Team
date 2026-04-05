@@ -40,6 +40,13 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 - `examples/oss-minimal/`：最小可运行 standalone harness 示例
 - `.release-artifacts/`：生成产物目录，只用于发布附件 / 验收 / 溯源，不是源码 authority
 
+### 仓库分层地图
+- **主产品面**：`src/`、`dashboard/`、`docs/architecture/`、`schemas/`
+- **公开示例 / 样例面**：`examples/`、`fixtures/`
+- **secondary / maintainer 面**：`config/team/`、`docs/ops/`、`scripts/ops/`、`scripts/acceptance/`
+- **背景 / 连续性面**：`references/`、`memory/`
+- **历史面**：`docs/archive/`
+
 ---
 
 ## 项目定位

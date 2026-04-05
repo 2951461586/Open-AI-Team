@@ -38,6 +38,13 @@ It also includes:
 - `examples/oss-minimal/` — minimal standalone harness example
 - `.release-artifacts/` — generated outputs only, not source authority
 
+### Repo surface map
+- **Primary product surfaces** — `src/`, `dashboard/`, `docs/architecture/`, `schemas/`
+- **Public examples / samples** — `examples/`, `fixtures/`
+- **Secondary / maintainer surfaces** — `config/team/`, `docs/ops/`, `scripts/ops/`, `scripts/acceptance/`
+- **Background / continuity surfaces** — `references/`, `memory/`
+- **Historical surface** — `docs/archive/`
+
 ## Deployment authority
 
 **Single authority rule:** production dashboard deployment must originate from the **full dashboard source tree**, then build, then deploy.

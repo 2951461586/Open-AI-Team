@@ -19,7 +19,7 @@ Default public-safe smoke entrypoints.
 Product/baseline-specific guards and validation surfaces.
 
 ### `acceptance/`
-Higher-cost or live validation.
+Higher-cost or live validation. Treat this as a maintainer-oriented or environment-bound surface unless a check is explicitly promoted into public-safe smoke.
 
 ### `ops/`
 Maintainer-oriented audits, replay, investigation, and maintenance helpers.

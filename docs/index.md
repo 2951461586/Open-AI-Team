@@ -41,6 +41,11 @@ Read in this order:
 - `changelog/`
 - `p4-streaming-recovery.md`
 
+### Understand background / continuity / sample surfaces *(non-primary / read only when needed)*
+- `../fixtures/README.md`
+- `../references/README.md`
+- `../memory/README.md`
+
 ### Understand historical context
 - `archive/`
 

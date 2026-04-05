@@ -79,6 +79,12 @@ Useful, but not part of the public product promise:
 - must not be presented as the public example/default package config surface
 - public examples should continue to live under `config/examples/`
 
+### `scripts/acceptance/`
+- may remain in-tree
+- should be described as higher-cost and often live/environment-bound validation
+- must not replace `smoke:team` as the default contributor regression path
+- checks that become cheap and public-safe should graduate into `scripts/smoke/` or `scripts/team/`
+
 ### Optional integrations
 - may stay in source tree
 - must be explicitly labeled optional
