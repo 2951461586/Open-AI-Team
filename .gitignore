@@ -67,4 +67,6 @@ services/
 skills/
 tmp/
 reports/pool-manager/
+memory/*.md
+!memory/README.md
 memory/compiler/

@@ -16,7 +16,10 @@ This directory currently contains two kinds of material:
 
 ## Boundary
 
-`memory/` may remain in-tree during transition, but it is **not** part of the default public product story.
+`memory/` is a **local continuity surface**, not a public repository surface.
+
+In the public GitHub repository, only this boundary README should remain tracked.
+Daily notes, internal continuity markdown, and derived compiler state should stay local and out of version control.
 
 Treat it as:
 - useful for maintainers / continuity work
