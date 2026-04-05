@@ -29,6 +29,8 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 
 ### 推荐先读
 - [英文主入口 / README.md](./README.md)
+- [Release engineering & CI](./docs/architecture/release-engineering-and-ci.md)
+- [Release artifacts & publishing](./docs/architecture/release-artifacts-and-publishing.md)
 - [Dashboard 源码 authority 与部署规则](./docs/deploy/dashboard-source-authority.md)
 - [旧 dashboard-static-export 退役说明](./docs/migration/dashboard-static-export-deprecation.md)
 - [DeerFlow / OpenHanako 对比与开源改造清单](./docs/oss/deerflow-openhanako-comparison.md)
