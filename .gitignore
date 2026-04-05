@@ -5,6 +5,11 @@ node_modules/
 .env
 .env.local
 .env.*.local
+/dashboard/.env.production
+
+# Python cache
+__pycache__/
+*.py[cod]
 
 # Runtime artifacts (never commit)
 run/
