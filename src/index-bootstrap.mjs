@@ -14,11 +14,12 @@ import { createNoopSessionRuntimeAdapter, createSessionRuntimeAdapter } from './
 import { createStandaloneProductRuntime } from './agent-harness-core/standalone-product-runtime.mjs';
 import { loadHostRuntimeConfig } from './index-host-config.mjs';
 import { createOpenClawRemoteSessionHostBootstrap } from './integrations/openclaw/host-bootstrap.mjs';
+import { resolveRemoteSessionHostBootstrap } from './integrations/host-bootstrap-selector.mjs';
 import { createTeamNodeHealth } from './team/team-node-health.mjs';
 import { createRuntimeExecutionAdapter } from './team-runtime-adapters/execution-harness.mjs';
 
 export function createRemoteSessionHostBootstrap(config = {}) {
-  return createOpenClawRemoteSessionHostBootstrap(config);
+  return resolveRemoteSessionHostBootstrap(config) || createHostAgnosticBootstrap(config);
 }
 
 export function createControlPlaneHostBootstrap(config = {}) {

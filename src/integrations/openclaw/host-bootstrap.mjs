@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { loadHostRuntimeConfig } from '../../index-host-config.mjs';
+import { applyMaintainerHostProbe, loadHostRuntimeConfig, loadMaintainerHostProbe, loadNeutralHostRuntimeConfig } from '../../index-host-config.mjs';
 import { createTeamNodeHealth } from '../../team/team-node-health.mjs';
 import { DEFAULT_NODE_ID, OBSERVER_NODE_ID, REVIEW_NODE_ID } from '../../team/team-node-ids.mjs';
 import { createControlPlaneClient } from '../../team-runtime-adapters/control-plane.mjs';
@@ -34,7 +34,9 @@ export function buildOpenClawNodeControls({
 }
 
 export function createOpenClawRemoteSessionHostBootstrap(config = {}) {
-  const hostConfig = loadHostRuntimeConfig(config);
+  const neutralHostConfig = loadNeutralHostRuntimeConfig(config);
+  const hostProbe = loadMaintainerHostProbe(config);
+  const hostConfig = applyMaintainerHostProbe(config, neutralHostConfig, hostProbe);
   const networkPorts = hostConfig.networkPorts || loadJsonFromUrl(new URL('../../../config/team/network-ports.json', import.meta.url), {});
   const compatNetworkPorts = hostConfig.compatNetworkPorts || loadJsonFromUrl(new URL('../../../config/team/network-ports.compat.json', import.meta.url), {});
   const localControlUrl = String(hostConfig?.local?.controlBaseUrl || '').trim();
