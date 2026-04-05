@@ -44,6 +44,7 @@ These paths belong to the main public product and should remain public-safe, doc
 These paths may stay in the repository during transition, but should not dominate the first-time contributor story.
 
 - `config/team/`
+- `config/README.md`
 - `examples/README.md`
 - `dashboard/README.md`
 - `scripts/README.md`
@@ -54,6 +55,12 @@ These paths may stay in the repository during transition, but should not dominat
 These may remain visible in the repository, but should not be treated as primary product authority:
 - `references/`
 - `memory/`
+
+### Locked interpretation
+- `config/examples/` = public-safe example config surface
+- `config/team/` = maintainer-facing active runtime inventory
+- `fixtures/public-contracts/` = public contract sample/validation surface
+- `references/` = background comparison material only
 
 Rule:
 - allowed in-tree

@@ -146,16 +146,18 @@ Rule:
 README.md                product overview and boundary definition
 ARCHITECTURE.md          repository layering authority
 GETTING-STARTED.md       contributor entrypoint
-config/team/             active team runtime config authority
-config/examples/         public-safe example config
+config/                  config surface map (`config/README.md`)
+config/team/             maintainer-facing active runtime inventory
+config/examples/         public-safe example config authority
 src/team*/               primary runtime and neutral semantics
 src/agent-harness-core/  reusable execution substrate
 src/integrations/        optional integrations only
 dashboard/src/           primary application UI
 examples/                runnable and forkable public examples
 schemas/                 public machine-readable contracts
-fixtures/                canonical, derived, and public samples
+fixtures/                public contract samples and validation fixtures
 scripts/                 validation, smoke, acceptance, ops
+references/              background comparison/reference material
 ```
 
 ---

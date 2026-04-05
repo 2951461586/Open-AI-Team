@@ -1,6 +1,6 @@
 # Background References
 
-> Third-party or extracted reference material kept for comparison, research, and context.
+> Comparison, research, and extracted third-party reference material kept only as background context.
 
 ## What lives here
 
@@ -26,4 +26,4 @@ If a file here conflicts with current repository docs, prefer:
 
 ## One-line rule
 
-References can inform decisions, but they do not define the product boundary of this repository.
+`references/` is background comparison material only. It can inform decisions, but it does not define the product boundary of this repository.

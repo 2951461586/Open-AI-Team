@@ -40,8 +40,8 @@ It also includes:
 
 ### Repo surface map
 - **Primary product surfaces** — `src/`, `dashboard/`, `docs/architecture/`, `schemas/`
-- **Public examples / samples** — `examples/`, `fixtures/`
-- **Secondary / maintainer surfaces** — `config/team/`, `docs/ops/`, `scripts/ops/`, `scripts/acceptance/`
+- **Public examples / samples** — `examples/`, `fixtures/`, `config/examples/`
+- **Maintainer runtime inventory / live surfaces** — `config/team/`, `docs/ops/`, `scripts/ops/`, `scripts/acceptance/`
 - **Background / continuity surfaces** — `references/`, `memory/`
 - **Historical surface** — `docs/archive/`
 

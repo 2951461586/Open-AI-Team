@@ -1,6 +1,6 @@
 # Public Fixtures
 
-> Public-safe sample payloads, route fixtures, and contract examples.
+> Public contract samples, validation fixtures, and contributor-facing example payloads.
 
 ## What lives here
 
@@ -36,4 +36,4 @@ Do **not** treat fixtures as:
 
 ## One-line rule
 
-Fixtures explain and validate the public surface; they do not replace the public surface authority.
+`fixtures/public-contracts/` is the public contract sample/validation surface; fixtures explain and validate the public surface, but do not replace the public surface authority.

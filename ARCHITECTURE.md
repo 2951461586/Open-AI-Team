@@ -235,6 +235,7 @@ They are not the primary definition authority for the product.
 - selected deployment and investigation notes
 
 ### Secondary / background / sample surfaces
+- `config/README.md`
 - `fixtures/README.md`
 - `references/README.md`
 - `memory/README.md`

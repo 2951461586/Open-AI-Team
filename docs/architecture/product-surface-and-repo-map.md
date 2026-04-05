@@ -141,6 +141,8 @@ Not part of the mainline product story:
 
 ### Secondary / background / sample authority
 Allowed in-tree, but not part of the default first-read product authority:
+- `config/examples/` as public-safe example configuration
+- `config/team/` as maintainer-facing active runtime inventory
 - `fixtures/` as public-safe sample/validation material
 - `references/` as comparison/background context
 - `memory/` as continuity and derived maintainer context

@@ -42,8 +42,8 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 
 ### 仓库分层地图
 - **主产品面**：`src/`、`dashboard/`、`docs/architecture/`、`schemas/`
-- **公开示例 / 样例面**：`examples/`、`fixtures/`
-- **secondary / maintainer 面**：`config/team/`、`docs/ops/`、`scripts/ops/`、`scripts/acceptance/`
+- **公开示例 / 样例面**：`examples/`、`fixtures/`、`config/examples/`
+- **maintainer 现役运行库存 / live 面**：`config/team/`、`docs/ops/`、`scripts/ops/`、`scripts/acceptance/`
 - **背景 / 连续性面**：`references/`、`memory/`
 - **历史面**：`docs/archive/`
 

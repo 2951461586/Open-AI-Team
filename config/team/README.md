@@ -1,6 +1,6 @@
-# Active Team Runtime Config (Maintainer-Oriented)
+# Active Team Runtime Inventory (Maintainer-Facing)
 
-> `config/team/` is the **active runtime inventory / maintainer-facing config authority** for the current repository, not the public example/default config surface.
+> `config/team/` is the **maintainer-facing active runtime inventory / maintainer-facing config authority** for the current repository/runtime line, not the public example/default config surface.
 
 ## What lives here
 
@@ -21,8 +21,9 @@ For public-safe examples, prefer:
 - `../examples/README.md`
 - `../examples/*.json`
 
-## Notes
+## Locked interpretation
 
-- `network-ports.json` is a current runtime inventory, not a promise that every public fork should ship the same topology
+- `roles.json` and `governance.json` are current runtime inventory inputs for the maintained runtime line
+- `network-ports.json` is current runtime topology inventory, not a promise that every public fork should ship the same topology
 - `network-ports.compat.json` is compatibility / investigation-only inventory
 - public example configuration belongs under `config/examples/`
