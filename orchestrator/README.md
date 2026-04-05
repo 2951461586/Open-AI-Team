@@ -46,7 +46,7 @@ Authoritative source boundary:
 - dashboard build config files
 
 Non-authoritative surfaces:
-- `.release-artifacts/dashboard-static-export/`
+- historical `dashboard-static-export` bundles / paths
 - copied static bundles
 - ad-hoc exported `out/` directories
 - stale local mirrors under `/srv/*`

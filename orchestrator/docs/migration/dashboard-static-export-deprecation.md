@@ -2,15 +2,12 @@
 
 ## Status
 
-`dashboard-static-export` is now a **deprecated fallback surface**.
+`dashboard-static-export` is now a **retired historical surface**.
 
-It may remain temporarily for:
-- release artifact inspection
-- migration notes
-- debugging stale bundles
-- historical provenance checks
+It has been removed from the repository mainline as a deployable directory.
+The path name may still appear in migration / provenance / retirement notes, but it is no longer kept as a living repo surface.
 
-It must no longer act as the recommended or default production deployment entry.
+It must not act as the recommended or default production deployment entry.
 
 ## Why this is being deprecated
 

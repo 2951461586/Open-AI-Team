@@ -16,7 +16,7 @@ Authoritative dashboard source surface:
 - `dashboard/public/`
 - `dashboard/package.json`
 - `dashboard/package-lock.json`
-- `dashboard/next.config.*`
+- `dashboard/next.config.js`
 - `dashboard/postcss.config.js`
 - `dashboard/tailwind.config.ts`
 - `dashboard/tsconfig.json`
@@ -27,7 +27,7 @@ A deployment is considered valid only when it is produced from that source bound
 
 The following are **not** valid authorities for deciding what version should be online:
 
-- `.release-artifacts/dashboard-static-export/`
+- historical `dashboard-static-export` bundles / paths
 - any previously exported `out/` directory copied across machines
 - any local static mirror such as `/srv/...` when its provenance is unclear
 - any one-off staging bundle without a matching source-tree build

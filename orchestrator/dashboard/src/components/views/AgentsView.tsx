@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import {
   Bot, RefreshCw, Package, Heart,
   FolderOpen, FileText, Terminal, Puzzle, Calendar,
@@ -11,13 +11,10 @@ import { cn, roleLabel, nodeLabel, probeLatencyLabel, formatTime } from '@/lib/u
 import { useTaskStore } from '@/lib/store'
 import { fetchNodes } from '@/lib/api'
 import { NodeSummary } from '@/lib/types'
-import laodaAvatar from '@/assets/node-avatars/laoda.png'
-import violetAvatar from '@/assets/node-avatars/violet.png'
-import lebangAvatar from '@/assets/node-avatars/lebang.png'
 
 /* ─── Shared ─────────────────────────────────────────────────── */
 
-const nodeAvatarMap: Record<string, StaticImageData> = { laoda: laodaAvatar, violet: violetAvatar, lebang: lebangAvatar }
+const nodeAvatarMap: Record<string, string> = { laoda: '/node-avatars/laoda.png', violet: '/node-avatars/violet.png', lebang: '/node-avatars/lebang.png' }
 const dotMap: Record<string, string> = { laoda: 'bg-[var(--node-laoda)]', violet: 'bg-[var(--node-violet)]', lebang: 'bg-[var(--success)]' }
 const nodeRingMap: Record<string, string> = { laoda: 'ring-[var(--node-laoda)]/30', violet: 'ring-[var(--node-violet)]/30', lebang: 'ring-[var(--success)]/30' }
 

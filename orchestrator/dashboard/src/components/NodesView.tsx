@@ -1,10 +1,7 @@
 'use client'
 
-import Image, { type StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { useMemo } from 'react'
-import laodaAvatar from '@/assets/node-avatars/laoda.png'
-import violetAvatar from '@/assets/node-avatars/violet.png'
-import lebangAvatar from '@/assets/node-avatars/lebang.png'
 import {
   GlobeLock,
   Wifi,
@@ -20,10 +17,10 @@ const dotMap: Record<string, string> = {
   lebang: 'bg-[var(--success)]',
 }
 
-const nodeAvatarMap: Record<string, StaticImageData> = {
-  laoda: laodaAvatar,
-  violet: violetAvatar,
-  lebang: lebangAvatar,
+const nodeAvatarMap: Record<string, string> = {
+  laoda: '/node-avatars/laoda.png',
+  violet: '/node-avatars/violet.png',
+  lebang: '/node-avatars/lebang.png',
 }
 
 const nodeAvatarRingMap: Record<string, string> = {

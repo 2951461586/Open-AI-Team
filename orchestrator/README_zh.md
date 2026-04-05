@@ -90,7 +90,7 @@ authority 范围：
 - dashboard build config
 
 非 authority：
-- `.release-artifacts/dashboard-static-export/`
+- 历史 `dashboard-static-export` bundle / 路径
 - 历史 `out/` 目录
 - 本机静态镜像目录
 - 不可追溯来源的旧 bundle
