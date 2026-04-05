@@ -1,5 +1,7 @@
 # AI Team Harness
 
+[English](./README.md) | 中文说明
+
 面向开源的多 Agent 编排执行基座。
 
 ## 这是什么
@@ -17,9 +19,24 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 
 - Dashboard 看板
 - Agent 管理视图
-- 节点状态视图
-- 交付物 / 证据 / 风险闭环
+- 交付物 / 证据 / 评审 / 裁决闭环
 - 面向 GitHub Release 的 release notes / provenance / version story
+- 面向开源的最小 harness 示例
+
+---
+
+## 主入口导航
+
+### 推荐先读
+- [英文主入口 / README.md](./README.md)
+- [Dashboard 源码 authority 与部署规则](./docs/deploy/dashboard-source-authority.md)
+- [旧 dashboard-static-export 退役说明](./docs/migration/dashboard-static-export-deprecation.md)
+- [DeerFlow / OpenHanako 对比与开源改造清单](./docs/oss/deerflow-openhanako-comparison.md)
+
+### 仓库关键入口
+- `dashboard/`：完整 dashboard 源码树
+- `examples/oss-minimal/`：最小可运行 standalone harness 示例
+- `.release-artifacts/`：生成产物目录，只用于发布附件 / 验收 / 溯源，不是源码 authority
 
 ---
 
@@ -29,7 +46,7 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 
 - **通用编排基座**，而不是某个特定研究场景框架
 - **产品化工作台**，而不是只给开发者看的运行时
-- **低平台绑定**，逐步清理 QQ / Telegram / Feishu 等历史接入痕迹
+- **低平台绑定**，逐步清理历史平台接入痕迹
 - **面向开源发布**，强调 release contract、artifact、provenance 和可复现性
 
 ---
@@ -61,36 +78,41 @@ AI Team Harness 关注的是 **可执行、可观测、可交付** 的多 Agent 
 
 ---
 
-## 快速开始
+## 唯一部署 authority
 
-### 安装依赖
+**正式规则：只能从完整 `dashboard/` 源码树 fresh build 后再部署。**
 
-```bash
-cd orchestrator
-npm install
-cd dashboard
-npm install
-```
+authority 范围：
+- `dashboard/src/`
+- `dashboard/public/`
+- `dashboard/package.json`
+- `dashboard/package-lock.json`
+- dashboard build config
 
-### 构建 Dashboard
+非 authority：
+- `.release-artifacts/dashboard-static-export/`
+- 历史 `out/` 目录
+- 本机静态镜像目录
+- 不可追溯来源的旧 bundle
+
+如果静态产物和源码树不一致，以源码树为准，重新 build。
+
+---
+
+## 推荐部署流程
 
 ```bash
 cd orchestrator/dashboard
+npm ci
 npm run build
+# 然后再把 fresh ./out 发布到你的托管目标
 ```
 
-### 运行示例
+如需强约束脚本，可用：
 
 ```bash
 cd orchestrator
-npm run demo:oss-minimal
-```
-
-### 运行主线 smoke
-
-```bash
-cd orchestrator
-node scripts/smoke/team-mainline.mjs
+bash scripts/deploy-dashboard-from-source.sh
 ```
 
 ---
@@ -99,14 +121,14 @@ node scripts/smoke/team-mainline.mjs
 
 ```text
 orchestrator/
-├─ dashboard/                 # 前端看板
+├─ dashboard/                 # 前端看板完整源码
 ├─ examples/
-│  ├─ oss-minimal/            # 最小可运行样例
-│  └─ third-party-agent-sample/
-├─ scripts/team/              # 编排 / release / smoke 脚本
-├─ docs/architecture/         # 架构与开源面文档
-├─ fixtures/public-contracts/ # 对外 contract fixtures
-└─ src/                       # 核心运行时代码
+│  └─ oss-minimal/            # 最小可运行样例
+├─ scripts/                   # 部署 / 验收脚本
+├─ docs/deploy/               # 部署 authority 文档
+├─ docs/migration/            # 退役 / 迁移文档
+├─ docs/oss/                  # 开源对比与改造清单
+└─ .release-artifacts/        # 生成产物（非 authority）
 ```
 
 ---
@@ -115,27 +137,11 @@ orchestrator/
 
 当前仓库正在持续做这几件事：
 
-1. 清理历史平台绑定
+1. 清理历史 fallback 面
 2. 收敛 UI 的内部噪音
 3. 把版本故事变成 machine-readable contract
 4. 让 release / smoke / docs / package 串成一条主线
-
----
-
-## 部署
-
-Dashboard 线上部署脚本：
-
-```bash
-cd orchestrator
-bash scripts/deploy-dashboard-cloudbase.sh
-```
-
-默认会：
-
-- 构建 `dashboard`
-- 同步静态产物到本机目录
-- 发布到 CloudBase Hosting
+5. 降低 OpenClaw/宿主环境对公共开源面的直接绑定
 
 ---
 
@@ -144,8 +150,9 @@ bash scripts/deploy-dashboard-cloudbase.sh
 - signing / attestations
 - structured changelog
 - 自动 version bump
+- runtime adapter / plugin boundary 继续去平台绑定
 - 第三方 agent 接入模板继续产品化
 
 ---
 
-如需英文说明，可补 `README.md` 主入口或双语导航。 
+一句话：**生成产物可以保留，但只有完整 dashboard 源码树才有部署话语权。**
