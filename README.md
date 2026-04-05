@@ -27,6 +27,7 @@ It also includes:
 - [中文总览 / README_zh.md](./README_zh.md)
 - [Dashboard UI surface](./dashboard/README.md)
 - [Release engineering & CI](./docs/architecture/release-engineering-and-ci.md)
+- [Release artifacts & publishing](./docs/architecture/release-artifacts-and-publishing.md)
 - [Dashboard source authority & deployment](./docs/deploy/dashboard-source-authority.md)
 - [Dashboard static export deprecation note](./docs/migration/dashboard-static-export-deprecation.md)
 - [OSS comparison: DeerFlow / OpenHanako / AI Team](./docs/oss/deerflow-openhanako-comparison.md)

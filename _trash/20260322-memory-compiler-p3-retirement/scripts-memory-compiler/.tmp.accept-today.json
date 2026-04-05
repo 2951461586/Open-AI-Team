@@ -1,9 +1,0 @@
-{
-  "type": "today",
-  "date": "2026-03-20",
-  "generationStrategy": "acceptance-refresh-v1",
-  "forceChangedSourceCompile": true,
-  "changedSourceRefs": [
-    "file:/root/.openclaw/workspace/SESSION-STATE.md"
-  ]
-}

@@ -35,6 +35,9 @@ examples/**/.shared/
 # Logs
 *.log
 
+# Historical trash / temp snapshots
+_trash/**/.tmp.*.json
+
 # Dashboard build outputs
 /dashboard/node_modules/
 /dashboard/.next/

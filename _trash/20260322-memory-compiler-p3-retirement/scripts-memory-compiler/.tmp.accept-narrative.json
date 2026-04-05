@@ -1,8 +1,0 @@
-{
-  "type": "narrative",
-  "generationStrategy": "acceptance-refresh-v1",
-  "forceChangedSourceCompile": true,
-  "changedSourceRefs": [
-    "file:/root/.openclaw/workspace/SESSION-STATE.md"
-  ]
-}
