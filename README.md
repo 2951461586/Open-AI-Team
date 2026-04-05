@@ -31,6 +31,8 @@ It also includes:
 - [Dashboard source authority & deployment](./docs/deploy/dashboard-source-authority.md)
 - [Dashboard static export deprecation note](./docs/migration/dashboard-static-export-deprecation.md)
 - [OSS comparison: DeerFlow / OpenHanako / AI Team](./docs/oss/deerflow-openhanako-comparison.md)
+- [OpenClaw integration retirement plan](./docs/architecture/openclaw-integration-retirement-plan.md)
+- [Repo shape migration plan](./docs/architecture/repo-shape-migration-plan.md)
 - [Docs index](./docs/index.md)
 
 ### Practical entry points

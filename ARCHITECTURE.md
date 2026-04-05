@@ -60,9 +60,11 @@ Current authority order for understanding the repository:
 7. `docs/architecture/session-capability-and-followup-fallback.md`
 8. `docs/architecture/independent-agent-onboarding.md`
 9. `docs/architecture/standalone-harness-baseline-release.md`
-10. `docs/architecture/release-engineering-and-ci.md`
-11. `docs/architecture/release-artifacts-and-publishing.md`
-12. `docs/architecture/release-notes-provenance-and-version-story.md`
+10. `docs/architecture/openclaw-integration-retirement-plan.md`
+11. `docs/architecture/repo-shape-migration-plan.md`
+12. `docs/architecture/release-engineering-and-ci.md`
+13. `docs/architecture/release-artifacts-and-publishing.md`
+14. `docs/architecture/release-notes-provenance-and-version-story.md`
 
 If an archived or maintainer-facing document disagrees with this stack, prefer this stack.
 

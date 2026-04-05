@@ -24,6 +24,8 @@ Read in this order:
 - `architecture/standalone-harness-baseline-release.md`
 - `architecture/standalone-run-layout-authority.md`
 - `architecture/release-preflight-retirement-inventory.md`
+- `architecture/openclaw-integration-retirement-plan.md`
+- `architecture/repo-shape-migration-plan.md`
 - `architecture/release-engineering-and-ci.md`
 - `architecture/release-artifacts-and-publishing.md`
 - `architecture/release-notes-provenance-and-version-story.md`
