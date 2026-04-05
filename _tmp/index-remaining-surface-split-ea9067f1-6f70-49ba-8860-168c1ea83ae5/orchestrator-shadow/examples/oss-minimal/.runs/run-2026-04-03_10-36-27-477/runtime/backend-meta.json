@@ -1,5 +1,0 @@
-{
-  "contractVersion": "agent-harness-backend.v1",
-  "dbPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/runtime/backend.sqlite",
-  "driver": "sqlite"
-}

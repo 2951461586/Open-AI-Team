@@ -41,3 +41,22 @@ examples/**/.shared/
 # Release staging / bundles
 /.release-artifacts/
 /.release-bundles/
+
+# workspace-private / non-product surfaces
+.learnings/
+.openclaw/
+AGENTS.md
+SOUL.md
+USER.md
+TOOLS.md
+HEARTBEAT.md
+IDENTITY.md
+AI-Account-Toolkit.tmp/
+_tmp/
+plugins/
+projects/
+services/
+skills/
+tmp/
+reports/pool-manager/
+memory/compiler/

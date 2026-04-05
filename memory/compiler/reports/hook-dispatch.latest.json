@@ -1,9 +1,0 @@
-{
-  "generatedAt": "2026-04-01T05:58:04.152Z",
-  "hookType": "heartbeat",
-  "eventType": "heartbeat",
-  "hookId": "accept-dup-hook",
-  "skipped": true,
-  "reason": "duplicate-hook",
-  "duplicateOf": "hookevt_a073d2c00c63"
-}

@@ -1,9 +1,0 @@
-{
-  "contractVersion": "agent-harness-lifecycle.v1",
-  "updatedAt": "2026-04-03T10:35:46.481Z",
-  "heartbeatEnabled": true,
-  "cronEnabled": true,
-  "personaSnapshots": true,
-  "lastHeartbeatAt": "2026-04-03T10:35:46.481Z",
-  "nextSuggestedTick": "2026-04-03T10:35:46.481Z"
-}
