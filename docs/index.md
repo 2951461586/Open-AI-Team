@@ -14,25 +14,21 @@ Read in this order:
 - `../README_zh.md`
 - `../ARCHITECTURE.md`
 - `../docs/deploy/dashboard-source-authority.md`
-- `../docs/migration/dashboard-static-export-deprecation.md`
 - `../docs/oss/deerflow-openhanako-comparison.md`
 - `architecture/product-surface-and-repo-map.md`
-- `architecture/release-surface-allowlist.md`
 - `architecture/current-team-runtime-architecture.md`
 - `architecture/session-capability-and-followup-fallback.md`
 - `architecture/independent-agent-onboarding.md`
 - `architecture/standalone-harness-baseline-release.md`
-- `architecture/standalone-run-layout-authority.md`
-- `architecture/release-preflight-retirement-inventory.md`
+
+### Delivery & execution surface
 - `architecture/execution-state-and-read-model-authority.md`
 - `architecture/execution-product-surface-and-delivery-closure.md`
 - `architecture/mission-workbench-deliverables-boundary.md`
 - `architecture/deliverables-evidence-acceptance-authority.md`
 - `architecture/terminal-state-archive-evidence-boundary.md`
-- `architecture/openclaw-integration-retirement-plan.md`
-- `architecture/host-runtime-config-boundary.md`
-- `architecture/wave2-host-topology-and-config-authority.md`
-- `architecture/repo-shape-migration-plan.md`
+
+### Release engineering
 - `architecture/release-engineering-and-ci.md`
 - `architecture/release-artifacts-and-publishing.md`
 - `architecture/release-notes-provenance-and-version-story.md`
@@ -40,58 +36,51 @@ Read in this order:
 ### Understand the runnable baseline / sample flow
 - `../examples/README.md`
 - `../examples/oss-minimal/README.md`
-- `../examples/third-party-agent-sample/README.md`
 - `../dashboard/README.md`
-
-### Understand operations / maintainer notes *(secondary / maintainer-only)*
-- `architecture/maintainer-private-ops-boundary.md`
-- `ops/README.md`
-- `ops/`
-- `changelog/`
-- `p4-streaming-recovery.md`
 
 ### Understand background / continuity / sample surfaces *(non-primary / read only when needed)*
 - `../fixtures/README.md`
 - `../references/README.md`
 - `../memory/README.md`
 
-### Understand historical context
-- `archive/`
-
 ---
 
 ## 2. Documentation Areas
 
-### `architecture/`
-Current product architecture, repository boundary rules, onboarding, baseline release, and release-facing cleanup authority.
+### `architecture/` — Current product architecture and authority
+- `product-surface-and-repo-map.md`
+- `current-team-runtime-architecture.md`
+- `session-capability-and-followup-fallback.md`
+- `independent-agent-onboarding.md`
+- `standalone-harness-baseline-release.md`
+- `execution-state-and-read-model-authority.md`
+- `execution-product-surface-and-delivery-closure.md`
+- `mission-workbench-deliverables-boundary.md`
+- `deliverables-evidence-acceptance-authority.md`
+- `terminal-state-archive-evidence-boundary.md`
+- `release-engineering-and-ci.md`
+- `release-artifacts-and-publishing.md`
+- `release-notes-provenance-and-version-story.md`
 
-### `api/`
-Public/runtime API documentation.
+### `api/` — Public API contracts
 
-### `ops/`
-Maintainer-oriented operational notes, deployment notes, and investigations.
+### `archive/` — Historical documents only (30 entries)
 
-### `changelog/`
-Milestone implementation records and dated progress notes.
+### `deploy/` — Deployment authority
 
-### `archive/`
-Historical documents only. Use for background, not for current authority.
+### `ops/` — Maintainer operational notes
+- `README.md`
 
 ---
 
 ## 3. Documentation Rules
 
 - Current truth belongs in:
-  - `../README.md`
-  - `../GETTING-STARTED.md`
-  - `../ARCHITECTURE.md`
+  - `../README.md`, `../GETTING-STARTED.md`, `../ARCHITECTURE.md`
   - `architecture/`
   - `api/`
-- Maintainer/private operational context belongs in:
-  - `ops/`
 - Historical material belongs in:
   - `archive/`
-- Example/runtime artifacts do **not** define documentation authority.
 - If a current document and an archived document disagree, prefer the current document.
 
 ---
@@ -102,10 +91,9 @@ Historical documents only. Use for background, not for current authority.
 2. `../README.md`
 3. `../ARCHITECTURE.md`
 4. `architecture/product-surface-and-repo-map.md`
-5. `architecture/release-surface-allowlist.md`
-6. `architecture/current-team-runtime-architecture.md`
-7. `architecture/independent-agent-onboarding.md`
-8. `architecture/standalone-harness-baseline-release.md`
+5. `architecture/current-team-runtime-architecture.md`
+6. `architecture/independent-agent-onboarding.md`
+7. `architecture/standalone-harness-baseline-release.md`
 
 ---
 
