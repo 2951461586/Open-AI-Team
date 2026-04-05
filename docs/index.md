@@ -24,7 +24,14 @@ Read in this order:
 - `architecture/standalone-harness-baseline-release.md`
 - `architecture/standalone-run-layout-authority.md`
 - `architecture/release-preflight-retirement-inventory.md`
+- `architecture/execution-state-and-read-model-authority.md`
+- `architecture/execution-product-surface-and-delivery-closure.md`
+- `architecture/mission-workbench-deliverables-boundary.md`
+- `architecture/deliverables-evidence-acceptance-authority.md`
+- `architecture/terminal-state-archive-evidence-boundary.md`
 - `architecture/openclaw-integration-retirement-plan.md`
+- `architecture/host-runtime-config-boundary.md`
+- `architecture/wave2-host-topology-and-config-authority.md`
 - `architecture/repo-shape-migration-plan.md`
 - `architecture/release-engineering-and-ci.md`
 - `architecture/release-artifacts-and-publishing.md`

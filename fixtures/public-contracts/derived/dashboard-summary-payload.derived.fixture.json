@@ -18,6 +18,20 @@
   "interventionStatus": "no_intervention_needed",
   "nextBestAction": "run_judge_decision",
   "executiveSummary": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+  "deliveryClosure": {
+    "deliverableReady": false,
+    "humanInterventionReady": false,
+    "deliveryStatus": "pending_delivery",
+    "interventionStatus": "no_intervention_needed",
+    "issueCount": 0,
+    "revisionCount": 0,
+    "artifactCount": 0,
+    "evidenceCount": 0,
+    "nextBestAction": "run_judge_decision",
+    "executiveSummary": "derived fixture task 已通过评审，等待 judge 最终裁决。",
+    "acceptanceState": "in_progress",
+    "recommendedSurface": "workbench"
+  },
   "currentMemberKey": "runtime.node-a",
   "protocolSource": "decision",
   "protocol": {

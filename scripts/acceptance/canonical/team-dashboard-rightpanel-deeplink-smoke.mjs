@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import { loadIndexConfig } from '../../../src/index-env.mjs';
 import { loadLiveEnvToken } from '../../../src/index-host-config.mjs';
 
-const API = 'https://api.liziai.cloud';
-const BOARD = 'https://board.liziai.cloud';
+const API = process.env.TEAM_ACCEPTANCE_API_BASE || 'https://api.example.com';
+const BOARD = process.env.TEAM_ACCEPTANCE_BOARD_BASE || 'https://dashboard.example.com';
 
 function loadDashboardToken() {
   return loadLiveEnvToken('DASHBOARD_TOKEN', loadIndexConfig());

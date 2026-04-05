@@ -9,7 +9,7 @@
         "teamId": "team:fixture-derived",
         "title": "derived fixture task",
         "state": "approved",
-        "updatedAt": 1775362350885,
+        "updatedAt": 1775388704642,
         "currentMemberKey": "runtime.node-a",
         "currentDriver": "judge",
         "nextBestAction": "run_judge_decision",
@@ -33,7 +33,7 @@
         "protocolSource": "decision"
       }
     ],
-    "cursor": 1775362350885,
+    "cursor": 1775388704642,
     "hasMore": false,
     "address": "http://127.0.0.1:19090/state/team/dashboard",
     "viewAddress": "http://127.0.0.1:19090/state/team/dashboard/view"

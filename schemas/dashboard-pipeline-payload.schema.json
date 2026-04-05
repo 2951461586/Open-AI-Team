@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-pipeline-payload.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-pipeline-payload.schema.json",
   "title": "Dashboard Pipeline Payload",
   "type": "object",
   "additionalProperties": true,
@@ -18,7 +18,50 @@
         "phaseProgress": { "type": "number" },
         "estimatedCompletion": { "type": "string" },
         "currentMemberKey": { "type": "string" },
-        "protocolSource": { "type": "string" }
+        "protocolSource": { "type": "string" },
+        "deliveryClosure": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "deliverableReady": { "type": "boolean" },
+            "humanInterventionReady": { "type": "boolean" },
+            "deliveryStatus": { "type": "string" },
+            "interventionStatus": { "type": "string" },
+            "issueCount": { "type": "number" },
+            "revisionCount": { "type": "number" },
+            "artifactCount": { "type": "number" },
+            "evidenceCount": { "type": "number" },
+            "nextBestAction": { "type": "string" },
+            "executiveSummary": { "type": "string" },
+            "acceptanceState": { "type": "string" },
+            "recommendedSurface": { "type": "string" },
+            "terminalState": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "isTerminal": { "type": "boolean" },
+                "terminalKind": { "type": "string" },
+                "headline": { "type": "string" },
+                "operatorHint": { "type": "string" },
+                "archiveEligible": { "type": "boolean" },
+                "archiveStatus": { "type": "string" },
+                "archiveRoute": { "type": "string" }
+              }
+            },
+            "evidenceRetrieval": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "route": { "type": "string" },
+                "totalCount": { "type": "number" },
+                "reviewIssueCount": { "type": "number" },
+                "blockingCount": { "type": "number" },
+                "recommendedSection": { "type": "string" },
+                "preferredSource": { "type": "string" }
+              }
+            }
+          }
+        }
       },
       "required": ["taskId", "teamId", "state", "phase", "phaseProgress", "estimatedCompletion"]
     },

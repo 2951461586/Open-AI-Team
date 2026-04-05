@@ -19,14 +19,14 @@ const roleStyles: Record<string, string> = {
 }
 
 const nodeBadgeStyles: Record<string, string> = {
-  laoda: 'border-[var(--node-laoda)] bg-[var(--node-laoda)]/10 text-[var(--node-laoda)]',
-  violet: 'border-[var(--node-violet)] bg-[var(--node-violet)]/10 text-[var(--node-violet)]',
-  lebang: 'border-[var(--success)] bg-[var(--success-soft)] text-[var(--success)]',
+  'node-a': 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]',
+  'node-b': 'border-[var(--node-violet)] bg-[var(--node-violet)]/10 text-[var(--node-violet)]',
+  'node-c': 'border-[var(--success)] bg-[var(--success-soft)] text-[var(--success)]',
 }
 
 const stateDotColors: Record<TaskState, string> = {
   pending: 'bg-[var(--fg-ghost)]',
-  planning: 'bg-[var(--node-laoda)]',
+  planning: 'bg-[var(--accent)]',
   plan_review: 'bg-[var(--warning)]',
   approved: 'bg-[var(--success)]',
   revision_requested: 'bg-[var(--warning)]',
@@ -74,6 +74,24 @@ export function TaskCard({ task, onClick, selected = false }: Props) {
     ? sessionModeLabel({ sessionMode: task.sessionMode, sessionPersistent: task.sessionPersistent })
     : '标准会话'
   const routeLabel = actualNode || requestedNode || nodeBadge || '待分配'
+  const surfaceLabel = task.recommendedSurface === 'deliverables'
+    ? '交付'
+    : task.recommendedSurface === 'workbench'
+      ? '操作'
+      : task.recommendedSurface === 'timeline'
+        ? '进展'
+        : task.recommendedSurface === 'chat'
+          ? '对话'
+          : task.recommendedSurface === 'files'
+            ? '文件'
+            : '现场'
+  const acceptancePulse = task.acceptanceState === 'ready_for_acceptance'
+    ? '可直接验收'
+    : task.acceptanceState === 'needs_human_decision'
+      ? '待人工裁决'
+      : task.acceptanceState === 'needs_issue_resolution'
+        ? '先处理问题'
+        : '继续推进'
 
   return (
     <button
@@ -140,6 +158,11 @@ export function TaskCard({ task, onClick, selected = false }: Props) {
             可交付
           </span>
         )}
+        {!!task.acceptanceState && (
+          <span className={cn('soft-label max-w-full border-[var(--border)] bg-[var(--surface-subtle)] px-2 py-1 text-[10px] leading-4 text-[var(--fg-secondary)] shadow-[var(--shadow-xs)]', selected && 'border-transparent')}>
+            {acceptancePulse}
+          </span>
+        )}
         <span className={cn(`soft-label max-w-full px-2 py-1 text-[10px] leading-4 shadow-[var(--shadow-xs)] ${task.sessionPersistent ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]' : 'border-[var(--warning)] bg-[var(--warning-soft)] text-[var(--warning)]'}`, selected && 'border-transparent')}>
           {executionModeLabel}
         </span>
@@ -164,7 +187,7 @@ export function TaskCard({ task, onClick, selected = false }: Props) {
         </div>
 
         <div className={cn('ml-auto inline-flex shrink-0 items-center gap-1 text-[10px] font-medium', selected ? 'text-[var(--accent)]' : 'text-[var(--fg-ghost)]')}>
-          {selected ? '现场已打开' : '进入现场'}
+          {selected ? `${surfaceLabel}已打开` : `进入${surfaceLabel}`}
         </div>
       </div>
     </button>

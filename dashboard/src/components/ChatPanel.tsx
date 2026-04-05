@@ -35,7 +35,7 @@ const roleConfig: Record<ChatRole, { label: string; icon: typeof Bot; style: str
 }
 
 const nodeStyleMap: Record<string, string> = {
-  laoda: 'bg-[var(--node-laoda)]', violet: 'bg-[var(--node-violet)]', lebang: 'bg-[var(--success)]',
+  'node-a': 'bg-[var(--accent)]', 'node-b': 'bg-[var(--node-violet)]', 'node-c': 'bg-[var(--success)]',
 }
 
 function buildRoleNodeMap(nodes: NodeSummary[]) {

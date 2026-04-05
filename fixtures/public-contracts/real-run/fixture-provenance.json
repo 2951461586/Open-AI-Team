@@ -5,7 +5,7 @@
   "generationScript": "scripts/team/team-generate-real-run-published-fixtures.mjs",
   "sanitization": {
     "rootPathReplacement": {
-      "from": "/root/.openclaw/workspace/orchestrator",
+      "from": "/workspace/project",
       "to": "/workspace/orchestrator"
     }
   },

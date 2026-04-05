@@ -69,6 +69,7 @@ export function tryHandleTeamPipelineRoute(req, res, ctx = {}) {
         estimatedCompletion,
         currentMemberKey: s.currentMemberKey,
         protocolSource: obs.protocolSource,
+        deliveryClosure: obs.deliveryClosure,
       },
       roles: {
         planner: { completed: hasPlan, status: hasPlan ? 'done' : (state === 'planning' ? 'in_progress' : 'pending'), ...s.protocol.planner },

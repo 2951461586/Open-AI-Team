@@ -1,5 +1,3 @@
-import { createOpenClawRemoteSessionHostBootstrap } from './openclaw/host-bootstrap.mjs';
-
 function firstNonEmpty(...values) {
   for (const value of values) {
     const text = String(value || '').trim();
@@ -12,12 +10,15 @@ function normalizeIntegration(value = '') {
   return String(value || '').trim().toLowerCase();
 }
 
-const remoteSessionBootstrapFactories = {
-  openclaw: createOpenClawRemoteSessionHostBootstrap,
+const remoteSessionBootstrapIntegrationLoaders = {
+  openclaw: async () => {
+    const mod = await import('./openclaw/host-bootstrap.mjs');
+    return mod?.createOpenClawRemoteSessionHostBootstrap || null;
+  },
 };
 
 export function listRemoteSessionHostBootstrapIntegrations() {
-  return Object.keys(remoteSessionBootstrapFactories);
+  return Object.keys(remoteSessionBootstrapIntegrationLoaders);
 }
 
 export function resolveRemoteSessionHostBootstrapIntegration(config = {}) {
@@ -26,22 +27,24 @@ export function resolveRemoteSessionHostBootstrapIntegration(config = {}) {
     config?.remoteSessionIntegration,
     env.TEAM_REMOTE_SESSION_INTEGRATION,
     process.env.TEAM_REMOTE_SESSION_INTEGRATION,
-    'openclaw',
+    'none',
   ));
 }
 
-export function resolveRemoteSessionHostBootstrap(config = {}) {
+export async function resolveRemoteSessionHostBootstrap(config = {}) {
   const explicitFactory = config?.remoteSessionHostBootstrapFactory || config?.remoteSessionBootstrapFactory;
   if (typeof explicitFactory === 'function') {
-    const out = explicitFactory(config);
+    const out = await Promise.resolve(explicitFactory(config));
     return out || null;
   }
 
   const integration = resolveRemoteSessionHostBootstrapIntegration(config);
   if (!integration || integration === 'none' || integration === 'host-agnostic') return null;
-  const factory = remoteSessionBootstrapFactories[integration];
+  const loader = remoteSessionBootstrapIntegrationLoaders[integration];
+  if (typeof loader !== 'function') return null;
+  const factory = await loader();
   if (typeof factory !== 'function') return null;
-  const bootstrap = factory(config);
+  const bootstrap = await Promise.resolve(factory(config));
   if (bootstrap && typeof bootstrap === 'object' && !bootstrap.selectedIntegration) {
     bootstrap.selectedIntegration = integration;
   }

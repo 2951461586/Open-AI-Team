@@ -27,6 +27,8 @@ export interface TaskCard {
   planSummary: string
   executiveSummary: string
   protocolSource?: string
+  acceptanceState?: string
+  recommendedSurface?: string
 }
 
 export type TaskState =
@@ -296,6 +298,19 @@ export interface ArtifactItem {
   updatedAt: number
 }
 
+export interface EvidenceItem {
+  evidenceId: string
+  taskId: string
+  teamId: string
+  evidenceType: string
+  sourceType: string
+  sourceId: string
+  title: string
+  detail: any
+  severity: string
+  createdAt: number
+}
+
 // ─── Timeline ───────────────────────────────────────────────────────
 
 export interface TimelineEntry {
@@ -313,6 +328,42 @@ export interface TimelineEntry {
 
 // ─── Workbench ──────────────────────────────────────────────────────
 
+export interface TerminalState {
+  isTerminal?: boolean
+  terminalKind?: 'done' | 'blocked' | 'cancelled' | 'active' | string
+  headline?: string
+  operatorHint?: string
+  archiveEligible?: boolean
+  archiveStatus?: string
+  archiveRoute?: string
+}
+
+export interface EvidenceRetrieval {
+  route?: string
+  totalCount?: number
+  reviewIssueCount?: number
+  blockingCount?: number
+  recommendedSection?: 'blocking' | 'supporting' | 'empty' | string
+  preferredSource?: 'evidence' | 'artifacts' | string
+}
+
+export interface DeliveryClosure {
+  deliverableReady?: boolean
+  humanInterventionReady?: boolean
+  deliveryStatus?: string
+  interventionStatus?: string
+  issueCount?: number
+  revisionCount?: number
+  artifactCount?: number
+  evidenceCount?: number
+  nextBestAction?: string
+  executiveSummary?: string
+  acceptanceState?: string
+  recommendedSurface?: 'mission' | 'workbench' | 'timeline' | 'deliverables' | 'chat' | 'files' | string
+  terminalState?: TerminalState
+  evidenceRetrieval?: EvidenceRetrieval
+}
+
 export interface WorkbenchSummary {
   executiveSummary?: string
   currentDriver?: string
@@ -326,6 +377,7 @@ export interface WorkbenchSummary {
   hasReview?: boolean
   hasDecision?: boolean
   deliverableReady?: boolean
+  deliveryClosure?: DeliveryClosure
 }
 
 export interface ResidentInfo {

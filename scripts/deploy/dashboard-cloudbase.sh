@@ -4,8 +4,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DASHBOARD_DIR="$ROOT_DIR/dashboard"
 DEFAULT_ENV_ID="opencloud-8g9e4db2eaac0c79"
-LOCAL_STATIC_DIR="${LOCAL_STATIC_DIR:-/srv/board.liziai.cloud}"
-CREDENTIALS_FILE="${TENCENT_CREDENTIALS_FILE:-/root/.openclaw/credentials/tencent-cloud}"
+LOCAL_STATIC_DIR="${LOCAL_STATIC_DIR:-}"
+CREDENTIALS_FILE="${TENCENT_CREDENTIALS_FILE:-}"
 
 if [[ -f "$CREDENTIALS_FILE" ]]; then
   # shellcheck disable=SC1090
@@ -17,17 +17,13 @@ AUTO_LOGIN="${TCB_AUTO_LOGIN:-0}"
 SKIP_BUILD="${SKIP_BUILD:-0}"
 TCB_SECRET_ID="${TCB_SECRET_ID:-${TENCENT_SECRET_ID:-}}"
 TCB_SECRET_KEY="${TCB_SECRET_KEY:-${TENCENT_SECRET_KEY:-}}"
-ORCH_OVERRIDE_FILE="${ORCH_OVERRIDE_FILE:-/root/.config/systemd/user/orchestrator.service.d/10-judge.conf}"
+ORCH_OVERRIDE_FILE="${ORCH_OVERRIDE_FILE:-}"
 NEXT_PUBLIC_API_BASE="${NEXT_PUBLIC_API_BASE:-}"
 NEXT_PUBLIC_WS_URL="${NEXT_PUBLIC_WS_URL:-}"
 NEXT_PUBLIC_DASHBOARD_TOKEN="${NEXT_PUBLIC_DASHBOARD_TOKEN:-${DASHBOARD_TOKEN:-}}"
 
-if [[ -z "$NEXT_PUBLIC_API_BASE" ]]; then
-  NEXT_PUBLIC_API_BASE="https://api.liziai.cloud"
-fi
-if [[ -z "$NEXT_PUBLIC_WS_URL" ]]; then
-  NEXT_PUBLIC_WS_URL="wss://api.liziai.cloud/ws/chat"
-fi
+: "${NEXT_PUBLIC_API_BASE:?NEXT_PUBLIC_API_BASE is required}"
+: "${NEXT_PUBLIC_WS_URL:?NEXT_PUBLIC_WS_URL is required}"
 
 if [[ -z "$NEXT_PUBLIC_DASHBOARD_TOKEN" && -f "$ORCH_OVERRIDE_FILE" ]]; then
   NEXT_PUBLIC_DASHBOARD_TOKEN="$(python3 - "$ORCH_OVERRIDE_FILE" <<'PY'

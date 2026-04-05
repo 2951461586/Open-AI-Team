@@ -11,6 +11,7 @@ import { tryHandleTeamWorkbenchRoute } from './team-state/workbench.mjs';
 import { tryHandleTeamControlRoute } from './team-state/control.mjs';
 import { tryHandleTeamSummaryRoute } from './team-state/summary.mjs';
 import { tryHandleTeamPipelineRoute } from './team-state/pipeline.mjs';
+import { buildTaskObservability } from './team-state/task-observability-shared.mjs';
 
 function parseUrlParam(url = '', key = '') {
   try {
@@ -1101,14 +1102,15 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
     const cards = tasks.map((task) => {
       const taskId = String(task.taskId || '');
       const s = snapshotTask(teamStore, taskId);
-      const issueCount = s.evidence?.filter ? s.evidence.filter((e) => String(e.evidenceType || '') === 'review_issue').length : 0;
-      const revisionCount = s.reviews?.filter ? s.reviews.filter((r) => String(r.verdict || '').toLowerCase() === 'revise').length : 0;
-      const currentDriver = inferCurrentDriver({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision });
-      const nextBestAction = inferNextBestAction({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision, artifactCount: (s.artifacts || []).length, evidenceCount: (s.evidence || []).length });
-      const deliveryStatus = computeDeliveryStatus({ task: s.task || task, latestDecision: s.latestDecision, artifactCount: (s.artifacts || []).length });
-      const interventionStatus = computeInterventionStatus({ task: s.task || task, issueCount, revisionCount, latestDecision: s.latestDecision });
-      const executiveSummary = buildExecutiveSummary({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision, deliveryStatus, interventionStatus, nextBestAction });
-      const protocolSource = s.latestDecision ? 'decision' : s.latestReview ? 'review' : s.plan ? 'plan' : 'task';
+      const obs = buildTaskObservability(s, {
+        inferNextBestAction,
+        inferCurrentDriver,
+        computeDeliveryStatus,
+        computeInterventionStatus,
+        buildExecutiveSummary,
+        getManualActions,
+        summarizeTaskMemoryLayers,
+      });
       return {
         taskId,
         teamId: (s.task || task).teamId,
@@ -1116,20 +1118,20 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
         state: (s.task || task).state || '',
         priority: Number((s.task || task).priority || 0),
         updatedAt: (s.task || task).updatedAt || null,
-        currentDriver,
-        nextBestAction,
+        currentDriver: obs.currentDriver,
+        nextBestAction: obs.nextBestAction,
         latestReviewVerdict: s.latestReview?.verdict || null,
         latestDecisionType: s.latestDecision?.decisionType || null,
         latestReviewProtocol: s.protocol?.critic || null,
         latestDecisionProtocol: s.protocol?.judge || null,
-        artifactCount: (s.artifacts || []).length,
-        evidenceCount: (s.evidence || []).length,
-        issueCount,
-        revisionCount,
-        deliverableReady: deliveryStatus === 'deliverable_ready',
-        humanInterventionReady: interventionStatus !== 'no_intervention_needed',
-        deliveryStatus,
-        interventionStatus,
+        artifactCount: obs.artifactCount,
+        evidenceCount: obs.evidenceCount,
+        issueCount: obs.issueCount,
+        revisionCount: obs.revisionCount,
+        deliverableReady: obs.deliverableReady,
+        humanInterventionReady: obs.humanInterventionReady,
+        deliveryStatus: obs.deliveryStatus,
+        interventionStatus: obs.interventionStatus,
         requestedNode: s.requestedNode,
         actualNode: s.actualNode,
         degradedReason: s.degradedReason,
@@ -1139,8 +1141,10 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
         sessionKey: String((s.task || task)?.metadata?.sessionKey || (s.task || task)?.metadata?.primarySessionKey || ''),
         sessionsByRole: (s.task || task)?.metadata?.sessionsByRole || {},
         planSummary: s.plan?.summary || '',
-        executiveSummary,
-        protocolSource,
+        executiveSummary: obs.executiveSummary,
+        protocolSource: obs.protocolSource,
+        acceptanceState: obs.deliveryClosure?.acceptanceState || 'in_progress',
+        recommendedSurface: obs.deliveryClosure?.recommendedSurface || 'mission',
       };
     });
 
@@ -1227,14 +1231,15 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
     const cards = tasks.map((task) => {
       const taskId = String(task.taskId || '');
       const s = snapshotTask(teamStore, taskId);
-      const issueCount = s.evidence?.filter ? s.evidence.filter((e) => String(e.evidenceType || '') === 'review_issue').length : 0;
-      const revisionCount = s.reviews?.filter ? s.reviews.filter((r) => String(r.verdict || '').toLowerCase() === 'revise').length : 0;
-      const currentDriver = inferCurrentDriver({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision });
-      const nextBestAction = inferNextBestAction({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision, artifactCount: (s.artifacts || []).length, evidenceCount: (s.evidence || []).length });
-      const deliveryStatus = computeDeliveryStatus({ task: s.task || task, latestDecision: s.latestDecision, artifactCount: (s.artifacts || []).length });
-      const interventionStatus = computeInterventionStatus({ task: s.task || task, issueCount, revisionCount, latestDecision: s.latestDecision });
-      const executiveSummary = buildExecutiveSummary({ task: s.task || task, latestReview: s.latestReview, latestDecision: s.latestDecision, deliveryStatus, interventionStatus, nextBestAction });
-      const protocolSource = s.latestDecision ? 'decision' : s.latestReview ? 'review' : s.plan ? 'plan' : 'task';
+      const obs = buildTaskObservability(s, {
+        inferNextBestAction,
+        inferCurrentDriver,
+        computeDeliveryStatus,
+        computeInterventionStatus,
+        buildExecutiveSummary,
+        getManualActions,
+        summarizeTaskMemoryLayers,
+      });
       return {
         taskId,
         teamId: (s.task || task).teamId,
@@ -1242,17 +1247,17 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
         state: (s.task || task).state || '',
         updatedAt: (s.task || task).updatedAt || null,
         currentMemberKey: s.currentMemberKey,
-        currentDriver,
-        nextBestAction,
+        currentDriver: obs.currentDriver,
+        nextBestAction: obs.nextBestAction,
         latestReviewVerdict: s.latestReview?.verdict || null,
         latestDecisionType: s.latestDecision?.decisionType || null,
-        artifactCount: (s.artifacts || []).length,
-        evidenceCount: (s.evidence || []).length,
-        issueCount,
-        deliverableReady: deliveryStatus === 'deliverable_ready',
-        humanInterventionReady: interventionStatus !== 'no_intervention_needed',
-        deliveryStatus,
-        interventionStatus,
+        artifactCount: obs.artifactCount,
+        evidenceCount: obs.evidenceCount,
+        issueCount: obs.issueCount,
+        deliverableReady: obs.deliverableReady,
+        humanInterventionReady: obs.humanInterventionReady,
+        deliveryStatus: obs.deliveryStatus,
+        interventionStatus: obs.interventionStatus,
         requestedNode: s.requestedNode,
         actualNode: s.actualNode,
         degradedReason: s.degradedReason,
@@ -1260,8 +1265,10 @@ export function tryHandleHealthStateRoute(req, res, ctx = {}) {
         sessionPersistent: !!(s.task || task)?.metadata?.sessionPersistent,
         sessionFallbackReason: String((s.task || task)?.metadata?.sessionFallbackReason || ''),
         planSummary: s.plan?.summary || '',
-        executiveSummary,
-        protocolSource,
+        executiveSummary: obs.executiveSummary,
+        protocolSource: obs.protocolSource,
+        acceptanceState: obs.deliveryClosure?.acceptanceState || 'in_progress',
+        recommendedSurface: obs.deliveryClosure?.recommendedSurface || 'mission',
       };
     });
     if (req.url?.startsWith('/state/team/dashboard/view')) {

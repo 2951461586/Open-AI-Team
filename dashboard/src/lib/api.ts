@@ -70,6 +70,8 @@ function normalizeTaskCard(raw: any) {
     planSummary: String(raw?.planSummary || ''),
     executiveSummary: String(raw?.executiveSummary || ''),
     protocolSource: String(raw?.protocolSource || ''),
+    acceptanceState: String(raw?.acceptanceState || ''),
+    recommendedSurface: String(raw?.recommendedSurface || ''),
   }
 }
 
@@ -247,6 +249,19 @@ export async function fetchArchive(limit = 100): Promise<Response> {
     })
   } catch (error) {
     console.error('Archive fetch error:', error)
+    throw error
+  }
+}
+
+export async function fetchTaskEvidence(taskId: string, limit = 200): Promise<Response> {
+  try {
+    return await fetch(`${API_BASE}/state/team/evidence?taskId=${encodeURIComponent(taskId)}&limit=${limit}`, {
+      cache: 'no-store',
+      mode: 'cors',
+      headers: authHeaders(),
+    })
+  } catch (error) {
+    console.error('Evidence fetch error:', error)
     throw error
   }
 }

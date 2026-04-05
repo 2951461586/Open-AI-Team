@@ -320,12 +320,12 @@ export default function DashboardPage() {
       const json = await res.json()
       const rawNodes = json?.payload?.nodes || json?.nodes || {}
       const deployment = json?.payload?.deployment || json?.deployment || {}
-      const labels: Record<string, string> = { laoda: 'Laoda', violet: 'Violet', lebang: 'Lebang' }
+      const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
       const list = Object.entries(rawNodes)
         .filter(([key, value]) => key !== 'ts' && value && typeof value === 'object')
         .map(([key, value]: [string, any]) => ({
           key,
-          label: labels[key] || key,
+          label: canonicalLabels[key] || value?.label || key,
           reachable: !!value?.reachable,
           latencyMs: value?.latencyMs,
           fallbackReady: !!value?.fallbackReady,

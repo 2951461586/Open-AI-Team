@@ -34,7 +34,7 @@ export function WorkbenchDeliveryOverviewSection({
   return (
     <section className="surface-card p-4 md:p-5">
       <div className="flex items-center gap-2 text-[13px] font-semibold text-[var(--fg)]">
-        <PackageOpen className="h-3.5 w-3.5 text-[var(--accent)]" /> 交付概览
+        <PackageOpen className="h-3.5 w-3.5 text-[var(--accent)]" /> 推进概览
       </div>
       <div className="mt-3 grid gap-3 xl:grid-cols-[1.15fr_0.85fr]">
         <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-subtle)] p-4">
@@ -69,11 +69,11 @@ export function WorkbenchDeliveryOverviewSection({
           </div>
         </div>
         <div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4">
-          <div className="text-[11px] font-medium text-[var(--fg-ghost)]">结果摘要</div>
+          <div className="text-[11px] font-medium text-[var(--fg-ghost)]">推进摘要</div>
           <div className="mt-2 space-y-2 text-[12px] leading-5 text-[var(--fg-secondary)]">
             <div>下一动作：{nextBestActionLabel(nextBestAction)}</div>
             <div>当前角色：{roleLabel(currentMemberKey || currentDriver)}</div>
-            <div>交付判断：{deliverableReady ? '已可验收' : '尚未可直接收口'}</div>
+            <div>交付判断：{deliverableReady ? '已进入验收窗口，请切到交付面确认' : '尚未可直接收口'}</div>
             <div>人工参与：{humanInterventionReady ? '建议现在介入' : '当前可继续让团队推进'}</div>
             <div>会话能力：{sessionModeText}</div>
             <div>续聊策略：{sessionPersistent ? '成员可直接持续 follow-up' : '成员不可持续时自动回退 TL 接管'}</div>

@@ -18,7 +18,9 @@
 - `team-policy.mjs`
 - `team-resident-runtime.mjs`
 - `team-governance-runtime.mjs`
-- `team-node-health.mjs`
+- `team-node-health.mjs` — facade
+- `team-node-health-core.mjs` — 节点打分 / 选路 authority
+- `team-node-health-probes.mjs` — 本地/远端健康探针采集
 
 ### retired / deleted surfaces
 - 旧 `team-runtime.mjs` / `team-agent-harness.mjs` / `team-multi-node-gateway.mjs` 已完成**物理清退**，不再保留壳文件

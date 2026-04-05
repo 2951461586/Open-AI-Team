@@ -4,7 +4,7 @@ import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export const DEFAULT_SERVICE_ENV_UNIT = 'orchestrator.service';
+export const DEFAULT_SERVICE_ENV_UNIT = '';
 
 let serviceEnvCache = new Map();
 

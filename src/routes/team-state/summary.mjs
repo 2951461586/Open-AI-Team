@@ -39,6 +39,7 @@ export function tryHandleTeamSummaryRoute(req, res, ctx = {}) {
       interventionStatus: obs.interventionStatus,
       nextBestAction: obs.nextBestAction,
       executiveSummary: obs.executiveSummary,
+      deliveryClosure: obs.deliveryClosure,
       currentMemberKey: s.currentMemberKey,
       protocolSource: obs.protocolSource,
       protocol: {

@@ -13,16 +13,16 @@ import { createCriticSessionRunner } from './team/team-agent-critic-session-runn
 import { createNoopSessionRuntimeAdapter, createSessionRuntimeAdapter } from './team-runtime-adapters/session-runtime-adapter.mjs';
 import { createStandaloneProductRuntime } from './agent-harness-core/standalone-product-runtime.mjs';
 import { loadHostRuntimeConfig } from './index-host-config.mjs';
-import { createOpenClawRemoteSessionHostBootstrap } from './integrations/openclaw/host-bootstrap.mjs';
 import { resolveRemoteSessionHostBootstrap } from './integrations/host-bootstrap-selector.mjs';
 import { createTeamNodeHealth } from './team/team-node-health.mjs';
 import { createRuntimeExecutionAdapter } from './team-runtime-adapters/execution-harness.mjs';
+import { createControlPlaneClient } from './team-runtime-adapters/control-plane.mjs';
 
-export function createRemoteSessionHostBootstrap(config = {}) {
-  return resolveRemoteSessionHostBootstrap(config) || createHostAgnosticBootstrap(config);
+export async function createRemoteSessionHostBootstrap(config = {}) {
+  return (await resolveRemoteSessionHostBootstrap(config)) || createHostAgnosticBootstrap(config);
 }
 
-export function createControlPlaneHostBootstrap(config = {}) {
+export async function createControlPlaneHostBootstrap(config = {}) {
   return createRemoteSessionHostBootstrap(config);
 }
 
@@ -32,13 +32,17 @@ export function createHostAgnosticBootstrap(config = {}) {
     createNodeHealth({ teamStore = null } = {}) {
       return createTeamNodeHealth({ teamStore });
     },
-    createSessionSubstrate() {
+    createSessionSubstrate({ roleDeployment } = {}) {
+      const sessionControlPlane = createControlPlaneClient({
+        roleDeployment,
+        nodeControls: {},
+      });
       const runtimeAdapter = createNoopSessionRuntimeAdapter({ provider: 'session-substrate' });
       const executionAdapter = createRuntimeExecutionAdapter({ runtimeAdapter });
       return {
         provider: 'session-substrate',
         sessionSubstrate: null,
-        sessionControlPlane: null,
+        sessionControlPlane,
         runtimeAdapter,
         executionAdapter,
         agentHarness: runtimeAdapter,
@@ -208,7 +212,7 @@ export async function createAppContext(config = {}) {
       ? createHostAgnosticBootstrap(config)
       : config.sessionSubstrate === 'standalone-broker'
         ? createStandaloneBrokerBootstrap(config)
-        : createRemoteSessionHostBootstrap(config));
+        : await createRemoteSessionHostBootstrap(config));
 
   const teamNodeHealth = hostBootstrap.createNodeHealth({ teamStore });
   void teamNodeHealth.refreshNodeStatus?.().catch(() => {});

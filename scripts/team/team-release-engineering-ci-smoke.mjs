@@ -18,7 +18,7 @@ const docsIndex = fs.readFileSync(new URL('../../docs/index.md', import.meta.url
 const gettingStarted = fs.readFileSync(new URL('../../GETTING-STARTED.md', import.meta.url), 'utf8');
 const dashboardReadme = fs.readFileSync(new URL('../../dashboard/README.md', import.meta.url), 'utf8');
 const releaseCiDoc = fs.readFileSync(new URL('../../docs/architecture/release-engineering-and-ci.md', import.meta.url), 'utf8');
-const preflight = fs.readFileSync(new URL('../../docs/architecture/github-open-source-preflight.md', import.meta.url), 'utf8');
+const preflight = fs.readFileSync(new URL('../../docs/archive/github-open-source-preflight.md', import.meta.url), 'utf8');
 const teamIndex = fs.readFileSync(new URL('../../scripts/team/INDEX.md', import.meta.url), 'utf8');
 const mainline = fs.readFileSync(new URL('../../scripts/smoke/team-mainline.mjs', import.meta.url), 'utf8');
 const pkg = JSON.parse(fs.readFileSync(new URL('../../package.json', import.meta.url), 'utf8'));
@@ -53,7 +53,7 @@ assert(releaseCiDoc.includes('GitHub Actions is split into layered public-safe j
 
 assert(dashboardReadme.includes('Current build boundary'), 'dashboard README declares current build boundary');
 assert(dashboardReadme.includes('single-repo build authority'), 'dashboard README describes repo-local build authority');
-assert(dashboardReadme.includes('cd /root/.openclaw/workspace/dashboard'), 'dashboard README documents repo-local dashboard cwd');
+assert(dashboardReadme.includes('cd dashboard'), 'dashboard README documents repo-local dashboard cwd');
 assert(dashboardReadme.includes('npm run dashboard:build'), 'dashboard README documents repo-local build entrypoint');
 assert(!dashboardReadme.includes('sibling `../dashboard` app shell'), 'dashboard README no longer references sibling app shell');
 

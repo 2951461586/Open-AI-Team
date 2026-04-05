@@ -37,6 +37,19 @@ examples/**/.shared/
 
 # Historical trash / temp snapshots
 _trash/**/.tmp.*.json
+_trash/
+_tmp/
+.runs/
+
+# Runtime data (never commit)
+memory/
+logs/
+logs/
+*.log
+
+# Local tooling / credential state
+AI-Account-Toolkit*/
+codex/
 
 # Dashboard build outputs
 /dashboard/node_modules/

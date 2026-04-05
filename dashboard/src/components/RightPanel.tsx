@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { X, Sparkles, ClipboardList, PackageOpen, MessageCircle, FolderOpen } from 'lucide-react'
 import { MissionControlPanel } from './panels/MissionControlPanel'
 import { WorkbenchPanel } from './panels/WorkbenchPanel'
+import { TimelinePanel } from './panels/TimelinePanel'
 import { ArtifactsPanel } from './panels/ArtifactsPanel'
 import { TaskChatPanel } from './panels/TaskChatPanel'
 import { TaskFilesPanel } from './panels/TaskFilesPanel'
 import { TeamConsolePanel } from './panels/TeamConsolePanel'
 import { TaskCard as TaskCardType, LiveFlowEvent, FocusTarget } from '@/lib/types'
 import { useChatStore, useLiveStore, useTaskStore } from '@/lib/store'
-import { routeModeLabel, sessionModeLabel, roleLabel, stateLabel } from '@/lib/utils'
+import { routeModeLabel, sessionModeLabel, roleLabel, stateLabel, acceptanceStateLabel } from '@/lib/utils'
 
 export type DetailTab = 'mission' | 'workbench' | 'timeline' | 'deliverables' | 'chat' | 'files'
 type MainTab = 'mission' | 'collaboration' | 'delivery'
@@ -35,6 +36,11 @@ const MAIN_TAB_DEFAULTS: Record<MainTab, DetailTab> = {
   delivery: 'deliverables',
 }
 
+function normalizeRecommendedDetailTab(value?: string | null): DetailTab | null {
+  const raw = String(value || '').trim()
+  return isDetailTab(raw) ? raw : null
+}
+
 function detailToMainTab(tab: DetailTab): MainTab {
   if (tab === 'mission' || tab === 'timeline') return 'mission'
   if (tab === 'workbench' || tab === 'chat') return 'collaboration'
@@ -57,7 +63,7 @@ const DETAIL_TAB_META: Record<DetailTab, { label: string; Icon: typeof Sparkles 
 }
 
 const DETAIL_TAB_GROUPS: Record<MainTab, DetailTab[]> = {
-  mission: ['mission'],
+  mission: ['mission', 'timeline'],
   collaboration: ['workbench', 'chat'],
   delivery: ['deliverables', 'files'],
 }
@@ -99,8 +105,9 @@ export function RightPanel({
       setDetailTab((focusTarget.openTab as DetailTab) || 'chat')
       return
     }
-    setDetailTab(defaultTab)
-  }, [selectedTaskId, focusTarget, defaultTab])
+    const preferredTab = normalizeRecommendedDetailTab(selectedTask?.recommendedSurface)
+    setDetailTab(preferredTab || defaultTab)
+  }, [selectedTaskId, focusTarget, defaultTab, selectedTask?.recommendedSurface])
 
   const handleMainTabClick = (mainTab: MainTab) => {
     if (detailToMainTab(detailTab) === mainTab) return
@@ -127,6 +134,8 @@ export function RightPanel({
                   {!!selectedTask.issueCount && <span className="soft-label border-[var(--warning)]/20 bg-[var(--warning-soft)] text-[var(--warning)]">风险：{selectedTask.issueCount}</span>}
                   {selectedTask.deliverableReady && <span className="soft-label border-[var(--success)]/20 bg-[var(--success-soft)] text-[var(--success)]">可交付</span>}
                   {selectedTask.humanInterventionReady && <span className="soft-label border-[var(--accent)]/20 bg-[var(--accent-soft)] text-[var(--accent)]">待人工确认</span>}
+                  {!!selectedTask.acceptanceState && <span className="soft-label border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--fg-secondary)]">验收态：{acceptanceStateLabel(selectedTask.acceptanceState)}</span>}
+                  {!!selectedTask.recommendedSurface && <span className="soft-label border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--fg-secondary)]">推荐落点：{DETAIL_TAB_META[normalizeRecommendedDetailTab(selectedTask.recommendedSurface) || 'mission'].label}</span>}
                 </>
               ) : (
                 <>
@@ -214,6 +223,13 @@ export function RightPanel({
                 teamId={selectedTeamId}
                 task={selectedTask}
                 liveEvents={liveEvents}
+                onFocusTarget={(target) => setFocusTarget(target)}
+              />
+            )}
+            {detailTab === 'timeline' && (
+              <TimelinePanel
+                taskId={selectedTaskId}
+                focusTarget={focusTarget}
                 onFocusTarget={(target) => setFocusTarget(target)}
               />
             )}

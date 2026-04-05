@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AlertTriangle, ClipboardList, Loader2, Sparkles, CheckCircle2, PackageOpen, Archive, ExternalLink, Clock } from 'lucide-react'
 import { TaskCard as TaskCardType, LiveFlowEvent, ResidentInfo, FocusTarget } from '@/lib/types'
-import { API_BASE, fetchWorkbench, fetchSummary, fetchControl, fetchPipeline, fetchResidents, postTaskAction, fetchArchive } from '@/lib/api'
+import { API_BASE, fetchWorkbench, fetchSummary, fetchControl, fetchPipeline, fetchTimeline, fetchResidents, postTaskAction, fetchArchive } from '@/lib/api'
 import { formatDateTime, roleLabel, nodeLabel, deliveryStatusLabel, interventionStatusLabel, verdictLabel, decisionTypeLabel, stateLabel, nextBestActionLabel, routeModeLabel, sessionModeLabel, sessionCapabilityHint, degradedReasonLabel } from '@/lib/utils'
 import { pickTaskFocusRef } from '@/lib/task-focus'
 import { StageTimeline } from '@/components/StageTimeline'
@@ -92,6 +92,7 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
   const [controlDoc, setControlDoc] = useState<any>(null)
   const [pipeline, setPipeline] = useState<any>(null)
   const [archiveState, setArchiveState] = useState<{ count: number; items: any[] } | null>(null)
+  const [mailboxEntries, setMailboxEntries] = useState<any[]>([])
   const [residents, setResidents] = useState<ResidentInfo[]>([])
   const [partialWarnings, setPartialWarnings] = useState<string[]>([])
   const [actionLoading, setActionLoading] = useState<string | null>(null)
@@ -115,11 +116,12 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
     setError(null)
     setPartialWarnings([])
     try {
-      const [wbRes, summaryRes, controlRes, pipeRes, residentRes, archiveRes] = await Promise.all([
+      const [wbRes, summaryRes, controlRes, pipeRes, mailboxRes, residentRes, archiveRes] = await Promise.all([
         fetchWorkbench(taskId),
         fetchSummary(taskId),
         fetchControl(taskId),
         fetchPipeline(taskId),
+        fetchTimeline(taskId, 100),
         fetchResidents(teamId),
         fetchArchive(200),
       ])
@@ -141,19 +143,23 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
       let pipeJson: any = null
       if (pipeRes.ok) pipeJson = await pipeRes.json()
 
+      let mailboxJson: any = null
+      if (mailboxRes.ok) mailboxJson = await mailboxRes.json()
+
       let residentJson: any = null
       if (residentRes.ok) residentJson = await residentRes.json()
 
       let archiveJson: any = null
       if (archiveRes.ok) archiveJson = await archiveRes.json()
 
-      if (!wbJson && !summaryJson && !controlJson && !pipeJson && !residentJson && !archiveJson) throw new Error('加载任务详情失败')
+      if (!wbJson && !summaryJson && !controlJson && !pipeJson && !mailboxJson && !residentJson && !archiveJson) throw new Error('加载任务详情失败')
 
       setWorkbench(wbJson)
       setSummaryDoc(summaryJson)
       setControlDoc(controlJson)
       setPipeline(pipeJson)
       setArchiveState(archiveJson?.archive || archiveJson?.payload?.archive || null)
+      setMailboxEntries(Array.isArray(mailboxJson?.items) ? mailboxJson.items : [])
       setPartialWarnings(warnings)
 
       const residentList = Array.isArray(residentJson?.residents) ? residentJson.residents : []
@@ -229,6 +235,7 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
       : []
   const resultCounters = summaryPayload?.counters || {}
   const deliveryLinks = workbench?.summaryLinks || summaryDoc?.links || summaryDoc?.summaryLinks || {}
+  const deliveryClosure = workbench?.summary?.deliveryClosure || summaryPayload?.deliveryClosure || pipeline?.pipeline?.deliveryClosure || null
   const sessionMode = String(summaryPayload?.sessionMode || summary.sessionMode || task?.sessionMode || '')
   const sessionPersistent = typeof summaryPayload?.sessionPersistent === 'boolean'
     ? summaryPayload.sessionPersistent
@@ -313,9 +320,9 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
     : ''
 
   const latestReplanResult = useMemo(() => {
-    const mailbox = Array.isArray(workbench?.board?.mailbox) ? workbench.board.mailbox : []
+    const mailbox = Array.isArray(mailboxEntries) ? mailboxEntries : []
     return mailbox.find((item: any) => String(item?.kind || '') === 'task.replan.result') || null
-  }, [workbench])
+  }, [mailboxEntries])
 
   const latestReplanMap = useMemo(() => {
     const replan = workbench?.board?.latestReplanMap
@@ -495,18 +502,18 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
             />
 
             <WorkbenchDeliveryOverviewSection
-              deliverableReady={task?.deliverableReady}
-              humanInterventionReady={task?.humanInterventionReady}
-              deliveryStatus={summaryPayload?.deliveryStatus || summary.deliveryStatus || task?.deliveryStatus}
-              interventionStatus={summaryPayload?.interventionStatus || task?.interventionStatus}
-              executiveSummary={summaryPayload?.executiveSummary || summary.executiveSummary || task?.executiveSummary || task?.planSummary}
+              deliverableReady={deliveryClosure?.deliverableReady ?? task?.deliverableReady}
+              humanInterventionReady={deliveryClosure?.humanInterventionReady ?? task?.humanInterventionReady}
+              deliveryStatus={deliveryClosure?.deliveryStatus || summaryPayload?.deliveryStatus || summary.deliveryStatus || task?.deliveryStatus}
+              interventionStatus={deliveryClosure?.interventionStatus || summaryPayload?.interventionStatus || task?.interventionStatus}
+              executiveSummary={deliveryClosure?.executiveSummary || summaryPayload?.executiveSummary || summary.executiveSummary || task?.executiveSummary || task?.planSummary}
               resultCounters={{
-                artifactCount: Number(resultCounters?.artifactCount || task?.artifactCount || 0),
-                evidenceCount: Number(resultCounters?.evidenceCount || task?.evidenceCount || 0),
-                issueCount: Number(resultCounters?.issueCount || task?.issueCount || 0),
-                revisionCount: Number(resultCounters?.revisionCount || 0),
+                artifactCount: Number(deliveryClosure?.artifactCount || resultCounters?.artifactCount || task?.artifactCount || 0),
+                evidenceCount: Number(deliveryClosure?.evidenceCount || resultCounters?.evidenceCount || task?.evidenceCount || 0),
+                issueCount: Number(deliveryClosure?.issueCount || resultCounters?.issueCount || task?.issueCount || 0),
+                revisionCount: Number(deliveryClosure?.revisionCount || resultCounters?.revisionCount || 0),
               }}
-              nextBestAction={summaryPayload?.nextBestAction || summary.nextBestAction || task?.nextBestAction}
+              nextBestAction={deliveryClosure?.nextBestAction || summaryPayload?.nextBestAction || summary.nextBestAction || task?.nextBestAction}
               currentMemberKey={summaryPayload?.currentMemberKey || summary.currentMemberKey || task?.currentMemberKey}
               currentDriver={summary.currentDriver || task?.currentDriver}
               sessionModeText={sessionModeText}

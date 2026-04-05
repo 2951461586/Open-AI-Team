@@ -87,7 +87,7 @@ export function createRemoteSessionControlPlane({
   function resolveControlForRole(role = '', opts = {}) {
     const deployment = roleDeployment?.resolve?.(role, opts);
     const selectedNode = canonicalNodeId(String(deployment?.selectedNode || DEFAULT_NODE_ID), DEFAULT_NODE_ID);
-    const control = controls[selectedNode] || controls[DEFAULT_NODE_ID] || controls.laoda;
+    const control = controls[selectedNode] || controls[DEFAULT_NODE_ID] || null;
     if (!control) {
       return { ok: false, error: `no_control_for_node:${selectedNode}`, selectedNode, deployment };
     }
@@ -102,7 +102,7 @@ export function createRemoteSessionControlPlane({
 
   function resolveControlForSession(sessionKey = '') {
     const nodeId = canonicalNodeId(inferNodeFromSessionKey(sessionKey) || DEFAULT_NODE_ID, DEFAULT_NODE_ID);
-    const control = controls[nodeId] || controls[DEFAULT_NODE_ID] || controls.laoda;
+    const control = controls[nodeId] || controls[DEFAULT_NODE_ID] || null;
     if (!control) {
       return { ok: false, error: `no_control_for_session:${nodeId || 'unknown'}`, selectedNode: nodeId || DEFAULT_NODE_ID };
     }

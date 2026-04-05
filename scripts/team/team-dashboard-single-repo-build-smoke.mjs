@@ -17,7 +17,7 @@ const dashboardPkg = JSON.parse(fs.readFileSync(new URL('../../dashboard/package
 const workflow = fs.readFileSync(new URL('../../.github/workflows/ci.yml', import.meta.url), 'utf8');
 const dashboardReadme = fs.readFileSync(new URL('../../dashboard/README.md', import.meta.url), 'utf8');
 const releaseCiDoc = fs.readFileSync(new URL('../../docs/architecture/release-engineering-and-ci.md', import.meta.url), 'utf8');
-const preflight = fs.readFileSync(new URL('../../docs/architecture/github-open-source-preflight.md', import.meta.url), 'utf8');
+const preflight = fs.readFileSync(new URL('../../docs/archive/github-open-source-preflight.md', import.meta.url), 'utf8');
 const productMap = fs.readFileSync(new URL('../../docs/architecture/product-surface-and-repo-map.md', import.meta.url), 'utf8');
 const allowlist = fs.readFileSync(new URL('../../docs/architecture/release-surface-allowlist.md', import.meta.url), 'utf8');
 const teamIndex = fs.readFileSync(new URL('../../scripts/team/INDEX.md', import.meta.url), 'utf8');
@@ -38,7 +38,7 @@ assert(workflow.includes('npm run build'), 'ci workflow runs dashboard build');
 assert(workflow.includes('npm run scan:bundle'), 'ci workflow runs dashboard bundle scan');
 
 assert(dashboardReadme.includes('single-repo build authority'), 'dashboard README declares single-repo build authority');
-assert(dashboardReadme.includes('cd /root/.openclaw/workspace/dashboard'), 'dashboard README documents repo-local dashboard cwd');
+assert(dashboardReadme.includes('cd dashboard'), 'dashboard README documents repo-local dashboard cwd');
 assert(!dashboardReadme.includes('sibling `../dashboard` app shell'), 'dashboard README no longer depends on sibling app shell');
 
 assert(releaseCiDoc.includes('repo-local dashboard build authority'), 'release engineering doc declares repo-local dashboard build authority');

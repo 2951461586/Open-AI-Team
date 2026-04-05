@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState, useCallback } from 'react'
 import { PackageOpen, FileText, Loader2, Info, Inbox, ChevronDown, ChevronUp, Download, Eye, X, ExternalLink } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { ArtifactItem, TaskCard, FocusTarget } from '@/lib/types'
-import { fetchTaskArtifacts, fetchTaskArtifactFile } from '@/lib/api'
+import { ArtifactItem, EvidenceItem, TaskCard, FocusTarget } from '@/lib/types'
+import { fetchTaskArtifacts, fetchTaskArtifactFile, fetchTaskEvidence } from '@/lib/api'
 import { formatDateTime, artifactTypeLabel, roleLabel } from '@/lib/utils'
 import { focusSummaryLabel, focusAssignmentId, focusChildTaskId, hasTaskFocus, withFocusOpenTab } from '@/lib/task-focus'
 import { useTaskStore } from '@/lib/store'
@@ -145,6 +145,7 @@ export function ArtifactsPanel({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [items, setItems] = useState<ArtifactItem[]>([])
+  const [evidenceItems, setEvidenceItems] = useState<EvidenceItem[]>([])
   const [expanded, setExpanded] = useState<Record<string, boolean>>({})
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewTitle, setPreviewTitle] = useState('')
@@ -252,12 +253,21 @@ export function ArtifactsPanel({
       setLoading(true)
       setError(null)
       try {
-        const res = await fetchTaskArtifacts(taskId, 200)
-        if (!res.ok) throw new Error(`API error: ${res.status}`)
-        const data = await res.json()
-        const list = Array.isArray(data?.items) ? data.items : []
+        const [artifactRes, evidenceRes] = await Promise.all([
+          fetchTaskArtifacts(taskId, 200),
+          fetchTaskEvidence(taskId, 200),
+        ])
+        if (!artifactRes.ok) throw new Error(`API error: ${artifactRes.status}`)
+        const artifactData = await artifactRes.json()
+        const evidenceData = evidenceRes.ok ? await evidenceRes.json().catch(() => ({})) : {}
+        const list = Array.isArray(artifactData?.items) ? artifactData.items : []
+        const evidenceList = Array.isArray(evidenceData?.items) ? evidenceData.items : []
         list.sort((a: ArtifactItem, b: ArtifactItem) => Number(b.updatedAt || 0) - Number(a.updatedAt || 0))
-        if (alive) setItems(list)
+        evidenceList.sort((a: EvidenceItem, b: EvidenceItem) => Number(b.createdAt || 0) - Number(a.createdAt || 0))
+        if (alive) {
+          setItems(list)
+          setEvidenceItems(evidenceList)
+        }
       } catch (e: any) {
         if (alive) setError(e?.message || '加载失败')
       } finally {
@@ -284,6 +294,18 @@ export function ArtifactsPanel({
   }, [items, currentFocusAssignmentId, currentFocusChildTaskId])
   const visibleDeliverables = filteredItems.filter((i) => String(i.artifactType) === 'deliverable')
   const processItems = filteredItems.filter((i) => String(i.artifactType) !== 'deliverable')
+  const blockingEvidenceItems = evidenceItems.filter((item) => String(item.evidenceType || '') === 'review_issue')
+  const supportingEvidenceItems = evidenceItems.filter((item) => String(item.evidenceType || '') !== 'review_issue')
+  const blockingEvidenceCount = Number(task?.issueCount || blockingEvidenceItems.length || 0)
+  const evidenceRoute = String(taskId ? `/state/team/evidence?taskId=${encodeURIComponent(String(taskId || ''))}&limit=200` : '')
+  const acceptanceState = String(task?.acceptanceState || '')
+  const acceptanceHeadline = acceptanceState === 'ready_for_acceptance'
+    ? '当前已经进入最终验收窗口。'
+    : acceptanceState === 'needs_human_decision'
+      ? '当前需要人工裁决后才能最终收口。'
+      : acceptanceState === 'needs_issue_resolution'
+        ? '当前还有阻塞问题，验收前需先处理。'
+        : '当前仍在推进中，交付结果还在形成。'
   const closurePulse = waitingExecutor
     ? '这条线已经具备交付条件，但最终结果还在执行链上生成。'
     : visibleDeliverables.length > 0
@@ -338,7 +360,7 @@ export function ArtifactsPanel({
               {task && (
                 <div className="surface-card p-4">
                   <div className="flex items-center gap-2 text-sm font-semibold text-[var(--fg)]">
-                    <Info className="h-4 w-4 text-[var(--accent)]" /> 交付概览
+                    <Info className="h-4 w-4 text-[var(--accent)]" /> 最终验收
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     <span className="rounded-full bg-[var(--surface-subtle)] px-2.5 py-1 text-[10px] text-[var(--fg-muted)]">{task.artifactCount} 份内容</span>
@@ -346,8 +368,8 @@ export function ArtifactsPanel({
                     {task.deliverableReady && <span className="rounded-full bg-[var(--success-soft)] px-2.5 py-1 text-[10px] text-[var(--success)]">已可交付</span>}
                   </div>
                   <div className="mt-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)]/95 p-3 text-[12px] leading-5 text-[var(--fg-secondary)]">
-                    <span className="font-medium text-[var(--fg)]">收口判断：</span>
-                    {closurePulse}
+                    <span className="font-medium text-[var(--fg)]">验收判断：</span>
+                    {acceptanceHeadline} {closurePulse}
                   </div>
                   <div className="mt-3 grid gap-2 md:grid-cols-3">
                     <div className="info-tile bg-[var(--surface-subtle)]">
@@ -362,6 +384,14 @@ export function ArtifactsPanel({
                       <div className="text-[10px] text-[var(--fg-ghost)]">当前建议</div>
                       <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{visibleDeliverables.length > 0 ? '优先做验收与导出' : waitingExecutor ? '先等执行链回传结果' : '继续观察推进并等待交付形成'}</div>
                     </div>
+                    <div className="info-tile bg-[var(--surface-subtle)]">
+                      <div className="text-[10px] text-[var(--fg-ghost)]">阻塞证据</div>
+                      <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{blockingEvidenceCount > 0 ? `${blockingEvidenceCount} 条需先处理` : '暂无阻塞证据'}</div>
+                    </div>
+                    <div className="info-tile bg-[var(--surface-subtle)]">
+                      <div className="text-[10px] text-[var(--fg-ghost)]">证据检索</div>
+                      <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{evidenceItems.length > 0 ? `${evidenceItems.length} 条可检索证据` : '当前无证据沉淀'}</div>
+                    </div>
                   </div>
                   {(task.executiveSummary || task.planSummary) && (
                     <div className="mt-3 rounded-lg bg-[var(--surface-subtle)] p-3 text-[12px] leading-5 text-[var(--fg-secondary)]">
@@ -370,6 +400,45 @@ export function ArtifactsPanel({
                   )}
                 </div>
               )}
+
+              <section className="surface-card p-4 md:p-5">
+                <div className="flex items-center gap-2 text-[13px] font-semibold text-[var(--fg)]">
+                  <Info className="h-4 w-4 text-[var(--accent)]" /> 关键证据
+                </div>
+                <div className="mt-1 text-[12px] leading-5 text-[var(--fg-muted)]">
+                  终态与验收优先看证据，不靠前端猜。{evidenceRoute ? ' 当前证据源已接到统一 evidence route。' : ''}
+                </div>
+                <div className="mt-3 grid gap-3 md:grid-cols-2">
+                  <div className="rounded-xl border border-[var(--warning)]/20 bg-[var(--warning-soft)]/60 p-3">
+                    <div className="text-[12px] font-medium text-[var(--fg)]">阻塞证据</div>
+                    <div className="mt-1 text-[11px] text-[var(--fg-muted)]">review_issue / 需先处理的问题</div>
+                    <div className="mt-3 space-y-2">
+                      {blockingEvidenceItems.length === 0 ? (
+                        <div className="text-[12px] text-[var(--fg-secondary)]">暂无阻塞证据</div>
+                      ) : blockingEvidenceItems.slice(0, 6).map((item) => (
+                        <div key={item.evidenceId} className="rounded-lg border border-[var(--warning)]/20 bg-white/60 p-2.5">
+                          <div className="text-[12px] font-medium text-[var(--fg)]">{item.title || item.evidenceType}</div>
+                          <div className="mt-1 text-[11px] text-[var(--fg-secondary)]">{formatDateTime(item.createdAt)} · {item.severity || 'info'}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] p-3">
+                    <div className="text-[12px] font-medium text-[var(--fg)]">支撑证据</div>
+                    <div className="mt-1 text-[11px] text-[var(--fg-muted)]">非阻塞、用于复查/归档的证据</div>
+                    <div className="mt-3 space-y-2">
+                      {supportingEvidenceItems.length === 0 ? (
+                        <div className="text-[12px] text-[var(--fg-secondary)]">暂无额外支撑证据</div>
+                      ) : supportingEvidenceItems.slice(0, 6).map((item) => (
+                        <div key={item.evidenceId} className="rounded-lg border border-[var(--border)] bg-white/60 p-2.5">
+                          <div className="text-[12px] font-medium text-[var(--fg)]">{item.title || item.evidenceType}</div>
+                          <div className="mt-1 text-[11px] text-[var(--fg-secondary)]">{formatDateTime(item.createdAt)} · {item.severity || 'info'}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
 
               {sections.map((section) => {
                 const Icon = section.icon

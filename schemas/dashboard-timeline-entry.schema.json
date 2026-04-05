@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-timeline-entry.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-timeline-entry.schema.json",
   "title": "Dashboard Timeline Entry",
   "type": "object",
   "additionalProperties": true,

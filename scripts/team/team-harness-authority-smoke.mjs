@@ -26,11 +26,12 @@ const safety = fs.readFileSync(new URL('../../src/team-core/execution-safety-con
 const standaloneRuntime = fs.readFileSync(new URL('../../src/agent-harness-core/standalone-product-runtime.mjs', import.meta.url), 'utf8');
 
 assert(bootstrap.includes('createRemoteSessionHostBootstrap'), 'bootstrap exposes neutral remote-session host bootstrap wrapper');
-assert(bootstrap.includes('createOpenClawRemoteSessionHostBootstrap'), 'bootstrap delegates host-specific implementation to optional OpenClaw integration');
+assert(bootstrap.includes('resolveRemoteSessionHostBootstrap'), 'bootstrap delegates host-specific implementation to optional integration selector');
+assert(!bootstrap.includes("from './integrations/openclaw/host-bootstrap.mjs'"), 'bootstrap no longer statically imports OpenClaw integration');
 assert(bootstrap.includes('createNoopSessionRuntimeAdapter'), 'bootstrap imports host-agnostic runtime adapter factory');
 assert(bootstrap.includes('createStandaloneProductRuntime'), 'bootstrap imports standalone broker runtime');
 assert(bootstrap.includes('createRuntimeExecutionAdapter'), 'bootstrap imports execution adapter factory');
-assert(bootstrap.includes('export function createRemoteSessionHostBootstrap'), 'bootstrap exposes remote-session host bootstrap');
+assert(bootstrap.includes('export async function createRemoteSessionHostBootstrap'), 'bootstrap exposes async remote-session host bootstrap');
 assert(!bootstrap.includes('export function createOpenClawHostBootstrap'), 'bootstrap no longer exposes OpenClaw bootstrap shell');
 assert(bootstrap.includes('export function createHostAgnosticBootstrap'), 'bootstrap exposes host-agnostic bootstrap');
 assert(bootstrap.includes('export function createStandaloneBrokerBootstrap'), 'bootstrap exposes standalone broker bootstrap');

@@ -24,6 +24,8 @@
 - `team-execution-surface-contract-smoke.mjs` — execution-surface contract smoke
 - `team-memory-three-layer-smoke.mjs` — three-layer memory smoke
 - `team-harness-authority-smoke.mjs` — harness authority / execution-chain guard smoke
+- `team-p0-execution-authority-smoke.mjs` — P0 execution-state / read-model authority gate
+- `team-p1-product-surface-delivery-closure-smoke.mjs` — P1 product-surface / delivery-closure gate
 - `team-independent-agent-onboarding-smoke.mjs` — independent-agent onboarding gate
 - `team-third-party-agent-template-smoke.mjs` — third-party productized template gate
 - `team-dashboard-public-contract-smoke.mjs` — dashboard public-contract gate
@@ -34,6 +36,8 @@
 - `team-release-artifact-publish-smoke.mjs` — release-artifact / publish pipeline gate
 - `team-release-notes-provenance-version-smoke.mjs` — release-notes / provenance / version-story gate
 - `team-compat-boundary-smoke.mjs` — compat-boundary guard smoke
+- `team-wave2-host-config-split-smoke.mjs` — Wave 2 host-config split gate
+- `team-wave2-full-boundary-smoke.mjs` — Wave 2 full closure gate
 - `team-search-evidence-safety-smoke.mjs` — evidence-search safety smoke
 - `team-roles-config-authority-smoke.mjs` — roles config authority smoke
 - `team-contract-boundary-matrix-smoke.mjs` — contract boundary matrix smoke

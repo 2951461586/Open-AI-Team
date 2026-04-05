@@ -22,7 +22,7 @@ const releaseDoc = fs.readFileSync(new URL('../../docs/architecture/release-note
 const releaseWorkflow = fs.readFileSync(new URL('../../.github/workflows/release.yml', import.meta.url), 'utf8');
 const readme = fs.readFileSync(new URL('../../README.md', import.meta.url), 'utf8');
 const docsIndex = fs.readFileSync(new URL('../../docs/index.md', import.meta.url), 'utf8');
-const preflight = fs.readFileSync(new URL('../../docs/architecture/github-open-source-preflight.md', import.meta.url), 'utf8');
+const preflight = fs.readFileSync(new URL('../../docs/archive/github-open-source-preflight.md', import.meta.url), 'utf8');
 const teamIndex = fs.readFileSync(new URL('../../scripts/team/INDEX.md', import.meta.url), 'utf8');
 const mainline = fs.readFileSync(new URL('../../scripts/smoke/team-mainline.mjs', import.meta.url), 'utf8');
 

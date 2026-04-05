@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/run-report.schema.json",
+  "$id": "https://schema.openai-team.dev/run-report.schema.json",
   "title": "Agent Harness Run Report",
   "type": "object",
   "additionalProperties": true,

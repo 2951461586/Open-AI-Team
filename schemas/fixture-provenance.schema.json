@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/fixture-provenance.schema.json",
+  "$id": "https://schema.openai-team.dev/fixture-provenance.schema.json",
   "title": "Published Fixture Provenance",
   "type": "object",
   "additionalProperties": true,

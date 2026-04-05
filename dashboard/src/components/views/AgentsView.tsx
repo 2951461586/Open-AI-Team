@@ -14,9 +14,9 @@ import { NodeSummary } from '@/lib/types'
 
 /* ─── Shared ─────────────────────────────────────────────────── */
 
-const nodeAvatarMap: Record<string, string> = { laoda: '/node-avatars/laoda.png', violet: '/node-avatars/violet.png', lebang: '/node-avatars/lebang.png' }
-const dotMap: Record<string, string> = { laoda: 'bg-[var(--node-laoda)]', violet: 'bg-[var(--node-violet)]', lebang: 'bg-[var(--success)]' }
-const nodeRingMap: Record<string, string> = { laoda: 'ring-[var(--node-laoda)]/30', violet: 'ring-[var(--node-violet)]/30', lebang: 'ring-[var(--success)]/30' }
+const nodeAvatarMap: Record<string, string> = { 'node-a': '/node-avatar.png', 'node-b': '/node-avatar.png', 'node-c': '/node-avatar.png' }
+const dotMap: Record<string, string> = { 'node-a': 'bg-[var(--accent)]', 'node-b': 'bg-[var(--node-violet)]', 'node-c': 'bg-[var(--success)]' }
+const nodeRingMap: Record<string, string> = { 'node-a': 'ring-[var(--accent)]/30', 'node-b': 'ring-[var(--node-violet)]/30', 'node-c': 'ring-[var(--success)]/30' }
 
 function Chip({ label, value, tone = 'default' }: { label?: string; value: string; tone?: 'default' | 'success' | 'warning' | 'accent' | 'danger' }) {
   const cls = tone === 'success' ? 'border-[var(--success)]/20 bg-[var(--success-soft)] text-[var(--success)]'
@@ -314,12 +314,12 @@ export function AgentsView() {
       const json = await res.json()
       const rawNodes = json?.payload?.nodes || json?.nodes || {}
       const deployment = json?.payload?.deployment || json?.deployment || {}
-      const labels: Record<string, string> = { laoda: 'Laoda', violet: 'Violet', lebang: 'Lebang' }
+      const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
       const list = Object.entries(rawNodes)
         .filter(([key, value]) => key !== 'ts' && value && typeof value === 'object')
         .map(([key, value]: [string, any]) => ({
           key,
-          label: labels[key] || key,
+          label: canonicalLabels[key] || value?.label || key,
           reachable: !!value?.reachable,
           latencyMs: value?.latencyMs,
           fallbackReady: !!value?.fallbackReady,

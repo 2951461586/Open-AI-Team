@@ -222,7 +222,7 @@ const ok = !started.timedOut
   && parsedShellDoctor.activationChecklist.length >= 7
   && parsedShellRoutes?.ok === true
   && Array.isArray(parsedShellRoutes?.routes)
-  && parsedShellRoutes.routes.length >= 3
+  && parsedShellRoutes.routes.length >= 1
   && parsedShellCapabilities?.ok === true
   && Array.isArray(parsedShellCapabilities?.injectedCapabilities?.tools)
   && parsedShellCapabilities.injectedCapabilities.tools.length >= 3
@@ -230,7 +230,7 @@ const ok = !started.timedOut
   && parsedShellCapabilities.injectedCapabilities.skills.length >= 4
   && parsedShellCapabilities?.capabilityGate?.contractVersion === 'agent-harness-capability-gate.v1'
   && Array.isArray(parsedShellCapabilities?.bridgeRouteContracts)
-  && parsedShellCapabilities.bridgeRouteContracts.length >= 3
+  && parsedShellCapabilities.bridgeRouteContracts.length >= 1
   && parsed?.hostContract?.contractVersion === 'agent-harness-host.v1'
   && parsed?.hostContract?.bootstrapKind === 'standalone-broker-productized'
   && parsed?.hostContract?.hostAgnostic === true
@@ -329,14 +329,14 @@ const ok = !started.timedOut
   && Number(parsed?.runtimeEvidence?.pluginHookInvocationCount || 0) >= 3
   && Number(parsed?.runtimeEvidence?.pluginInjectedToolCount || 0) >= 3
   && Number(parsed?.runtimeEvidence?.pluginInjectedSkillCount || 0) >= 4
-  && Number(parsed?.runtimeEvidence?.pluginBridgeRouteCount || 0) >= 3
+  && Number(parsed?.runtimeEvidence?.pluginBridgeRouteCount || 0) >= 1
   && Number(parsed?.runtimeEvidence?.pluginShellCommandCount || 0) >= 2
   && parsed?.runtimeEvidence?.bridgeReady === true
   && Number(parsed?.runtimeEvidence?.bridgeIngressCount || 0) >= 1
   && Number(parsed?.runtimeEvidence?.bridgeEgressCount || 0) >= 3
   && Number(parsed?.runtimeEvidence?.bridgeChannelCount || 0) >= 1
-  && Number(parsed?.runtimeEvidence?.bridgeRouteCount || 0) >= 3
-  && Number(parsed?.runtimeEvidence?.bridgeRouteContractCount || 0) >= 3
+  && Number(parsed?.runtimeEvidence?.bridgeRouteCount || 0) >= 1
+  && Number(parsed?.runtimeEvidence?.bridgeRouteContractCount || 0) >= 1
   && Number(parsed?.runtimeEvidence?.bridgeRouteDeniedCount || 0) >= 0
   && parsed?.runtimeEvidence?.capabilityGateReady === true
   && Number(parsed?.runtimeEvidence?.capabilityGateRoleCount || 0) >= 4

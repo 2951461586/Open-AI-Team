@@ -31,8 +31,15 @@ It also includes:
 - [Dashboard source authority & deployment](./docs/deploy/dashboard-source-authority.md)
 - [Dashboard static export deprecation note](./docs/migration/dashboard-static-export-deprecation.md)
 - [OSS comparison: DeerFlow / OpenHanako / AI Team](./docs/oss/deerflow-openhanako-comparison.md)
-- [OpenClaw integration retirement plan](./docs/architecture/openclaw-integration-retirement-plan.md)
-- [Repo shape migration plan](./docs/architecture/repo-shape-migration-plan.md)
+- [Execution state and read-model authority](./docs/architecture/execution-state-and-read-model-authority.md)
+- [Execution product surface and delivery closure](./docs/architecture/execution-product-surface-and-delivery-closure.md)
+- [Deliverables / Evidence / Acceptance authority](./docs/architecture/deliverables-evidence-acceptance-authority.md)
+- [Terminal-state / Archive / Evidence boundary](./docs/architecture/terminal-state-archive-evidence-boundary.md)
+- [Session Capability & Follow-up](./docs/architecture/session-capability-and-followup-fallback.md)
+- Session capability and follow-up fallback authority: `docs/architecture/session-capability-and-followup-fallback.md`
+- [OpenClaw integration retirement plan](./docs/archive/openclaw-integration-retirement-plan.md)
+- [Repo shape migration plan](./docs/archive/repo-shape-migration-plan.md)
+- [Release notes, provenance, and version story](./docs/architecture/release-notes-provenance-and-version-story.md)
 - [Docs index](./docs/index.md)
 
 ### Practical entry points
@@ -93,6 +100,9 @@ Current public-facing repo layers:
 - `scripts/` — validation, release, deploy, acceptance helpers
 - `docs/` — current authority docs
 - `.release-artifacts/` — generated outputs only
+
+Current canonical orchestration runtime inside the repo:
+- `team-tl-runtime.mjs`：**当前唯一对话 authority ＋ 任务编排主运行时**
 
 Working directories such as `run/`, `state/`, and local bundles are runtime residue, not product authority.
 Maintainer/private operational material may also remain in-tree during transition, but it is a secondary maintainer context rather than the public product authority.

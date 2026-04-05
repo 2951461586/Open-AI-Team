@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/artifact-file-response.schema.json",
+  "$id": "https://schema.openai-team.dev/artifact-file-response.schema.json",
   "title": "Artifact File Response",
   "type": "object",
   "additionalProperties": true,

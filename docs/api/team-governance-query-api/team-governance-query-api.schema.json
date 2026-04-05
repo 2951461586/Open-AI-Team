@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/team-governance-query-api.schema.json",
+  "$id": "https://schema.openai-team.dev/team-governance-query-api.schema.json",
   "title": "Team Governance Query Stable Envelope",
   "type": "object",
   "required": ["ok", "api", "resource", "query", "links"],

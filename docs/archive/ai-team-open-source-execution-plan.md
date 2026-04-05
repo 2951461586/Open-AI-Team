@@ -6,7 +6,7 @@
 
 ## Objective
 
-Turn the current AI Team stack into a public-safe, GitHub-friendly, host-neutral product surface while preserving an optional OpenClaw integration path and shipping the validated frontend to `https://board.liziai.cloud/` at the end.
+Turn the current AI Team stack into a public-safe, GitHub-friendly, host-neutral product surface while preserving an optional OpenClaw integration path and shipping the validated frontend to the configured public dashboard target at the end.
 
 ## Operating Rules
 
@@ -53,7 +53,7 @@ Turn the current AI Team stack into a public-safe, GitHub-friendly, host-neutral
 - Produce clear evidence artifacts for final ship/no-ship decision.
 
 ### 8. Final deployment
-- Release to `board.liziai.cloud` only after acceptance evidence is green.
+- Release to the configured public dashboard target only after acceptance evidence is green.
 - Record deployment inputs, version, smoke results, and rollback path.
 
 ## Immediate Next Moves

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-control-payload.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-control-payload.schema.json",
   "title": "Dashboard Control Payload",
   "type": "object",
   "additionalProperties": true,

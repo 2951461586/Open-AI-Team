@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/completion-result.schema.json",
+  "$id": "https://schema.openai-team.dev/completion-result.schema.json",
   "title": "TL / Member Completion Result",
   "type": "object",
   "additionalProperties": true,

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/bridge-state.schema.json",
+  "$id": "https://schema.openai-team.dev/bridge-state.schema.json",
   "title": "Runtime Bridge State",
   "type": "object",
   "additionalProperties": true,

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-task-card.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-task-card.schema.json",
   "title": "Dashboard Task Card",
   "type": "object",
   "additionalProperties": true,
@@ -30,7 +30,9 @@
     "sessionFallbackReason": { "type": "string" },
     "planSummary": { "type": "string" },
     "executiveSummary": { "type": "string" },
-    "protocolSource": { "type": "string" }
+    "protocolSource": { "type": "string" },
+    "acceptanceState": { "type": "string" },
+    "recommendedSurface": { "type": "string" }
   },
   "required": ["taskId", "title", "state", "updatedAt"]
 }

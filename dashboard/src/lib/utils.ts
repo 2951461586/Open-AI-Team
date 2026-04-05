@@ -12,6 +12,7 @@ export const NODE_LABELS: Record<string, string> = {
   'node-a': 'Node A',
   'node-b': 'Node B',
   'node-c': 'Node C',
+  // Legacy fallback keys — remove once API consumers fully migrate
   laoda: 'Node A',
   authority: 'Node A',
   violet: 'Node B',
@@ -80,6 +81,8 @@ export function threadPhaseLabel(phase?: string): string {
 export function rawPathLabel(path?: string): string {
   const value = String(path || '').trim()
   if (!value) return '未挂载'
+  if (value.startsWith('/workspace/project/')) return `workspace/${value.slice('/workspace/project/'.length)}`
+  if (value.startsWith('/workspace/project')) return 'workspace/'
   if (value.startsWith('/root/.openclaw/workspace/')) return `workspace/${value.slice('/root/.openclaw/workspace/'.length)}`
   if (value.startsWith('/root/.openclaw/workspace')) return 'workspace/'
   return '已挂载工作区'
@@ -246,6 +249,16 @@ export function interventionStatusLabel(status?: string): string {
     intervention_in_progress: '介入处理中',
   }
   return map[String(status || '')] || status || '未知'
+}
+
+export function acceptanceStateLabel(state?: string): string {
+  const map: Record<string, string> = {
+    ready_for_acceptance: '可直接验收',
+    needs_human_decision: '待人工裁决',
+    needs_issue_resolution: '需先处理问题',
+    in_progress: '推进中',
+  }
+  return map[String(state || '')] || state || '推进中'
 }
 
 export function verdictLabel(verdict?: string): string {

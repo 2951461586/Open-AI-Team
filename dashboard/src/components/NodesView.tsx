@@ -11,28 +11,28 @@ import { useTaskStore } from '@/lib/store'
 import { NodeConnectivityInfo, NodeSummary, NodeSystemStats } from '@/lib/types'
 import { nodeLabel, nodeServiceStatusLabel, probeLatencyLabel, roleLabel } from '@/lib/utils'
 
-const dotMap: Record<string, string> = {
-  laoda: 'bg-[var(--node-laoda)]',
-  violet: 'bg-[var(--node-violet)]',
-  lebang: 'bg-[var(--success)]',
+const nodeDotMap: Record<string, string> = {
+  'node-a': 'bg-[var(--accent)]',
+  'node-b': 'bg-[var(--node-violet)]',
+  'node-c': 'bg-[var(--success)]',
 }
 
 const nodeAvatarMap: Record<string, string> = {
-  laoda: '/node-avatars/laoda.png',
-  violet: '/node-avatars/violet.png',
-  lebang: '/node-avatars/lebang.png',
+  'node-a': '/node-avatar.png',
+  'node-b': '/node-avatar.png',
+  'node-c': '/node-avatar.png',
 }
 
 const nodeAvatarRingMap: Record<string, string> = {
-  laoda: 'ring-[var(--node-laoda)]/30',
-  violet: 'ring-[var(--node-violet)]/30',
-  lebang: 'ring-[var(--success)]/30',
+  'node-a': 'ring-[var(--accent)]/30',
+  'node-b': 'ring-[var(--node-violet)]/30',
+  'node-c': 'ring-[var(--success)]/30',
 }
 
 const nodeAvatarGlowMap: Record<string, string> = {
-  laoda: 'shadow-[0_10px_30px_rgba(107,127,202,0.22)]',
-  violet: 'shadow-[0_10px_30px_rgba(155,126,212,0.22)]',
-  lebang: 'shadow-[0_10px_30px_rgba(107,175,140,0.22)]',
+  'node-a': 'shadow-[0_10px_30px_rgba(107,127,202,0.22)]',
+  'node-b': 'shadow-[0_10px_30px_rgba(155,126,212,0.22)]',
+  'node-c': 'shadow-[0_10px_30px_rgba(107,175,140,0.22)]',
 }
 
 function MiniChip({ label, value, tone = 'default' }: { label: string; value: string; tone?: 'default' | 'success' | 'warning' | 'accent' | 'danger' }) {
@@ -71,7 +71,7 @@ function NodeAvatar({ nodeKey }: { nodeKey: string }) {
           priority
         />
       ) : (
-        <div className={`flex h-full w-full items-center justify-center text-sm font-semibold text-white ${dotMap[nodeKey] || 'bg-[var(--fg-ghost)]'}`}>
+        <div className={`flex h-full w-full items-center justify-center text-sm font-semibold text-white ${nodeDotMap[nodeKey] || 'bg-[var(--fg-ghost)]'}`}>
           {nodeLabel(nodeKey).slice(0, 1)}
         </div>
       )}
@@ -176,7 +176,7 @@ function NodeCard({ nodeKey, node }: { nodeKey: string; node: NodeSummary }) {
           <NodeAvatar nodeKey={nodeKey} />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2.5">
-              <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${dotMap[nodeKey] || 'bg-[var(--fg-ghost)]'}`} />
+              <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${nodeDotMap[nodeKey] || 'bg-[var(--fg-ghost)]'}`} />
               <div className="min-w-0">
                 <div className="truncate text-[15px] font-semibold text-[var(--fg)]">{nodeLabel(nodeKey)}</div>
                 <div className="mt-1 text-[11px] text-[var(--fg-muted)]">{serviceLabel}</div>

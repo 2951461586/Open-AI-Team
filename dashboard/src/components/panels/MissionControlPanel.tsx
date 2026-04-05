@@ -354,7 +354,7 @@ export function MissionControlPanel({ task, liveEvents = [], messages = [], task
             </div>
             <div className="info-tile">
               <div className="text-[10px] text-[var(--fg-ghost)]">当前判断</div>
-              <div className="mt-1 text-[13px] font-medium text-[var(--fg)]">{task.deliverableReady ? '建议直接验收' : task.humanInterventionReady ? '建议现在介入' : '继续让团队推进'}</div>
+              <div className="mt-1 text-[13px] font-medium text-[var(--fg)]">{task.deliverableReady ? '建议切到交付面验收' : task.humanInterventionReady ? '建议现在介入' : '继续让团队推进'}</div>
             </div>
             <div className="info-tile">
               <div className="text-[10px] text-[var(--fg-ghost)]">事件回流</div>

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/work-item.schema.json",
+  "$id": "https://schema.openai-team.dev/work-item.schema.json",
   "title": "AI Team Work Item",
   "type": "object",
   "additionalProperties": true,

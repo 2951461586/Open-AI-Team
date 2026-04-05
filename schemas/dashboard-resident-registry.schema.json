@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-resident-registry.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-resident-registry.schema.json",
   "title": "Dashboard Resident Registry",
   "type": "object",
   "additionalProperties": true,

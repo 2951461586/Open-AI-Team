@@ -15,7 +15,7 @@ function sanitize(value) {
     return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, sanitize(v)]));
   }
   if (typeof value === 'string') {
-    return value.split(root).join('/workspace/orchestrator');
+    return value.split(root).join('/workspace/project');
   }
   return value;
 }

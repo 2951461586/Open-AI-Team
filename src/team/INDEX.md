@@ -7,7 +7,9 @@
 - `team-store.mjs`
 - `team-policy.mjs`
 - `team-single-flight-guard.mjs`
-- `team-node-health.mjs`
+- `team-node-health.mjs` — facade
+- `team-node-health-core.mjs` — scoring / placement semantics
+- `team-node-health-probes.mjs` — health probe adapters
 - `team-resident-runtime.mjs`
 - `team-governance-runtime.mjs`
 - `team-session-completion-bus.mjs`

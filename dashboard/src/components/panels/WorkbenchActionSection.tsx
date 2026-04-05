@@ -80,17 +80,17 @@ export function WorkbenchActionSection({
           <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{humanInterventionReady ? '建议现在拍板' : '当前可继续观察'}</div>
         </div>
         <div className="info-tile bg-[var(--surface-subtle)]">
-          <div className="text-[10px] text-[var(--fg-ghost)]">验收结论</div>
-          <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{deliverableReady ? '已接近可收口' : '暂不建议直接收口'}</div>
+          <div className="text-[10px] text-[var(--fg-ghost)]">交付导流</div>
+          <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{deliverableReady ? '切到交付面做最终验收' : '暂不建议切到最终验收'}</div>
         </div>
       </div>
 
       <div className="mt-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-4">
-        <div className="text-[11px] font-medium text-[var(--fg-ghost)]">结果摘要</div>
+        <div className="text-[11px] font-medium text-[var(--fg-ghost)]">推进摘要</div>
         <div className="mt-2 space-y-2 text-[12px] leading-5 text-[var(--fg-secondary)]">
           <div>下一动作：{nextBestActionLabel(nextBestAction)}</div>
           <div>当前角色：{roleLabel(currentMemberKey || currentDriver)}</div>
-          <div>交付判断：{deliverableReady ? '已可验收' : '尚未可直接收口'}</div>
+          <div>交付导流：{deliverableReady ? '已进入验收窗口，请切到交付面确认' : '尚未进入最终验收窗口'}</div>
           <div>人工参与：{humanInterventionReady ? '建议现在介入' : '当前可继续让团队推进'}</div>
           <div>会话能力：{sessionModeText}</div>
           <div>续聊策略：{sessionPersistent ? '成员可直接持续 follow-up' : '成员不可持续时自动回退 TL 接管'}</div>

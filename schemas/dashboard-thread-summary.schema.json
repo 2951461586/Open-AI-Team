@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://openclaw.local/orchestrator/schemas/dashboard-thread-summary.schema.json",
+  "$id": "https://schema.openai-team.dev/dashboard-thread-summary.schema.json",
   "title": "Dashboard Thread Summary",
   "type": "object",
   "additionalProperties": true,
