@@ -77,5 +77,5 @@ For public docs and READMEs, use this simplified wording:
 
 ## Related docs
 
-- [Dashboard static export deprecation](../migration/dashboard-static-export-deprecation.md)
+- [Dashboard static export deprecation](../archive/dashboard-static-export-deprecation.md)
 - [DeerFlow / OpenHanako comparison](../oss/deerflow-openhanako-comparison.md)

@@ -4,116 +4,63 @@ English | [中文说明](./README_zh.md)
 
 Multi-agent orchestration harness focused on **execution**, **observability**, and **deliverable closure**.
 
-## What this repository is for
-
-AI Team Harness is not a chat-only assistant shell. It is a product-facing multi-agent runtime surface built around:
-
-- **Planner** — break work down
-- **Executor** — perform work
-- **Critic** — review quality and gaps
-- **Judge** — make the final decision
-
-It also includes:
-
-- dashboard / workbench UI
-- agent management view
-- runtime / release contracts
-- release notes / provenance / version story
-- OSS minimal harness example
-
-## Start here
-
-### Product & authority
-- [中文总览 / README_zh.md](./README_zh.md)
-- [Dashboard UI surface](./dashboard/README.md)
-- [Release engineering & CI](./docs/architecture/release-engineering-and-ci.md)
-- [Release artifacts & publishing](./docs/architecture/release-artifacts-and-publishing.md)
-- [Dashboard source authority & deployment](./docs/deploy/dashboard-source-authority.md)
-- [Dashboard static export deprecation note](./docs/migration/dashboard-static-export-deprecation.md)
-- [OSS comparison: DeerFlow / OpenHanako / AI Team](./docs/oss/deerflow-openhanako-comparison.md)
-- [Execution state and read-model authority](./docs/architecture/execution-state-and-read-model-authority.md)
-- [Execution product surface and delivery closure](./docs/architecture/execution-product-surface-and-delivery-closure.md)
-- [Deliverables / Evidence / Acceptance authority](./docs/architecture/deliverables-evidence-acceptance-authority.md)
-- [Terminal-state / Archive / Evidence boundary](./docs/architecture/terminal-state-archive-evidence-boundary.md)
-- [Session Capability & Follow-up](./docs/architecture/session-capability-and-followup-fallback.md)
-- Session capability and follow-up fallback authority: `docs/architecture/session-capability-and-followup-fallback.md`
-- [OpenClaw integration retirement plan](./docs/archive/openclaw-integration-retirement-plan.md)
-- [Repo shape migration plan](./docs/archive/repo-shape-migration-plan.md)
-- [Release notes, provenance, and version story](./docs/architecture/release-notes-provenance-and-version-story.md)
-- [Docs index](./docs/index.md)
-
-### Practical entry points
-- `dashboard/` — full dashboard source tree
-- `examples/oss-minimal/` — minimal standalone harness example
-- `.release-artifacts/` — generated outputs only, not source authority
-
-### Repo surface map
-- **Primary product surfaces** — `src/`, `dashboard/`, `docs/architecture/`, `schemas/`
-- **Public examples / samples** — `examples/`, `fixtures/`, `config/examples/`
-- **Maintainer runtime inventory / live surfaces** — `config/team/`, `docs/ops/`, `scripts/ops/`, `scripts/acceptance/`
-- **Background / continuity surfaces** — `references/`, `memory/`
-- **Historical surface** — `docs/archive/`
-
-## Deployment authority
-
-**Single authority rule:** production dashboard deployment must originate from the **full dashboard source tree**, then build, then deploy.
-
-Authoritative source boundary:
-- `dashboard/src/`
-- `dashboard/public/`
-- `dashboard/package.json`
-- `dashboard/package-lock.json`
-- dashboard build config files
-
-Non-authoritative surfaces:
-- historical `dashboard-static-export` bundles / paths
-- copied static bundles
-- ad-hoc exported `out/` directories
-- stale local mirrors under `/srv/*`
-
-If a generated bundle disagrees with the source tree, trust the source tree and rebuild.
-
-## Recommended deploy flow
+## Quick Start
 
 ```bash
-cd dashboard
-npm ci
-npm run build
-# then publish the fresh ./out bundle to your hosting target
+npm install
+cp .env.example .env
+npm run smoke:team       # verify everything works
+node examples/oss-minimal/product-shell.mjs  # run a demo
 ```
 
-Or use the authority guard script:
+That's the fastest way to see it in action.
 
-```bash
-bash scripts/deploy/dashboard-from-source.sh
-```
+## What It Does
 
-See: [docs/deploy/dashboard-source-authority.md](./docs/deploy/dashboard-source-authority.md)
+Not a chat-only assistant. A multi-agent runtime where agents **plan**, **execute**, **review**, and **decide** — with a dashboard to watch it all.
 
-## Repo layering
+- **Planner** → breaks work into tasks
+- **Executor** → performs the work
+- **Critic** → reviews quality
+- **Judge** → makes final decisions
 
-Current public-facing repo layers:
+Plus a task dashboard, agent management view, and a deliverable/evidence acceptance loop.
 
-- `src/` — runtime / orchestration core
-- `dashboard/` — product UI surface
-- `examples/` — runnable public examples
-- `scripts/` — validation, release, deploy, acceptance helpers
-- `docs/` — current authority docs
-- `.release-artifacts/` — generated outputs only
+`team-tl-runtime.mjs`：**当前唯一对话 authority ＋ 任务编排主运行时**
 
-Current canonical orchestration runtime inside the repo:
-- `team-tl-runtime.mjs`：**当前唯一对话 authority ＋ 任务编排主运行时**
+## Key Directories
 
-Working directories such as `run/`, `state/`, and local bundles are runtime residue, not product authority.
-Maintainer/private operational material may also remain in-tree during transition, but it is a secondary maintainer context rather than the public product authority.
+| Path | What |
+|---|---|
+| `src/agent-harness-core/` | Standalone baseline (no orchestrator) |
+| `src/team/` | Runtime & orchestration core |
+| `dashboard/` | Web UI |
+| `examples/oss-minimal/` | Minimal standalone demo |
+| `schemas/` | Public API contracts |
+| `scripts/team/` | Smoke tests & validation |
 
-## Open-source cleanup direction
+## Key Concepts
 
-Compared with DeerFlow's strong harness substrate and OpenHanako's more independently pluggable agent-facing UI ideas, this project is currently prioritizing:
+- [Execution State & Read-Model Authority](./docs/architecture/execution-state-and-read-model-authority.md) — the UI reads state; it doesn't invent it
+- [Product Surface & Delivery Closure](./docs/architecture/execution-product-surface-and-delivery-closure.md) — what counts as "done"
+- [Deliverables / Evidence / Acceptance authority](./docs/architecture/deliverables-evidence-acceptance-authority.md) — acceptance boundary
+- [Terminal-state / Archive / Evidence boundary](./docs/architecture/terminal-state-archive-evidence-boundary.md) — terminal state
+- [Session Capability & Follow-up Fallback](./docs/architecture/session-capability-and-follow-up-fallback.md) — session boundary
 
-1. single runtime / event / deployment authority
-2. less OpenClaw-specific coupling
-3. fewer historical fallback surfaces
-4. clearer public OSS contracts and release surfaces
+## Release & Operations
 
-See the formal checklist: [docs/oss/deerflow-openhanako-comparison.md](./docs/oss/deerflow-openhanako-comparison.md)
+- [Release Artifacts & Publishing](./docs/architecture/release-artifacts-and-publishing.md)
+- [Release Engineering & CI](./docs/architecture/release-engineering-and-ci.md)
+- [Release Notes & Provenance](./docs/architecture/release-notes-provenance-and-version-story.md)
+
+## Next Steps
+
+- **[Getting Started](./GETTING-STARTED.md)** — full contributor guide with detailed paths
+- **[Architecture](./ARCHITECTURE.md)** — repository layering & boundaries
+- **[Dashboard](./dashboard/README.md)** — frontend setup & dev server
+
+## CI Status
+
+[![CI](https://github.com/user/repo/actions/workflows/ci.yml/badge.svg)](https://github.com/user/repo/actions/workflows/ci.yml)
+
+Requires Node 22+. See [GETTING-STARTED.md](./GETTING-STARTED.md) for detailed setup.

@@ -1,204 +1,91 @@
 # Getting Started
 
-> External entrypoint for contributors evaluating AI Team Harness.
+## 1. 5 Minutes
 
-This repository now has **four explicit surfaces**:
-- **AI Team Runtime** — primary product
-- **Dashboard** — primary application UI
-- **Harness Core + Agent Package SDK** — reusable substrate
-- **Optional Integrations** — non-primary, non-required surface
+See it running — no configuration needed:
 
-If you only read one story first, read the **AI Team Runtime + Dashboard** story.
-
----
-
-## 1. Start Here First
-
-Read in this order:
-1. `README.md`
-2. `ARCHITECTURE.md`
-3. `docs/architecture/product-surface-and-repo-map.md`
-4. `docs/architecture/release-surface-allowlist.md`
-
-Then choose one of the paths below.
-
----
-
-## 2. Choose Your Path
-
-### A) AI Team Runtime — primary product surface
-Use this path if you want the DeerFlow-style team workflow product.
-
-Key surfaces:
-- `src/team/`
-- `src/team-core/`
-- `src/team-runtime-adapters/`
-- `src/routes/`
-
-Start here:
 ```bash
+git clone <your-repo-url> ai-team-harness
+cd ai-team-harness
 npm install
 cp .env.example .env
-npm run smoke:team
-node scripts/team/team-query-route-catalog-example.mjs
+npm run smoke:team          # should pass in ~30s
+node examples/oss-minimal/product-shell.mjs  # run a demo task
+cd dashboard && npm run dev  # open http://localhost:3000
 ```
 
-Then read:
-- `docs/architecture/current-team-runtime-architecture.md`
-- `docs/api/team-governance-query-api/README.md`
-- `dashboard/README.md`
+That's it. You should see the dashboard with a task timeline.
 
 ---
 
-### B) Dashboard — primary application UI
-Use this path if you care about the frontend-facing workbench, task cockpit, runtime visibility, and schema/read-model alignment.
+## 2. Understand What You're Looking At
 
-Key surfaces:
-- `dashboard/src/app/page.tsx`
-- `dashboard/src/lib/types.ts`
-- `dashboard/src/lib/api.ts`
-- `dashboard/src/components/`
-- `/state/team/dashboard`
-- `/state/team/workbench`
-- `/state/team/residents`
-- `/state/team/control`
+```
+src/team/          → Multi-agent runtime (Planner, Executor, Critic, Judge)
+src/routes/        → HTTP API routes
+dashboard/         → Next.js web UI
+examples/          → Runnable demos
+schemas/           → Machine-readable API contracts
+scripts/team/      → Smoke tests (each validates one boundary)
+```
 
-Validation:
+## 3. Choose Your Interest
+
+Don't try to understand the whole repo at once. Pick one:
+
+### I want the team workflow
+Read: `ARCHITECTURE.md` → `src/team/`
+
+### I want the dashboard / frontend
 ```bash
-node scripts/team/team-uat-observability-neutralization-smoke.mjs
-npm run dashboard:build
+cd dashboard && npm install && npm run dev
 ```
+Key files: `dashboard/src/components/panels/WorkbenchPanel.tsx`, `dashboard/src/components/TaskCard.tsx`
+
+### I want the agent substrate (forkable core)
+Read: `src/agent-harness-core/README.md` → `examples/oss-minimal/`
+
+### I want to contribute a third-party agent
+Read: `examples/third-party-agent-sample/README.md`
 
 ---
 
-### C) Harness Core + Agent Package SDK — reusable substrate
-Use this path if you want the OpenHanako-style independent-agent substrate and onboarding contract set.
+## 4. Deep Dives
 
-Key surfaces:
-- `src/agent-harness-core/`
-- `schemas/`
-- `examples/oss-minimal/`
-- `examples/third-party-agent-sample/`
+Once you've picked a focus:
 
-Start here:
-```bash
-npm run demo:oss-minimal
-npm run status:oss-minimal
-npm run doctor:oss-minimal
-npm run validate:agent-package
-npm run validate:third-party-agent
-npm run smoke:third-party-agent
-```
-
-Then read:
-- `src/agent-harness-core/README.md`
-- `docs/architecture/independent-agent-onboarding.md`
-- `docs/architecture/standalone-harness-baseline-release.md`
-- `docs/architecture/standalone-run-layout-authority.md`
+- **Runtime architecture:** `docs/architecture/current-team-runtime-architecture.md`
+- **Execution contracts:** `docs/architecture/execution-product-surface-and-delivery-closure.md`
+- **Dashboard contracts:** `docs/deploy/dashboard-source-authority.md`
+- **API reference:** `docs/api/`
+- **Repo map (detailed):** `docs/architecture/product-surface-and-repo-map.md`
 
 ---
 
-### D) Optional Integrations — non-primary surface
-Use this path only if you are intentionally working on host/channel-specific integration layers.
+## 5. Contributing
 
-Examples:
-- `src/integrations/openclaw/`
-- compatibility ingress routes
-- maintainer-host deployment/runtime wiring
+1. Keep host-neutral logic in `src/team-core/` and `src/agent-harness-core/`
+2. Each new surface needs a smoke test in `scripts/team/`
+3. Update docs for user-visible changes
+4. No hard-coded host paths, machine names, or platform assumptions in public defaults
 
-Rule:
-- useful for integration work
-- not required to understand the public product story
-- should not be treated as the default starting point
-
-### E) Maintainer / private ops — secondary surface
-Use this only if you are maintaining a live deployment, auditing a current environment, or reading rollout/investigation notes.
-
-Examples:
-- `docs/ops/README.md`
-- `scripts/ops/README.md`
-- `config/team/README.md`
-- `docs/architecture/maintainer-private-ops-boundary.md`
-
-Rule:
-- useful for maintainers
-- not part of the default public onboarding path
-- not a substitute for public examples under `config/examples/`
-
-### F) Background / continuity / sample surfaces
-Use these only when you intentionally need context, sample payloads, or derived continuity material.
-
-Examples:
-- `fixtures/README.md`
-- `references/README.md`
-- `memory/README.md`
-
-Rule:
-- useful for examples, background, or continuity
-- not the primary product authority
-- not a replacement for current docs, schemas, or runtime source surfaces
+Before making a PR, run `npm run smoke:team` and make sure it passes.
 
 ---
 
-## 3. Repository Map
+## 6. Troubleshooting
 
-```text
-README.md                product overview and boundary definition
-ARCHITECTURE.md          repository layering authority
-GETTING-STARTED.md       contributor entrypoint
-config/                  config surface map (`config/README.md`)
-config/team/             maintainer-facing active runtime inventory
-config/examples/         public-safe example config authority
-src/team*/               primary runtime and neutral semantics
-src/agent-harness-core/  reusable execution substrate
-src/integrations/        optional integrations only
-dashboard/src/           primary application UI
-examples/                runnable and forkable public examples
-schemas/                 public machine-readable contracts
-fixtures/                public contract samples and validation fixtures
-scripts/                 validation, smoke, acceptance, ops
-references/              background comparison/reference material
-```
+- `npm run smoke:team` fails → check Node version (need 22+)
+- dashboard won't build → run `npm ci` in `dashboard/` first
+- dashboard contract / build validation → `npm run dashboard:build` from repo root
+- API port conflict → set `PORT=19090` in `.env` or pick another port
 
 ---
 
-## 4. Which Surfaces Are Primary?
+## 7. Repository Boundaries
 
-- **Primary product:** AI Team Runtime + Dashboard
-- **Reusable substrate:** Harness Core + Agent Package SDK
-- **Optional surface:** host/channel/deployment integrations
-- **Historical surface:** archive only
+- **Public primary surfaces:** `src/`, `dashboard/`, `schemas/`, `examples/`
+- **Maintainer-only surfaces:** `config/team/`, `docs/ops/`, `scripts/ops/`
+- **Historical reference:** `docs/archive/` — context only, not current authority
 
-If you are unsure where to start, start with the primary product, not the integrations.
-
----
-
-## 5. Public Example Tracks
-
-- `examples/README.md` — examples index
-- `examples/team-runtime-public/` — Team Runtime public-facing track
-- `examples/oss-minimal/` — runnable standalone sample
-- `examples/third-party-agent-sample/` — external onboarding template
-- `config/examples/` — public-safe example configuration
-
----
-
-## 6. Validation Shortlist
-
-```bash
-npm run smoke:team
-npm run smoke:team:batch
-npm run smoke:oss-minimal
-npm run smoke:public-schemas
-node scripts/team/team-uat-observability-neutralization-smoke.mjs
-```
-
----
-
-## 7. Public Contract / Sample Shortcuts
-
-```bash
-node scripts/team/team-query-route-catalog-example.mjs
-npm run fixtures:real-run-published
-npm run fixtures:real-run-provenance
-```
+Start with the public surfaces. Only look at the rest when you have a specific reason.

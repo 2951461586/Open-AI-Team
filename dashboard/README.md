@@ -1,75 +1,63 @@
-# Dashboard / UAT Frontend
+# Dashboard
 
-This directory is the current frontend-facing product surface for the AI Team Runtime.
+Next.js web UI for the AI Team Runtime. Shows tasks, agents, workbench, and timeline.
 
-## Role
+## Quick Start
 
-`dashboard/src/` is the UI / UAT layer aligned to the public Team Runtime contract surface under `/state/team/*`.
-
-It should be understood as part of the **primary Team Runtime product surface**, not as a detached sample.
-
-## Current scope
-
-- workbench / task deep view
-- node visibility and control-plane-neutral observability
-- team console / task chat panels
-- dashboard contract alignment with public read models
-
-## Key files
-
-- `src/app/page.tsx`
-- `src/lib/types.ts`
-- `src/lib/api.ts`
-- `src/lib/utils.ts`
-- `src/components/Header.tsx`
-- `src/components/NodesView.tsx`
-- `src/components/panels/TeamConsolePanel.tsx`
-- `src/components/panels/TaskChatPanel.tsx`
-- `src/components/panels/WorkbenchPanel.tsx`
-
-## Contract alignment
-
-The dashboard should consume the public query/runtime contract layer first:
-
-- `/state/team/dashboard`
-- `/state/team/summary`
-- `/state/team/workbench`
-- `/state/team/pipeline`
-- `/state/team/control`
-- `/state/team/residents`
-- `/state/team/nodes`
-- `/state/team/board`
-- `/state/team/threads`
-- `/state/team/thread-summary`
-
-See:
-- `../docs/architecture/dashboard-contract-alignment.md`
-- `../docs/api/team-governance-query-api/README.md`
-
-## Validation
-
-```bash
-node scripts/team/team-uat-observability-neutralization-smoke.mjs
-```
-
-## Current build boundary
-
-Dashboard now has **single-repo build authority** inside this repository:
-- `dashboard/src/`
-- `dashboard/public/`
-- `dashboard/scripts/`
-- `dashboard/package.json`
-- `dashboard/package-lock.json`
-
-Rule for P7:
-- public CI validates both dashboard contract alignment and repo-local app buildability
-- `dashboard-build` is now a real GitHub CI lane, not a workspace-only workaround
-- `npm run dashboard:build` is now a repo-local build authority entrypoint
-
-### Repo-local running
 ```bash
 cd dashboard
-npm ci
-npm run build
-npm run scan:bundle
+npm install
+cp .env.example .env.local
+npm run dev     # http://localhost:3000
+```
+
+Set `NEXT_PUBLIC_API_BASE=http://127.0.0.1:19090` to connect to a local orchestrator.
+
+## Key Files
+
+| Path | What |
+|---|---|
+| `src/components/panels/WorkbenchPanel.tsx` | Task workbench / delivery view |
+| `src/components/panels/MissionControlPanel.tsx` | Mission control overview |
+| `src/components/panels/ArtifactsPanel.tsx` | Deliverables and evidence |
+| `src/components/panels/TimelinePanel.tsx` | Event timeline |
+| `src/components/TaskCard.tsx` | Individual task card |
+| `src/components/NodesView.tsx` | Node status view |
+| `src/lib/api.ts` | API client |
+| `src/lib/types.ts` | TypeScript types |
+| `src/lib/store.ts` | State management |
+
+## API Contracts
+
+The dashboard consumes these orchestrator endpoints:
+
+## Public Contract Routes
+
+All dashboard API endpoints consumed by the frontend:
+
+- `/state/team/dashboard` — task list / board view
+- `/state/team/workbench` — workbench details
+- `/state/team/pipeline` — pipeline state
+- `/state/team/residents` — active residents
+- `/state/team/nodes` — node health
+- `/state/team/control` — control-plane actions
+- `/state/team/threads` — thread list
+- `/state/team/thread-summary` — per-thread summary
+- `/state/team/timeline` — event timeline
+- `/state/team/artifacts` — artifact listing
+- `/state/team/evidence` — evidence/review items
+
+## Build & Deploy
+
+The dashboard follows **single-repo build authority**: only deployed from this source tree after a fresh build (`cd dashboard && npm run build`). No pre-built or cross-repo static exports.
+
+**Current build boundary**: dashboard source lives at `dashboard/` within this mono-repo. Run `npm run dashboard:build` from repo root, or `npm run build` inside `dashboard/`.
+
+Deploy rules: see [docs/deploy/dashboard-source-authority.md](../../docs/deploy/dashboard-source-authority.md)
+
+## Development
+
+```bash
+npm run build:css    # rebuild Tailwind
+npm run scan:bundle  # analyze bundle size
 ```
