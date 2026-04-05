@@ -1,0 +1,13 @@
+{
+  "jobs": [
+    {
+      "jobId": "job:run-2026-04-03_10-36-27-477:bootstrap",
+      "kind": "bootstrap",
+      "status": "pending",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-27-477"
+      },
+      "updatedAt": "2026-04-03T10:36:27.816Z"
+    }
+  ]
+}

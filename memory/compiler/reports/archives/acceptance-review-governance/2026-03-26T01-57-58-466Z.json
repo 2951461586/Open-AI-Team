@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-26T01:57:58.466Z",
+  "action": "compress",
+  "contractVersion": "acceptance-review-governance.v1",
+  "summary": {
+    "acceptanceOpenBefore": 6,
+    "acceptanceOpenAfter": 4,
+    "compressedCount": 2,
+    "keptOpenCount": 4,
+    "operatorOpenBefore": 0,
+    "operatorOpenAfter": 0,
+    "uniqueAcceptanceSignatures": 2
+  },
+  "governance": {
+    "minAgeHours": 0,
+    "maxKeepPerSignature": 2,
+    "compressionPolicy": "compress aged duplicate acceptance follow-up samples; keep latest exemplars for audit and namespace isolation",
+    "signatures": [
+      {
+        "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed",
+        "openCountBefore": 3,
+        "keptCount": 2,
+        "compressedCount": 1
+      },
+      {
+        "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated",
+        "openCountBefore": 3,
+        "keptCount": 2,
+        "compressedCount": 1
+      }
+    ]
+  },
+  "compressed": [
+    {
+      "id": "review_e02a2cd40308",
+      "title": "follow-up promotion: acceptance refresh review flow mn4hgjph",
+      "reviewType": "promotion-review",
+      "targetState": "confirmed",
+      "ageHours": 39.214349444444444,
+      "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed"
+    },
+    {
+      "id": "review_0812ebf9d9a4",
+      "title": "arbitration follow-up: acceptance dispute review flow mn4hgjph",
+      "reviewType": "arbitration-review",
+      "targetState": "arbitrated",
+      "ageHours": 39.21615611111111,
+      "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated"
+    }
+  ],
+  "keptSampleIds": [
+    "review_1928ced13e44",
+    "review_1f3e85353376",
+    "review_2b4803a7df48",
+    "review_7d78098eaccf"
+  ],
+  "evidencePaths": [
+    "memory/compiler/review-queue.jsonl",
+    "memory/compiler/reports/acceptance-review-governance.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

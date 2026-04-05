@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "mode": "plugin-preferred",
+  "workspaceDir": "/root/.openclaw/workspace",
+  "pluginDataDir": "/root/.openclaw/workspace/memory/compiler",
+  "pluginReportsDir": "/root/.openclaw/workspace/memory/compiler/reports",
+  "pluginDocsDir": "/root/.openclaw/workspace/plugins/memory-compiler/docs",
+  "pluginRuntimeDir": "/root/.openclaw/workspace/memory/compiler",
+  "compat": {
+    "legacyScriptsPresent": false,
+    "legacyBridgePresent": false,
+    "legacyDocsPresent": false,
+    "legacyDataPresent": true,
+    "sessionStatePresent": true,
+    "workingBufferPresent": true,
+    "workspaceScriptFallbackSupported": false,
+    "bridgeRequiredByPlugin": false
+  },
+  "migrationPlan": [
+    "Initialize plugin-owned runtime/data/report directories.",
+    "Keep reading existing memory/compiler data in place unless operator explicitly relocates dataDir.",
+    "Use plugin entry as the only supported runtime/control-plane boundary.",
+    "Migrate high-value wrappers first: runtime bridge, session lifecycle, control-plane status/verify/refresh, imports.",
+    "Treat scripts/memory-compiler and memory-compiler-bridge as retirement residue / compat evidence only."
+  ],
+  "nonDestructive": true
+}

@@ -1,0 +1,40 @@
+{
+  "id": "handoff_d56969f0b71a",
+  "kind": "session-handoff-capsule",
+  "packId": "sessionpack_7ee329435c01",
+  "sessionKey": "accept-burnin-session",
+  "reason": "finalize",
+  "focus": "Verify import-real-sources includes LCM summary adapter input.",
+  "primaryThreadId": "thread_8e1faf0f73c9",
+  "primaryThreadTitle": "workspace-scan:MASTERPLAN.md",
+  "decisions": [
+    "精确问答先回源再答"
+  ],
+  "unresolvedRisks": [],
+  "nextActions": [
+    "Check source backlinks after real import.",
+    "Regenerate backlinks and inspect lcm-summary/lcm-message coverage.",
+    "补足 precise scene selector"
+  ],
+  "handoffSummary": "Focus: Verify import-real-sources includes LCM summary adapter input.\nPrimary thread: workspace-scan:MASTERPLAN.md\nDecisions: 精确问答先回源再答\nNext actions: Check source backlinks after real import. | Regenerate backlinks and inspect lcm-summary/lcm-message coverage. | 补足 precise scene selector\nEscalation: lcm-on-demand",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "sum:sum_4e6742ae47a210c5",
+    "msg:accept-msg-lcm-adapter-1",
+    "msg:accept-real-import-lcm-msg-1",
+    "artifact:test:blocked-promotion",
+    "artifact:test:blocked-promotion-review",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/IMPLEMENTATION-BACKLOG.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md",
+    "session:accept-burnin-session"
+  ],
+  "generatedAt": "2026-03-24T09:19:11.755Z",
+  "status": "finalized"
+}

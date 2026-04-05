@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:7d7222d3-410c-48af-b6c7-e59adbab3a8b",
+  "sourceKind": "memory-item",
+  "sourceId": "7d7222d3-410c-48af-b6c7-e59adbab3a8b",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_9adec7f24ab4",
+      "title": "项目代号：Phoenix，目标是在 Q2 完成多 Agent 编排系统的核心功能",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "contractVersion": "agent-harness-host-layer.v1",
+  "kind": "host_runtime",
+  "runId": "run-2026-04-03_10-35-41-993",
+  "features": {
+    "sessionBus": true,
+    "desk": true,
+    "scheduler": true,
+    "inbox": true,
+    "outbox": true,
+    "dispatch": true
+  },
+  "counts": {
+    "inboxPending": 0,
+    "outboxPending": 0,
+    "schedulerJobs": 1,
+    "dispatches": 2
+  },
+  "paths": {
+    "hostLayerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-layer-state.json",
+    "hostSchedulerPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-scheduler.json",
+    "hostSessionBusPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-session-bus.json",
+    "hostInboxQueuePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-inbox.json",
+    "hostOutboxQueuePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-outbox.json",
+    "hostDispatchLogPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/host-dispatch.json"
+  },
+  "updatedAt": "2026-04-03T10:35:45.490Z"
+}

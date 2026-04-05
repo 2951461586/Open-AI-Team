@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:a0b95809-d91c-4a19-bd24-a2a4ec68f85d",
+  "sourceKind": "memory-item",
+  "sourceId": "a0b95809-d91c-4a19-bd24-a2a4ec68f85d",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_0ce5100cf4b7",
+      "title": "memory-lancedb-context@1.4.0 已发布，新增：OpenClaw 兼容的结构化摘要格式、标识符提取（IDs/URLs/paths/ports/hashes/emails）、Ask Overlap 检测（确保用户请求被保留）、子代理上下文管理（prepareSubagentSpawn/onSubagentEnded）",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

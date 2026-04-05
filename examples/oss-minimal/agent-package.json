@@ -37,7 +37,7 @@
         "skills": [
           { "id": "bridge.channel-routing", "kind": "skill" }
         ],
-        "bridgeRoutes": ["local-thread", "telegram-scaffold", "feishu-scaffold"],
+        "bridgeRoutes": ["local-thread"],
         "shellCommands": ["routes"]
       }
     },
@@ -121,9 +121,7 @@
     "contractVersion": "agent-harness-bridge.v1",
     "enabled": true,
     "channels": [
-      "local-thread",
-      "telegram-scaffold",
-      "feishu-scaffold"
+      "local-thread"
     ],
     "defaultChannel": "local-thread",
     "routeContracts": [
@@ -132,18 +130,6 @@
         "enabled": true,
         "allowedRoles": ["planner", "executor", "critic", "judge"],
         "allowedKinds": ["bootstrap", "status", "route", "user_request", "egress"]
-      },
-      {
-        "routeKey": "telegram-scaffold",
-        "enabled": true,
-        "allowedRoles": ["executor"],
-        "allowedKinds": ["route", "status", "egress"]
-      },
-      {
-        "routeKey": "feishu-scaffold",
-        "enabled": false,
-        "allowedRoles": ["executor"],
-        "allowedKinds": ["route", "status", "egress"]
       }
     ]
   },
@@ -157,7 +143,7 @@
       },
       "executor": {
         "allowInjectedTools": ["bridge.route", "lifecycle.snapshot", "shell.inspect"],
-        "allowBridgeRoutes": ["local-thread", "telegram-scaffold"]
+        "allowBridgeRoutes": ["local-thread"]
       },
       "critic": {
         "allowInjectedTools": [],

@@ -43,9 +43,9 @@ NEXT_PUBLIC_ENABLE_REALTIME=1 \
 NEXT_PUBLIC_DASHBOARD_TOKEN=dashboard_scope_token \
 LOCAL_STATIC_DIR=/srv/example-dashboard \
 TCB_ENV_ID=your-cloudbase-env \
-bash scripts/deploy-dashboard-cloudbase.sh
+bash scripts/deploy/dashboard-cloudbase.sh
 ```
 
 ## Recommended Rule
 
-Treat `scripts/deploy-dashboard-cloudbase.sh` as a **maintainer-friendly deploy entry**, not as proof that all public users should mirror the same host layout.
+Treat `scripts/deploy/dashboard-cloudbase.sh` as a **maintainer-friendly deploy entry**, not as proof that all public users should mirror the same host layout.

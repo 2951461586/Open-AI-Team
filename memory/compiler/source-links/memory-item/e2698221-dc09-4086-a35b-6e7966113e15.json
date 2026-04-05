@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:e2698221-dc09-4086-a35b-6e7966113e15",
+  "sourceKind": "memory-item",
+  "sourceId": "e2698221-dc09-4086-a35b-6e7966113e15",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_521e496fe0fc",
+      "title": "Skills cleanup 2026-03-07: uninstalled news-summary, codex-deep-search, web-search-lite, docker-essentials, server-health, elite-longterm-memory, catbox-upload from both violet and laoda. New trash location: /root/.openclaw/workspace/_trash",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

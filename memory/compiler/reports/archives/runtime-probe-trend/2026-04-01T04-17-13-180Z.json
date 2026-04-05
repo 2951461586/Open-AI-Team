@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "generatedAt": "2026-04-01T04:17:13.180Z",
+  "action": "archive",
+  "contractVersion": "runtime-probe-trend.v1",
+  "windows": [
+    7,
+    30
+  ],
+  "snapshot": {
+    "generatedAt": "2026-04-01T04:17:13.180Z",
+    "preciseScene": "precise",
+    "taskScene": "task",
+    "preciseDispatchReady": true,
+    "preciseDispatchBlocking": false,
+    "taskCoverageQuality": "trusted-clean",
+    "taskBudgetReason": "mixed-keep-budget",
+    "taskEscalation": "lcm-on-demand",
+    "trusted": false,
+    "operatorVerdict": "do-not-trust-until-blockers-cleared"
+  },
+  "history": {
+    "archiveCountBeforeCurrent": 65,
+    "archiveDir": "memory/compiler/reports/archives/runtime-probe-trend",
+    "recentArchives": [
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-06-59-155Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-07-23-064Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-20-50-299Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-21-35-860Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-24-47-200Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-28T06-25-32-024Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-04-01T03-57-46-428Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-04-01T03-58-13-009Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-04-01T04-05-31-055Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-04-01T04-06-11-073Z.json"
+    ]
+  },
+  "baselines": [
+    {
+      "days": 7,
+      "sampleCountIncludingCurrent": 15,
+      "latest": {
+        "generatedAt": "2026-04-01T04:17:13.180Z",
+        "preciseScene": "precise",
+        "taskScene": "task",
+        "preciseDispatchReady": true,
+        "preciseDispatchBlocking": false,
+        "taskCoverageQuality": "trusted-clean",
+        "taskBudgetReason": "mixed-keep-budget",
+        "taskEscalation": "lcm-on-demand",
+        "trusted": false,
+        "operatorVerdict": "do-not-trust-until-blockers-cleared"
+      },
+      "trendSummary": {
+        "preciseDispatchReadyStableSnapshots": 15,
+        "preciseBlockingStableSnapshots": 15,
+        "taskCoverageStableSnapshots": 13,
+        "trustedStableSnapshots": 9
+      }
+    },
+    {
+      "days": 30,
+      "sampleCountIncludingCurrent": 66,
+      "latest": {
+        "generatedAt": "2026-04-01T04:17:13.180Z",
+        "preciseScene": "precise",
+        "taskScene": "task",
+        "preciseDispatchReady": true,
+        "preciseDispatchBlocking": false,
+        "taskCoverageQuality": "trusted-clean",
+        "taskBudgetReason": "mixed-keep-budget",
+        "taskEscalation": "lcm-on-demand",
+        "trusted": false,
+        "operatorVerdict": "do-not-trust-until-blockers-cleared"
+      },
+      "trendSummary": {
+        "preciseDispatchReadyStableSnapshots": 66,
+        "preciseBlockingStableSnapshots": 43,
+        "taskCoverageStableSnapshots": 13,
+        "trustedStableSnapshots": 9
+      }
+    }
+  ],
+  "operatorFacing": {
+    "summaryText": "7d preciseReady=true blocking=false taskMix=trusted-clean trusted=do-not-trust-until-blockers-cleared stable=15/13 | 30d preciseReady=true blocking=false taskMix=trusted-clean trusted=do-not-trust-until-blockers-cleared stable=66/13",
+    "preciseDispatchReady": true,
+    "preciseDispatchBlocking": false,
+    "taskCoverageQuality": "trusted-clean",
+    "longestPreciseDispatchReadyStableSnapshots": 66,
+    "longestTaskCoverageStableSnapshots": 13
+  },
+  "evidencePaths": [
+    "memory/compiler/reports/runtime-probe.latest.json",
+    "memory/compiler/reports/runtime-probe-trend.latest.json",
+    "memory/compiler/reports/archives/runtime-probe-trend",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

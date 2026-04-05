@@ -1,0 +1,9 @@
+{
+  "includeKinds": [
+    "lcm-summary",
+    "lcm-message",
+    "file",
+    "memory-item",
+    "session"
+  ]
+}

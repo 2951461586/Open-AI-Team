@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:16dd9754-fa0e-4f46-b88e-48d01f1550f3",
+  "sourceKind": "memory-item",
+  "sourceId": "16dd9754-fa0e-4f46-b88e-48d01f1550f3",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_799fd86dc655",
+      "title": "laoda服务器SSH配置：Host laoda, HostName 119.91.63.250, User root, IdentityFile ~/.ssh/id_ed25519, 牢大节点",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

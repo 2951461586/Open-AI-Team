@@ -1,0 +1,55 @@
+{
+  "sourceRef": "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/DURABLE-MEMORY-BATCH-IMPORT-V2.md",
+  "sourceKind": "file",
+  "sourceId": "/root/.openclaw/workspace/reports/openclaw-memory-compiler/DURABLE-MEMORY-BATCH-IMPORT-V2.md",
+  "totalBacklinks": 4,
+  "byKind": {
+    "thread": 1,
+    "digest-manifest": 1,
+    "continuity": 1,
+    "fact": 1
+  },
+  "latestGeneratedAt": "2026-04-01T03:55:29.946Z",
+  "backlinks": [
+    {
+      "artifactKind": "thread",
+      "artifactId": "thread_d529ecc7b7b9",
+      "title": "workspace-scan:DURABLE-MEMORY-BATCH-IMPORT-V2.md",
+      "status": "closed",
+      "generatedAt": "2026-04-01T03:55:29.946Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_87297fffa0f7",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-21T05:46:22.294Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "continuity",
+      "artifactId": "continuity_e1ec7c5d7098",
+      "title": "Workspace scan imported DURABLE-MEMORY-BATCH-IMPORT-V2.md for operator-facing replay.",
+      "status": "live",
+      "generatedAt": "2026-03-21T05:46:21.959Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_7a12f7e5b6df",
+      "title": "Workspace source scanned: reports/openclaw-memory-compiler/DURABLE-MEMORY-BATCH-IMPORT-V2.md",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

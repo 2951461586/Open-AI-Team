@@ -1,0 +1,33 @@
+{
+  "brokerId": "run-2026-04-03_10-35-41-993-broker-3",
+  "nodeId": "node-c",
+  "updatedAt": "2026-04-03T10:35:46.549Z",
+  "summary": {
+    "totalJobs": 1,
+    "queued": 0,
+    "running": 0,
+    "completed": 1,
+    "failed": 0
+  },
+  "jobs": [
+    {
+      "id": "job:1775212546389:hl4tvc",
+      "role": "judge",
+      "brokerId": "run-2026-04-03_10-35-41-993-broker-3",
+      "nodeId": "node-c",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "judge:1775212546390",
+      "error": "",
+      "eventCount": 21,
+      "createdAt": 1775212546390,
+      "updatedAt": 1775212546526,
+      "lastLeaseExpiresAt": "2026-04-03T10:35:47.611Z",
+      "leaseId": "lease:job:1775212546368:axmnqe",
+      "dispatchId": "dispatch:1775212546369:p5z8b6"
+    }
+  ]
+}

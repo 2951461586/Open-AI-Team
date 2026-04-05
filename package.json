@@ -25,6 +25,8 @@
     "fixtures:real-run-provenance": "node scripts/team/team-published-fixture-provenance-summary.mjs",
     "dashboard:build": "cd dashboard && npm ci && npm run build",
     "dashboard:check-bundle": "cd dashboard && npm run scan:bundle",
+    "dashboard:deploy:authority": "bash scripts/deploy/dashboard-from-source.sh",
+    "dashboard:deploy:cloudbase": "bash scripts/deploy/dashboard-cloudbase.sh",
     "release:stage-artifacts": "node scripts/team/team-stage-release-artifacts.mjs",
     "release:notes": "node scripts/team/team-generate-release-notes.mjs",
     "acceptance:three-node-live": "node scripts/acceptance/canonical/team-three-node-live.mjs",

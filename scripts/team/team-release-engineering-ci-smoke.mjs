@@ -53,7 +53,7 @@ assert(releaseCiDoc.includes('GitHub Actions is split into layered public-safe j
 
 assert(dashboardReadme.includes('Current build boundary'), 'dashboard README declares current build boundary');
 assert(dashboardReadme.includes('single-repo build authority'), 'dashboard README describes repo-local build authority');
-assert(dashboardReadme.includes('cd /root/.openclaw/workspace/orchestrator/dashboard'), 'dashboard README documents repo-local dashboard cwd');
+assert(dashboardReadme.includes('cd /root/.openclaw/workspace/dashboard'), 'dashboard README documents repo-local dashboard cwd');
 assert(dashboardReadme.includes('npm run dashboard:build'), 'dashboard README documents repo-local build entrypoint');
 assert(!dashboardReadme.includes('sibling `../dashboard` app shell'), 'dashboard README no longer references sibling app shell');
 

@@ -1,0 +1,200 @@
+{
+  "ok": true,
+  "generatedAt": "2026-04-01T05:51:39.502Z",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "sources": {
+    "dailyMemoryPaths": [
+      "/root/.openclaw/workspace/memory/2026-03-21.md",
+      "/root/.openclaw/workspace/memory/2026-03-20.md"
+    ],
+    "workspaceFiles": [
+      "/root/.openclaw/workspace/SESSION-STATE.md",
+      "/root/.openclaw/workspace/memory/working-buffer.md",
+      "/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+      "/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md"
+    ],
+    "durableMemoryExportPath": null,
+    "durableMemoryExportMode": null,
+    "durableMemoryExportError": null,
+    "durableMemoryItems": 3,
+    "lcmSummaryImportPath": null,
+    "lcmSummaryImportMode": "inline",
+    "lcmSummaryExportError": null,
+    "lcmSummaryItems": 1,
+    "lcmDbPath": null
+  },
+  "sourceCoverage": {
+    "totalSources": 215,
+    "totalArtifacts": 6178,
+    "kinds": {
+      "lcm-summary": 2,
+      "lcm-message": 51,
+      "file": 15,
+      "memory-item": 136,
+      "session": 11
+    },
+    "realInputSourcesPresent": {
+      "dailyMemory": [
+        "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+        "file:/root/.openclaw/workspace/memory/2026-03-20.md"
+      ],
+      "workspace": [
+        "file:/root/.openclaw/workspace/SESSION-STATE.md",
+        "file:/root/.openclaw/workspace/memory/working-buffer.md",
+        "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+        "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md"
+      ],
+      "durableMemory": [
+        "mem:accept-real-mnfmj5yk-durable-1",
+        "mem:accept-real-mnfmj5yk-durable-2",
+        "mem:accept-real-mnfmj5yk-durable-3"
+      ],
+      "lcmSummary": [
+        "sum:sum_4e6742ae47a210c5"
+      ],
+      "lcmMessage": [
+        "msg:accept-real-mnfmj5yk-msg-1"
+      ]
+    }
+  },
+  "runs": [
+    {
+      "kind": "workspace",
+      "adapter": "workspace",
+      "inputPath": "/tmp/memory-compiler-adapter-workspace-1775022699519-1vjm6lg51bv.json",
+      "factsCreated": 0,
+      "factsUpdated": 6,
+      "threadsCreated": 0,
+      "continuityCreated": 0,
+      "sourceBacklinks": 211,
+      "batchCount": null,
+      "completedBatches": null,
+      "failedBatches": null,
+      "durableItems": null,
+      "importedDurableItems": null,
+      "skippedDurableItems": null,
+      "importStrategy": null,
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    },
+    {
+      "kind": "session-state",
+      "adapter": "session-state",
+      "inputPath": "/tmp/memory-compiler-adapter-session-state-1775022709321-1kgn9v33r5gj.json",
+      "factsCreated": 0,
+      "factsUpdated": 1,
+      "threadsCreated": 0,
+      "continuityCreated": 0,
+      "sourceBacklinks": 211,
+      "batchCount": null,
+      "completedBatches": null,
+      "failedBatches": null,
+      "durableItems": null,
+      "importedDurableItems": null,
+      "skippedDurableItems": null,
+      "importStrategy": null,
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    },
+    {
+      "kind": "lcm",
+      "adapter": "lcm-summary",
+      "inputPath": "/tmp/memory-compiler-adapter-lcm-summary-1775022719805-5p2llh5b2c6.json",
+      "factsCreated": 0,
+      "factsUpdated": 1,
+      "threadsCreated": 1,
+      "continuityCreated": 0,
+      "sourceBacklinks": 212,
+      "batchCount": null,
+      "completedBatches": null,
+      "failedBatches": null,
+      "durableItems": null,
+      "importedDurableItems": null,
+      "skippedDurableItems": null,
+      "importStrategy": null,
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    },
+    {
+      "kind": "lancedb-batch",
+      "adapter": "durable-memory-batch.v2",
+      "inputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/manifests/durable-batch-mnfmpbrs-rwux5q.json",
+      "factsCreated": 0,
+      "factsUpdated": 3,
+      "threadsCreated": null,
+      "continuityCreated": null,
+      "sourceBacklinks": 215,
+      "batchCount": 2,
+      "completedBatches": 2,
+      "failedBatches": 0,
+      "durableItems": 3,
+      "importedDurableItems": 3,
+      "skippedDurableItems": 0,
+      "importStrategy": "incremental",
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    }
+  ],
+  "reportScope": {
+    "namespace": "acceptance",
+    "latestScope": "latest-run",
+    "truthMode": "acceptance-replay-latest-not-live-truth",
+    "operatorTruthPath": "memory/compiler/reports/real-import.live.json",
+    "preciseClaimRule": "read operator truth from real-import.live.json, not acceptance latest"
+  },
+  "controlPlane": {
+    "refreshed": true,
+    "verifyOk": true,
+    "operatorVerdict": "trusted-with-acceptance-samples",
+    "liveTruthPath": "memory/compiler/reports/real-import.live.json",
+    "evidencePaths": [
+      "memory/compiler/control-plane/status.json",
+      "memory/compiler/control-plane/overview.md",
+      "memory/compiler/reports/contract-check.latest.json",
+      "memory/compiler/reports/integrity-audit.latest.json",
+      "memory/compiler/reports/source-discipline.latest.json",
+      "memory/compiler/reports/acceptance-smoke.latest.json",
+      "memory/compiler/reports/scheduler-audit.latest.json",
+      "memory/compiler/reports/scheduler-drain.latest.json",
+      "memory/compiler/reports/review-apply.latest.json",
+      "memory/compiler/reports/runtime-probe.latest.json",
+      "memory/compiler/reports/runtime-probe-trend.latest.json",
+      "memory/compiler/reports/acceptance-review-governance.latest.json",
+      "memory/compiler/reports/real-import.latest.json",
+      "memory/compiler/reports/burn-in-trend.latest.json"
+    ]
+  }
+}

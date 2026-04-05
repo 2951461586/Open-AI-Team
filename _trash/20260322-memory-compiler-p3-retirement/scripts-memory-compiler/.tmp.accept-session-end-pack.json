@@ -1,0 +1,5 @@
+{
+  "eventType": "session-end",
+  "sessionKey": "accept-session",
+  "force": true
+}

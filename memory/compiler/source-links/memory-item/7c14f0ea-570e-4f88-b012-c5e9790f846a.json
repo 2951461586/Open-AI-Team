@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:7c14f0ea-570e-4f88-b012-c5e9790f846a",
+  "sourceKind": "memory-item",
+  "sourceId": "7c14f0ea-570e-4f88-b012-c5e9790f846a",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_5ef4735e0cd2",
+      "title": "测试批量存储功能 1：服务器运行在端口 3000",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

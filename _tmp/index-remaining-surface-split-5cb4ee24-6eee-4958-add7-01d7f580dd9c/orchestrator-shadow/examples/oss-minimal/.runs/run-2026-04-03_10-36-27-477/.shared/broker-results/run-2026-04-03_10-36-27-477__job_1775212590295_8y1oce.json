@@ -1,0 +1,346 @@
+{
+  "contractVersion": "agent-harness-broker-result.v1",
+  "runId": "run-2026-04-03_10-36-27-477",
+  "jobId": "job:1775212590295:8y1oce",
+  "workItemId": "w3",
+  "role": "critic",
+  "title": "审查最小样板结果",
+  "brokerId": "run-2026-04-03_10-36-27-477-broker-1",
+  "nodeId": "node-a",
+  "status": "completed",
+  "attempt": 1,
+  "retryCount": 0,
+  "dispatchId": "dispatch:1775212590274:fy093k",
+  "leaseId": "lease:job:1775212590273:8i1xda",
+  "error": "",
+  "result": {
+    "run": {
+      "ok": true,
+      "provider": "local-demo",
+      "role": "critic",
+      "sessionKey": "demo:critic:local",
+      "childSessionKey": "demo:critic:local",
+      "runId": "demo-run:critic",
+      "via": "local_runtime_adapter",
+      "requestedNode": "local",
+      "_routedNode": "local",
+      "workspaceDir": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace",
+      "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/REVIEW.md",
+      "reply": "{\"summary\":\"已完成审查：发现缺口，需要 replan\",\"verdict\":\"revise\",\"needsReplan\":true,\"replanReason\":\"deliverable 缺少 memory retrieval 证据\",\"issues\":[\"missing_memory_retrieval_section\"],\"deliverables\":[\"/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/REVIEW.md\"],\"findings\":[\"sample 主链可用，但缺 retrieval-backed evidence\"],\"blackboardUpdate\":{\"review_status\":\"revise\",\"review_path\":\"/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/REVIEW.md\",\"needs_replan\":true}}",
+      "workerPid": 2008774
+    },
+    "eventLog": [
+      {
+        "type": "plugins.initialized",
+        "pluginCount": 3,
+        "ts": 1775212590346
+      },
+      {
+        "type": "bridge.ingress.appended",
+        "channel": "local-thread",
+        "routeKey": "local-thread",
+        "messageId": "bridge-bootstrap",
+        "kind": "bootstrap",
+        "ts": 1775212590348
+      },
+      {
+        "type": "bridge.egress.appended",
+        "channel": "local-thread",
+        "routeKey": "local-thread",
+        "messageId": "bridge-status",
+        "kind": "bootstrap",
+        "ts": 1775212590349
+      },
+      {
+        "type": "bridge.initialized",
+        "channelCount": 3,
+        "routeCount": 3,
+        "ts": 1775212590351
+      },
+      {
+        "type": "lifecycle.initialized",
+        "heartbeatEnabled": true,
+        "cronEnabled": true,
+        "ts": 1775212590355
+      },
+      {
+        "type": "tool.executed",
+        "tool": "fs.read_text",
+        "ok": true,
+        "runId": "toolrun:1",
+        "ts": 1775212590357
+      },
+      {
+        "type": "tool.executed",
+        "tool": "memory.retrieve",
+        "ok": true,
+        "runId": "toolrun:2",
+        "ts": 1775212590365
+      },
+      {
+        "type": "tool.executed",
+        "tool": "command.exec",
+        "ok": false,
+        "runId": "toolrun:3",
+        "ts": 1775212590373
+      },
+      {
+        "type": "artifact.review.writing",
+        "role": "critic",
+        "path": "artifacts/REVIEW.md",
+        "verdict": "revise",
+        "ts": 1775212590374
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.thinking",
+        "delta": "开始审查 deliverable。\n当前 verdict=revise",
+        "index": 1,
+        "total": 1,
+        "ts": 1775212590374
+      },
+      {
+        "type": "stream.done",
+        "role": "critic",
+        "label": "review.thinking",
+        "total": 1,
+        "ts": 1775212590374
+      },
+      {
+        "type": "tool.executed",
+        "tool": "fs.write_text",
+        "ok": true,
+        "runId": "toolrun:4",
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "# Review\n## Review Target\n# Deliverable\n## Objective",
+        "index": 1,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n## Based On Plan\n# Plan",
+        "index": 2,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+        "index": 3,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+        "index": 4,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+        "index": 5,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+        "index": 6,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+        "index": 7,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+        "index": 8,
+        "total": 14,
+        "ts": 1775212590378
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+        "index": 9,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+        "index": 10,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "## Verdict\nrevise\n## Retrieval Probe\n- [knowledgeBase] Provider registry should stay visible (score=8)",
+        "index": 11,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- [durableArtifacts] DELIVERABLE.md (score=6)\n- [durableArtifacts] PLAN.md (score=6)",
+        "index": 12,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- [knowledgeBase] Sandbox and tool runtime need evidence (score=6)\n## Command Probe\n-\n## Notes",
+        "index": 13,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.chunk",
+        "role": "critic",
+        "label": "review.result",
+        "delta": "- deliverable 缺少 Memory Retrieval 章节，需要补 retrieval 证据并 replan",
+        "index": 14,
+        "total": 14,
+        "ts": 1775212590379
+      },
+      {
+        "type": "stream.done",
+        "role": "critic",
+        "label": "review.result",
+        "total": 14,
+        "ts": 1775212590379
+      }
+    ],
+    "toolRuns": [
+      {
+        "runId": "toolrun:1",
+        "tool": "fs.read_text",
+        "args": {
+          "path": "artifacts/DELIVERABLE.md"
+        },
+        "ok": true,
+        "result": {
+          "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/DELIVERABLE.md",
+          "text": "# Deliverable\n\n## Objective\n帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n\n## Based On Plan\n# Plan\n\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n- acceptance: 明确角色、registry、memory、artifact、report。\n\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Skill Registry\n- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment\n- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker\n- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state\n- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing\n- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n\n## Upstream Context\n- none yet\n\n\n## Produced Output\n- minimal runnable sample\n- local runtime adapter\n- standalone bootstrap\n- run report\n\n## Available Tools\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Command Runtime Evidence\n- pwd => /root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace\n- ls artifacts => PLAN.md\n\n## Artifact Snapshot\n- artifacts/PLAN.md\n",
+          "bytes": 1714
+        },
+        "ts": 1775212590357
+      },
+      {
+        "runId": "toolrun:2",
+        "tool": "memory.retrieve",
+        "args": {
+          "query": "provider registry runtime adapter workspace sandbox memory retrieval",
+          "limit": 4
+        },
+        "ok": true,
+        "result": {
+          "query": "provider registry runtime adapter workspace sandbox memory retrieval",
+          "hits": [
+            {
+              "scope": "knowledgeBase",
+              "id": "seed:provider-registry",
+              "title": "Provider registry should stay visible",
+              "score": 8,
+              "snippet": "Provider registry should stay visible\nA strong standalone harness should make provider registry and runtime adapter boundaries explicit in output and review.\nprovider registry runtime adapter standalone harness"
+            },
+            {
+              "scope": "durableArtifacts",
+              "id": "w2",
+              "title": "DELIVERABLE.md",
+              "score": 6,
+              "snippet": "已完成执行：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/DELIVERABLE.md\nexec"
+            },
+            {
+              "scope": "durableArtifacts",
+              "id": "w1",
+              "title": "PLAN.md",
+              "score": 6,
+              "snippet": "已完成规划：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/PLAN.md\nplanner"
+            },
+            {
+              "scope": "knowledgeBase",
+              "id": "seed:sandbox-tools",
+              "title": "Sandbox and tool runtime need evidence",
+              "score": 6,
+              "snippet": "Sandbox and tool runtime need evidence\nReviewers should expect workspace sandbox, tool runtime evidence, and tool-runs.json rather than only narrative claims.\nsandbox tool runtime tool-runs.json evidence"
+            }
+          ],
+          "count": 4
+        },
+        "ts": 1775212590365
+      },
+      {
+        "runId": "toolrun:3",
+        "tool": "command.exec",
+        "args": {
+          "command": "grep",
+          "args": [
+            "-n",
+            "Memory Retrieval",
+            "artifacts/DELIVERABLE.md"
+          ],
+          "cwd": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace"
+        },
+        "ok": false,
+        "result": {
+          "error": "command_failed:1"
+        },
+        "ts": 1775212590373
+      },
+      {
+        "runId": "toolrun:4",
+        "tool": "fs.write_text",
+        "args": {
+          "path": "artifacts/REVIEW.md",
+          "content": "# Review\n\n## Review Target\n# Deliverable\n\n## Objective\n帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n\n## Based On Plan\n# Plan\n\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n- acceptance: 明确角色、registry、memory、artifact、report。\n\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Skill Registry\n- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment\n- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker\n- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state\n- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing\n- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n\n## Upstream Context\n- none yet\n\n\n\n## Verdict\nrevise\n\n## Retrieval Probe\n- [knowledgeBase] Provider registry should stay visible (score=8)\n- [durableArtifacts] DELIVERABLE.md (score=6)\n- [durableArtifacts] PLAN.md (score=6)\n- [knowledgeBase] Sandbox and tool runtime need evidence (score=6)\n\n## Command Probe\n-\n\n## Notes\n- deliverable 缺少 Memory Retrieval 章节，需要补 retrieval 证据并 replan\n"
+        },
+        "ok": true,
+        "result": {
+          "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/workspace/artifacts/REVIEW.md",
+          "bytes": 1577
+        },
+        "ts": 1775212590378
+      }
+    ]
+  },
+  "eventCount": 18,
+  "updatedAt": "2026-04-03T10:36:30.389Z"
+}

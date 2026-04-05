@@ -1,0 +1,52 @@
+{
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "pluginId": "memory-lancedb-pro",
+  "memories": [
+    {
+      "id": "accept-batch-failure-1",
+      "text": "durable batch failure acceptance item 1",
+      "category": "project",
+      "tags": [],
+      "confidence": 0.91,
+      "confirmed": true,
+      "sourceRefs": [
+        "mem:accept-batch-failure-1"
+      ],
+      "subject": null,
+      "attribute": null,
+      "value": null,
+      "pluginId": "memory-lancedb-pro",
+      "forceFailure": false,
+      "fingerprint": "{\"id\":\"accept-batch-failure-1\",\"text\":\"durable batch failure acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-1\"]}"
+    },
+    {
+      "id": "accept-batch-failure-2",
+      "text": "durable batch failure acceptance item 2 repaired",
+      "category": "project",
+      "tags": [],
+      "confidence": 0.86,
+      "confirmed": true,
+      "sourceRefs": [
+        "mem:accept-batch-failure-2"
+      ],
+      "subject": null,
+      "attribute": null,
+      "value": null,
+      "pluginId": "memory-lancedb-pro",
+      "forceFailure": false,
+      "fingerprint": "{\"id\":\"accept-batch-failure-2\",\"text\":\"durable batch failure acceptance item 2 repaired\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-2\"]}"
+    }
+  ],
+  "meta": {
+    "importMode": "durable-memory-batch.v1",
+    "runId": "durable-batch-mn4cxjcd-jmy3bc",
+    "batchId": "durable-batch-mn4cxjcd-jmy3bc-b001",
+    "batchIndex": 1,
+    "batchSize": 2,
+    "totalBatches": 2,
+    "exportPath": null,
+    "operatorFacing": true,
+    "replayable": true
+  }
+}

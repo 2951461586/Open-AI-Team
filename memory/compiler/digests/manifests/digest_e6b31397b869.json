@@ -1,0 +1,27 @@
+{
+  "id": "digest_e6b31397b869",
+  "type": "narrative",
+  "title": "Current Narrative",
+  "outputPath": "memory/compiler/digests/narrative/current.md",
+  "sourceRefs": [
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/IMPLEMENTATION-BACKLOG.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/SOURCE-REFS.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/DURABLE-MEMORY-BATCH-IMPORT-V2.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/RUNTIME-SOURCE-MIX-V2.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-19.md"
+  ],
+  "generatedAt": "2026-03-21T07:34:59.334Z",
+  "generationStrategy": "pipeline-narrative-v1",
+  "confidence": 0.72,
+  "tokenEstimate": 895,
+  "contentHash": "01c2e5000aa8edda197598cb8b3b7df87b228d8e",
+  "sourceHash": "3aa4720f6857174daa390fdd8d6ee350b845cb0d",
+  "supersedes": null,
+  "changedSourceRefsCount": 11,
+  "supersededBy": "digest_b361c72a0a28"
+}

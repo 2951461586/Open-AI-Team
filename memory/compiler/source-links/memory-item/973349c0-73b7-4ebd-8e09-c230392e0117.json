@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:973349c0-73b7-4ebd-8e09-c230392e0117",
+  "sourceKind": "memory-item",
+  "sourceId": "973349c0-73b7-4ebd-8e09-c230392e0117",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_aa1be67f5d77",
+      "title": "OpenClaw 记忆插件配置确认（/root/.openclaw/openclaw.json）：plugins.load.paths 包含 /root/.openclaw/workspace/plugins/memory-lancedb-pro；plugins.slots.memory 指向 memory-lancedb-pro；plugins.entries.memory-lancedb-pro enabled=true；其 embedding 使用 Cloudflare AI 的 @cf/baai/bge-large-en-v1.5，baseURL=https://api.cloudflare.com/.../ai/v1，dimensions=1024，normalized=true；LanceDB dbPath=/root/.openclaw/memory/lancedb-cf-1024。结论：memory_store/memory_recall 底层由 memory-lancedb-pro 插件接管，文件记忆可仅做索引。",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:3b3f66c6-be10-464f-a1be-208b5878ed40",
+  "sourceKind": "memory-item",
+  "sourceId": "3b3f66c6-be10-464f-a1be-208b5878ed40",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_b5f4e2717104",
+      "title": "GitHub 仓库 memory-lancedb-context 已创建：https://github.com/2951461586/memory-lancedb-context，ContextEngine 插件，v1.2.0，功能包括智能记忆注入、自动捕获、记忆感知压缩",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

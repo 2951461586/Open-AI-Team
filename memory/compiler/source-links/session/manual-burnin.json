@@ -1,0 +1,143 @@
+{
+  "sourceRef": "session:manual-burnin",
+  "sourceKind": "session",
+  "sourceId": "manual-burnin",
+  "totalBacklinks": 13,
+  "byKind": {
+    "session-pack-history": 7,
+    "session-handoff": 6
+  },
+  "latestGeneratedAt": "2026-03-21T01:38:17.644Z",
+  "backlinks": [
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_588630d29e23",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:17.644Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_985d5223e6a8",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:15.521Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_c17051c96e6f",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:13.295Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_20f6a120c4d0",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:13.183Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0ea2b9639bfe",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:12.219Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0ea2b9639bfe",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:12.219Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_9e56d137e71c",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:08.578Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d820e35dd540",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:07.454Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d820e35dd540",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:07.454Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_064737ec263f",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:03.041Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_426f3026c44f",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:02.914Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_807201fb59e9",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-21T01:38:01.905Z",
+      "outputPath": null,
+      "sessionKey": "manual-burnin",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_807201fb59e9",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "finalized",
+      "generatedAt": "2026-03-21T01:38:01.905Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    }
+  ]
+}

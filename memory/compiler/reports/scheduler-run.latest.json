@@ -1,0 +1,269 @@
+{
+  "generatedAt": "2026-04-01T05:58:35.110Z",
+  "plan": {
+    "ok": true,
+    "generatedAt": "2026-04-01T05:58:34.701Z",
+    "eventType": "heartbeat",
+    "eventFingerprint": "drain:pending_48b25c2ccd9b:1775023114590",
+    "openReviews": 6,
+    "sourceDispatchBlockingOpen": 0,
+    "deduped": false,
+    "dedupeMinutes": 0,
+    "duplicateOf": null,
+    "throttled": false,
+    "minIntervalMinutes": 30,
+    "lastRunAt": "2026-04-01T05:58:15.178Z",
+    "jobs": [
+      {
+        "kind": "source-discipline-check",
+        "reason": "heartbeat-health",
+        "priority": "medium"
+      },
+      {
+        "kind": "review-snapshot",
+        "reason": "open-reviews-present",
+        "priority": "medium",
+        "count": 6
+      },
+      {
+        "kind": "session-pack-expire",
+        "reason": "heartbeat-pack-ttl-check",
+        "priority": "low"
+      }
+    ],
+    "skipped": [],
+    "weekLabel": "2026-W14"
+  },
+  "output": {
+    "ok": true,
+    "eventType": "heartbeat",
+    "eventFingerprint": "drain:pending_48b25c2ccd9b:1775023114590",
+    "throttled": false,
+    "deduped": false,
+    "jobs": 3,
+    "enqueued": null,
+    "results": [
+      {
+        "job": {
+          "kind": "source-discipline-check",
+          "reason": "heartbeat-health",
+          "priority": "medium"
+        },
+        "out": {
+          "ok": true,
+          "out": "/root/.openclaw/workspace/memory/compiler/reports/source-discipline.latest.json",
+          "warnings": [],
+          "factsConfirmed": {
+            "total": 235,
+            "trusted": 235,
+            "artifactOnly": 0,
+            "noRefs": 0,
+            "trustedRatio": 1
+          },
+          "threadsActive": {
+            "total": 17,
+            "trusted": 17,
+            "artifactOnly": 0,
+            "noRefs": 0,
+            "trustedRatio": 1
+          },
+          "continuityLive": {
+            "total": 27,
+            "trusted": 27,
+            "artifactOnly": 0,
+            "noRefs": 0,
+            "trustedRatio": 1
+          }
+        }
+      },
+      {
+        "job": {
+          "kind": "review-snapshot",
+          "reason": "open-reviews-present",
+          "priority": "medium",
+          "count": 6
+        },
+        "out": {
+          "ok": true,
+          "total": 6,
+          "items": [
+            {
+              "id": "review_59155e1218de",
+              "status": "open",
+              "reviewType": "promotion-review",
+              "factId": "fact_ec039e52e034",
+              "title": "follow-up promotion: acceptance refresh review flow mnfmj5yk",
+              "reason": "followup-refresh-ready-for-promotion",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "confirmed",
+              "suggestedDecision": "promote",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+                "artifact:test:refresh-followup-initial"
+              ],
+              "followUpOf": [
+                "review_04f48b06d44d"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T05:57:24.578Z",
+              "updatedAt": "2026-04-01T05:57:24.578Z"
+            },
+            {
+              "id": "review_8e9d90687cda",
+              "status": "open",
+              "reviewType": "arbitration-review",
+              "factId": "fact_60210dbf4f12",
+              "title": "arbitration follow-up: acceptance dispute review flow mnfmj5yk",
+              "reason": "acceptance-dispute-approved",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "arbitrated",
+              "suggestedDecision": "refresh",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md"
+              ],
+              "followUpOf": [
+                "review_725192ee082e"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T05:57:14.541Z",
+              "updatedAt": "2026-04-01T05:57:14.541Z"
+            },
+            {
+              "id": "review_681cf2b1d1d6",
+              "status": "open",
+              "reviewType": "promotion-review",
+              "factId": "fact_d56178f97e0b",
+              "title": "follow-up promotion: acceptance refresh review flow mnfj8unc",
+              "reason": "followup-refresh-ready-for-promotion",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "confirmed",
+              "suggestedDecision": "promote",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+                "artifact:test:refresh-followup-initial"
+              ],
+              "followUpOf": [
+                "review_1e626905c918"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T04:23:07.065Z",
+              "updatedAt": "2026-04-01T04:23:07.065Z"
+            },
+            {
+              "id": "review_f10ea0d60901",
+              "status": "open",
+              "reviewType": "arbitration-review",
+              "factId": "fact_773c2b99b952",
+              "title": "arbitration follow-up: acceptance dispute review flow mnfj8unc",
+              "reason": "acceptance-dispute-approved",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "arbitrated",
+              "suggestedDecision": "refresh",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md"
+              ],
+              "followUpOf": [
+                "review_ad2142354799"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T04:22:58.329Z",
+              "updatedAt": "2026-04-01T04:22:58.329Z"
+            },
+            {
+              "id": "review_17b9aabf4621",
+              "status": "open",
+              "reviewType": "promotion-review",
+              "factId": "fact_ed3626f20748",
+              "title": "follow-up promotion: acceptance refresh review flow mnfirske",
+              "reason": "followup-refresh-ready-for-promotion",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "confirmed",
+              "suggestedDecision": "promote",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+                "artifact:test:refresh-followup-initial"
+              ],
+              "followUpOf": [
+                "review_f5edfe09de91"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T04:12:51.018Z",
+              "updatedAt": "2026-04-01T04:12:51.018Z"
+            },
+            {
+              "id": "review_5ccf7a6ea80a",
+              "status": "open",
+              "reviewType": "arbitration-review",
+              "factId": "fact_38f8da83bb64",
+              "title": "arbitration follow-up: acceptance dispute review flow mnfirske",
+              "reason": "acceptance-dispute-approved",
+              "scope": "project",
+              "priority": "medium",
+              "targetState": "arbitrated",
+              "suggestedDecision": "refresh",
+              "operatorFlow": "inferred-to-confirmed",
+              "operatorVisible": false,
+              "origin": "acceptance",
+              "namespace": "acceptance",
+              "evidenceMode": "sample",
+              "sourceRefs": [
+                "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md"
+              ],
+              "followUpOf": [
+                "review_500b31e817d3"
+              ],
+              "followUpReviewIds": [],
+              "createdAt": "2026-04-01T04:12:42.423Z",
+              "updatedAt": "2026-04-01T04:12:42.423Z"
+            }
+          ]
+        }
+      },
+      {
+        "job": {
+          "kind": "session-pack-expire",
+          "reason": "heartbeat-pack-ttl-check",
+          "priority": "low"
+        },
+        "out": {
+          "ok": true,
+          "action": "expire",
+          "skipped": true,
+          "reason": "not-expired",
+          "packId": "sessionpack_2fc8b5cd8cd2",
+          "expiresAt": "2026-04-01T11:55:51.778Z"
+        }
+      }
+    ]
+  }
+}

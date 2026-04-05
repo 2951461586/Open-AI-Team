@@ -1,0 +1,182 @@
+{
+  "generated_at": "2026-04-05T08:00:01Z",
+  "run_id": "pool-1775376001-2931777",
+  "task_mode": "check",
+  "provider": "codex",
+  "base_url": "http://127.0.0.1:8317",
+  "dry_run": false,
+  "command": [
+    "/root/.openclaw/workspace/scripts/nightly_pool_manager.py",
+    "--base-url",
+    "http://127.0.0.1:8317",
+    "--management-key-file",
+    "/root/.openclaw/credentials/cliproxyapi-mgmt",
+    "--provider",
+    "codex",
+    "--min-active",
+    "900",
+    "--target-active",
+    "1050",
+    "--max-refill",
+    "100",
+    "--report-dir",
+    "/root/.openclaw/workspace/reports/pool-manager",
+    "--state-path",
+    "/root/.openclaw/workspace/run/codex-pool-manager.state.json",
+    "--history-path",
+    "/root/.openclaw/workspace/reports/pool-manager/run-history.jsonl",
+    "--policy-state-path",
+    "/root/.openclaw/workspace/reports/pool-manager/policy-state.json",
+    "--quarantine-file",
+    "/root/.openclaw/workspace/reports/pool-manager/dead-quarantine.json",
+    "--max-workers",
+    "4",
+    "--proxy-url",
+    "http://127.0.0.1:7899",
+    "--register-dir",
+    "/root/.openclaw/workspace/projects/chatgpt_register",
+    "--register-timeout",
+    "3600",
+    "--total-accounts",
+    "100",
+    "--delete-after-dead-seen",
+    "2",
+    "--transient-observe-threshold",
+    "2",
+    "--review-observe-threshold",
+    "2",
+    "--lock-path",
+    "/root/.openclaw/workspace/run/codex-pool-manager.lock",
+    "--retire-disabled",
+    "--task-mode",
+    "check",
+    "--log-file",
+    "/root/.openclaw/workspace/logs/codex-pool-check.log"
+  ],
+  "command_line": "/root/.openclaw/workspace/scripts/nightly_pool_manager.py --base-url http://127.0.0.1:8317 --management-key-file /root/.openclaw/credentials/cliproxyapi-mgmt --provider codex --min-active 900 --target-active 1050 --max-refill 100 --report-dir /root/.openclaw/workspace/reports/pool-manager --state-path /root/.openclaw/workspace/run/codex-pool-manager.state.json --history-path /root/.openclaw/workspace/reports/pool-manager/run-history.jsonl --policy-state-path /root/.openclaw/workspace/reports/pool-manager/policy-state.json --quarantine-file /root/.openclaw/workspace/reports/pool-manager/dead-quarantine.json --max-workers 4 --proxy-url http://127.0.0.1:7899 --register-dir /root/.openclaw/workspace/projects/chatgpt_register --register-timeout 3600 --total-accounts 100 --delete-after-dead-seen 2 --transient-observe-threshold 2 --review-observe-threshold 2 --lock-path /root/.openclaw/workspace/run/codex-pool-manager.lock --retire-disabled --task-mode check --log-file /root/.openclaw/workspace/logs/codex-pool-check.log",
+  "runtime_sources": {
+    "poolmgr": {
+      "path": "/root/.openclaw/workspace/projects/poolmgr-cli/poolmgr/__init__.py",
+      "sha256": "deba46ee8fe5"
+    },
+    "nightly_pool_manager": {
+      "path": "/root/.openclaw/workspace/scripts/nightly_pool_manager.py",
+      "sha256": "9ccb25854289"
+    },
+    "refill_codex_pool": {
+      "path": "/root/.openclaw/workspace/scripts/refill_codex_pool.py",
+      "sha256": "58bbdb9e7709"
+    }
+  },
+  "counts": {
+    "total": 4,
+    "healthy": 0,
+    "quota_exhausted": 3,
+    "dead": 0,
+    "transient": 0,
+    "disabled": 0,
+    "needs_review": 1,
+    "disabled_now": 0,
+    "deleted_now": 0,
+    "skipped_other_provider": 9
+  },
+  "actions": [
+    {
+      "action": "observe_review",
+      "name": "codex-29ceeb69-bharatarelli203@gmail.com-team.json",
+      "reason": "generic_error; seen=1",
+      "category": "needs_review",
+      "status": "recorded",
+      "http_status": null,
+      "response": null
+    }
+  ],
+  "classified": [
+    {
+      "name": "codex-0d8c986a-zhuhaoyi181@gmail.com-team.json",
+      "category": "quota_exhausted",
+      "reason": "usage_limit_reached",
+      "status": "error",
+      "disabled": false,
+      "unavailable": false,
+      "status_message": "{\"error\":{\"type\":\"usage_limit_reached\",\"message\":\"The usage limit has been reached\",\"plan_type\":\"team\",\"resets_at\":1775372579,\"eligible_promo\":null,\"resets_in_seconds\":5214}}",
+      "next_retry_after": null,
+      "path": "/root/.cli-proxy-api/codex-0d8c986a-zhuhaoyi181@gmail.com-team.json",
+      "observation": null,
+      "escalated": false
+    },
+    {
+      "name": "codex-1a58cbc1-2951461586@qq.com-team.json",
+      "category": "quota_exhausted",
+      "reason": "usage_limit_reached",
+      "status": "error",
+      "disabled": false,
+      "unavailable": false,
+      "status_message": "{\"error\":{\"type\":\"usage_limit_reached\",\"message\":\"The usage limit has been reached\",\"plan_type\":\"team\",\"resets_at\":1775370701,\"eligible_promo\":null,\"resets_in_seconds\":3334}}",
+      "next_retry_after": null,
+      "path": "/root/.cli-proxy-api/codex-1a58cbc1-2951461586@qq.com-team.json",
+      "observation": null,
+      "escalated": false
+    },
+    {
+      "name": "codex-29ceeb69-bharatarelli203@gmail.com-team.json",
+      "category": "needs_review",
+      "reason": "generic_error",
+      "status": "error",
+      "disabled": false,
+      "unavailable": false,
+      "status_message": "context canceled",
+      "next_retry_after": null,
+      "path": "/root/.cli-proxy-api/codex-29ceeb69-bharatarelli203@gmail.com-team.json",
+      "observation": {
+        "seen": 1,
+        "category": "needs_review",
+        "reason": "generic_error",
+        "first_seen": "2026-04-05T08:00:01Z",
+        "last_seen": "2026-04-05T08:00:01Z"
+      },
+      "escalated": false
+    },
+    {
+      "name": "codex-7df0d873-hao2127971@maricopa.edu-team.json",
+      "category": "quota_exhausted",
+      "reason": "usage_limit_reached",
+      "status": "error",
+      "disabled": false,
+      "unavailable": false,
+      "status_message": "{\"error\":{\"type\":\"usage_limit_reached\",\"message\":\"The usage limit has been reached\",\"plan_type\":\"team\",\"resets_at\":1775372437,\"eligible_promo\":null,\"resets_in_seconds\":5067}}",
+      "next_retry_after": null,
+      "path": "/root/.cli-proxy-api/codex-7df0d873-hao2127971@maricopa.edu-team.json",
+      "observation": null,
+      "escalated": false
+    }
+  ],
+  "retire_disabled": null,
+  "refill": null,
+  "refill_audit": null,
+  "quarantine_file": "/root/.openclaw/workspace/reports/pool-manager/dead-quarantine.json",
+  "policy_state_file": "/root/.openclaw/workspace/reports/pool-manager/policy-state.json",
+  "log_file": "/root/.openclaw/workspace/logs/codex-pool-check.log",
+  "history_file": "/root/.openclaw/workspace/reports/pool-manager/run-history.jsonl",
+  "strategy_explainer": {
+    "observation_policy": "transient>=2, needs_review>=2",
+    "observation_counts": {
+      "transient_observed": 0,
+      "needs_review_observed": 1
+    },
+    "delete_dead_threshold": 2,
+    "retire_disabled_enabled": true
+  },
+  "summary_markdown": "## 号池检查报告\n- run_id：pool-1775376001-2931777\n- 模式：check\n- 总账号数：4\n- 跳过其它 provider：9\n- 健康：0\n- 额度耗尽：3\n- 死号：0\n- 短时异常：0\n- 已禁用：0\n- 待人工复核：1\n- 本轮禁用：0\n- 本轮删除：0\n- Dry-run：否\n- 观察策略：transient>=2, needs_review>=2\n- poolmgr 源：/root/.openclaw/workspace/projects/poolmgr-cli/poolmgr/__init__.py\n- nightly 源：/root/.openclaw/workspace/scripts/nightly_pool_manager.py#9ccb25854289\n- refill 源：/root/.openclaw/workspace/scripts/refill_codex_pool.py#58bbdb9e7709",
+  "effective_params": {
+    "max_workers": 4,
+    "proxy_url": "http://127.0.0.1:7899",
+    "total_accounts": 100,
+    "register_timeout": 3600,
+    "delete_after_dead_seen": 2,
+    "transient_observe_threshold": 2,
+    "review_observe_threshold": 2
+  },
+  "duration_sec": 0.105,
+  "report_file": "/root/.openclaw/workspace/reports/pool-manager/pool-check-report-20260405-080001.json"
+}

@@ -9,7 +9,7 @@
     "lint": "next lint",
     "scan:bundle": "node scripts/scan-bundle-residue.mjs",
     "check:bundle": "npm run build && npm run scan:bundle",
-    "cloudbase:deploy": "bash ../scripts/deploy-dashboard-cloudbase.sh"
+    "cloudbase:deploy": "bash ../scripts/deploy/dashboard-cloudbase.sh"
   },
   "dependencies": {
     "clsx": "^2.1.0",

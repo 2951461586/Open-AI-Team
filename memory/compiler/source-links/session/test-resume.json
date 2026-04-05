@@ -1,0 +1,22 @@
+{
+  "sourceRef": "session:test-resume",
+  "sourceKind": "session",
+  "sourceId": "test-resume",
+  "totalBacklinks": 1,
+  "byKind": {
+    "session-pack-history": 1
+  },
+  "latestGeneratedAt": "2026-03-22T08:15:39.513Z",
+  "backlinks": [
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_902f918dcc9e",
+      "title": "继续完善 source-first 的 recall 升级策略",
+      "status": "active",
+      "generatedAt": "2026-03-22T08:15:39.513Z",
+      "outputPath": null,
+      "sessionKey": "test-resume",
+      "reviewType": null
+    }
+  ]
+}

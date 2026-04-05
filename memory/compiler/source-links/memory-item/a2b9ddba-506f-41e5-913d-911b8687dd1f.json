@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:a2b9ddba-506f-41e5-913d-911b8687dd1f",
+  "sourceKind": "memory-item",
+  "sourceId": "a2b9ddba-506f-41e5-913d-911b8687dd1f",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_c20e8f8f5377",
+      "title": "npm 账户：lizi_xiaoming，Token 存储于 /root/.openclaw/credentials/npm。已发布 memory-lancedb-context@1.2.0 到 npm：https://www.npmjs.com/package/memory-lancedb-context",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

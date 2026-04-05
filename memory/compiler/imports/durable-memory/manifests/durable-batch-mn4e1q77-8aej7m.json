@@ -1,0 +1,110 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-24T09:04:38.210Z",
+  "runId": "durable-batch-mn4e1q77-8aej7m",
+  "runLabel": "2026-03-21-real-import-3items",
+  "importMode": "durable-memory-batch.v2",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "pluginId": "memory-lancedb-pro",
+  "exportPath": null,
+  "totalItems": 3,
+  "importedItems": 3,
+  "skippedItems": 0,
+  "importStrategy": "incremental",
+  "replayFailedBatchIds": [],
+  "batchSize": 2,
+  "totalBatches": 2,
+  "completedBatches": 2,
+  "failedBatches": 0,
+  "batches": [
+    {
+      "batchId": "durable-batch-mn4e1q77-8aej7m-b001",
+      "batchIndex": 1,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn4e1q77-8aej7m-b001.input.json",
+      "memoryCount": 2,
+      "fingerprints": [
+        "{\"id\":\"accept-real-mn4dzbji-durable-1\",\"text\":\"real durable memory import path acceptance item\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-1\"]}",
+        "{\"id\":\"accept-real-mn4dzbji-durable-2\",\"text\":\"real durable memory import path acceptance item batch second\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-2\"]}"
+      ],
+      "result": {
+        "factsCreated": 0,
+        "factsUpdated": 2,
+        "sourceBacklinks": 72,
+        "controlPlaneOk": true
+      }
+    },
+    {
+      "batchId": "durable-batch-mn4e1q77-8aej7m-b002",
+      "batchIndex": 2,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn4e1q77-8aej7m-b002.input.json",
+      "memoryCount": 1,
+      "fingerprints": [
+        "{\"id\":\"accept-real-mn4dzbji-durable-3\",\"text\":\"real durable memory import path acceptance item batch third\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-3\"]}"
+      ],
+      "result": {
+        "factsCreated": 0,
+        "factsUpdated": 1,
+        "sourceBacklinks": 73,
+        "controlPlaneOk": true
+      }
+    }
+  ],
+  "totals": {
+    "factsCreated": 0,
+    "factsUpdated": 3
+  },
+  "reportScope": {
+    "namespace": "operator",
+    "latestScope": "latest-run",
+    "truthMode": "operator-latest",
+    "operatorTruthPath": "memory/compiler/reports/control-plane-verify.latest.json",
+    "preciseClaimRule": "operator truth must be read from control-plane-verify.latest.json, not replay latest"
+  },
+  "controlPlane": {
+    "refreshOk": true,
+    "verifyOk": true,
+    "operatorVerdict": "trusted-with-acceptance-samples",
+    "liveTruthPath": "memory/compiler/reports/control-plane-verify.latest.json"
+  },
+  "backlinks": {
+    "totalSources": 73,
+    "kinds": {
+      "lcm-summary": 2,
+      "lcm-message": 1,
+      "file": 15,
+      "memory-item": 45,
+      "session": 10
+    }
+  },
+  "incremental": {
+    "previousRunId": "durable-batch-mn4dg8dr-vsqb9a",
+    "previousImportedItems": 3,
+    "skippedFingerprintsSample": [],
+    "failedBatchIds": [],
+    "replayHint": null
+  },
+  "items": [
+    {
+      "id": "accept-real-mn4dzbji-durable-1",
+      "fingerprint": "{\"id\":\"accept-real-mn4dzbji-durable-1\",\"text\":\"real durable memory import path acceptance item\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-1\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-real-mn4dzbji-durable-2",
+      "fingerprint": "{\"id\":\"accept-real-mn4dzbji-durable-2\",\"text\":\"real durable memory import path acceptance item batch second\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-2\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-real-mn4dzbji-durable-3",
+      "fingerprint": "{\"id\":\"accept-real-mn4dzbji-durable-3\",\"text\":\"real durable memory import path acceptance item batch third\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-real-mn4dzbji-durable-3\"]}",
+      "imported": true
+    }
+  ],
+  "evidencePaths": [
+    "memory/compiler/facts.jsonl",
+    "memory/compiler/source-links/index.json",
+    "memory/compiler/reports/source-backlinks.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

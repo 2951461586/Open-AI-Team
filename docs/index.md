@@ -11,7 +11,11 @@
 Read in this order:
 - `../GETTING-STARTED.md`
 - `../README.md`
+- `../README_zh.md`
 - `../ARCHITECTURE.md`
+- `../docs/deploy/dashboard-source-authority.md`
+- `../docs/migration/dashboard-static-export-deprecation.md`
+- `../docs/oss/deerflow-openhanako-comparison.md`
 - `architecture/product-surface-and-repo-map.md`
 - `architecture/release-surface-allowlist.md`
 - `architecture/current-team-runtime-architecture.md`

@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-04-01T05:58:34.701Z",
+  "ok": true,
+  "eventType": "heartbeat",
+  "eventFingerprint": "drain:pending_48b25c2ccd9b:1775023114590",
+  "openReviews": 6,
+  "sourceDispatchBlockingOpen": 0,
+  "deduped": false,
+  "dedupeMinutes": 0,
+  "duplicateOf": null,
+  "throttled": false,
+  "minIntervalMinutes": 30,
+  "lastRunAt": "2026-04-01T05:58:15.178Z",
+  "jobs": [
+    {
+      "kind": "source-discipline-check",
+      "reason": "heartbeat-health",
+      "priority": "medium"
+    },
+    {
+      "kind": "review-snapshot",
+      "reason": "open-reviews-present",
+      "priority": "medium",
+      "count": 6
+    },
+    {
+      "kind": "session-pack-expire",
+      "reason": "heartbeat-pack-ttl-check",
+      "priority": "low"
+    }
+  ],
+  "skipped": [],
+  "weekLabel": "2026-W14"
+}

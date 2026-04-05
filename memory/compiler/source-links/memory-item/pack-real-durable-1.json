@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:pack-real-durable-1",
+  "sourceKind": "memory-item",
+  "sourceId": "pack-real-durable-1",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_2ede1713ce1b",
+      "title": "real durable memory import path pack item 1",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

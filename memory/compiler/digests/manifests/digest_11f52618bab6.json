@@ -1,0 +1,25 @@
+{
+  "id": "digest_11f52618bab6",
+  "type": "today",
+  "title": "Today Digest 2026-03-20",
+  "outputPath": "memory/compiler/digests/today/2026-03-20.md",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+    "sum:sum_4e6742ae47a210c5",
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md"
+  ],
+  "generatedAt": "2026-03-24T09:02:31.661Z",
+  "generationStrategy": "acceptance-refresh-v1",
+  "confidence": 0.72,
+  "tokenEstimate": 928,
+  "contentHash": "0e0fd4dd0db4b33a3bbc5cde83d15f1e695abc40",
+  "sourceHash": "7ec4c2d6317ad7d625da8c865be0f12584cd0117",
+  "supersedes": "digest_d23e8d439275",
+  "changedSourceRefsCount": 1
+}

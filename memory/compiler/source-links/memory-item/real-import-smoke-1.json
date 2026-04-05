@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:real-import-smoke-1",
+  "sourceKind": "memory-item",
+  "sourceId": "real-import-smoke-1",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_296a011e532e",
+      "title": "real durable memory item imported through operator-facing entry",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

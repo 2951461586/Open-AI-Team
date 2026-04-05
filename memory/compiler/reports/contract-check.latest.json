@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "checkedAt": "2026-04-01T05:58:41.756Z",
+  "version": "v1.0.0",
+  "summary": [
+    {
+      "name": "facts",
+      "total": 489,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/facts.jsonl"
+    },
+    {
+      "name": "threads",
+      "total": 46,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/threads.jsonl"
+    },
+    {
+      "name": "continuity",
+      "total": 28,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/continuity.jsonl"
+    },
+    {
+      "name": "review-queue",
+      "total": 655,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/review-queue.jsonl"
+    },
+    {
+      "name": "runtime-probe",
+      "total": 1,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/reports/runtime-probe.latest.json"
+    },
+    {
+      "name": "runtime-probe-trend",
+      "total": 1,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/reports/runtime-probe-trend.latest.json"
+    },
+    {
+      "name": "acceptance-review-governance",
+      "total": 1,
+      "errors": 0,
+      "path": "/root/.openclaw/workspace/memory/compiler/reports/acceptance-review-governance.latest.json"
+    }
+  ],
+  "errors": []
+}

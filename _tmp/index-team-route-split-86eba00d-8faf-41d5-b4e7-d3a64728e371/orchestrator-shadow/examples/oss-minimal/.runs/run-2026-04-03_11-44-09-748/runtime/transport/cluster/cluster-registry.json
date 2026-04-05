@@ -1,0 +1,78 @@
+{
+  "runId": "run-2026-04-03_11-44-09-748",
+  "generatedAt": "2026-04-03T11:44:13.554Z",
+  "nodes": [
+    {
+      "nodeId": "node-a",
+      "region": "local-a",
+      "tier": "control",
+      "roles": [
+        "planner",
+        "critic"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T11:44:13.462Z"
+    },
+    {
+      "nodeId": "node-b",
+      "region": "local-b",
+      "tier": "worker",
+      "roles": [
+        "executor"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T11:44:13.507Z"
+    },
+    {
+      "nodeId": "node-c",
+      "region": "local-c",
+      "tier": "decision",
+      "roles": [
+        "judge"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T11:44:13.486Z"
+    }
+  ],
+  "brokers": [
+    {
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+      "nodeId": "node-a",
+      "pid": 2033161,
+      "port": 37269,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T11:44:13.458Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+      "nodeId": "node-b",
+      "pid": 2033129,
+      "port": 33111,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T11:44:13.503Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+      "nodeId": "node-c",
+      "pid": 2033130,
+      "port": 45211,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T11:44:13.483Z"
+    }
+  ]
+}

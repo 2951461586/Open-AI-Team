@@ -1,0 +1,210 @@
+{
+  "ok": true,
+  "generatedAt": "2026-04-01T05:53:22.023Z",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "sources": {
+    "dailyMemoryPaths": [
+      "/root/.openclaw/workspace/memory/2026-03-21.md"
+    ],
+    "workspaceFiles": [
+      "/root/.openclaw/workspace/SESSION-STATE.md",
+      "/root/.openclaw/workspace/memory/working-buffer.md",
+      "/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+      "/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md",
+      "/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+      "/root/.openclaw/workspace/memory/2026-03-19.md",
+      "/root/.openclaw/workspace/memory/2026-03-18.md"
+    ],
+    "durableMemoryExportPath": null,
+    "durableMemoryExportMode": "live-export",
+    "durableMemoryExportError": null,
+    "durableMemoryItems": 40,
+    "lcmSummaryImportPath": null,
+    "lcmSummaryImportMode": null,
+    "lcmSummaryExportError": null,
+    "lcmSummaryItems": 0,
+    "lcmDbPath": null
+  },
+  "sourceCoverage": {
+    "totalSources": 215,
+    "totalArtifacts": 6202,
+    "kinds": {
+      "lcm-summary": 2,
+      "lcm-message": 51,
+      "file": 15,
+      "memory-item": 136,
+      "session": 11
+    },
+    "realInputSourcesPresent": {
+      "dailyMemory": [
+        "file:/root/.openclaw/workspace/memory/2026-03-21.md"
+      ],
+      "workspace": [
+        "file:/root/.openclaw/workspace/SESSION-STATE.md",
+        "file:/root/.openclaw/workspace/memory/working-buffer.md",
+        "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+        "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md",
+        "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+        "file:/root/.openclaw/workspace/memory/2026-03-19.md",
+        "file:/root/.openclaw/workspace/memory/2026-03-18.md"
+      ],
+      "durableMemory": [
+        "mem:68857a01-e061-4d8e-a3c8-acc32e3096ef",
+        "mem:aecda510-62e7-4402-a18a-3b3c8dc3b4ab",
+        "mem:ddf091b0-eeed-4e2d-8bdd-fcf257165b61",
+        "mem:6d278033-98a2-4656-9ac4-df731b530c52",
+        "mem:16dd9754-fa0e-4f46-b88e-48d01f1550f3",
+        "mem:7868c161-bd23-41b0-8380-ebcacf0f9cd6",
+        "mem:2c6ebcc4-7edd-4db5-9f4a-217b5462a8bd",
+        "mem:45d32c44-2119-4b1c-b1c1-f74965f2cd84",
+        "mem:298fea2d-24e4-4db5-befd-3b0cd03e1ed9",
+        "mem:7c14f0ea-570e-4f88-b012-c5e9790f846a",
+        "mem:380c58c2-4403-431f-9c9b-0c54f34867b3",
+        "mem:f2efe1a3-8416-4e45-9abb-193813650663",
+        "mem:c330ef52-9493-4afa-8883-081bce0902e6",
+        "mem:a0b95809-d91c-4a19-bd24-a2a4ec68f85d",
+        "mem:1c2d47a0-dd08-44f0-abed-87cdd7910da8",
+        "mem:a2b9ddba-506f-41e5-913d-911b8687dd1f",
+        "mem:3b3f66c6-be10-464f-a1be-208b5878ed40",
+        "mem:7d7222d3-410c-48af-b6c7-e59adbab3a8b",
+        "mem:b0a9ec87-7f35-4892-af0b-8bcd7a1194df",
+        "mem:0ca68658-e684-4f4a-877c-77df598380d0",
+        "mem:618ec2a6-b5bf-42f2-8a76-d9aaec0506b2",
+        "mem:e2698221-dc09-4086-a35b-6e7966113e15",
+        "mem:1807ff03-6e33-4a35-867b-8bf428022471",
+        "mem:b1d6b2d2-a34b-403a-90a3-c39a17e46a4e",
+        "mem:368877f1-7761-45d4-9094-3bbc8c28a4d2",
+        "mem:ef51a4cc-eec6-419e-8696-e4ff3957786b",
+        "mem:9405f161-72b7-4378-be5b-80e8b664a701",
+        "mem:973349c0-73b7-4ebd-8e09-c230392e0117",
+        "mem:da9f23e8-90a5-4b3c-a959-c7da070b3c75",
+        "mem:c57267c8-ce01-4fec-82f0-012efcb2ba41",
+        "mem:2c5b7728-1732-412f-afc1-85e3e39c1714",
+        "mem:138da748-f3ef-453b-9dc2-102983698b6a",
+        "mem:3c032905-fc28-4b25-a2b2-f36fcf702a8b",
+        "mem:456e9561-1ba1-469b-a4fe-a3ca25124f80",
+        "mem:e1832a4e-93eb-44ea-aa5e-787081b881d4",
+        "mem:bb651205-a170-4aec-b9a5-1434745e707e",
+        "mem:d6884428-1c47-4fa5-a1f1-0ac95d5ba31e",
+        "mem:41f0ef38-96a0-438c-9369-5cfed4c38113",
+        "mem:91d965cd-74d1-47b8-94f6-b0db61899a42",
+        "mem:c1ed7159-998e-46b4-b2af-8c696cb106c1"
+      ],
+      "lcmSummary": [],
+      "lcmMessage": []
+    }
+  },
+  "runs": [
+    {
+      "kind": "workspace",
+      "adapter": "workspace",
+      "inputPath": "/tmp/memory-compiler-adapter-workspace-1775022839374-67doaaydrc9.json",
+      "factsCreated": 0,
+      "factsUpdated": 8,
+      "threadsCreated": 0,
+      "continuityCreated": 0,
+      "sourceBacklinks": 215,
+      "batchCount": null,
+      "completedBatches": null,
+      "failedBatches": null,
+      "durableItems": null,
+      "importedDurableItems": null,
+      "skippedDurableItems": null,
+      "importStrategy": null,
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    },
+    {
+      "kind": "session-state",
+      "adapter": "session-state",
+      "inputPath": "/tmp/memory-compiler-adapter-session-state-1775022849301-gqtz1khkypg.json",
+      "factsCreated": 0,
+      "factsUpdated": 1,
+      "threadsCreated": 0,
+      "continuityCreated": 0,
+      "sourceBacklinks": 215,
+      "batchCount": null,
+      "completedBatches": null,
+      "failedBatches": null,
+      "durableItems": null,
+      "importedDurableItems": null,
+      "skippedDurableItems": null,
+      "importStrategy": null,
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    },
+    {
+      "kind": "lancedb-batch",
+      "adapter": "durable-memory-batch.v2",
+      "inputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/manifests/durable-batch-mnfms3ej-dh6vaj.json",
+      "factsCreated": 0,
+      "factsUpdated": 40,
+      "threadsCreated": null,
+      "continuityCreated": null,
+      "sourceBacklinks": 215,
+      "batchCount": 4,
+      "completedBatches": 4,
+      "failedBatches": 0,
+      "durableItems": 40,
+      "importedDurableItems": 40,
+      "skippedDurableItems": 0,
+      "importStrategy": "incremental",
+      "failedBatchIds": [],
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/source-links/index.json",
+        "memory/compiler/reports/control-plane-verify.latest.json",
+        "memory/compiler/reports/durable-memory-batch-import.latest.json",
+        "memory/compiler/reports/real-import.latest.json"
+      ]
+    }
+  ],
+  "reportScope": {
+    "namespace": "operator",
+    "latestScope": "latest-run",
+    "truthMode": "operator-latest",
+    "operatorTruthPath": "memory/compiler/reports/real-import.live.json",
+    "preciseClaimRule": "this report is operator latest truth"
+  },
+  "controlPlane": {
+    "refreshed": true,
+    "verifyOk": true,
+    "operatorVerdict": "trusted-with-acceptance-samples",
+    "liveTruthPath": "memory/compiler/reports/real-import.live.json",
+    "evidencePaths": [
+      "memory/compiler/control-plane/status.json",
+      "memory/compiler/control-plane/overview.md",
+      "memory/compiler/reports/contract-check.latest.json",
+      "memory/compiler/reports/integrity-audit.latest.json",
+      "memory/compiler/reports/source-discipline.latest.json",
+      "memory/compiler/reports/acceptance-smoke.latest.json",
+      "memory/compiler/reports/scheduler-audit.latest.json",
+      "memory/compiler/reports/scheduler-drain.latest.json",
+      "memory/compiler/reports/review-apply.latest.json",
+      "memory/compiler/reports/runtime-probe.latest.json",
+      "memory/compiler/reports/runtime-probe-trend.latest.json",
+      "memory/compiler/reports/acceptance-review-governance.latest.json",
+      "memory/compiler/reports/real-import.latest.json",
+      "memory/compiler/reports/burn-in-trend.latest.json"
+    ]
+  }
+}

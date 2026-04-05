@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-22T10:11:17.168Z",
+  "action": "compress",
+  "contractVersion": "acceptance-review-governance.v1",
+  "summary": {
+    "acceptanceOpenBefore": 0,
+    "acceptanceOpenAfter": 0,
+    "compressedCount": 0,
+    "keptOpenCount": 0,
+    "operatorOpenBefore": 0,
+    "operatorOpenAfter": 0,
+    "uniqueAcceptanceSignatures": 0
+  },
+  "governance": {
+    "minAgeHours": 0,
+    "maxKeepPerSignature": 1,
+    "compressionPolicy": "compress aged duplicate acceptance follow-up samples; keep latest exemplars for audit and namespace isolation",
+    "signatures": []
+  },
+  "compressed": [],
+  "keptSampleIds": [],
+  "evidencePaths": [
+    "memory/compiler/review-queue.jsonl",
+    "memory/compiler/reports/acceptance-review-governance.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "contractVersion": "agent-harness-bridge.v1",
+  "updatedAt": "2026-04-03T10:36:30.994Z",
+  "channels": [
+    "local-thread",
+    "telegram-scaffold",
+    "feishu-scaffold"
+  ],
+  "defaultChannel": "local-thread",
+  "routes": [
+    "local-thread",
+    "telegram-scaffold",
+    "feishu-scaffold"
+  ],
+  "routeContracts": [
+    {
+      "routeKey": "local-thread",
+      "enabled": true,
+      "allowedRoles": [
+        "planner",
+        "executor",
+        "critic",
+        "judge"
+      ],
+      "allowedKinds": [
+        "bootstrap",
+        "status",
+        "route",
+        "user_request",
+        "egress"
+      ]
+    },
+    {
+      "routeKey": "telegram-scaffold",
+      "enabled": true,
+      "allowedRoles": [
+        "executor"
+      ],
+      "allowedKinds": [
+        "route",
+        "status",
+        "egress"
+      ]
+    },
+    {
+      "routeKey": "feishu-scaffold",
+      "enabled": false,
+      "allowedRoles": [
+        "executor"
+      ],
+      "allowedKinds": [
+        "route",
+        "status",
+        "egress"
+      ]
+    }
+  ],
+  "counts": {
+    "ingress": 1,
+    "egress": 8
+  },
+  "ingress": [
+    {
+      "messageId": "bridge-bootstrap",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "bootstrap ingress",
+      "kind": "bootstrap",
+      "createdAt": "2026-04-03T10:36:27.986Z"
+    }
+  ],
+  "egress": [
+    {
+      "messageId": "bridge-status",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "runtime ready",
+      "kind": "bootstrap",
+      "createdAt": "2026-04-03T10:36:27.986Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w1",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "planner:w1 completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:28.776Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w2",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "executor:w2 completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:30.253Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w3",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "critic:w3 completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:30.422Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w3-replan-executor",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "executor:w3-replan-executor completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:30.566Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w3-replan-critic",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "critic:w3-replan-critic completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:30.722Z"
+    },
+    {
+      "messageId": "bridge-member:run-2026-04-03_10-36-27-477:w4",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "judge:w4 completed",
+      "kind": "member.completed",
+      "createdAt": "2026-04-03T10:36:30.978Z"
+    },
+    {
+      "messageId": "bridge-run:run-2026-04-03_10-36-27-477:completed",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "run completed",
+      "kind": "run.completed",
+      "createdAt": "2026-04-03T10:36:30.994Z"
+    }
+  ]
+}

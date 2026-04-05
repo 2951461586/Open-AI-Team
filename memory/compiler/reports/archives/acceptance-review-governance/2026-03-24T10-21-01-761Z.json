@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-24T10:21:01.761Z",
+  "action": "compress",
+  "contractVersion": "acceptance-review-governance.v1",
+  "summary": {
+    "acceptanceOpenBefore": 6,
+    "acceptanceOpenAfter": 4,
+    "compressedCount": 2,
+    "keptOpenCount": 4,
+    "operatorOpenBefore": 0,
+    "operatorOpenAfter": 0,
+    "uniqueAcceptanceSignatures": 2
+  },
+  "governance": {
+    "minAgeHours": 0,
+    "maxKeepPerSignature": 2,
+    "compressionPolicy": "compress aged duplicate acceptance follow-up samples; keep latest exemplars for audit and namespace isolation",
+    "signatures": [
+      {
+        "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed",
+        "openCountBefore": 3,
+        "keptCount": 2,
+        "compressedCount": 1
+      },
+      {
+        "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated",
+        "openCountBefore": 3,
+        "keptCount": 2,
+        "compressedCount": 1
+      }
+    ]
+  },
+  "compressed": [
+    {
+      "id": "review_e3ed94e02aca",
+      "title": "follow-up promotion: acceptance refresh review flow mn4fv6lx",
+      "reviewType": "promotion-review",
+      "targetState": "confirmed",
+      "ageHours": 0.3478483333333333,
+      "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed"
+    },
+    {
+      "id": "review_bb4c141e6769",
+      "title": "arbitration follow-up: acceptance dispute review flow mn4fv6lx",
+      "reviewType": "arbitration-review",
+      "targetState": "arbitrated",
+      "ageHours": 0.34951472222222224,
+      "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated"
+    }
+  ],
+  "keptSampleIds": [
+    "review_141bbec7e75e",
+    "review_f94d715844b1",
+    "review_ecc97f4ebdd8",
+    "review_348f2e31962f"
+  ],
+  "evidencePaths": [
+    "memory/compiler/review-queue.jsonl",
+    "memory/compiler/reports/acceptance-review-governance.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

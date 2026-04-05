@@ -1,0 +1,27 @@
+{
+  "id": "digest_96518575f205",
+  "type": "week",
+  "title": "Week Digest 2026-W13",
+  "outputPath": "memory/compiler/digests/week/2026-W13.md",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+    "sum:sum_4e6742ae47a210c5",
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/IMPLEMENTATION-BACKLOG.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md"
+  ],
+  "generatedAt": "2026-03-24T09:21:40.744Z",
+  "generationStrategy": "review-apply-v2",
+  "confidence": 0.72,
+  "tokenEstimate": 1326,
+  "contentHash": "c7e4c7e83947ec386e29bb7cb8178c29b07e75de",
+  "sourceHash": "9edc27c7927fd241b2f6b5c711bbefc1a0287007",
+  "supersedes": "digest_ef861325c511",
+  "changedSourceRefsCount": 1
+}

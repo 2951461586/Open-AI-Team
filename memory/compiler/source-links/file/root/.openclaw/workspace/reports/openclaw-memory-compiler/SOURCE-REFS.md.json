@@ -1,0 +1,75 @@
+{
+  "sourceRef": "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/SOURCE-REFS.md",
+  "sourceKind": "file",
+  "sourceId": "/root/.openclaw/workspace/reports/openclaw-memory-compiler/SOURCE-REFS.md",
+  "totalBacklinks": 6,
+  "byKind": {
+    "thread": 1,
+    "digest-manifest": 3,
+    "continuity": 1,
+    "fact": 1
+  },
+  "latestGeneratedAt": "2026-04-01T03:55:29.946Z",
+  "backlinks": [
+    {
+      "artifactKind": "thread",
+      "artifactId": "thread_fe0a941df2cb",
+      "title": "workspace-scan:SOURCE-REFS.md",
+      "status": "closed",
+      "generatedAt": "2026-04-01T03:55:29.946Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_4b3fcd7d85ee",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-21T05:48:25.218Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_4f217889967c",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-21T05:46:25.822Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_87297fffa0f7",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-21T05:46:22.294Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "continuity",
+      "artifactId": "continuity_890433900b22",
+      "title": "Workspace scan imported SOURCE-REFS.md for operator-facing replay.",
+      "status": "live",
+      "generatedAt": "2026-03-21T05:46:21.959Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_1a99f92cce8c",
+      "title": "Workspace source scanned: reports/openclaw-memory-compiler/SOURCE-REFS.md",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -809,6 +809,7 @@ export default function DashboardPage() {
         lastUpdate={lastUpdate}
         onRefresh={() => { loadData(); loadNodes() }}
         loading={loading}
+        controlPlaneStatus={Object.values(nodes || {}).find((node: any) => node?.stats?.controlPlaneStatus)?.stats?.controlPlaneStatus || ''}
         currentViewLabel={view === 'kanban' ? '任务台' : view === 'chat' ? '协作' : 'Agent · 节点'}
         currentView={view}
         onSwitchView={setView}

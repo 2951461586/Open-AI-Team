@@ -4,7 +4,7 @@ import { RefreshCw } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
 import { TaskState } from '@/lib/types'
 import type { View } from './Sidebar'
-import { stateLabel } from '@/lib/utils'
+import { stateLabel, nodeServiceStatusLabel } from '@/lib/utils'
 
 interface Props {
   lastUpdate: number | null
@@ -16,6 +16,7 @@ interface Props {
   selectedTask?: { taskId?: string; title?: string; state?: TaskState | string; currentDriver?: string | null } | null
   onOpenSelectedTask?: () => void
   tasks?: { state: TaskState }[]
+  controlPlaneStatus?: string
 }
 
 function formatLastUpdate(lastUpdate: number | null) {
@@ -70,6 +71,7 @@ export function Header({
   selectedTask = null,
   onOpenSelectedTask,
   tasks = [],
+  controlPlaneStatus,
 }: Props) {
   const currentTaskPill = selectedTask?.taskId
     ? {
@@ -90,6 +92,11 @@ export function Header({
             <span className="inline-flex shrink-0 rounded-md border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-1.5 py-0.5 text-[10px] text-[var(--fg-muted)]">
               {formatLastUpdate(lastUpdate)}
             </span>
+            {controlPlaneStatus ? (
+              <span className="inline-flex shrink-0 rounded-md border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-1.5 py-0.5 text-[10px] text-[var(--fg-muted)]">
+                控制面：{nodeServiceStatusLabel({ controlPlaneStatus })}
+              </span>
+            ) : null}
             <StageStrip tasks={tasks} />
           </div>
 

@@ -1,0 +1,184 @@
+{
+  "contractVersion": "agent-harness-plugin-events.v1",
+  "generatedAt": "2026-04-03T10:36:26.766Z",
+  "hookInvocationCount": 11,
+  "events": [
+    {
+      "type": "plugins.initialized",
+      "pluginCount": 3,
+      "at": "2026-04-03T10:36:25.522Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3",
+        "role": "critic"
+      },
+      "at": "2026-04-03T10:36:26.180Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3",
+        "role": "critic"
+      },
+      "at": "2026-04-03T10:36:26.180Z"
+    },
+    {
+      "type": "state.persisted",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "running"
+      },
+      "at": "2026-04-03T10:36:26.186Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3-replan-executor",
+        "role": "executor"
+      },
+      "at": "2026-04-03T10:36:26.375Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3-replan-executor",
+        "role": "executor"
+      },
+      "at": "2026-04-03T10:36:26.376Z"
+    },
+    {
+      "type": "state.persisted",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "running"
+      },
+      "at": "2026-04-03T10:36:26.379Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3-replan-critic",
+        "role": "critic"
+      },
+      "at": "2026-04-03T10:36:26.530Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w3-replan-critic",
+        "role": "critic"
+      },
+      "at": "2026-04-03T10:36:26.530Z"
+    },
+    {
+      "type": "state.persisted",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "running"
+      },
+      "at": "2026-04-03T10:36:26.534Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w4",
+        "role": "judge"
+      },
+      "at": "2026-04-03T10:36:26.748Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "member.completed",
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "workItemId": "w4",
+        "role": "judge"
+      },
+      "at": "2026-04-03T10:36:26.748Z"
+    },
+    {
+      "type": "state.persisted",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "running"
+      },
+      "at": "2026-04-03T10:36:26.752Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "run.completed",
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "completed",
+        "currentIndex": 6
+      },
+      "at": "2026-04-03T10:36:26.761Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "run.completed",
+      "pluginId": "plugin.oss.lifecycle-core",
+      "kind": "lifecycle",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "completed",
+        "currentIndex": 6
+      },
+      "at": "2026-04-03T10:36:26.761Z"
+    },
+    {
+      "type": "plugin.hook",
+      "hook": "run.completed",
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "completed",
+        "currentIndex": 6
+      },
+      "at": "2026-04-03T10:36:26.761Z"
+    },
+    {
+      "type": "state.persisted",
+      "payload": {
+        "runId": "run-2026-04-03_10-36-22-499",
+        "status": "completed"
+      },
+      "at": "2026-04-03T10:36:26.765Z"
+    }
+  ]
+}

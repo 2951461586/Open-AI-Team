@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:618ec2a6-b5bf-42f2-8a76-d9aaec0506b2",
+  "sourceKind": "memory-item",
+  "sourceId": "618ec2a6-b5bf-42f2-8a76-d9aaec0506b2",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_db7ab6628295",
+      "title": "Violet proxy: xray running at /usr/local/etc/xray/config.json, no v2ray installed, port 7897 not listening, process started Mar 1",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

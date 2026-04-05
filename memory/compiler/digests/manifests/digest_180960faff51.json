@@ -1,0 +1,25 @@
+{
+  "id": "digest_180960faff51",
+  "type": "narrative",
+  "title": "Current Narrative",
+  "outputPath": "memory/compiler/digests/narrative/current.md",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/IMPLEMENTATION-BACKLOG.md"
+  ],
+  "generatedAt": "2026-03-21T06:03:43.013Z",
+  "generationStrategy": "review-apply-v2",
+  "confidence": 0.72,
+  "tokenEstimate": 1059,
+  "contentHash": "82fc3084f5143ca3386674f6ec5e46b1359aa220",
+  "sourceHash": "1190b0613fee7101e5f47d29ae31a47a99c104e5",
+  "supersedes": "digest_9ba94ee6171d",
+  "changedSourceRefsCount": 1,
+  "supersededBy": "digest_20463734ea0f"
+}

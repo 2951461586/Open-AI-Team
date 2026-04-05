@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-21T02:00:38.862Z",
+  "action": "archive",
+  "windows": [
+    7,
+    30
+  ],
+  "baselines": [
+    {
+      "days": 7,
+      "schedulerRuns": 542,
+      "avgJobsPerRun": 2.96309963099631,
+      "throttledRuns": 2,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "trusted-with-acceptance-samples",
+      "liveTrusted": true,
+      "metricsVerdict": "do-not-trust-until-blockers-cleared",
+      "metricsControlPlaneTrusted": false,
+      "metricsSnapshotTrust": null,
+      "metricsFinalTrust": null,
+      "acceptanceOk": true,
+      "burnInOk": true,
+      "burnInIterations": 2
+    },
+    {
+      "days": 30,
+      "schedulerRuns": 542,
+      "avgJobsPerRun": 2.96309963099631,
+      "throttledRuns": 2,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "trusted-with-acceptance-samples",
+      "liveTrusted": true,
+      "metricsVerdict": "do-not-trust-until-blockers-cleared",
+      "metricsControlPlaneTrusted": false,
+      "metricsSnapshotTrust": null,
+      "metricsFinalTrust": null,
+      "acceptanceOk": true,
+      "burnInOk": true,
+      "burnInIterations": 2
+    }
+  ],
+  "evidencePaths": [
+    "memory/compiler/reports/burn-in.latest.json",
+    "memory/compiler/reports/compiler-metrics.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json",
+    "memory/compiler/scheduler-history.jsonl"
+  ]
+}

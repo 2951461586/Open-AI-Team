@@ -1,0 +1,6 @@
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216651029:imkuu8","role":"planner","nodeId":"node-a","brokerId":"run-2026-04-03_11-44-09-748-broker-1","reason":"preferred_node","createdAt":"2026-04-03T11:44:11.072Z"}
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216651259:lgj3w1","role":"executor","nodeId":"node-b","brokerId":"run-2026-04-03_11-44-09-748-broker-2","reason":"preferred_node","createdAt":"2026-04-03T11:44:11.302Z"}
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216652706:pbu3fb","role":"critic","nodeId":"node-a","brokerId":"run-2026-04-03_11-44-09-748-broker-1","reason":"preferred_node","createdAt":"2026-04-03T11:44:12.725Z"}
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216652865:oar2vm","role":"executor","nodeId":"node-b","brokerId":"run-2026-04-03_11-44-09-748-broker-2","reason":"preferred_node","createdAt":"2026-04-03T11:44:12.895Z"}
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216653021:rua01s","role":"critic","nodeId":"node-a","brokerId":"run-2026-04-03_11-44-09-748-broker-1","reason":"preferred_node","createdAt":"2026-04-03T11:44:13.039Z"}
+{"runId":"run-2026-04-03_11-44-09-748","jobId":"job:1775216653214:vq52io","role":"judge","nodeId":"node-c","brokerId":"run-2026-04-03_11-44-09-748-broker-3","reason":"preferred_node","createdAt":"2026-04-03T11:44:13.252Z"}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:accept-real-mn4g3fzt-durable-2",
+  "sourceKind": "memory-item",
+  "sourceId": "accept-real-mn4g3fzt-durable-2",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_83e27e602386",
+      "title": "real durable memory import path acceptance item batch second",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

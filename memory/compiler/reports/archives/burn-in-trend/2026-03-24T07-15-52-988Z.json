@@ -1,0 +1,115 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-24T07:15:52.988Z",
+  "action": "archive",
+  "windows": [
+    7,
+    30
+  ],
+  "baselines": [
+    {
+      "days": 7,
+      "schedulerRuns": 1220,
+      "avgJobsPerRun": 2.7442622950819673,
+      "throttledRuns": 2,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "trusted-with-warnings",
+      "liveTrusted": true,
+      "metricsVerdict": "trusted-with-warnings",
+      "metricsControlPlaneTrusted": true,
+      "metricsSnapshotTrust": {
+        "trusted": true,
+        "verdict": "trusted-with-warnings",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json"
+      },
+      "metricsFinalTrust": {
+        "trusted": true,
+        "verdict": "trusted-with-warnings",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json",
+        "note": "live truth follows control-plane-verify; metrics snapshot must not override operator trust"
+      },
+      "acceptanceOk": true,
+      "burnInOk": true,
+      "burnInIterations": 2,
+      "previousGeneratedAt": null,
+      "deltas": {
+        "schedulerRuns": 0.0016,
+        "avgJobsPerRun": -0.0007,
+        "throttledRuns": 0,
+        "dedupedRuns": null
+      },
+      "trendSummary": {
+        "trustStableSnapshots": 2,
+        "acceptanceStableSnapshots": 6,
+        "blockingFreeStableSnapshots": 7,
+        "sampleCountIncludingCurrent": 106
+      }
+    },
+    {
+      "days": 30,
+      "schedulerRuns": 1220,
+      "avgJobsPerRun": 2.7442622950819673,
+      "throttledRuns": 2,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "trusted-with-warnings",
+      "liveTrusted": true,
+      "metricsVerdict": "trusted-with-warnings",
+      "metricsControlPlaneTrusted": true,
+      "metricsSnapshotTrust": {
+        "trusted": true,
+        "verdict": "trusted-with-warnings",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json"
+      },
+      "metricsFinalTrust": {
+        "trusted": true,
+        "verdict": "trusted-with-warnings",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json",
+        "note": "live truth follows control-plane-verify; metrics snapshot must not override operator trust"
+      },
+      "acceptanceOk": true,
+      "burnInOk": true,
+      "burnInIterations": 2,
+      "previousGeneratedAt": null,
+      "deltas": {
+        "schedulerRuns": 0.0016,
+        "avgJobsPerRun": -0.0007,
+        "throttledRuns": 0,
+        "dedupedRuns": null
+      },
+      "trendSummary": {
+        "trustStableSnapshots": 2,
+        "acceptanceStableSnapshots": 6,
+        "blockingFreeStableSnapshots": 7,
+        "sampleCountIncludingCurrent": 103
+      }
+    }
+  ],
+  "history": {
+    "archiveCountBeforeCurrent": 105,
+    "archiveDir": "memory/compiler/reports/archives/burn-in-trend",
+    "recentArchives": [
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-45-59-535Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-45-59-740Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-50-30-379Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-50-38-229Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-50-38-451Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-52-42-103Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-52-50-240Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T08-52-50-456Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-22T10-11-19-504Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-24T07-15-40-639Z.json"
+    ]
+  },
+  "operatorFacing": {
+    "summaryText": "7d trust=trusted-with-warnings stable=2 samples throttled=2 deduped=0 | 30d trust=trusted-with-warnings stable=2 samples throttled=2 deduped=0",
+    "longestTrustStableSnapshots": 2,
+    "longestAcceptanceStableSnapshots": 6
+  },
+  "evidencePaths": [
+    "memory/compiler/reports/burn-in.latest.json",
+    "memory/compiler/reports/compiler-metrics.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json",
+    "memory/compiler/scheduler-history.jsonl",
+    "memory/compiler/reports/archives/burn-in-trend"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:456e9561-1ba1-469b-a4fe-a3ca25124f80",
+  "sourceKind": "memory-item",
+  "sourceId": "456e9561-1ba1-469b-a4fe-a3ca25124f80",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_47663434d624",
+      "title": "CloudBase项目配置：任务看板地址https://opencloud-8g9e4db2eaac0c79-1354587046.tcloudbaseapp.com，项目路径/root/.openclaw/workspace/projects/task-kanban/。AI小程序成长计划：6个月免费资源，1亿混元Token，1万张混元生图，6个月云开发个人版。",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "handoff_efbc4d68588a",
+  "kind": "session-handoff-capsule",
+  "packId": "sessionpack_33fd4b110285",
+  "sessionKey": "accept-burnin-session",
+  "reason": "finalize",
+  "focus": "继续完善 source-first 的 recall 升级策略",
+  "primaryThreadId": "thread_0bfe9502b7ce",
+  "primaryThreadTitle": "记忆编译层适配层建设",
+  "decisions": [
+    "精确问答先回源再答"
+  ],
+  "unresolvedRisks": [],
+  "nextActions": [
+    "补足 precise scene selector",
+    "Check source backlinks and runtime source mix after import.",
+    "继续接 LCM / memory-lancedb 适配"
+  ],
+  "handoffSummary": "Focus: 继续完善 source-first 的 recall 升级策略\nPrimary thread: 记忆编译层适配层建设\nDecisions: 精确问答先回源再答\nNext actions: 补足 precise scene selector | Check source backlinks and runtime source mix after import. | 继续接 LCM / memory-lancedb 适配\nEscalation: lcm-on-demand+source-leaning+artifact-first",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "sum:sum_4e6742ae47a210c5",
+    "artifact:test:blocked-promotion",
+    "artifact:test:blocked-promotion-review",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/IMPLEMENTATION-BACKLOG.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/IMPLEMENTATION-BACKLOG.md",
+    "file:/root/.openclaw/workspace/plugins/memory-compiler/docs/OPERATOR-REVIEW-FLOW.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-21.md",
+    "file:/root/.openclaw/workspace/memory/working-buffer.md",
+    "session:accept-burnin-session"
+  ],
+  "generatedAt": "2026-03-22T08:52:33.268Z",
+  "status": "finalized"
+}

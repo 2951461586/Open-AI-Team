@@ -1,0 +1,22 @@
+{
+  "lastRuns": {
+    "heartbeat": "2026-04-01T05:58:35.110Z",
+    "daily": "2026-04-01T05:56:34.333Z",
+    "weekly": "2026-03-20T03:45:22.951Z",
+    "session-end": "2026-04-01T05:49:47.068Z",
+    "subagent-complete": "2026-04-01T05:48:59.282Z"
+  },
+  "runCount": 1597,
+  "lastJobCount": 3,
+  "lastEventType": "heartbeat",
+  "lastFinishedAt": "2026-04-01T05:58:35.110Z",
+  "lastAttempts": {
+    "heartbeat": "2026-04-01T05:58:35.110Z",
+    "session-end": "2026-04-01T05:49:47.068Z",
+    "daily": "2026-04-01T05:56:34.333Z",
+    "subagent-complete": "2026-04-01T05:48:59.282Z"
+  },
+  "lastThrottled": false,
+  "lastDeduped": false,
+  "lastEnqueued": null
+}

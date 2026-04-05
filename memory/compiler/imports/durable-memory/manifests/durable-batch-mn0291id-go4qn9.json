@@ -1,0 +1,100 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-21T08:23:05.506Z",
+  "runId": "durable-batch-mn0291id-go4qn9",
+  "runLabel": "2026-03-21-acceptance-batch-failure-3items",
+  "importMode": "durable-memory-batch.v2",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "pluginId": "memory-lancedb-pro",
+  "exportPath": null,
+  "totalItems": 3,
+  "importedItems": 3,
+  "skippedItems": 2,
+  "importStrategy": "full",
+  "replayFailedBatchIds": [
+    "durable-batch-mn028zv4-7ljb2u-b001"
+  ],
+  "batchSize": 2,
+  "totalBatches": 2,
+  "completedBatches": 0,
+  "failedBatches": 0,
+  "batches": [
+    {
+      "batchId": "durable-batch-mn0291id-go4qn9-b001",
+      "batchIndex": 1,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn0291id-go4qn9-b001.input.json",
+      "memoryCount": 2,
+      "skipped": true,
+      "skipReason": "not-in-failed-batch-replay-set"
+    },
+    {
+      "batchId": "durable-batch-mn0291id-go4qn9-b002",
+      "batchIndex": 2,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn0291id-go4qn9-b002.input.json",
+      "memoryCount": 1,
+      "skipped": true,
+      "skipReason": "not-in-failed-batch-replay-set"
+    }
+  ],
+  "totals": {
+    "factsCreated": 0,
+    "factsUpdated": 0
+  },
+  "reportScope": {
+    "namespace": "acceptance",
+    "latestScope": "failed-batch-replay-latest",
+    "truthMode": "acceptance-replay-latest-not-live-truth",
+    "operatorTruthPath": "memory/compiler/reports/control-plane-verify.latest.json",
+    "preciseClaimRule": "operator truth must be read from control-plane-verify.latest.json, not replay latest"
+  },
+  "controlPlane": {
+    "refreshOk": true,
+    "verifyOk": false,
+    "operatorVerdict": "do-not-trust-until-blockers-cleared",
+    "liveTruthPath": "memory/compiler/reports/control-plane-verify.latest.json"
+  },
+  "backlinks": {
+    "totalSources": 30,
+    "kinds": {
+      "lcm-summary": 0,
+      "lcm-message": 0,
+      "file": 12,
+      "memory-item": 16,
+      "session": 2
+    }
+  },
+  "incremental": {
+    "previousRunId": "durable-batch-mn028zv4-7ljb2u",
+    "previousImportedItems": 3,
+    "skippedFingerprintsSample": [
+      "{\"id\":\"accept-batch-failure-1\",\"text\":\"durable batch failure acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-1\"]}",
+      "{\"id\":\"accept-batch-failure-3\",\"text\":\"durable batch failure acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-3\"]}"
+    ],
+    "failedBatchIds": [],
+    "replayHint": null
+  },
+  "items": [
+    {
+      "id": "accept-batch-failure-1",
+      "fingerprint": "{\"id\":\"accept-batch-failure-1\",\"text\":\"durable batch failure acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-1\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-batch-failure-2",
+      "fingerprint": "{\"id\":\"accept-batch-failure-2\",\"text\":\"durable batch failure acceptance item 2 repaired\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-2\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-batch-failure-3",
+      "fingerprint": "{\"id\":\"accept-batch-failure-3\",\"text\":\"durable batch failure acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-3\"]}",
+      "imported": true
+    }
+  ],
+  "evidencePaths": [
+    "memory/compiler/facts.jsonl",
+    "memory/compiler/source-links/index.json",
+    "memory/compiler/reports/source-backlinks.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

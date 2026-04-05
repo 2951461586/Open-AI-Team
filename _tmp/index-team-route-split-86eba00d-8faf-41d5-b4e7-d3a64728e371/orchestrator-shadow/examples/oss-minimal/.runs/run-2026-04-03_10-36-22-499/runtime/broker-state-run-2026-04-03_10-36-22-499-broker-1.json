@@ -1,0 +1,52 @@
+{
+  "brokerId": "run-2026-04-03_10-36-22-499-broker-1",
+  "nodeId": "node-a",
+  "updatedAt": "2026-04-03T10:36:26.523Z",
+  "summary": {
+    "totalJobs": 2,
+    "queued": 0,
+    "running": 0,
+    "completed": 2,
+    "failed": 0
+  },
+  "jobs": [
+    {
+      "id": "job:1775212586009:7tn6hr",
+      "role": "critic",
+      "brokerId": "run-2026-04-03_10-36-22-499-broker-1",
+      "nodeId": "node-a",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "critic:1775212586009",
+      "error": "",
+      "eventCount": 20,
+      "createdAt": 1775212586009,
+      "updatedAt": 1775212586157,
+      "lastLeaseExpiresAt": "2026-04-03T10:36:27.230Z",
+      "leaseId": "lease:job:1775212585981:uaesmh",
+      "dispatchId": "dispatch:1775212585982:dzd3nc"
+    },
+    {
+      "id": "job:1775212586412:qar1hh",
+      "role": "critic",
+      "brokerId": "run-2026-04-03_10-36-22-499-broker-1",
+      "nodeId": "node-a",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "critic:1775212586412",
+      "error": "",
+      "eventCount": 19,
+      "createdAt": 1775212586412,
+      "updatedAt": 1775212586503,
+      "lastLeaseExpiresAt": "2026-04-03T10:36:27.617Z",
+      "leaseId": "lease:job:1775212586394:us1h8u",
+      "dispatchId": "dispatch:1775212586395:spl4ek"
+    }
+  ]
+}

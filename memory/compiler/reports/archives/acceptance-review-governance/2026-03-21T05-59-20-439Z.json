@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-21T05:59:20.439Z",
+  "action": "compress",
+  "contractVersion": "acceptance-review-governance.v1",
+  "summary": {
+    "acceptanceOpenBefore": 8,
+    "acceptanceOpenAfter": 4,
+    "compressedCount": 4,
+    "keptOpenCount": 4,
+    "operatorOpenBefore": 1,
+    "operatorOpenAfter": 1,
+    "uniqueAcceptanceSignatures": 2
+  },
+  "governance": {
+    "minAgeHours": 0.25,
+    "maxKeepPerSignature": 2,
+    "compressionPolicy": "compress aged duplicate acceptance follow-up samples; keep latest exemplars for audit and namespace isolation",
+    "signatures": [
+      {
+        "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed",
+        "openCountBefore": 4,
+        "keptCount": 2,
+        "compressedCount": 2
+      },
+      {
+        "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated",
+        "openCountBefore": 4,
+        "keptCount": 2,
+        "compressedCount": 2
+      }
+    ]
+  },
+  "compressed": [
+    {
+      "id": "review_8e08a3334cfd",
+      "title": "follow-up promotion: acceptance refresh review flow mmzw21sv",
+      "reviewType": "promotion-review",
+      "targetState": "confirmed",
+      "ageHours": 0.4515969444444444,
+      "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed"
+    },
+    {
+      "id": "review_a1e32df6a383",
+      "title": "follow-up promotion: acceptance refresh review flow mmzvxnnw",
+      "reviewType": "promotion-review",
+      "targetState": "confirmed",
+      "ageHours": 0.5109408333333333,
+      "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed"
+    },
+    {
+      "id": "review_1a42cdbc07d2",
+      "title": "arbitration follow-up: acceptance dispute review flow mmzw21sv",
+      "reviewType": "arbitration-review",
+      "targetState": "arbitrated",
+      "ageHours": 0.4523891666666667,
+      "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated"
+    },
+    {
+      "id": "review_16c5bad90135",
+      "title": "arbitration follow-up: acceptance dispute review flow mmzvxnnw",
+      "reviewType": "arbitration-review",
+      "targetState": "arbitrated",
+      "ageHours": 0.5116811111111111,
+      "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated"
+    }
+  ],
+  "keptSampleIds": [
+    "review_d849a85d3e1b",
+    "review_ba8ba6925cee",
+    "review_5537da133c02",
+    "review_2f4916c91d56"
+  ],
+  "evidencePaths": [
+    "memory/compiler/review-queue.jsonl",
+    "memory/compiler/reports/acceptance-review-governance.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

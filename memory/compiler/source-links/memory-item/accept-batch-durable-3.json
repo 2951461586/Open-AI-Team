@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:accept-batch-durable-3",
+  "sourceKind": "memory-item",
+  "sourceId": "accept-batch-durable-3",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_9ac3e1c69517",
+      "title": "durable batch import acceptance item 3",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:memory-lancedb-pro:accept-batch-failure-1",
+  "sourceKind": "memory-item",
+  "sourceId": "memory-lancedb-pro:accept-batch-failure-1",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_eea0ac0e30d8",
+      "title": "durable batch failure acceptance item 1",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

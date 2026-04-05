@@ -126,7 +126,7 @@ export function createLocalRuntimeAdapter({ agentRegistry = [], toolProvider = n
       const snapshot = await runTool('fs.list', { path: 'artifacts', recursive: true });
       const pwdExec = await runTool('command.exec', { command: 'pwd', args: [], cwd: workspaceDir });
       const lsExec = await runTool('command.exec', { command: 'ls', args: ['-1', 'artifacts'], cwd: workspaceDir });
-      const bridgeRoute = await runTool('bridge.route', { role: normalizedRole, routeKey: 'telegram-scaffold', text: `deliverable-ready:${objective || task}` });
+      const bridgeRoute = await runTool('bridge.route', { role: normalizedRole, routeKey: 'local-thread', text: `deliverable-ready:${objective || task}` });
       const deliverableRel = 'artifacts/DELIVERABLE.md';
       const body = `# Deliverable\n\n## Objective\n${objective || task}\n\n## Based On Plan\n${String(planRead?.result?.text || previousSummaries || '- none').slice(0, 1200)}\n\n## Produced Output\n- minimal runnable sample\n- local runtime adapter\n- standalone bootstrap\n- run report\n\n## Available Tools\n${toolList.map((x) => `- ${x}`).join('\n') || '- none'}\n\n## Command Runtime Evidence\n- pwd => ${String(pwdExec?.result?.stdout || '').trim() || '-'}\n- ls artifacts => ${String(lsExec?.result?.stdout || '').trim() || '-'}\n\n## Artifact Snapshot\n${(snapshot?.result?.items || []).map((x) => `- ${x.path}`).join('\n') || '- none'}\n`;
       if (eventBus?.emit) eventBus.emit({ type: 'artifact.deliverable.writing', role: normalizedRole, path: deliverableRel });

@@ -1,0 +1,495 @@
+{
+  "sourceRef": "file:/root/.openclaw/workspace/memory/2026-03-18.md",
+  "sourceKind": "file",
+  "sourceId": "/root/.openclaw/workspace/memory/2026-03-18.md",
+  "totalBacklinks": 48,
+  "byKind": {
+    "digest-manifest": 45,
+    "continuity": 1,
+    "thread": 1,
+    "fact": 1
+  },
+  "latestGeneratedAt": "2026-04-01T05:54:00.074Z",
+  "backlinks": [
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_c62d8fe1d7b7",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T05:54:00.074Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "continuity",
+      "artifactId": "continuity_bb5066bcd1c5",
+      "title": "Workspace scan imported 2026-03-18.md for operator-facing replay.",
+      "status": "live",
+      "generatedAt": "2026-04-01T05:54:00.008Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "thread",
+      "artifactId": "thread_1590e451175f",
+      "title": "workspace-scan:2026-03-18.md",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:00.002Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_15cc6afe6c09",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T05:52:46.203Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_7d8ba49ac6c4",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:19:50.501Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_e5af94f094fb",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:18:58.614Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_2f93699d4932",
+      "title": "week:memory/compiler/digests/week/2026-W14.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:09:23.887Z",
+      "outputPath": "memory/compiler/digests/week/2026-W14.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_4154b7046353",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:09:22.821Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_9cd3fb6e3cfc",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:08:24.373Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_1da86948fb70",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T04:01:11.947Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_91df35572021",
+      "title": "week:memory/compiler/digests/week/2026-W14.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T03:59:42.516Z",
+      "outputPath": "memory/compiler/digests/week/2026-W14.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_87ee884dc29d",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-04-01T03:59:35.864Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_e5671e67a562",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:30:41.905Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_a58ade557e1a",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:28:33.764Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_571e044d1ccf",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:26:40.383Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_de2a83ff6f2a",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:24:34.883Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_5b7700c23b67",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:09:52.360Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_ac007229a916",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:08:54.148Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_1a0bd6c478c8",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-28T06:05:02.897Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_f9b580d7ecc8",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T04:21:33.469Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_c99563970365",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T04:20:32.843Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_5b1258397b55",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T03:20:52.125Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_35dac7f32c7c",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T03:20:20.109Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_a89895f61826",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T03:12:57.153Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_da4cc76f0663",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T01:53:39.059Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_066920b3aa1a",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-26T01:52:39.617Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_80a6b224a761",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T16:31:22.279Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_d1fff5a1bb2e",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T16:30:48.520Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_61b03cd09ddf",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:43:04.482Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_5a3ae489e525",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:42:28.738Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_b4558f32ce69",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:35:56.585Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_e472e4492544",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:35:23.929Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_a17cabddd5be",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:18:13.788Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_d4cdcba52e01",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:17:40.488Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_d85d539b57d4",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:04:42.890Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_0fcad7dba155",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T10:04:11.098Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_cce98167495c",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:58:15.017Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_90b6a8297f76",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:57:43.477Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_ee4d70b9819d",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:49:25.670Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_5bace02d4a7b",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:48:54.379Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_967c8a02011d",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:45:36.544Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_0e00e70b17ad",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:45:23.692Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_f487ebf9180b",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:43:22.214Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_f71468bcf9d9",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:32:13.257Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_76437c6f07af",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:17:46.528Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_53d98a798b6d",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:12:53.439Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "digest-manifest",
+      "artifactId": "digest_96a4f41061b6",
+      "title": "week:memory/compiler/digests/week/2026-W12.md",
+      "status": "week",
+      "generatedAt": "2026-03-24T09:12:18.729Z",
+      "outputPath": "memory/compiler/digests/week/2026-W12.md",
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_158f2fa8d603",
+      "title": "Workspace source scanned: memory/2026-03-18.md",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

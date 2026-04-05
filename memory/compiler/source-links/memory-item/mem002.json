@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:mem002",
+  "sourceKind": "memory-item",
+  "sourceId": "mem002",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_d14119e12dc1",
+      "title": "当前阶段不展开 UI 设计",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "id": "inbox:1775216644898:1",
+      "payload": {
+        "kind": "user_request",
+        "text": "帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。"
+      },
+      "createdAt": "2026-04-03T11:44:04.898Z",
+      "dispatchedAt": "2026-04-03T11:44:04.942Z"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-21T07:35:52.668Z",
+  "action": "compress",
+  "contractVersion": "acceptance-review-governance.v1",
+  "summary": {
+    "acceptanceOpenBefore": 2,
+    "acceptanceOpenAfter": 2,
+    "compressedCount": 0,
+    "keptOpenCount": 2,
+    "operatorOpenBefore": 0,
+    "operatorOpenAfter": 0,
+    "uniqueAcceptanceSignatures": 2
+  },
+  "governance": {
+    "minAgeHours": 0,
+    "maxKeepPerSignature": 2,
+    "compressionPolicy": "compress aged duplicate acceptance follow-up samples; keep latest exemplars for audit and namespace isolation",
+    "signatures": [
+      {
+        "signature": "promotion-review::follow-up promotion: acceptance refresh review flow::confirmed",
+        "openCountBefore": 1,
+        "keptCount": 1,
+        "compressedCount": 0
+      },
+      {
+        "signature": "arbitration-review::arbitration follow-up: acceptance dispute review flow::arbitrated",
+        "openCountBefore": 1,
+        "keptCount": 1,
+        "compressedCount": 0
+      }
+    ]
+  },
+  "compressed": [],
+  "keptSampleIds": [
+    "review_22c6136e60a5",
+    "review_219b8eb78048"
+  ],
+  "evidencePaths": [
+    "memory/compiler/review-queue.jsonl",
+    "memory/compiler/reports/acceptance-review-governance.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

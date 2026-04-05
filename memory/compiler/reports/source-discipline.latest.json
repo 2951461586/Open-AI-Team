@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-04-01T05:58:34.770Z",
+  "factsConfirmed": {
+    "total": 235,
+    "trusted": 235,
+    "artifactOnly": 0,
+    "noRefs": 0,
+    "trustedRatio": 1
+  },
+  "threadsActive": {
+    "total": 17,
+    "trusted": 17,
+    "artifactOnly": 0,
+    "noRefs": 0,
+    "trustedRatio": 1
+  },
+  "continuityLive": {
+    "total": 27,
+    "trusted": 27,
+    "artifactOnly": 0,
+    "noRefs": 0,
+    "trustedRatio": 1
+  },
+  "ok": true,
+  "warnings": []
+}

@@ -1,0 +1,107 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-21T07:35:53.083Z",
+  "action": "archive",
+  "windows": [
+    7,
+    30
+  ],
+  "baselines": [
+    {
+      "days": 7,
+      "schedulerRuns": 19,
+      "avgJobsPerRun": 2.263157894736842,
+      "throttledRuns": 1,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "do-not-trust-until-blockers-cleared",
+      "liveTrusted": false,
+      "metricsVerdict": "do-not-trust-until-blockers-cleared",
+      "metricsControlPlaneTrusted": false,
+      "metricsSnapshotTrust": {
+        "trusted": false,
+        "verdict": "do-not-trust-until-blockers-cleared",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json"
+      },
+      "metricsFinalTrust": {
+        "trusted": false,
+        "verdict": "do-not-trust-until-blockers-cleared",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json",
+        "note": "live truth follows control-plane-verify; metrics snapshot must not override operator trust"
+      },
+      "acceptanceOk": false,
+      "burnInOk": false,
+      "burnInIterations": 2,
+      "previousGeneratedAt": null,
+      "deltas": {
+        "schedulerRuns": 0.9,
+        "avgJobsPerRun": 0.4145,
+        "throttledRuns": null,
+        "dedupedRuns": null
+      },
+      "trendSummary": {
+        "trustStableSnapshots": 3,
+        "acceptanceStableSnapshots": 3,
+        "blockingFreeStableSnapshots": 1,
+        "sampleCountIncludingCurrent": 3
+      }
+    },
+    {
+      "days": 30,
+      "schedulerRuns": 19,
+      "avgJobsPerRun": 2.263157894736842,
+      "throttledRuns": 1,
+      "dedupedRuns": 0,
+      "liveTrustVerdict": "do-not-trust-until-blockers-cleared",
+      "liveTrusted": false,
+      "metricsVerdict": "do-not-trust-until-blockers-cleared",
+      "metricsControlPlaneTrusted": false,
+      "metricsSnapshotTrust": {
+        "trusted": false,
+        "verdict": "do-not-trust-until-blockers-cleared",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json"
+      },
+      "metricsFinalTrust": {
+        "trusted": false,
+        "verdict": "do-not-trust-until-blockers-cleared",
+        "source": "memory/compiler/reports/control-plane-verify.latest.json",
+        "note": "live truth follows control-plane-verify; metrics snapshot must not override operator trust"
+      },
+      "acceptanceOk": false,
+      "burnInOk": false,
+      "burnInIterations": 2,
+      "previousGeneratedAt": null,
+      "deltas": {
+        "schedulerRuns": 0.9,
+        "avgJobsPerRun": 0.4145,
+        "throttledRuns": null,
+        "dedupedRuns": null
+      },
+      "trendSummary": {
+        "trustStableSnapshots": 3,
+        "acceptanceStableSnapshots": 3,
+        "blockingFreeStableSnapshots": 1,
+        "sampleCountIncludingCurrent": 3
+      }
+    }
+  ],
+  "history": {
+    "archiveCountBeforeCurrent": 2,
+    "archiveDir": "memory/compiler/reports/archives/burn-in-trend",
+    "recentArchives": [
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-21T07-35-20-518Z.json",
+      "memory/compiler/reports/archives/burn-in-trend/2026-03-21T07-35-20-601Z.json"
+    ]
+  },
+  "operatorFacing": {
+    "summaryText": "7d trust=do-not-trust-until-blockers-cleared stable=3 samples throttled=1 deduped=0 | 30d trust=do-not-trust-until-blockers-cleared stable=3 samples throttled=1 deduped=0",
+    "longestTrustStableSnapshots": 3,
+    "longestAcceptanceStableSnapshots": 3
+  },
+  "evidencePaths": [
+    "memory/compiler/reports/burn-in.latest.json",
+    "memory/compiler/reports/compiler-metrics.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json",
+    "memory/compiler/scheduler-history.jsonl",
+    "memory/compiler/reports/archives/burn-in-trend"
+  ]
+}

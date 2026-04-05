@@ -1,0 +1,1527 @@
+{
+  "sourceRef": "msg:accept-real-mnfij9l0-msg-1",
+  "sourceKind": "lcm-message",
+  "sourceId": "accept-real-mnfij9l0-msg-1",
+  "totalBacklinks": 151,
+  "byKind": {
+    "session-pack": 1,
+    "session-pack-history": 122,
+    "continuity": 1,
+    "session-handoff": 25,
+    "thread": 1,
+    "fact": 1
+  },
+  "latestGeneratedAt": "2026-04-01T05:55:51.772Z",
+  "backlinks": [
+    {
+      "artifactKind": "session-pack",
+      "artifactId": "sessionpack_2fc8b5cd8cd2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:55:51.772Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_2fc8b5cd8cd2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:55:51.772Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c18414188065",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:55:23.416Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_aeab68835f77",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:55:13.716Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f3ebfd6f6a56",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:48.348Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_44f17920fd3c",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:38.371Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_cae89150a345",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:28.832Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_5dcbe38a9cdb",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:19.373Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3cedae28e4b2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:09.860Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_702197bfac5b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:54:00.312Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_ab62806ec113",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:53:05.779Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_1908be514cc4",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:52:56.053Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3eb8b5c18e2b",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:52:46.454Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_cbb85509af09",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:52:20.038Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d2f069130b42",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:52:10.310Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_1a1c5f2052c1",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:52:00.372Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "continuity",
+      "artifactId": "continuity_868688e87b1a",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "live",
+      "generatedAt": "2026-04-01T05:52:00.090Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_80f60cd0ed73",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:51:49.875Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f388e31004bb",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:51:40.111Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_892fb61be78a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:51:30.427Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_77c9a3709289",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:51:20.660Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_6ca9d4cb6f93",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:51:09.575Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_8c9f17da75e7",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:49:47.050Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_021ca23126d1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:49:17.940Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_021ca23126d1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:49:17.940Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_9bd95d82468a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:49:08.615Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_ec175b0bed4b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:48:59.264Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_5271b39e3a19",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:48:59.058Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_5271b39e3a19",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:48:59.058Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_216627c4ed6c",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:48:40.289Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_1d46036ec679",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:48:30.898Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_44590f67fe03",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:48:21.553Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_6c26b7ebcc51",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:48:21.344Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_6c26b7ebcc51",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:48:21.344Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_ac431157c025",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:56.195Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_af0165814b93",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:55.977Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_1f0de4fa8431",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:55.352Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_07026692573d",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:47:46.079Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f441a6400d47",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:45.734Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f441a6400d47",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:47:45.734Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3a77d68c0b3a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:45.292Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3a77d68c0b3a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "expired",
+      "generatedAt": "2026-04-01T05:47:45.292Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_407debc4e0a2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:47:43.929Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_953eb15bcd0d",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T05:47:34.557Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_953eb15bcd0d",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T05:47:34.557Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_2f8bd3b441a3",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:21:39.992Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_8479827801e3",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:21:30.766Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay-debug",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c36a110a9a53",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:21:03.170Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c36a110a9a53",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:21:03.170Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay-debug",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7a7d9946fca3",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:20:54.982Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_272093bd05b1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:20:32.876Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_4b5baf9e3cb6",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:20:24.454Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_95e97cd446e2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:20:15.402Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_1cd9814f13a1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:20:07.185Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_59313e00e2cc",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:19:58.972Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3f5fed46b245",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:19:50.694Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_293763bd8fe5",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:19:15.267Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_64f452e1e3b2",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:19:07.065Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_4062f6c73150",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:58.806Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_9243d7829ccc",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:37.065Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_8eb2d86ac052",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:28.809Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_eb3dc36e4ac0",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:19.924Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_e3f7a37853c6",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:11.891Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_ce38ed1b7ecf",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:18:03.692Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_b78cfc6a831a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:17:55.487Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_a6c9618da301",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:17:47.179Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_21431b333174",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:17:39.035Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_9216a196ca26",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:17:21.738Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_74f6a5633c89",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:58.275Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_74f6a5633c89",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:16:58.275Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_532ef05b1ebd",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:16:50.505Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_c3dfbb79e34d",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:42.796Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c02fc11cfd31",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:42.622Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c02fc11cfd31",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:16:42.622Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_394fa0c7bc78",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:26.514Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_9df97cdf83b8",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:16:18.740Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_b1d7c2cf7533",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:10.881Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_394cb8ea9c52",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:16:10.706Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_394cb8ea9c52",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:16:10.706Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_71f165f7ba6b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:49.618Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_ddf4a2a75fb8",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:49.444Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0389b62f2cf1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:48.911Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_411893347dce",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:15:40.836Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_309ace520679",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:40.574Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_309ace520679",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:15:40.574Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_8de05105af86",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:40.204Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_8de05105af86",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "expired",
+      "generatedAt": "2026-04-01T04:15:40.204Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_f858f2197fed",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:15:39.102Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_666be58060c0",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:15:31.212Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_666be58060c0",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:15:31.212Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0c4a8ea88e4a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:11:26.627Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_355f6b73f10d",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:11:00.389Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f5f63a38d174",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:10:52.270Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_836bd7c730fe",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:10:25.765Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_cf01abc2ab2b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:10:10.334Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3ef251278560",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:10:00.550Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7adda12772a2",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:09:51.714Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_a988a2e7899b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:09:38.394Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_6cdadd400560",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:09:23.266Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7c0daf7d87c5",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:08:41.116Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c6a79888b72b",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:08:32.842Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0c0bf0cd7516",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:08:24.566Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_a3276da2b675",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:08:02.753Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_71a990db5b85",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:07:51.326Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_9c2a3568e3b5",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:07:35.945Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c299f77f9ccf",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:07:20.540Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_dbc040aafd0f",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:07:05.289Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7ab82698fc52",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:06:49.501Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_fbcf34656137",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:06:34.447Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_da25b85ae24b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:06:19.343Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_003568e2303b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:05:46.962Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_45430e1f4689",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:05:04.055Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_45430e1f4689",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:05:04.055Z",
+      "outputPath": null,
+      "sessionKey": "accept-rebuild-replay",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_a83a219f16b1",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:04:49.796Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_4040248d2197",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:04:35.401Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0506fb1a97db",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:04:35.018Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0506fb1a97db",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:04:35.018Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_10126040c7b4",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:04:07.144Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_8a49719e9d9c",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:03:56.437Z",
+      "outputPath": null,
+      "sessionKey": "accept-session-debug",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_21e638992375",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:03:51.951Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_b6cdf9938b60",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:03:37.332Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7e249bd5761b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:03:36.981Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_7e249bd5761b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:03:36.981Z",
+      "outputPath": null,
+      "sessionKey": "accept-burnin-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_f2579a1dc9a9",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:03:21.494Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_3c514c22cecf",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:56.664Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_07de587626e9",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:56.323Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d609f40e3a7a",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:55.268Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_a7543b29e1c8",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:02:40.885Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_511ce45bdadc",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:40.416Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_511ce45bdadc",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:02:40.416Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d51c435b009b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:39.710Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_d51c435b009b",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "expired",
+      "generatedAt": "2026-04-01T04:02:39.710Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-handoff",
+      "artifactId": "handoff_5bfa8cf39aa7",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:02:37.670Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c37257b59d50",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:37.302Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_c37257b59d50",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "finalized",
+      "generatedAt": "2026-04-01T04:02:37.302Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_13c670d5c25c",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:22.773Z",
+      "outputPath": null,
+      "sessionKey": "accept-session",
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_070f4406ceb7",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:02:22.409Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_8ac80ab1edd8",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:53.085Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_ae4f9e8530b7",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:44.879Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_ae90c51366fe",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:36.895Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_bc730108b0f8",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:28.583Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_946eb8d73f82",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:20.072Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_143d360c86e0",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:01:12.146Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_896db6d43533",
+      "title": "Imported LCM summary sum_4e6742ae47a210c5: [2026-03-24 07:01 GMT+8]",
+      "status": "active",
+      "generatedAt": "2026-04-01T04:00:03.849Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_018298e8023b",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:59:47.592Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_0d0c154f030e",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:59:36.067Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3fb1ad107365",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:59:14.681Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_b25fb73bcfdc",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:59:06.801Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "session-pack-history",
+      "artifactId": "sessionpack_3eb60fd81447",
+      "title": "Verify import-real-sources includes LCM summary adapter input.",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:58:58.399Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "thread",
+      "artifactId": "thread_8ad81c3e3ac5",
+      "title": "real import lcm summary accept-real-mnfij9l0",
+      "status": "active",
+      "generatedAt": "2026-04-01T03:58:58.166Z",
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    },
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_613931400636",
+      "title": "real import LCM summary acceptance item",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

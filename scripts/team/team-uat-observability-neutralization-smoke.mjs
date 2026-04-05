@@ -12,12 +12,12 @@ function assert(condition, label, detail = '') {
   }
 }
 
-const dashboardTypes = fs.readFileSync(new URL('../../../dashboard/src/lib/types.ts', import.meta.url), 'utf8');
-const dashboardUtils = fs.readFileSync(new URL('../../../dashboard/src/lib/utils.ts', import.meta.url), 'utf8');
-const dashboardApi = fs.readFileSync(new URL('../../../dashboard/src/lib/api.ts', import.meta.url), 'utf8');
-const nodesView = fs.readFileSync(new URL('../../../dashboard/src/components/NodesView.tsx', import.meta.url), 'utf8');
-const header = fs.readFileSync(new URL('../../../dashboard/src/components/Header.tsx', import.meta.url), 'utf8');
-const teamConsole = fs.readFileSync(new URL('../../../dashboard/src/components/panels/TeamConsolePanel.tsx', import.meta.url), 'utf8');
+const dashboardTypes = fs.readFileSync(new URL('../../dashboard/src/lib/types.ts', import.meta.url), 'utf8');
+const dashboardUtils = fs.readFileSync(new URL('../../dashboard/src/lib/utils.ts', import.meta.url), 'utf8');
+const dashboardApi = fs.readFileSync(new URL('../../dashboard/src/lib/api.ts', import.meta.url), 'utf8');
+const nodesView = fs.readFileSync(new URL('../../dashboard/src/components/NodesView.tsx', import.meta.url), 'utf8');
+const header = fs.readFileSync(new URL('../../dashboard/src/components/Header.tsx', import.meta.url), 'utf8');
+const teamConsole = fs.readFileSync(new URL('../../dashboard/src/components/panels/TeamConsolePanel.tsx', import.meta.url), 'utf8');
 const nodesRoute = fs.readFileSync(new URL('../../src/routes/team-state/nodes.mjs', import.meta.url), 'utf8');
 const nodeHealth = fs.readFileSync(new URL('../../src/team/team-node-health.mjs', import.meta.url), 'utf8');
 const architecture = fs.readFileSync(new URL('../../docs/architecture/current-team-runtime-architecture.md', import.meta.url), 'utf8');

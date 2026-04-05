@@ -1,0 +1,13 @@
+{
+  "scene": "precise",
+  "prompt": "精确回答：LCM 适配输入 这条主线到底落在哪个 thread？",
+  "date": "2026-03-20",
+  "week": "2026-W12",
+  "maxPromptChars": 1000,
+  "maxPromptTokens": 220,
+  "preferredSourcePrefixes": [
+    "sum:",
+    "file:",
+    "mem:"
+  ]
+}

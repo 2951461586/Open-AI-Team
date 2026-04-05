@@ -1,0 +1,109 @@
+{
+  "ok": false,
+  "generatedAt": "2026-03-24T08:27:39.728Z",
+  "runId": "durable-batch-mn4cqal9-857vsv",
+  "runLabel": "2026-03-21-acceptance-batch-failure-3items",
+  "importMode": "durable-memory-batch.v2",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "pluginId": "memory-lancedb-pro",
+  "exportPath": null,
+  "totalItems": 3,
+  "importedItems": 3,
+  "skippedItems": 0,
+  "importStrategy": "full",
+  "replayFailedBatchIds": [],
+  "batchSize": 2,
+  "totalBatches": 2,
+  "completedBatches": 1,
+  "failedBatches": 1,
+  "batches": [
+    {
+      "batchId": "durable-batch-mn4cqal9-857vsv-b001",
+      "batchIndex": 1,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn4cqal9-857vsv-b001.input.json",
+      "memoryCount": 2,
+      "fingerprints": [
+        "{\"id\":\"accept-batch-failure-1\",\"text\":\"durable batch failure acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-1\"]}",
+        "{\"id\":\"accept-batch-failure-2\",\"text\":\"durable batch failure acceptance item 2 forced failure\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-2\"]}"
+      ],
+      "failed": true,
+      "error": "fixture-forced-failure",
+      "fixtureFailure": true
+    },
+    {
+      "batchId": "durable-batch-mn4cqal9-857vsv-b002",
+      "batchIndex": 2,
+      "batchInputPath": "/root/.openclaw/workspace/memory/compiler/imports/durable-memory/batches/durable-batch-mn4cqal9-857vsv-b002.input.json",
+      "memoryCount": 1,
+      "fingerprints": [
+        "{\"id\":\"accept-batch-failure-3\",\"text\":\"durable batch failure acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-3\"]}"
+      ],
+      "result": {
+        "factsCreated": 0,
+        "factsUpdated": 1,
+        "sourceBacklinks": 63,
+        "controlPlaneOk": true
+      }
+    }
+  ],
+  "totals": {
+    "factsCreated": 0,
+    "factsUpdated": 1
+  },
+  "reportScope": {
+    "namespace": "acceptance",
+    "latestScope": "latest-run",
+    "truthMode": "acceptance-replay-latest-not-live-truth",
+    "operatorTruthPath": "memory/compiler/reports/control-plane-verify.latest.json",
+    "preciseClaimRule": "operator truth must be read from control-plane-verify.latest.json, not replay latest"
+  },
+  "controlPlane": {
+    "refreshOk": true,
+    "verifyOk": true,
+    "operatorVerdict": "trusted-with-warnings",
+    "liveTruthPath": "memory/compiler/reports/control-plane-verify.latest.json"
+  },
+  "backlinks": {
+    "totalSources": 63,
+    "kinds": {
+      "lcm-summary": 2,
+      "lcm-message": 0,
+      "file": 15,
+      "memory-item": 36,
+      "session": 10
+    }
+  },
+  "incremental": {
+    "previousRunId": "durable-batch-mn4cq7de-c4xawl",
+    "previousImportedItems": 0,
+    "skippedFingerprintsSample": [],
+    "failedBatchIds": [
+      "durable-batch-mn4cqal9-857vsv-b001"
+    ],
+    "replayHint": "node plugins/memory-compiler/scripts/memory-compiler/import-durable-memory-batch.mjs <config.json with replayFailedBatchIds>"
+  },
+  "items": [
+    {
+      "id": "accept-batch-failure-1",
+      "fingerprint": "{\"id\":\"accept-batch-failure-1\",\"text\":\"durable batch failure acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-1\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-batch-failure-2",
+      "fingerprint": "{\"id\":\"accept-batch-failure-2\",\"text\":\"durable batch failure acceptance item 2 forced failure\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-2\"]}",
+      "imported": true
+    },
+    {
+      "id": "accept-batch-failure-3",
+      "fingerprint": "{\"id\":\"accept-batch-failure-3\",\"text\":\"durable batch failure acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-failure-3\"]}",
+      "imported": true
+    }
+  ],
+  "evidencePaths": [
+    "memory/compiler/facts.jsonl",
+    "memory/compiler/source-links/index.json",
+    "memory/compiler/reports/source-backlinks.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

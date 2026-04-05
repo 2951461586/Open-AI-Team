@@ -1,0 +1,71 @@
+{
+  "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+  "nodeId": "node-a",
+  "updatedAt": "2026-04-03T11:44:13.135Z",
+  "summary": {
+    "totalJobs": 3,
+    "queued": 0,
+    "running": 0,
+    "completed": 3,
+    "failed": 0
+  },
+  "jobs": [
+    {
+      "id": "job:1775216651029:imkuu8",
+      "role": "planner",
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+      "nodeId": "node-a",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "planner:1775216651029",
+      "error": "",
+      "eventCount": 14,
+      "createdAt": 1775216651029,
+      "updatedAt": 1775216651150,
+      "lastLeaseExpiresAt": "2026-04-03T11:44:12.250Z",
+      "leaseId": "lease:job:1775216650996:7orjjo",
+      "dispatchId": "dispatch:1775216651005:csyabl"
+    },
+    {
+      "id": "job:1775216652706:pbu3fb",
+      "role": "critic",
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+      "nodeId": "node-a",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "critic:1775216652706",
+      "error": "",
+      "eventCount": 20,
+      "createdAt": 1775216652706,
+      "updatedAt": 1775216652800,
+      "lastLeaseExpiresAt": "2026-04-03T11:44:13.910Z",
+      "leaseId": "lease:job:1775216652685:qova6z",
+      "dispatchId": "dispatch:1775216652686:pmapz8"
+    },
+    {
+      "id": "job:1775216653021:rua01s",
+      "role": "critic",
+      "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+      "nodeId": "node-a",
+      "status": "completed",
+      "attempt": 1,
+      "maxAttempts": 2,
+      "leaseMs": 1200,
+      "retryCount": 0,
+      "queueKey": "critic:1775216653021",
+      "error": "",
+      "eventCount": 19,
+      "createdAt": 1775216653021,
+      "updatedAt": 1775216653111,
+      "lastLeaseExpiresAt": "2026-04-03T11:44:14.225Z",
+      "leaseId": "lease:job:1775216652996:ko7ceg",
+      "dispatchId": "dispatch:1775216652997:5pi4ml"
+    }
+  ]
+}

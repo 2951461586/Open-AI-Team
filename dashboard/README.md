@@ -68,7 +68,7 @@ Rule for P7:
 
 ### Repo-local running
 ```bash
-cd /root/.openclaw/workspace/orchestrator/dashboard
+cd /root/.openclaw/workspace/dashboard
 npm ci
 npm run build
 npm run scan:bundle

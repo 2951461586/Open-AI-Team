@@ -28,7 +28,7 @@ function defaultContributesFor(ref = {}) {
     return {
       tools: [{ id: 'bridge.route', kind: 'tool', note: 'route message via bridge adapter' }],
       skills: [{ id: 'bridge.channel-routing', kind: 'skill' }],
-      bridgeRoutes: ['local-thread', 'telegram-scaffold', 'feishu-scaffold'],
+      bridgeRoutes: ['local-thread'],
       shellCommands: ['routes'],
     };
   }

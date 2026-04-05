@@ -1,0 +1,10 @@
+{
+  "contractVersion": "agent-harness-authority.v1",
+  "mode": "shared_fs",
+  "sharedDir": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/.shared",
+  "runIndexPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/.shared/run-index.json",
+  "recoveryStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-27-477/.shared/recovery-state.json",
+  "leaseReapGraceMs": 0,
+  "reapOnResume": true,
+  "updatedAt": "2026-04-03T10:36:30.996Z"
+}

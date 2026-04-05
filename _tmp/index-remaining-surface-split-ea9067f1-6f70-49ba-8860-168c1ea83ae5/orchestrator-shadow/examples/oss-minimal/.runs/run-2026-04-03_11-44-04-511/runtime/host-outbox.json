@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "id": "outbox:1775216644910:1",
+      "payload": {
+        "kind": "status",
+        "text": "run created"
+      },
+      "createdAt": "2026-04-03T11:44:04.910Z",
+      "dispatchedAt": "2026-04-03T11:44:04.942Z"
+    }
+  ]
+}

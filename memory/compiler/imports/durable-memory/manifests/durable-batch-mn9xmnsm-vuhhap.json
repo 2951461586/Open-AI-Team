@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-28T06:11:32.271Z",
+  "runId": "durable-batch-mn9xmnsm-vuhhap",
+  "runLabel": "2026-03-21-acceptance-batch-0items",
+  "importMode": "durable-memory-batch.v2",
+  "date": "2026-03-21",
+  "week": "2026-W12",
+  "pluginId": "memory-lancedb-pro",
+  "exportPath": null,
+  "totalItems": 3,
+  "importedItems": 0,
+  "skippedItems": 3,
+  "importStrategy": "incremental",
+  "replayFailedBatchIds": [],
+  "batchSize": 2,
+  "totalBatches": 0,
+  "completedBatches": 0,
+  "failedBatches": 0,
+  "batches": [],
+  "totals": {
+    "factsCreated": 0,
+    "factsUpdated": 0
+  },
+  "reportScope": {
+    "namespace": "acceptance",
+    "latestScope": "latest-run",
+    "truthMode": "acceptance-replay-latest-not-live-truth",
+    "operatorTruthPath": "memory/compiler/reports/control-plane-verify.latest.json",
+    "preciseClaimRule": "operator truth must be read from control-plane-verify.latest.json, not replay latest"
+  },
+  "controlPlane": {
+    "refreshOk": true,
+    "verifyOk": true,
+    "operatorVerdict": "trusted-with-acceptance-samples",
+    "liveTruthPath": "memory/compiler/reports/control-plane-verify.latest.json"
+  },
+  "backlinks": {
+    "totalSources": 188,
+    "kinds": {
+      "lcm-summary": 2,
+      "lcm-message": 45,
+      "file": 15,
+      "memory-item": 116,
+      "session": 10
+    }
+  },
+  "incremental": {
+    "previousRunId": "durable-batch-mn9xm406-fyubmf",
+    "previousImportedItems": 3,
+    "skippedFingerprintsSample": [
+      "{\"id\":\"accept-batch-durable-1\",\"text\":\"durable batch import acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-1\"]}",
+      "{\"id\":\"accept-batch-durable-2\",\"text\":\"durable batch import acceptance item 2\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-2\"]}",
+      "{\"id\":\"accept-batch-durable-3\",\"text\":\"durable batch import acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-3\"]}"
+    ],
+    "failedBatchIds": [],
+    "replayHint": null
+  },
+  "items": [
+    {
+      "id": "accept-batch-durable-1",
+      "fingerprint": "{\"id\":\"accept-batch-durable-1\",\"text\":\"durable batch import acceptance item 1\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-1\"]}",
+      "imported": false
+    },
+    {
+      "id": "accept-batch-durable-2",
+      "fingerprint": "{\"id\":\"accept-batch-durable-2\",\"text\":\"durable batch import acceptance item 2\",\"category\":\"project\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-2\"]}",
+      "imported": false
+    },
+    {
+      "id": "accept-batch-durable-3",
+      "fingerprint": "{\"id\":\"accept-batch-durable-3\",\"text\":\"durable batch import acceptance item 3\",\"category\":\"decision\",\"subject\":null,\"attribute\":null,\"value\":null,\"sourceRefs\":[\"mem:accept-batch-durable-3\"]}",
+      "imported": false
+    }
+  ],
+  "evidencePaths": [
+    "memory/compiler/facts.jsonl",
+    "memory/compiler/source-links/index.json",
+    "memory/compiler/reports/source-backlinks.latest.json",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:accept-real-mn4twg43-durable-1",
+  "sourceKind": "memory-item",
+  "sourceId": "accept-real-mn4twg43-durable-1",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_7cf04420b4fb",
+      "title": "real durable memory import path acceptance item",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "contractVersion": "agent-harness-broker-result.v1",
+  "runId": "run-2026-04-03_10-36-22-499",
+  "jobId": "job:1775212583840:96qysq",
+  "workItemId": "w2",
+  "role": "executor",
+  "title": "生成最小样板交付",
+  "brokerId": "run-2026-04-03_10-36-22-499-broker-2",
+  "nodeId": "node-b",
+  "status": "completed",
+  "attempt": 2,
+  "retryCount": 1,
+  "dispatchId": "dispatch:1775212583814:sbogrh",
+  "leaseId": "lease:job:1775212583814:kdzsoc",
+  "error": "",
+  "result": {
+    "run": {
+      "ok": true,
+      "provider": "local-demo",
+      "role": "executor",
+      "sessionKey": "demo:executor:local",
+      "childSessionKey": "demo:executor:local",
+      "runId": "demo-run:executor",
+      "via": "local_runtime_adapter",
+      "requestedNode": "local",
+      "_routedNode": "local",
+      "workspaceDir": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace",
+      "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace/artifacts/DELIVERABLE.md",
+      "reply": "{\"summary\":\"已完成执行：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\",\"deliverables\":[\"DELIVERABLE.md\",\"/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace/artifacts/DELIVERABLE.md\"],\"issues\":[],\"findings\":[\"workspace/artifact 已通过真实工具链落盘\",\"bridge route injected capability 已实际执行\",\"当前故意未补 memory retrieval 证据，留给 critic 审查触发 replan\"],\"nextSteps\":[\"critic review\",\"judge decision\"],\"blackboardUpdate\":{\"execution_status\":\"done\",\"deliverable_path\":\"/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace/artifacts/DELIVERABLE.md\"}}",
+      "workerPid": 2008351
+    },
+    "eventLog": [
+      {
+        "type": "plugins.initialized",
+        "pluginCount": 3,
+        "ts": 1775212585167
+      },
+      {
+        "type": "bridge.ingress.appended",
+        "channel": "local-thread",
+        "routeKey": "local-thread",
+        "messageId": "bridge-bootstrap",
+        "kind": "bootstrap",
+        "ts": 1775212585169
+      },
+      {
+        "type": "bridge.egress.appended",
+        "channel": "local-thread",
+        "routeKey": "local-thread",
+        "messageId": "bridge-status",
+        "kind": "bootstrap",
+        "ts": 1775212585170
+      },
+      {
+        "type": "bridge.initialized",
+        "channelCount": 3,
+        "routeCount": 3,
+        "ts": 1775212585170
+      },
+      {
+        "type": "lifecycle.initialized",
+        "heartbeatEnabled": true,
+        "cronEnabled": true,
+        "ts": 1775212585173
+      },
+      {
+        "type": "tool.executed",
+        "tool": "fs.read_text",
+        "ok": true,
+        "runId": "toolrun:1",
+        "ts": 1775212585175
+      },
+      {
+        "type": "tool.executed",
+        "tool": "fs.list",
+        "ok": true,
+        "runId": "toolrun:2",
+        "ts": 1775212585176
+      },
+      {
+        "type": "tool.executed",
+        "tool": "command.exec",
+        "ok": true,
+        "runId": "toolrun:3",
+        "ts": 1775212585185
+      },
+      {
+        "type": "tool.executed",
+        "tool": "command.exec",
+        "ok": true,
+        "runId": "toolrun:4",
+        "ts": 1775212585189
+      },
+      {
+        "type": "bridge.route.denied",
+        "routeKey": "telegram-scaffold",
+        "role": "",
+        "kind": "route",
+        "reason": "role_not_allowed",
+        "messageId": "bridge-denied:1775212585189",
+        "ts": 1775212585189
+      },
+      {
+        "type": "tool.executed",
+        "tool": "bridge.route",
+        "ok": true,
+        "runId": "toolrun:5",
+        "ts": 1775212585190
+      },
+      {
+        "type": "artifact.deliverable.writing",
+        "role": "executor",
+        "path": "artifacts/DELIVERABLE.md",
+        "ts": 1775212585190
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.thinking",
+        "delta": "开始执行：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n先交付主结果，暂不补 retrieval evidence。",
+        "index": 1,
+        "total": 1,
+        "ts": 1775212585191
+      },
+      {
+        "type": "stream.done",
+        "role": "executor",
+        "label": "deliverable.thinking",
+        "total": 1,
+        "ts": 1775212585191
+      },
+      {
+        "type": "tool.executed",
+        "tool": "fs.write_text",
+        "ok": true,
+        "runId": "toolrun:6",
+        "ts": 1775212585192
+      },
+      {
+        "type": "tool.executed",
+        "tool": "text.search",
+        "ok": true,
+        "runId": "toolrun:7",
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "# Deliverable\n## Objective\n帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+        "index": 1,
+        "total": 14,
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "## Based On Plan\n# Plan\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+        "index": 2,
+        "total": 14,
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+        "index": 3,
+        "total": 14,
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+        "index": 4,
+        "total": 14,
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+        "index": 5,
+        "total": 14,
+        "ts": 1775212585193
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+        "index": 6,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+        "index": 7,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+        "index": 8,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+        "index": 9,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "## Produced Output\n- minimal runnable sample\n- local runtime adapter\n- standalone bootstrap\n- run report\n## Available Tools\n- fs.write_text",
+        "index": 10,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route",
+        "index": 11,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- lifecycle.snapshot\n- shell.inspect\n## Command Runtime Evidence",
+        "index": 12,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "- pwd => /root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace\n- ls artifacts => PLAN.md",
+        "index": 13,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.chunk",
+        "role": "executor",
+        "label": "deliverable.result",
+        "delta": "## Artifact Snapshot\n- artifacts/PLAN.md",
+        "index": 14,
+        "total": 14,
+        "ts": 1775212585194
+      },
+      {
+        "type": "stream.done",
+        "role": "executor",
+        "label": "deliverable.result",
+        "total": 14,
+        "ts": 1775212585194
+      }
+    ],
+    "toolRuns": [
+      {
+        "runId": "toolrun:1",
+        "tool": "fs.read_text",
+        "args": {
+          "path": "artifacts/PLAN.md"
+        },
+        "ok": true,
+        "result": {
+          "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace/artifacts/PLAN.md",
+          "text": "# Plan\n\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n- acceptance: 明确角色、registry、memory、artifact、report。\n\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Skill Registry\n- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment\n- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker\n- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state\n- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing\n- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n\n## Upstream Context\n- none yet\n",
+          "bytes": 1052
+        },
+        "ts": 1775212585175
+      },
+      {
+        "runId": "toolrun:2",
+        "tool": "fs.list",
+        "args": {
+          "path": "artifacts",
+          "recursive": true
+        },
+        "ok": true,
+        "result": {
+          "items": [
+            {
+              "path": "artifacts/PLAN.md",
+              "type": "file"
+            }
+          ],
+          "count": 1
+        },
+        "ts": 1775212585176
+      },
+      {
+        "runId": "toolrun:3",
+        "tool": "command.exec",
+        "args": {
+          "command": "pwd",
+          "args": [],
+          "cwd": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace"
+        },
+        "ok": true,
+        "result": {
+          "ok": true,
+          "command": "pwd",
+          "args": [],
+          "cwd": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace",
+          "exitCode": 0,
+          "signal": "",
+          "timedOut": false,
+          "stdout": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace\n",
+          "stderr": ""
+        },
+        "ts": 1775212585185
+      },
+      {
+        "runId": "toolrun:4",
+        "tool": "command.exec",
+        "args": {
+          "command": "ls",
+          "args": [
+            "-1",
+            "artifacts"
+          ],
+          "cwd": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace"
+        },
+        "ok": true,
+        "result": {
+          "ok": true,
+          "command": "ls",
+          "args": [
+            "-1",
+            "artifacts"
+          ],
+          "cwd": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace",
+          "exitCode": 0,
+          "signal": "",
+          "timedOut": false,
+          "stdout": "PLAN.md\n",
+          "stderr": ""
+        },
+        "ts": 1775212585189
+      },
+      {
+        "runId": "toolrun:5",
+        "tool": "bridge.route",
+        "args": {
+          "role": "executor",
+          "routeKey": "telegram-scaffold",
+          "text": "deliverable-ready:帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。"
+        },
+        "ok": true,
+        "result": {
+          "routed": {
+            "ok": false,
+            "denied": {
+              "messageId": "bridge-denied:1775212585189",
+              "channel": "telegram-scaffold",
+              "routeKey": "telegram-scaffold",
+              "text": "deliverable-ready:帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+              "kind": "route_denied",
+              "role": "",
+              "denyReason": "role_not_allowed",
+              "createdAt": "2026-04-03T10:36:25.189Z"
+            },
+            "access": {
+              "ok": false,
+              "routeKey": "telegram-scaffold",
+              "reason": "role_not_allowed",
+              "contract": {
+                "routeKey": "telegram-scaffold",
+                "enabled": true,
+                "allowedRoles": [
+                  "executor"
+                ],
+                "allowedKinds": [
+                  "route",
+                  "status",
+                  "egress"
+                ]
+              }
+            }
+          }
+        },
+        "ts": 1775212585190
+      },
+      {
+        "runId": "toolrun:6",
+        "tool": "fs.write_text",
+        "args": {
+          "path": "artifacts/DELIVERABLE.md",
+          "content": "# Deliverable\n\n## Objective\n帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n\n## Based On Plan\n# Plan\n\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n- acceptance: 明确角色、registry、memory、artifact、report。\n\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Skill Registry\n- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment\n- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker\n- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state\n- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing\n- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n\n## Upstream Context\n- none yet\n\n\n## Produced Output\n- minimal runnable sample\n- local runtime adapter\n- standalone bootstrap\n- run report\n\n## Available Tools\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n\n## Command Runtime Evidence\n- pwd => /root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace\n- ls artifacts => PLAN.md\n\n## Artifact Snapshot\n- artifacts/PLAN.md\n"
+        },
+        "ok": true,
+        "result": {
+          "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-36-22-499/workspace/artifacts/DELIVERABLE.md",
+          "bytes": 1714
+        },
+        "ts": 1775212585192
+      },
+      {
+        "runId": "toolrun:7",
+        "tool": "text.search",
+        "args": {
+          "path": "artifacts",
+          "query": "Plan"
+        },
+        "ok": true,
+        "result": {
+          "hits": [
+            {
+              "path": "artifacts/DELIVERABLE.md",
+              "match": "Plan"
+            },
+            {
+              "path": "artifacts/PLAN.md",
+              "match": "Plan"
+            }
+          ],
+          "count": 2
+        },
+        "ts": 1775212585193
+      }
+    ]
+  },
+  "eventCount": 22,
+  "updatedAt": "2026-04-03T10:36:25.201Z"
+}

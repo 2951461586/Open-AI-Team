@@ -1,0 +1,121 @@
+[
+  {
+    "id": "thread_5b3b0509d41c",
+    "title": "session-state-import",
+    "updatedAt": "2026-04-01T05:54:09.568Z",
+    "nextStepHint": "Use as continuity support, not sole authority for precise claims.",
+    "priority": 60
+  },
+  {
+    "id": "thread_fa35436d4d3d",
+    "title": "daily-memory:2026-03-21.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 40
+  },
+  {
+    "id": "thread_026703b6f92e",
+    "title": "workspace-scan:working-buffer.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_8e1faf0f73c9",
+    "title": "workspace-scan:MASTERPLAN.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_4dfb885c480d",
+    "title": "workspace-scan:IMPLEMENTATION-BACKLOG.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_e6cfabcf7aec",
+    "title": "workspace-scan:SESSION-STATE.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_2e78cdf57e22",
+    "title": "workspace-scan:OPERATOR-REVIEW-FLOW.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_5c3312b13ec7",
+    "title": "workspace-scan:2026-03-19.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_1590e451175f",
+    "title": "workspace-scan:2026-03-18.md",
+    "updatedAt": "2026-04-01T05:54:00.002Z",
+    "nextStepHint": null,
+    "priority": 35
+  },
+  {
+    "id": "thread_22650b89eb59",
+    "title": "[2026-03-24 07:01 GMT+8]",
+    "updatedAt": "2026-04-01T05:53:05.470Z",
+    "nextStepHint": null,
+    "priority": null
+  },
+  {
+    "id": "thread_69636ef2899a",
+    "title": "real import lcm summary accept-real-mnfmj5yk",
+    "updatedAt": "2026-04-01T05:52:00.086Z",
+    "nextStepHint": null,
+    "priority": null
+  },
+  {
+    "id": "thread_c98ebb1dc655",
+    "title": "daily-memory:2026-03-20.md",
+    "updatedAt": "2026-04-01T05:51:39.791Z",
+    "nextStepHint": null,
+    "priority": 40
+  },
+  {
+    "id": "thread_2ca4005fbc5c",
+    "title": "适配层 / ingest 统一入口",
+    "updatedAt": "2026-04-01T05:51:20.334Z",
+    "nextStepHint": "跑 control-plane / acceptance / backlinks 验证",
+    "priority": null
+  },
+  {
+    "id": "thread_893fab904df3",
+    "title": "多源 source coverage 推进",
+    "updatedAt": "2026-04-01T05:51:09.267Z",
+    "nextStepHint": "验证 source backlinks 已覆盖 file / memory-item / session",
+    "priority": null
+  },
+  {
+    "id": "thread_1d5028e25d14",
+    "title": "real import lcm summary accept-real-mnfj8unc",
+    "updatedAt": "2026-04-01T04:18:19.685Z",
+    "nextStepHint": null,
+    "priority": null
+  },
+  {
+    "id": "thread_66171c3f2cd6",
+    "title": "real import lcm summary accept-real-mnfirske",
+    "updatedAt": "2026-04-01T04:07:35.466Z",
+    "nextStepHint": null,
+    "priority": null
+  },
+  {
+    "id": "thread_8ad81c3e3ac5",
+    "title": "real import lcm summary accept-real-mnfij9l0",
+    "updatedAt": "2026-04-01T03:58:58.166Z",
+    "nextStepHint": null,
+    "priority": null
+  }
+]

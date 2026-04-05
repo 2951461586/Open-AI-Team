@@ -1,0 +1,94 @@
+{
+  "contractVersion": "agent-harness-cluster-control.v1",
+  "runId": "run-2026-04-03_10-35-47-257",
+  "generatedAt": "2026-04-03T10:35:50.846Z",
+  "nodes": [
+    {
+      "nodeId": "node-a",
+      "region": "local-a",
+      "tier": "control",
+      "roles": [
+        "planner",
+        "critic"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T10:35:50.793Z"
+    },
+    {
+      "nodeId": "node-b",
+      "region": "local-b",
+      "tier": "worker",
+      "roles": [
+        "executor"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T10:35:50.761Z"
+    },
+    {
+      "nodeId": "node-c",
+      "region": "local-c",
+      "tier": "decision",
+      "roles": [
+        "judge"
+      ],
+      "labels": {},
+      "status": "ready",
+      "brokerCount": 0,
+      "activeJobs": 0,
+      "updatedAt": "2026-04-03T10:35:50.776Z"
+    }
+  ],
+  "brokers": [
+    {
+      "brokerId": "run-2026-04-03_10-35-47-257-broker-1",
+      "nodeId": "node-a",
+      "pid": 2006891,
+      "port": 45279,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/broker-state-run-2026-04-03_10-35-47-257-broker-1.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T10:35:50.788Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_10-35-47-257-broker-2",
+      "nodeId": "node-b",
+      "pid": 2006858,
+      "port": 33381,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/broker-state-run-2026-04-03_10-35-47-257-broker-2.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T10:35:50.759Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_10-35-47-257-broker-3",
+      "nodeId": "node-c",
+      "pid": 2006859,
+      "port": 38515,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/broker-state-run-2026-04-03_10-35-47-257-broker-3.json",
+      "status": "stopped",
+      "lastHealth": "stopped",
+      "updatedAt": "2026-04-03T10:35:50.774Z"
+    }
+  ],
+  "counts": {
+    "nodeCount": 3,
+    "activeBrokerCount": 0,
+    "placementCount": 6,
+    "dispatchCount": 6,
+    "controlEventCount": 25
+  },
+  "jobsByStatus": {
+    "completed": 6
+  },
+  "paths": {
+    "clusterRegistryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/transport/cluster/cluster-registry.json",
+    "clusterPlacementsPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/transport/cluster/cluster-placements.jsonl",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-47-257/runtime/transport/cluster/cluster-summary.json"
+  }
+}

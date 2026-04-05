@@ -1,0 +1,6 @@
+{
+  "action": "expire",
+  "force": true,
+  "sessionKey": "accept-session",
+  "reason": "acceptance-expire"
+}

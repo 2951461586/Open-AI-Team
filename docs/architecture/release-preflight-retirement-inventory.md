@@ -10,17 +10,17 @@
 
 | 区域 | 文件数 | 行数 | 说明 |
 |---|---:|---:|---|
-| `orchestrator/src` | 107 | 21,349 | 现役运行时与 control plane 主链 |
-| `orchestrator/scripts` | 86 | 9,642 | smoke / acceptance / ops / guardrail |
-| `orchestrator/docs` | 45 | 5,658 | 当前主文档面 |
-| `orchestrator/examples` | 26 | 5,560 | 仅 facade / regression sample |
+| `src` | 107 | 21,349 | 现役运行时与 control plane 主链 |
+| `scripts` | 86 | 9,642 | smoke / acceptance / ops / guardrail |
+| `docs` | 45 | 5,658 | 当前主文档面 |
+| `examples` | 26 | 5,560 | 仅 facade / regression sample |
 | `dashboard/src` | 35 | 9,998 | 前端主产品面 |
 | **active-code（`src + scripts + dashboard/src`）** | **212** | **39,913** | **最接近“真实活跃代码规模”** |
 | **readable-surface（`src + scripts + docs + examples + dashboard/src`）** | **299** | **52,207** | 对外阅读 / 审查口径 |
 
 ## 2．为什么之前会看到“两百多万行”
 
-因为 `orchestrator/examples/` 下包含了大量历史 run 产物／样例输出／报告快照。
+因为 `examples/` 下包含了大量历史 run 产物／样例输出／报告快照。
 
 这类数据在“目录总行数”里会把仓库放大到 **2,310,835 行**，但那不是现役源码体量。
 

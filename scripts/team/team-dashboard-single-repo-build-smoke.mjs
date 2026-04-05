@@ -30,7 +30,7 @@ assert(dashboardPkg.name === 'ai-team-dashboard', 'dashboard package exists in r
 assert(fs.existsSync(new URL('../../dashboard/package-lock.json', import.meta.url)), 'dashboard package-lock exists');
 assert(fs.existsSync(new URL('../../dashboard/public/manifest.webmanifest', import.meta.url)), 'dashboard public assets exist');
 assert(fs.existsSync(new URL('../../dashboard/scripts/scan-bundle-residue.mjs', import.meta.url)), 'dashboard bundle scan script exists');
-assert(fs.existsSync(new URL('../../scripts/deploy-dashboard-cloudbase.sh', import.meta.url)), 'repo-local dashboard deploy script exists');
+assert(fs.existsSync(new URL('../../scripts/deploy/dashboard-cloudbase.sh', import.meta.url)), 'repo-local dashboard deploy script exists');
 
 assert(workflow.includes('dashboard-build:'), 'ci workflow defines dashboard-build job');
 assert(workflow.includes('working-directory: dashboard'), 'ci workflow builds dashboard from repo-local directory');
@@ -38,7 +38,7 @@ assert(workflow.includes('npm run build'), 'ci workflow runs dashboard build');
 assert(workflow.includes('npm run scan:bundle'), 'ci workflow runs dashboard bundle scan');
 
 assert(dashboardReadme.includes('single-repo build authority'), 'dashboard README declares single-repo build authority');
-assert(dashboardReadme.includes('cd /root/.openclaw/workspace/orchestrator/dashboard'), 'dashboard README documents repo-local dashboard cwd');
+assert(dashboardReadme.includes('cd /root/.openclaw/workspace/dashboard'), 'dashboard README documents repo-local dashboard cwd');
 assert(!dashboardReadme.includes('sibling `../dashboard` app shell'), 'dashboard README no longer depends on sibling app shell');
 
 assert(releaseCiDoc.includes('repo-local dashboard build authority'), 'release engineering doc declares repo-local dashboard build authority');

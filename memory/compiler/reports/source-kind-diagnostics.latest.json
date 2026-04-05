@@ -1,0 +1,247 @@
+{
+  "ok": true,
+  "generatedAt": "2026-04-01T05:56:19.091Z",
+  "diagnostics": [
+    {
+      "scene": "task",
+      "contract": {
+        "contractVersion": "source-kind-contract.v2",
+        "trustedKinds": [
+          "lcm-summary",
+          "file",
+          "memory-item"
+        ],
+        "kindRules": {
+          "lcm-summary": {
+            "authorityWeight": 0.93,
+            "exactClaimUse": "allowed-with-evidence-path"
+          },
+          "file": {
+            "authorityWeight": 0.96,
+            "exactClaimUse": "preferred-with-evidence-path"
+          },
+          "memory-item": {
+            "authorityWeight": 0.84,
+            "exactClaimUse": "allowed-for-stable-memory-with-evidence-path"
+          },
+          "session": {
+            "authorityWeight": 0.42,
+            "exactClaimUse": "support-only"
+          },
+          "lcm-message": {
+            "authorityWeight": 0.72,
+            "exactClaimUse": "allowed-when-expanded-to-source"
+          },
+          "artifact": {
+            "authorityWeight": 0.18,
+            "exactClaimUse": "forbidden"
+          },
+          "other": {
+            "authorityWeight": 0.12,
+            "exactClaimUse": "forbidden"
+          }
+        },
+        "authority": "trusted-derived-with-source-backing",
+        "digestAuthority": "support-only",
+        "continuityAuthority": "allowed-with-trusted-sources",
+        "minimumTrustedRecords": 1,
+        "minAuthorityScore": 0.58,
+        "sceneRule": "execution-support",
+        "claimRule": "precise-claim-still-needs-evidence-path"
+      },
+      "trustedRecordCount": 527,
+      "sourceMix": {
+        "facts": {
+          "memory-item": 136,
+          "file": 420,
+          "lcm-message": 21,
+          "lcm-summary": 6,
+          "artifact": 257
+        },
+        "threads": {
+          "file": 28,
+          "lcm-message": 51,
+          "lcm-summary": 24
+        },
+        "continuity": {
+          "file": 26,
+          "lcm-message": 51,
+          "lcm-summary": 6,
+          "artifact": 1
+        }
+      },
+      "decisionPoints": {
+        "selectorOrdering": "runtime-selector-core.mjs",
+        "reviewTrigger": "trigger-plan.mjs/review-apply.mjs",
+        "sourceDispatchBlockingOpen": 0,
+        "sourceDispatchBlockingRule": "promotion-review with untrusted sources blocks dispatch until trusted evidence or explicit override"
+      },
+      "contractSatisfied": true,
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/review-queue.jsonl"
+      ]
+    },
+    {
+      "scene": "precise",
+      "contract": {
+        "contractVersion": "source-kind-contract.v2",
+        "trustedKinds": [
+          "lcm-summary",
+          "file",
+          "memory-item"
+        ],
+        "kindRules": {
+          "lcm-summary": {
+            "authorityWeight": 0.93,
+            "exactClaimUse": "allowed-with-evidence-path"
+          },
+          "file": {
+            "authorityWeight": 0.96,
+            "exactClaimUse": "preferred-with-evidence-path"
+          },
+          "memory-item": {
+            "authorityWeight": 0.84,
+            "exactClaimUse": "allowed-for-stable-memory-with-evidence-path"
+          },
+          "session": {
+            "authorityWeight": 0.42,
+            "exactClaimUse": "support-only"
+          },
+          "lcm-message": {
+            "authorityWeight": 0.72,
+            "exactClaimUse": "allowed-when-expanded-to-source"
+          },
+          "artifact": {
+            "authorityWeight": 0.18,
+            "exactClaimUse": "forbidden"
+          },
+          "other": {
+            "authorityWeight": 0.12,
+            "exactClaimUse": "forbidden"
+          }
+        },
+        "authority": "source-first",
+        "digestAuthority": "forbidden",
+        "continuityAuthority": "forbidden",
+        "minimumTrustedRecords": 1,
+        "minAuthorityScore": 0.88,
+        "sceneRule": "precise-source-first",
+        "claimRule": "exact-claim-requires-evidence-path"
+      },
+      "trustedRecordCount": 250,
+      "sourceMix": {
+        "facts": {
+          "memory-item": 66,
+          "file": 217,
+          "lcm-message": 21,
+          "lcm-summary": 6,
+          "artifact": 184
+        },
+        "threads": {
+          "file": 16,
+          "lcm-message": 34,
+          "lcm-summary": 5
+        },
+        "continuity": {}
+      },
+      "decisionPoints": {
+        "selectorOrdering": "runtime-selector-core.mjs",
+        "reviewTrigger": "trigger-plan.mjs/review-apply.mjs",
+        "sourceDispatchBlockingOpen": 0,
+        "sourceDispatchBlockingRule": "promotion-review with untrusted sources blocks dispatch until trusted evidence or explicit override"
+      },
+      "contractSatisfied": true,
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/review-queue.jsonl"
+      ]
+    },
+    {
+      "scene": "session",
+      "contract": {
+        "contractVersion": "source-kind-contract.v2",
+        "trustedKinds": [
+          "lcm-summary",
+          "file",
+          "memory-item"
+        ],
+        "kindRules": {
+          "lcm-summary": {
+            "authorityWeight": 0.93,
+            "exactClaimUse": "allowed-with-evidence-path"
+          },
+          "file": {
+            "authorityWeight": 0.96,
+            "exactClaimUse": "preferred-with-evidence-path"
+          },
+          "memory-item": {
+            "authorityWeight": 0.84,
+            "exactClaimUse": "allowed-for-stable-memory-with-evidence-path"
+          },
+          "session": {
+            "authorityWeight": 0.42,
+            "exactClaimUse": "support-only"
+          },
+          "lcm-message": {
+            "authorityWeight": 0.72,
+            "exactClaimUse": "allowed-when-expanded-to-source"
+          },
+          "artifact": {
+            "authorityWeight": 0.18,
+            "exactClaimUse": "forbidden"
+          },
+          "other": {
+            "authorityWeight": 0.12,
+            "exactClaimUse": "forbidden"
+          }
+        },
+        "authority": "trusted-derived-with-source-backing",
+        "digestAuthority": "support-only",
+        "continuityAuthority": "allowed-with-trusted-sources",
+        "minimumTrustedRecords": 1,
+        "minAuthorityScore": 0.58,
+        "sceneRule": "resume-support",
+        "claimRule": "precise-claim-still-needs-evidence-path"
+      },
+      "trustedRecordCount": 527,
+      "sourceMix": {
+        "facts": {
+          "memory-item": 136,
+          "file": 420,
+          "lcm-message": 21,
+          "lcm-summary": 6,
+          "artifact": 257
+        },
+        "threads": {
+          "file": 28,
+          "lcm-message": 51,
+          "lcm-summary": 24
+        },
+        "continuity": {
+          "file": 26,
+          "lcm-message": 51,
+          "lcm-summary": 6,
+          "artifact": 1
+        }
+      },
+      "decisionPoints": {
+        "selectorOrdering": "runtime-selector-core.mjs",
+        "reviewTrigger": "trigger-plan.mjs/review-apply.mjs",
+        "sourceDispatchBlockingOpen": 0,
+        "sourceDispatchBlockingRule": "promotion-review with untrusted sources blocks dispatch until trusted evidence or explicit override"
+      },
+      "contractSatisfied": true,
+      "evidencePaths": [
+        "memory/compiler/facts.jsonl",
+        "memory/compiler/threads.jsonl",
+        "memory/compiler/continuity.jsonl",
+        "memory/compiler/review-queue.jsonl"
+      ]
+    }
+  ]
+}

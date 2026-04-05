@@ -1,0 +1,14 @@
+{
+  "dispatches": [
+    {
+      "direction": "inbox",
+      "entryId": "inbox:1775212582821:1",
+      "dispatchedAt": "2026-04-03T10:36:22.867Z"
+    },
+    {
+      "direction": "outbox",
+      "entryId": "outbox:1775212582833:1",
+      "dispatchedAt": "2026-04-03T10:36:22.867Z"
+    }
+  ]
+}

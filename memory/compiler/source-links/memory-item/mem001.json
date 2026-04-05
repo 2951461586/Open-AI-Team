@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:mem001",
+  "sourceKind": "memory-item",
+  "sourceId": "mem001",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_40823a9c6ffe",
+      "title": "用户偏好少讲文案、多动手执行",
+      "status": "confirmed",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:c1ed7159-998e-46b4-b2af-8c696cb106c1",
+  "sourceKind": "memory-item",
+  "sourceId": "c1ed7159-998e-46b4-b2af-8c696cb106c1",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_0aca6520f4c3",
+      "title": "NapCat Bridge 双机器人架构：Violet服务器(116.140.211.73)运行NapCat容器，QQ账号xm(3844363225)，Bridge脚本路径/opt/napcat-bridge/bridge.mjs，Agent为violet。Laoda服务器(119.91.63.250)运行NapCat容器，QQ账号lizi(806543415)，Agent为laoda。目标QQ群：OpenClaw测试(1085631891)。Bridge版本v10，特性：WebSocket长连接、Markdown清理、防循环机制(3秒冷却+30%回复概率)。",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}

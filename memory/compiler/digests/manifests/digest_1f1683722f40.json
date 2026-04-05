@@ -1,0 +1,24 @@
+{
+  "id": "digest_1f1683722f40",
+  "type": "week",
+  "title": "Week Digest 2026-W12",
+  "outputPath": "memory/compiler/digests/week/2026-W12.md",
+  "sourceRefs": [
+    "sum:sum_0fe296000a893a83",
+    "file:/root/.openclaw/workspace/SESSION-STATE.md",
+    "file:/root/.openclaw/workspace/memory/2026-03-20.md",
+    "file:/root/.openclaw/workspace/reports/openclaw-memory-compiler/MASTERPLAN.md",
+    "mem:memory-lancedb:mem001",
+    "mem:memory-lancedb:mem002",
+    "sum:sum_4e6742ae47a210c5"
+  ],
+  "generatedAt": "2026-03-20T03:24:46.062Z",
+  "generationStrategy": "post-clean-refresh-v1",
+  "confidence": 0.72,
+  "tokenEstimate": 287,
+  "contentHash": "55779920983ed90d3dba64ca7aa2f8a927a50a57",
+  "sourceHash": "47c0a7560cf2efe6c6d39425307eba62fd67db5e",
+  "supersedes": "digest_87001c591965",
+  "changedSourceRefsCount": 1,
+  "supersededBy": "digest_d2276fbffe91"
+}

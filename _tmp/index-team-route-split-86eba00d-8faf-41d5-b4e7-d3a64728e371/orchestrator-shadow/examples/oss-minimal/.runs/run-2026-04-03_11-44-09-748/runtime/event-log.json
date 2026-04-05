@@ -1,0 +1,2484 @@
+[
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216649751
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216649753
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216649754
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216649755
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216649759
+  },
+  {
+    "type": "host.session_bus.appended",
+    "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-session-bus.json",
+    "ts": 1775216650102
+  },
+  {
+    "type": "host.desk.note_written",
+    "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/desk/notes/host-bootstrap.md",
+    "ts": 1775216650103
+  },
+  {
+    "type": "host.inbox.enqueued",
+    "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-inbox.json",
+    "entryId": "inbox:1775216650104:1",
+    "ts": 1775216650112
+  },
+  {
+    "type": "host.outbox.enqueued",
+    "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-outbox.json",
+    "entryId": "outbox:1775216650121:1",
+    "ts": 1775216650139
+  },
+  {
+    "type": "host.scheduler.upserted",
+    "jobId": "job:run-2026-04-03_11-44-09-748:bootstrap",
+    "status": "pending",
+    "ts": 1775216650167
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-in:run-2026-04-03_11-44-09-748",
+    "kind": "user_request",
+    "ts": 1775216650177
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-out:run-2026-04-03_11-44-09-748",
+    "kind": "status",
+    "ts": 1775216650182
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216650183
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.lifecycle-core",
+    "kind": "lifecycle",
+    "ts": 1775216650183
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.created",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216650183
+  },
+  {
+    "type": "host.dispatch.completed",
+    "dispatchCount": 2,
+    "path": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/host-dispatch.json",
+    "ts": 1775216650233
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216650422
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216650424
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216650425
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216650427
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216650434
+  },
+  {
+    "type": "member.started",
+    "role": "planner",
+    "workItemId": "w1",
+    "ts": 1775216650696
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033128,
+    "port": 33671,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650842
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "pid": 2033129,
+    "port": 33111,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650854
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "pid": 2033130,
+    "port": 45211,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650858
+  },
+  {
+    "type": "transport.broker.failover.injected",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650872
+  },
+  {
+    "type": "transport.broker.stopped",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033128,
+    "port": 33671,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "reason": "failover_injected",
+    "ts": 1775216650925
+  },
+  {
+    "type": "transport.broker.started",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033161,
+    "port": 37269,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650993
+  },
+  {
+    "type": "transport.broker.restarted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "pid": 2033161,
+    "port": 37269,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ts": 1775216650993
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "port": 37269,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216651023
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "placementReason": "preferred_node",
+    "ts": 1775216651100
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "attempt": 0,
+    "queueKey": "planner:1775216651029",
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651029,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651050,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:12.250Z",
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651050,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "leaseId": "lease:job:1775216650996:7orjjo",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651150,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "attempt": 1,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216651005:csyabl",
+    "durableResultPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216651029_imkuu8.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216651150,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "jobId": "job:1775216651029:imkuu8",
+    "role": "planner",
+    "pid": 2033172,
+    "ts": 1775216651186
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216651106
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216651109
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216651109
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216651112
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216651115
+  },
+  {
+    "type": "artifact.plan.writing",
+    "role": "planner",
+    "path": "artifacts/PLAN.md",
+    "ts": 1775216651117
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.thinking",
+    "delta": "开始规划：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n将输出 PLAN.md。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216651117
+  },
+  {
+    "type": "stream.done",
+    "role": "planner",
+    "label": "plan.thinking",
+    "total": 1,
+    "ts": 1775216651120
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216651125
+  },
+  {
+    "type": "tool.executed",
+    "tool": "workspace.snapshot",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "# Plan\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 1,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 2,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 3,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 4,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 5,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 6,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 7,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.chunk",
+    "role": "planner",
+    "label": "plan.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+    "index": 8,
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "stream.done",
+    "role": "planner",
+    "label": "plan.result",
+    "total": 8,
+    "ts": 1775216651132
+  },
+  {
+    "type": "member.completed",
+    "role": "planner",
+    "workItemId": "w1",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/PLAN.md",
+    "workerPid": 2033172,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "brokerJobId": "job:1775216651029:imkuu8",
+    "schedulerDispatchId": "dispatch:1775216651005:csyabl",
+    "schedulerLeaseId": "lease:job:1775216650996:7orjjo",
+    "ts": 1775216651186
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w1",
+    "kind": "member.completed",
+    "ts": 1775216651186
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216651187
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216651187
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216651198
+  },
+  {
+    "type": "member.started",
+    "role": "executor",
+    "workItemId": "w2",
+    "ts": 1775216651226
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "port": 33111,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216651254
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651235:ske83p",
+    "schedulerLeaseId": "lease:job:1775216651234:ukayha",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "placementReason": "preferred_node",
+    "ts": 1775216651337
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "attempt": 0,
+    "queueKey": "executor:1775216651259",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651259,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651281,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:12.481Z",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216651281,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.expired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033190,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652483,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.retried",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "attempt": 1,
+    "retryCount": 1,
+    "reason": "lease_expired",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652492,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652546,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:13.746Z",
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652546,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "leaseId": "lease:job:1775216651234:ukayha",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652628,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "attempt": 2,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216651235:ske83p",
+    "durableResultPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216651259_lgj3w1.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652628,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216651235:ske83p",
+    "schedulerLeaseId": "lease:job:1775216651234:ukayha",
+    "jobId": "job:1775216651259:lgj3w1",
+    "role": "executor",
+    "pid": 2033205,
+    "ts": 1775216652660
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216652585
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216652587
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216652588
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216652590
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216652594
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.read_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216652596
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.list",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216652597
+  },
+  {
+    "type": "tool.executed",
+    "tool": "command.exec",
+    "ok": true,
+    "runId": "toolrun:3",
+    "ts": 1775216652606
+  },
+  {
+    "type": "tool.executed",
+    "tool": "command.exec",
+    "ok": true,
+    "runId": "toolrun:4",
+    "ts": 1775216652610
+  },
+  {
+    "type": "bridge.route.denied",
+    "routeKey": "telegram-scaffold",
+    "role": "",
+    "kind": "route",
+    "reason": "role_not_allowed",
+    "messageId": "bridge-denied:1775216652610",
+    "ts": 1775216652610
+  },
+  {
+    "type": "tool.executed",
+    "tool": "bridge.route",
+    "ok": true,
+    "runId": "toolrun:5",
+    "ts": 1775216652611
+  },
+  {
+    "type": "artifact.deliverable.writing",
+    "role": "executor",
+    "path": "artifacts/DELIVERABLE.md",
+    "ts": 1775216652611
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.thinking",
+    "delta": "开始执行：帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n先交付主结果，暂不补 retrieval evidence。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216652611
+  },
+  {
+    "type": "stream.done",
+    "role": "executor",
+    "label": "deliverable.thinking",
+    "total": 1,
+    "ts": 1775216652612
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:6",
+    "ts": 1775216652615
+  },
+  {
+    "type": "tool.executed",
+    "tool": "text.search",
+    "ok": true,
+    "runId": "toolrun:7",
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "# Deliverable\n## Objective\n帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 1,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "## Based On Plan\n# Plan\n- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 2,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 3,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 4,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 5,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 6,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 7,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 8,
+    "total": 14,
+    "ts": 1775216652618
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+    "index": 9,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "## Produced Output\n- minimal runnable sample\n- local runtime adapter\n- standalone bootstrap\n- run report\n## Available Tools\n- fs.write_text",
+    "index": 10,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- fs.append_text\n- fs.read_text\n- fs.list\n- text.search\n- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route",
+    "index": 11,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- lifecycle.snapshot\n- shell.inspect\n## Command Runtime Evidence",
+    "index": 12,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "- pwd => /root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace\n- ls artifacts => PLAN.md",
+    "index": 13,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "deliverable.result",
+    "delta": "## Artifact Snapshot\n- artifacts/PLAN.md",
+    "index": 14,
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "stream.done",
+    "role": "executor",
+    "label": "deliverable.result",
+    "total": 14,
+    "ts": 1775216652619
+  },
+  {
+    "type": "member.completed",
+    "role": "executor",
+    "workItemId": "w2",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/DELIVERABLE.md",
+    "workerPid": 2033205,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "brokerJobId": "job:1775216651259:lgj3w1",
+    "schedulerDispatchId": "dispatch:1775216651235:ske83p",
+    "schedulerLeaseId": "lease:job:1775216651234:ukayha",
+    "ts": 1775216652660
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w2",
+    "kind": "member.completed",
+    "ts": 1775216652660
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216652661
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216652661
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216652668
+  },
+  {
+    "type": "member.started",
+    "role": "critic",
+    "workItemId": "w3",
+    "ts": 1775216652680
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "port": 37269,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216652702
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652686:pmapz8",
+    "schedulerLeaseId": "lease:job:1775216652685:qova6z",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "placementReason": "preferred_node",
+    "ts": 1775216652737
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "attempt": 0,
+    "queueKey": "critic:1775216652706",
+    "dispatchId": "dispatch:1775216652686:pmapz8",
+    "leaseId": "lease:job:1775216652685:qova6z",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216652706,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "pid": 2033218,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216652710,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "pid": 2033218,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:13.910Z",
+    "leaseId": "lease:job:1775216652685:qova6z",
+    "dispatchId": "dispatch:1775216652686:pmapz8",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216652710,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "pid": 2033218,
+    "attempt": 1,
+    "leaseId": "lease:job:1775216652685:qova6z",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216652800,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "pid": 2033218,
+    "attempt": 1,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216652686:pmapz8",
+    "durableResultPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216652706_pbu3fb.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216652800,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652686:pmapz8",
+    "schedulerLeaseId": "lease:job:1775216652685:qova6z",
+    "jobId": "job:1775216652706:pbu3fb",
+    "role": "critic",
+    "pid": 2033218,
+    "ts": 1775216652827
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216652756
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216652759
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216652759
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216652763
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216652766
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.read_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216652768
+  },
+  {
+    "type": "tool.executed",
+    "tool": "memory.retrieve",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216652776
+  },
+  {
+    "type": "tool.executed",
+    "tool": "command.exec",
+    "ok": false,
+    "runId": "toolrun:3",
+    "ts": 1775216652784
+  },
+  {
+    "type": "artifact.review.writing",
+    "role": "critic",
+    "path": "artifacts/REVIEW.md",
+    "verdict": "revise",
+    "ts": 1775216652784
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.thinking",
+    "delta": "开始审查 deliverable。\n当前 verdict=revise",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216652785
+  },
+  {
+    "type": "stream.done",
+    "role": "critic",
+    "label": "review.thinking",
+    "total": 1,
+    "ts": 1775216652785
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:4",
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "# Review\n## Review Target\n# Deliverable\n## Objective",
+    "index": 1,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n## Based On Plan\n# Plan",
+    "index": 2,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 3,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 4,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 5,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 6,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 7,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 8,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 9,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+    "index": 10,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "## Verdict\nrevise\n## Retrieval Probe\n- [knowledgeBase] Provider registry should stay visible (score=8)",
+    "index": 11,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- [durableArtifacts] DELIVERABLE.md (score=6)\n- [durableArtifacts] PLAN.md (score=6)",
+    "index": 12,
+    "total": 14,
+    "ts": 1775216652788
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- [knowledgeBase] Sandbox and tool runtime need evidence (score=6)\n## Command Probe\n-\n## Notes",
+    "index": 13,
+    "total": 14,
+    "ts": 1775216652789
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- deliverable 缺少 Memory Retrieval 章节，需要补 retrieval 证据并 replan",
+    "index": 14,
+    "total": 14,
+    "ts": 1775216652789
+  },
+  {
+    "type": "stream.done",
+    "role": "critic",
+    "label": "review.result",
+    "total": 14,
+    "ts": 1775216652789
+  },
+  {
+    "type": "member.completed",
+    "role": "critic",
+    "workItemId": "w3",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/REVIEW.md",
+    "workerPid": 2033218,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "brokerJobId": "job:1775216652706:pbu3fb",
+    "schedulerDispatchId": "dispatch:1775216652686:pmapz8",
+    "schedulerLeaseId": "lease:job:1775216652685:qova6z",
+    "ts": 1775216652828
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w3",
+    "kind": "member.completed",
+    "ts": 1775216652828
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216652828
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216652828
+  },
+  {
+    "type": "replan.injected",
+    "sourceWorkItemId": "w3",
+    "addedWorkItemIds": [
+      "w3-replan-executor",
+      "w3-replan-critic"
+    ],
+    "ts": 1775216652832
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216652834
+  },
+  {
+    "type": "member.started",
+    "role": "executor",
+    "workItemId": "w3-replan-executor",
+    "ts": 1775216652842
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "port": 33111,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216652861
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652849:oxhqum",
+    "schedulerLeaseId": "lease:job:1775216652848:spg4r2",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "placementReason": "preferred_node",
+    "ts": 1775216652907
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "attempt": 0,
+    "queueKey": "executor:1775216652865",
+    "dispatchId": "dispatch:1775216652849:oxhqum",
+    "leaseId": "lease:job:1775216652848:spg4r2",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652865,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "pid": 2033230,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652871,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "pid": 2033230,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:14.070Z",
+    "leaseId": "lease:job:1775216652848:spg4r2",
+    "dispatchId": "dispatch:1775216652849:oxhqum",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652871,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "pid": 2033230,
+    "attempt": 1,
+    "leaseId": "lease:job:1775216652848:spg4r2",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652951,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "pid": 2033230,
+    "attempt": 1,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216652849:oxhqum",
+    "durableResultPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216652865_oar2vm.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "ts": 1775216652951,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "nodeId": "node-b",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-2.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652849:oxhqum",
+    "schedulerLeaseId": "lease:job:1775216652848:spg4r2",
+    "jobId": "job:1775216652865:oar2vm",
+    "role": "executor",
+    "pid": 2033230,
+    "ts": 1775216652978
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216652911
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216652914
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216652914
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216652917
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216652920
+  },
+  {
+    "type": "tool.executed",
+    "tool": "memory.retrieve",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216652930
+  },
+  {
+    "type": "tool.executed",
+    "tool": "lifecycle.snapshot",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216652930
+  },
+  {
+    "type": "tool.executed",
+    "tool": "shell.inspect",
+    "ok": true,
+    "runId": "toolrun:3",
+    "ts": 1775216652930
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.thinking",
+    "delta": "收到 critic revise，开始 retrieval-based replan。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216652930
+  },
+  {
+    "type": "stream.done",
+    "role": "executor",
+    "label": "replan.thinking",
+    "total": 1,
+    "ts": 1775216652932
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:4",
+    "ts": 1775216652939
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.append_text",
+    "ok": true,
+    "runId": "toolrun:5",
+    "ts": 1775216652940
+  },
+  {
+    "type": "tool.executed",
+    "tool": "text.search",
+    "ok": true,
+    "runId": "toolrun:6",
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "# Retrieval Addendum\n## Query\nprovider registry runtime adapter workspace sandbox memory retrieval replan\n## Hits",
+    "index": 1,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- [knowledgeBase] Provider registry should stay visible (score=8)\n- [durableArtifacts] DELIVERABLE.md (score=6)",
+    "index": 2,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- [durableArtifacts] PLAN.md (score=6)\n- [knowledgeBase] Critic can trigger replan (score=6)",
+    "index": 3,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- [knowledgeBase] Sandbox and tool runtime need evidence (score=6)\n## Why This Matters",
+    "index": 4,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- provider registry should be visible in memory retrieval\n- sandbox / tool runtime evidence should be retrievable",
+    "index": 5,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- lifecycle / shell injected tools should be observable\n- judge should see retrieval-backed completion evidence\n## Injected Tool Evidence",
+    "index": 6,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.chunk",
+    "role": "executor",
+    "label": "replan.result",
+    "delta": "- lifecycle state => available\n- shell state => missing",
+    "index": 7,
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "stream.done",
+    "role": "executor",
+    "label": "replan.result",
+    "total": 7,
+    "ts": 1775216652942
+  },
+  {
+    "type": "member.completed",
+    "role": "executor",
+    "workItemId": "w3-replan-executor",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/RETRIEVAL-ADDENDUM.md",
+    "workerPid": 2033230,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-2",
+    "brokerJobId": "job:1775216652865:oar2vm",
+    "schedulerDispatchId": "dispatch:1775216652849:oxhqum",
+    "schedulerLeaseId": "lease:job:1775216652848:spg4r2",
+    "ts": 1775216652978
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w3-replan-executor",
+    "kind": "member.completed",
+    "ts": 1775216652978
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216652978
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216652978
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216652982
+  },
+  {
+    "type": "member.started",
+    "role": "critic",
+    "workItemId": "w3-replan-critic",
+    "ts": 1775216652991
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "port": 37269,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216653014
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652997:5pi4ml",
+    "schedulerLeaseId": "lease:job:1775216652996:ko7ceg",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "placementReason": "preferred_node",
+    "ts": 1775216653057
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "attempt": 0,
+    "queueKey": "critic:1775216653021",
+    "dispatchId": "dispatch:1775216652997:5pi4ml",
+    "leaseId": "lease:job:1775216652996:ko7ceg",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216653021,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "pid": 2033241,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216653025,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "pid": 2033241,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:14.225Z",
+    "leaseId": "lease:job:1775216652996:ko7ceg",
+    "dispatchId": "dispatch:1775216652997:5pi4ml",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216653025,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.released",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "pid": 2033241,
+    "attempt": 1,
+    "leaseId": "lease:job:1775216652996:ko7ceg",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216653111,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.completed",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "pid": 2033241,
+    "attempt": 1,
+    "exitCode": 0,
+    "dispatchId": "dispatch:1775216652997:5pi4ml",
+    "durableResultPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/.shared/broker-results/run-2026-04-03_11-44-09-748__job_1775216653021_rua01s.json",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "ts": 1775216653111,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "nodeId": "node-a",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-1.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216652997:5pi4ml",
+    "schedulerLeaseId": "lease:job:1775216652996:ko7ceg",
+    "jobId": "job:1775216653021:rua01s",
+    "role": "critic",
+    "pid": 2033241,
+    "ts": 1775216653140
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216653065
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216653067
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216653068
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216653071
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216653075
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.read_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216653078
+  },
+  {
+    "type": "tool.executed",
+    "tool": "memory.retrieve",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216653086
+  },
+  {
+    "type": "tool.executed",
+    "tool": "command.exec",
+    "ok": true,
+    "runId": "toolrun:3",
+    "ts": 1775216653094
+  },
+  {
+    "type": "artifact.review.writing",
+    "role": "critic",
+    "path": "artifacts/REVIEW-REPLAN.md",
+    "verdict": "approve_with_notes",
+    "ts": 1775216653094
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.thinking",
+    "delta": "开始审查 deliverable。\n当前 verdict=approve_with_notes",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216653095
+  },
+  {
+    "type": "stream.done",
+    "role": "critic",
+    "label": "review.thinking",
+    "total": 1,
+    "ts": 1775216653095
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:4",
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "# Review\n## Review Target\n# Deliverable\n## Objective",
+    "index": 1,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n## Based On Plan\n# Plan",
+    "index": 2,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 3,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 4,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 5,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 6,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 7,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 8,
+    "total": 13,
+    "ts": 1775216653101
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 9,
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Upstream Context\n- none yet",
+    "index": 10,
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "## Verdict\napprove_with_notes\n## Retrieval Probe\n- [durableArtifacts] RETRIEVAL-ADDENDUM.md (score=8)",
+    "index": 11,
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- [knowledgeBase] Provider registry should stay visible (score=8)\n- [durableArtifacts] DELIVERABLE.md (score=6)",
+    "index": 12,
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "stream.chunk",
+    "role": "critic",
+    "label": "review.result",
+    "delta": "- [durableArtifacts] PLAN.md (score=6)\n## Command Probe\n84:## Memory Retrieval\n## Notes\n- sample 已包含 retrieval-backed evidence，可通过",
+    "index": 13,
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "stream.done",
+    "role": "critic",
+    "label": "review.result",
+    "total": 13,
+    "ts": 1775216653102
+  },
+  {
+    "type": "member.completed",
+    "role": "critic",
+    "workItemId": "w3-replan-critic",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/REVIEW-REPLAN.md",
+    "workerPid": 2033241,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-1",
+    "brokerJobId": "job:1775216653021:rua01s",
+    "schedulerDispatchId": "dispatch:1775216652997:5pi4ml",
+    "schedulerLeaseId": "lease:job:1775216652996:ko7ceg",
+    "ts": 1775216653140
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w3-replan-critic",
+    "kind": "member.completed",
+    "ts": 1775216653140
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216653141
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216653141
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216653145
+  },
+  {
+    "type": "member.started",
+    "role": "judge",
+    "workItemId": "w4",
+    "ts": 1775216653165
+  },
+  {
+    "type": "transport.broker.probed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "port": 45211,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "ok": true,
+    "ts": 1775216653206
+  },
+  {
+    "type": "transport.broker.job.submitted",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216653175:l6f79l",
+    "schedulerLeaseId": "lease:job:1775216653174:qy5198",
+    "jobId": "job:1775216653214:vq52io",
+    "role": "judge",
+    "placementReason": "preferred_node",
+    "ts": 1775216653270
+  },
+  {
+    "type": "transport.job.queued",
+    "jobId": "job:1775216653214:vq52io",
+    "role": "judge",
+    "attempt": 0,
+    "queueKey": "judge:1775216653214",
+    "dispatchId": "dispatch:1775216653175:l6f79l",
+    "leaseId": "lease:job:1775216653174:qy5198",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "ts": 1775216653214,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.job.running",
+    "jobId": "job:1775216653214:vq52io",
+    "role": "judge",
+    "pid": 2033255,
+    "attempt": 1,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "ts": 1775216653233,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.lease.acquired",
+    "jobId": "job:1775216653214:vq52io",
+    "role": "judge",
+    "pid": 2033255,
+    "attempt": 1,
+    "leaseMs": 1200,
+    "leaseExpiresAt": "2026-04-03T11:44:14.432Z",
+    "leaseId": "lease:job:1775216653174:qy5198",
+    "dispatchId": "dispatch:1775216653175:l6f79l",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "ts": 1775216653233,
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json"
+  },
+  {
+    "type": "transport.broker.job.completed",
+    "transportKind": "remote_broker_http",
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "nodeId": "node-c",
+    "brokerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/broker-state-run-2026-04-03_11-44-09-748-broker-3.json",
+    "clusterSummaryPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/cluster/cluster-summary.json",
+    "schedulerStatePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/runtime/transport/scheduler-state.json",
+    "schedulerDispatchId": "dispatch:1775216653175:l6f79l",
+    "schedulerLeaseId": "lease:job:1775216653174:qy5198",
+    "jobId": "job:1775216653214:vq52io",
+    "role": "judge",
+    "pid": 2033255,
+    "ts": 1775216653378
+  },
+  {
+    "type": "plugins.initialized",
+    "pluginCount": 3,
+    "ts": 1775216653287
+  },
+  {
+    "type": "bridge.ingress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-bootstrap",
+    "kind": "bootstrap",
+    "ts": 1775216653289
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-status",
+    "kind": "bootstrap",
+    "ts": 1775216653290
+  },
+  {
+    "type": "bridge.initialized",
+    "channelCount": 3,
+    "routeCount": 3,
+    "ts": 1775216653292
+  },
+  {
+    "type": "lifecycle.initialized",
+    "heartbeatEnabled": true,
+    "cronEnabled": true,
+    "ts": 1775216653298
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.read_text",
+    "ok": true,
+    "runId": "toolrun:1",
+    "ts": 1775216653302
+  },
+  {
+    "type": "tool.executed",
+    "tool": "workspace.snapshot",
+    "ok": true,
+    "runId": "toolrun:2",
+    "ts": 1775216653309
+  },
+  {
+    "type": "tool.executed",
+    "tool": "command.exec",
+    "ok": true,
+    "runId": "toolrun:3",
+    "ts": 1775216653324
+  },
+  {
+    "type": "artifact.decision.writing",
+    "role": "judge",
+    "path": "artifacts/DECISION.md",
+    "ts": 1775216653324
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.thinking",
+    "delta": "开始最终裁决。",
+    "index": 1,
+    "total": 1,
+    "ts": 1775216653324
+  },
+  {
+    "type": "stream.done",
+    "role": "judge",
+    "label": "decision.thinking",
+    "total": 1,
+    "ts": 1775216653327
+  },
+  {
+    "type": "tool.executed",
+    "tool": "fs.write_text",
+    "ok": true,
+    "runId": "toolrun:4",
+    "ts": 1775216653328
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "# Decision\n## Inputs\n# Review\n## Review Target\n# Deliverable\n## Objective",
+    "index": 1,
+    "total": 15,
+    "ts": 1775216653328
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。\n## Based On Plan\n# Plan",
+    "index": 2,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- objective: 帮我做一个更像 deer-flow / OpenHanako 的 AI Team 开源最小样板，至少具备多角色编排、workspace、artifact、registry、memory、report。",
+    "index": 3,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- acceptance: 明确角色、registry、memory、artifact、report。\n## Tool Registry\n- fs.write_text\n- fs.append_text\n- fs.read_text\n- fs.list\n- text.search",
+    "index": 4,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- workspace.snapshot\n- memory.retrieve\n- command.exec\n- bridge.route\n- lifecycle.snapshot\n- shell.inspect\n## Skill Registry",
+    "index": 5,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- planning.decomposition\n- execution.delivery\n- review.critique\n- decision.finalize\n- memory.retrieval\n- replan.dynamic-adjustment",
+    "index": 6,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- streaming.incremental-output\n- continuation.resume\n- transport.remote-broker\n- transport.lease-retry\n- transport.multi-broker",
+    "index": 7,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- transport.health-probe\n- transport.failover\n- execution.command-runtime\n- host.inbox-outbox-dispatch\n- backend.sqlite-state",
+    "index": 8,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- cluster.control-plane\n- cluster.distributed-placement\n- cluster.scheduler-dispatch\n- plugins.capability-injection\n- bridge.channel-routing",
+    "index": 9,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- host.session-bus\n- bridge.channel-routing\n- lifecycle.heartbeat\n- lifecycle.cron\n- shell.observability\n## Up\n## Decision\napprove\n## Reason",
+    "index": 10,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "The sample demonstrates core + adapter + workspace sandbox + tool runtime + memory retrieval + replan + review loop skeleton.",
+    "index": 11,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "## Command Runtime Evidence\n89 artifacts/DELIVERABLE.md\n## Durable Artifacts Count\n5\n## Workspace Files\n- artifacts",
+    "index": 12,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- artifacts/DELIVERABLE.md\n- artifacts/PLAN.md\n- artifacts/RETRIEVAL-ADDENDUM.md\n- artifacts/REVIEW-REPLAN.md\n- artifacts/REVIEW.md\n- desk",
+    "index": 13,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- desk/inbox\n- desk/notes\n- desk/notes/host-bootstrap.md\n- memory\n- memory/blackboard.json\n- memory/durable-memory.json",
+    "index": 14,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.chunk",
+    "role": "judge",
+    "label": "decision.result",
+    "delta": "- memory/persona-state.json",
+    "index": 15,
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "stream.done",
+    "role": "judge",
+    "label": "decision.result",
+    "total": 15,
+    "ts": 1775216653329
+  },
+  {
+    "type": "member.completed",
+    "role": "judge",
+    "workItemId": "w4",
+    "artifactPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-09-748/workspace/artifacts/DECISION.md",
+    "workerPid": 2033255,
+    "brokerId": "run-2026-04-03_11-44-09-748-broker-3",
+    "brokerJobId": "job:1775216653214:vq52io",
+    "schedulerDispatchId": "dispatch:1775216653175:l6f79l",
+    "schedulerLeaseId": "lease:job:1775216653174:qy5198",
+    "ts": 1775216653378
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-member:run-2026-04-03_11-44-09-748:w4",
+    "kind": "member.completed",
+    "ts": 1775216653378
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216653379
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "member.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216653379
+  },
+  {
+    "type": "plugin.state.persisted",
+    "payload": {
+      "runId": "run-2026-04-03_11-44-09-748",
+      "status": "running"
+    },
+    "ts": 1775216653383
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.completed",
+    "pluginId": "plugin.oss.bridge-core",
+    "kind": "bridge",
+    "ts": 1775216653399
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.completed",
+    "pluginId": "plugin.oss.lifecycle-core",
+    "kind": "lifecycle",
+    "ts": 1775216653399
+  },
+  {
+    "type": "plugin.hook.executed",
+    "hook": "run.completed",
+    "pluginId": "plugin.oss.shell-core",
+    "kind": "shell",
+    "ts": 1775216653399
+  },
+  {
+    "type": "bridge.egress.appended",
+    "channel": "local-thread",
+    "routeKey": "local-thread",
+    "messageId": "bridge-run:run-2026-04-03_11-44-09-748:completed",
+    "kind": "run.completed",
+    "ts": 1775216653401
+  }
+]

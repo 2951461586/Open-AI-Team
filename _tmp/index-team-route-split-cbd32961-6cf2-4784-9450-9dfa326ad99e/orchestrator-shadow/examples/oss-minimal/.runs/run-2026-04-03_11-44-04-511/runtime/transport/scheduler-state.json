@@ -1,0 +1,47 @@
+{
+  "contractVersion": "agent-harness-distributed-scheduler.v1",
+  "runId": "run-2026-04-03_11-44-04-511",
+  "dbPath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-04-511/runtime/transport/scheduler.sqlite",
+  "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-04-511/runtime/transport/scheduler-state.json",
+  "updatedAt": "2026-04-03T11:44:09.147Z",
+  "brokers": [
+    {
+      "brokerId": "run-2026-04-03_11-44-04-511-broker-1",
+      "nodeId": "node-a",
+      "port": 41629,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-04-511/runtime/broker-state-run-2026-04-03_11-44-04-511-broker-1.json",
+      "status": "stopped",
+      "health": "stopped",
+      "updatedAt": "2026-04-03T11:44:09.066Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_11-44-04-511-broker-2",
+      "nodeId": "node-b",
+      "port": 45031,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-04-511/runtime/broker-state-run-2026-04-03_11-44-04-511-broker-2.json",
+      "status": "stopped",
+      "health": "stopped",
+      "updatedAt": "2026-04-03T11:44:09.118Z"
+    },
+    {
+      "brokerId": "run-2026-04-03_11-44-04-511-broker-3",
+      "nodeId": "node-c",
+      "port": 40725,
+      "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_11-44-04-511/runtime/broker-state-run-2026-04-03_11-44-04-511-broker-3.json",
+      "status": "stopped",
+      "health": "stopped",
+      "updatedAt": "2026-04-03T11:44:09.116Z"
+    }
+  ],
+  "counts": {
+    "brokerCount": 3,
+    "activeBrokerCount": 0,
+    "dispatchCount": 6,
+    "leaseCount": 7,
+    "activeLeaseCount": 0,
+    "reapedLeaseCount": 1,
+    "recoveredJobCount": 1,
+    "recoveryCount": 1,
+    "distributedDispatchCount": 12
+  }
+}

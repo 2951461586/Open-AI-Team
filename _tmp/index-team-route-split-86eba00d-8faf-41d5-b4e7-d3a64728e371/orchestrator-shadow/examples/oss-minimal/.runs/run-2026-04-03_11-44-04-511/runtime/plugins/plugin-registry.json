@@ -1,0 +1,162 @@
+{
+  "contractVersion": "agent-harness-plugins.v1",
+  "generatedAt": "2026-04-03T11:44:08.994Z",
+  "pluginCount": 3,
+  "hookInvocationCount": 11,
+  "injectedCapabilities": {
+    "tools": [
+      {
+        "id": "bridge.route",
+        "kind": "tool",
+        "note": "route message via bridge adapter",
+        "sourcePluginId": "plugin.oss.bridge-core"
+      },
+      {
+        "id": "lifecycle.snapshot",
+        "kind": "tool",
+        "note": "inspect lifecycle runtime state",
+        "sourcePluginId": "plugin.oss.lifecycle-core"
+      },
+      {
+        "id": "shell.inspect",
+        "kind": "tool",
+        "note": "inspect shell runtime state",
+        "sourcePluginId": "plugin.oss.shell-core"
+      }
+    ],
+    "skills": [
+      {
+        "id": "bridge.channel-routing",
+        "kind": "skill",
+        "sourcePluginId": "plugin.oss.bridge-core"
+      },
+      {
+        "id": "lifecycle.heartbeat",
+        "kind": "skill",
+        "sourcePluginId": "plugin.oss.lifecycle-core"
+      },
+      {
+        "id": "lifecycle.cron",
+        "kind": "skill",
+        "sourcePluginId": "plugin.oss.lifecycle-core"
+      },
+      {
+        "id": "shell.observability",
+        "kind": "skill",
+        "sourcePluginId": "plugin.oss.shell-core"
+      }
+    ],
+    "bridgeRoutes": [
+      "local-thread",
+      "telegram-scaffold",
+      "feishu-scaffold"
+    ],
+    "shellCommands": [
+      "routes",
+      "capabilities"
+    ]
+  },
+  "plugins": [
+    {
+      "pluginId": "plugin.oss.bridge-core",
+      "kind": "bridge",
+      "enabled": true,
+      "hooks": [
+        "run.created",
+        "member.completed",
+        "run.completed"
+      ],
+      "contributes": {
+        "tools": [
+          {
+            "id": "bridge.route",
+            "kind": "tool",
+            "note": "route message via bridge adapter",
+            "sourcePluginId": "plugin.oss.bridge-core"
+          }
+        ],
+        "skills": [
+          {
+            "id": "bridge.channel-routing",
+            "kind": "skill",
+            "sourcePluginId": "plugin.oss.bridge-core"
+          }
+        ],
+        "bridgeRoutes": [
+          "local-thread",
+          "telegram-scaffold",
+          "feishu-scaffold"
+        ],
+        "shellCommands": [
+          "routes"
+        ]
+      }
+    },
+    {
+      "pluginId": "plugin.oss.lifecycle-core",
+      "kind": "lifecycle",
+      "enabled": true,
+      "hooks": [
+        "run.created",
+        "resume.started",
+        "run.completed"
+      ],
+      "contributes": {
+        "tools": [
+          {
+            "id": "lifecycle.snapshot",
+            "kind": "tool",
+            "note": "inspect lifecycle runtime state",
+            "sourcePluginId": "plugin.oss.lifecycle-core"
+          }
+        ],
+        "skills": [
+          {
+            "id": "lifecycle.heartbeat",
+            "kind": "skill",
+            "sourcePluginId": "plugin.oss.lifecycle-core"
+          },
+          {
+            "id": "lifecycle.cron",
+            "kind": "skill",
+            "sourcePluginId": "plugin.oss.lifecycle-core"
+          }
+        ],
+        "bridgeRoutes": [],
+        "shellCommands": []
+      }
+    },
+    {
+      "pluginId": "plugin.oss.shell-core",
+      "kind": "shell",
+      "enabled": true,
+      "hooks": [
+        "run.created",
+        "resume.started",
+        "member.completed",
+        "run.completed"
+      ],
+      "contributes": {
+        "tools": [
+          {
+            "id": "shell.inspect",
+            "kind": "tool",
+            "note": "inspect shell runtime state",
+            "sourcePluginId": "plugin.oss.shell-core"
+          }
+        ],
+        "skills": [
+          {
+            "id": "shell.observability",
+            "kind": "skill",
+            "sourcePluginId": "plugin.oss.shell-core"
+          }
+        ],
+        "bridgeRoutes": [],
+        "shellCommands": [
+          "capabilities"
+        ]
+      }
+    }
+  ]
+}

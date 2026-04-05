@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "generatedAt": "2026-03-26T01:51:11.684Z",
+  "action": "archive",
+  "contractVersion": "runtime-probe-trend.v1",
+  "windows": [
+    7,
+    30
+  ],
+  "snapshot": {
+    "generatedAt": "2026-03-26T01:51:11.684Z",
+    "preciseScene": "precise",
+    "taskScene": "task",
+    "preciseDispatchReady": true,
+    "preciseDispatchBlocking": false,
+    "taskCoverageQuality": "trusted-mixed",
+    "taskBudgetReason": "tighten-session-heavy-mix",
+    "taskEscalation": "lcm-on-demand",
+    "trusted": true,
+    "operatorVerdict": "trusted-with-acceptance-samples"
+  },
+  "history": {
+    "archiveCountBeforeCurrent": 52,
+    "archiveDir": "memory/compiler/reports/archives/runtime-probe-trend",
+    "recentArchives": [
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-03-12-005Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-16-25-964Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-16-40-404Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-34-10-114Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-34-24-428Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-41-12-286Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T10-41-27-000Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T16-29-31-206Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-24T16-29-46-202Z.json",
+      "memory/compiler/reports/archives/runtime-probe-trend/2026-03-26T01-50-48-097Z.json"
+    ]
+  },
+  "baselines": [
+    {
+      "days": 7,
+      "sampleCountIncludingCurrent": 53,
+      "latest": {
+        "generatedAt": "2026-03-26T01:51:11.684Z",
+        "preciseScene": "precise",
+        "taskScene": "task",
+        "preciseDispatchReady": true,
+        "preciseDispatchBlocking": false,
+        "taskCoverageQuality": "trusted-mixed",
+        "taskBudgetReason": "tighten-session-heavy-mix",
+        "taskEscalation": "lcm-on-demand",
+        "trusted": true,
+        "operatorVerdict": "trusted-with-acceptance-samples"
+      },
+      "trendSummary": {
+        "preciseDispatchReadyStableSnapshots": 53,
+        "preciseBlockingStableSnapshots": 30,
+        "taskCoverageStableSnapshots": 20,
+        "trustedStableSnapshots": 10
+      }
+    },
+    {
+      "days": 30,
+      "sampleCountIncludingCurrent": 53,
+      "latest": {
+        "generatedAt": "2026-03-26T01:51:11.684Z",
+        "preciseScene": "precise",
+        "taskScene": "task",
+        "preciseDispatchReady": true,
+        "preciseDispatchBlocking": false,
+        "taskCoverageQuality": "trusted-mixed",
+        "taskBudgetReason": "tighten-session-heavy-mix",
+        "taskEscalation": "lcm-on-demand",
+        "trusted": true,
+        "operatorVerdict": "trusted-with-acceptance-samples"
+      },
+      "trendSummary": {
+        "preciseDispatchReadyStableSnapshots": 53,
+        "preciseBlockingStableSnapshots": 30,
+        "taskCoverageStableSnapshots": 20,
+        "trustedStableSnapshots": 10
+      }
+    }
+  ],
+  "operatorFacing": {
+    "summaryText": "7d preciseReady=true blocking=false taskMix=trusted-mixed trusted=trusted-with-acceptance-samples stable=53/20 | 30d preciseReady=true blocking=false taskMix=trusted-mixed trusted=trusted-with-acceptance-samples stable=53/20",
+    "preciseDispatchReady": true,
+    "preciseDispatchBlocking": false,
+    "taskCoverageQuality": "trusted-mixed",
+    "longestPreciseDispatchReadyStableSnapshots": 53,
+    "longestTaskCoverageStableSnapshots": 20
+  },
+  "evidencePaths": [
+    "memory/compiler/reports/runtime-probe.latest.json",
+    "memory/compiler/reports/runtime-probe-trend.latest.json",
+    "memory/compiler/reports/archives/runtime-probe-trend",
+    "memory/compiler/reports/control-plane-verify.latest.json"
+  ]
+}

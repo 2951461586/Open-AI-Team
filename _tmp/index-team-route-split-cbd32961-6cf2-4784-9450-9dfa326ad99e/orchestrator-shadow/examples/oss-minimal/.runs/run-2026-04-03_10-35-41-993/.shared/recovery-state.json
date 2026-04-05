@@ -1,0 +1,7 @@
+{
+  "contractVersion": "agent-harness-recovery.v1",
+  "runId": "run-2026-04-03_10-35-41-993",
+  "runDir": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993",
+  "statePath": "/root/.openclaw/workspace/orchestrator/examples/oss-minimal/.runs/run-2026-04-03_10-35-41-993/runtime/run-state.json",
+  "updatedAt": "2026-04-03T10:35:46.568Z"
+}

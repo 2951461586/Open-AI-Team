@@ -1,0 +1,148 @@
+{
+  "contractVersion": "agent-shell.v1",
+  "updatedAt": "2026-04-03T10:35:46.567Z",
+  "onboardingReady": false,
+  "onboardingMode": "productized",
+  "commands": [
+    "status",
+    "package",
+    "plugins",
+    "onboarding",
+    "routes",
+    "capabilities",
+    "doctor"
+  ],
+  "capabilityPolicy": {
+    "contractVersion": "agent-harness-capability-gate.v1",
+    "defaultInjectedToolAccess": "deny",
+    "roles": {
+      "planner": {
+        "allowInjectedTools": [],
+        "allowBridgeRoutes": [
+          "local-thread"
+        ]
+      },
+      "executor": {
+        "allowInjectedTools": [
+          "bridge.route",
+          "lifecycle.snapshot",
+          "shell.inspect"
+        ],
+        "allowBridgeRoutes": [
+          "local-thread",
+          "telegram-scaffold"
+        ]
+      },
+      "critic": {
+        "allowInjectedTools": [],
+        "allowBridgeRoutes": [
+          "local-thread"
+        ]
+      },
+      "judge": {
+        "allowInjectedTools": [],
+        "allowBridgeRoutes": [
+          "local-thread"
+        ]
+      }
+    }
+  },
+  "doctor": {
+    "status": "warn",
+    "passed": 7,
+    "total": 8,
+    "checks": [
+      {
+        "key": "package",
+        "label": "agent package loaded",
+        "ok": true
+      },
+      {
+        "key": "shell",
+        "label": "product shell state writable",
+        "ok": true
+      },
+      {
+        "key": "capabilityGate",
+        "label": "capability gate present",
+        "ok": true
+      },
+      {
+        "key": "commands",
+        "label": "shell commands registered",
+        "ok": true
+      },
+      {
+        "key": "routes",
+        "label": "bridge routes observable",
+        "ok": false
+      },
+      {
+        "key": "plugins",
+        "label": "plugin surface injected",
+        "ok": true
+      },
+      {
+        "key": "desk",
+        "label": "desk surface ready",
+        "ok": true
+      },
+      {
+        "key": "sessionBus",
+        "label": "session bus ready",
+        "ok": true
+      }
+    ]
+  },
+  "activationChecklist": [
+    {
+      "step": "inspect package",
+      "command": "package",
+      "ready": true
+    },
+    {
+      "step": "inspect shell status",
+      "command": "status",
+      "ready": true
+    },
+    {
+      "step": "inspect plugins",
+      "command": "plugins",
+      "ready": true
+    },
+    {
+      "step": "inspect onboarding",
+      "command": "onboarding",
+      "ready": true
+    },
+    {
+      "step": "inspect bridge routes",
+      "command": "routes",
+      "ready": true
+    },
+    {
+      "step": "inspect capability gate",
+      "command": "capabilities",
+      "ready": true
+    },
+    {
+      "step": "run onboarding doctor",
+      "command": "doctor",
+      "ready": true
+    }
+  ],
+  "status": "ready",
+  "lastRunId": "run-2026-04-03_10-35-41-993",
+  "lastStatus": "completed",
+  "lastCompletedWorkItemId": "w4",
+  "lastCompletedRole": "judge",
+  "completedWorkItemCount": 6,
+  "runBound": true,
+  "bridgeRouteCount": 0,
+  "bridgeRoutes": [],
+  "pluginCount": 3,
+  "injectedToolCount": 3,
+  "injectedSkillCount": 4,
+  "deskReady": true,
+  "sessionBusReady": true
+}

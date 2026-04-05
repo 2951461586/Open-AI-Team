@@ -1,0 +1,12 @@
+{
+  "plugin": "memory-compiler",
+  "initializedAt": "2026-04-05T05:49:14.372Z",
+  "workspaceDir": "/root/.openclaw/workspace",
+  "dataDir": "/root/.openclaw/workspace/memory/compiler",
+  "runtimeDir": "/root/.openclaw/workspace/memory/compiler",
+  "reportsDir": "/root/.openclaw/workspace/memory/compiler/reports",
+  "docsDir": "/root/.openclaw/workspace/plugins/memory-compiler/docs",
+  "sessionStatePath": "/root/.openclaw/workspace/SESSION-STATE.md",
+  "workingBufferPath": "/root/.openclaw/workspace/memory/working-buffer.md",
+  "dailyMemoryDir": "/root/.openclaw/workspace/memory"
+}

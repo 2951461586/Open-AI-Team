@@ -1,0 +1,22 @@
+{
+  "sourceRef": "mem:3c032905-fc28-4b25-a2b2-f36fcf702a8b",
+  "sourceKind": "memory-item",
+  "sourceId": "3c032905-fc28-4b25-a2b2-f36fcf702a8b",
+  "totalBacklinks": 1,
+  "byKind": {
+    "fact": 1
+  },
+  "latestGeneratedAt": null,
+  "backlinks": [
+    {
+      "artifactKind": "fact",
+      "artifactId": "fact_8297efe807fd",
+      "title": "经验教训：修改openclaw.json或其他关键配置文件时必须遵守安全规则。推荐使用/usr/local/sbin/openclaw-config-safe-edit命令进行安全修改。禁止直接编辑配置文件，必须先挂5分钟回滚保险丝，成功后取消。教训来源：2026-02-26为memory-lancedb-pro添加不支持的配置项导致网关启动失败。",
+      "status": "inferred",
+      "generatedAt": null,
+      "outputPath": null,
+      "sessionKey": null,
+      "reviewType": null
+    }
+  ]
+}
