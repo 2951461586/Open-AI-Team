@@ -1,0 +1,173 @@
+{
+  "contractVersion": "agent-harness-bridge.v2",
+  "updatedAt": "2026-04-06T04:08:53.497Z",
+  "channels": [
+    "local-thread"
+  ],
+  "defaultChannel": "local-thread",
+  "routes": [
+    "local-thread"
+  ],
+  "routeContracts": [
+    {
+      "routeKey": "local-thread",
+      "enabled": true,
+      "allowedRoles": [
+        "planner"
+      ],
+      "allowedKinds": [
+        "route",
+        "bootstrap",
+        "egress"
+      ]
+    }
+  ],
+  "heartbeat": {
+    "intervalMs": 30000,
+    "graceMs": 90000
+  },
+  "counts": {
+    "ingress": 1,
+    "egress": 1,
+    "relayed": 0,
+    "activeAgents": 1,
+    "totalAgents": 1,
+    "authFailures": 0
+  },
+  "agentRegistry": [
+    {
+      "agentId": "agent-1",
+      "sessionId": "agent-1",
+      "role": "",
+      "status": "active",
+      "registeredAt": "2026-04-06T04:08:53.485Z",
+      "lastHeartbeatAt": "2026-04-06T04:08:53.485Z",
+      "heartbeatExpiresAt": "2026-04-06T04:10:53.485Z",
+      "currentTaskCount": 0,
+      "channelBindings": [
+        "local-thread"
+      ],
+      "capabilities": {
+        "schemaVersion": "agent-capabilities.v1",
+        "tools": [
+          "bridge.route"
+        ],
+        "memory": [
+          "shared"
+        ],
+        "channels": [
+          {
+            "routeKey": "local-thread",
+            "priority": 1,
+            "modes": [
+              "ingress",
+              "egress"
+            ]
+          }
+        ],
+        "tags": [],
+        "limits": {
+          "maxConcurrentTasks": 1,
+          "maxQueueDepth": 0
+        },
+        "metadata": {},
+        "verification": {
+          "mode": "declarative",
+          "evidence": [],
+          "verifiedAt": "",
+          "notes": ""
+        }
+      },
+      "auth": {
+        "mode": "anonymous",
+        "tokenHint": ""
+      },
+      "metadata": {},
+      "counters": {
+        "ingress": 0,
+        "egress": 0,
+        "relayed": 0
+      }
+    }
+  ],
+  "capabilities": {
+    "contractVersion": "agent-capabilities-snapshot.v1",
+    "generatedAt": "2026-04-06T04:08:53.497Z",
+    "count": 1,
+    "items": [
+      {
+        "agentId": "agent-1",
+        "status": "active",
+        "currentTaskCount": 0,
+        "capabilities": {
+          "schemaVersion": "agent-capabilities.v1",
+          "tools": [
+            "bridge.route"
+          ],
+          "memory": [
+            "shared"
+          ],
+          "channels": [
+            {
+              "routeKey": "local-thread",
+              "channel": "local-thread",
+              "priority": 1,
+              "modes": [
+                "ingress",
+                "egress"
+              ],
+              "metadata": {}
+            }
+          ],
+          "tags": [],
+          "limits": {
+            "maxConcurrentTasks": 1,
+            "maxQueueDepth": 0
+          },
+          "metadata": {},
+          "verification": {
+            "mode": "declarative",
+            "evidence": [],
+            "verifiedAt": "",
+            "notes": ""
+          }
+        }
+      }
+    ]
+  },
+  "ingress": [
+    {
+      "messageId": "bridge-bootstrap",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "bootstrap ingress",
+      "kind": "bootstrap",
+      "direction": "ingress",
+      "agentId": "",
+      "fromAgentId": "",
+      "toAgentId": "",
+      "role": "",
+      "createdAt": "2026-04-06T04:08:53.468Z",
+      "metadata": {}
+    }
+  ],
+  "egress": [
+    {
+      "messageId": "bridge-status",
+      "channel": "local-thread",
+      "routeKey": "local-thread",
+      "text": "runtime ready",
+      "kind": "bootstrap",
+      "direction": "egress",
+      "agentId": "",
+      "fromAgentId": "",
+      "toAgentId": "",
+      "role": "",
+      "createdAt": "2026-04-06T04:08:53.481Z",
+      "metadata": {}
+    }
+  ],
+  "relayLog": [],
+  "authFailures": [],
+  "deliveries": []
+}

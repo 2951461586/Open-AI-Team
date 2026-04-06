@@ -2,6 +2,7 @@
 
 import { LayoutGrid, MessageSquare, Bot, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useI18n } from '@/i18n/context'
 
 export type View = 'kanban' | 'chat' | 'agents'
 
@@ -14,12 +15,14 @@ interface Props {
 }
 
 const navItems = [
-  { id: 'kanban' as View, icon: LayoutGrid, label: '任务台' },
-  { id: 'chat' as View, icon: MessageSquare, label: '协作' },
-  { id: 'agents' as View, icon: Bot, label: 'Agent' },
+  { id: 'kanban' as View, icon: LayoutGrid, labelKey: 'nav.kanban' },
+  { id: 'chat' as View, icon: MessageSquare, labelKey: 'nav.chat' },
+  { id: 'agents' as View, icon: Bot, labelKey: 'nav.agents' },
 ]
 
 export function Sidebar({ currentView, onViewChange, taskCount, collapsed = false, onToggle }: Props) {
+  const { t } = useI18n()
+
   return (
     <>
       {/* Desktop sidebar */}
@@ -53,8 +56,8 @@ export function Sidebar({ currentView, onViewChange, taskCount, collapsed = fals
                     ? 'bg-[var(--accent-soft)] text-[var(--accent)]'
                     : 'text-[var(--fg-muted)] hover:bg-[var(--surface-subtle)] hover:text-[var(--fg-secondary)]'
                 )}
-                title={item.label}
-                aria-label={item.label}
+                title={t(item.labelKey)}
+                aria-label={t(item.labelKey)}
                 aria-current={active ? 'page' : undefined}
               >
                 {active && (
@@ -62,7 +65,7 @@ export function Sidebar({ currentView, onViewChange, taskCount, collapsed = fals
                 )}
                 <Icon className="h-[17px] w-[17px]" />
                 {!collapsed && (
-                  <span className="hidden lg:inline text-[9px] font-medium leading-none mt-0.5">{item.label}</span>
+                  <span className="hidden lg:inline text-[9px] font-medium leading-none mt-0.5">{t(item.labelKey)}</span>
                 )}
               </button>
             )
@@ -75,7 +78,7 @@ export function Sidebar({ currentView, onViewChange, taskCount, collapsed = fals
             <button
               onClick={onToggle}
               className="flex w-full items-center justify-center rounded-lg p-1.5 text-[var(--fg-ghost)] transition hover:bg-[var(--surface-subtle)] hover:text-[var(--fg-secondary)]"
-              title={collapsed ? '展开边栏' : '收起边栏'}
+              title={collapsed ? t('sidebar.expand') : t('sidebar.collapse')}
             >
               {collapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
             </button>
@@ -100,7 +103,7 @@ export function Sidebar({ currentView, onViewChange, taskCount, collapsed = fals
                     ? 'bg-[var(--accent-soft)] text-[var(--accent)] shadow-[var(--shadow-xs)]'
                     : 'text-[var(--fg-ghost)] hover:bg-[var(--surface-subtle)]'
                 )}
-                aria-label={item.label}
+                aria-label={t(item.labelKey)}
                 aria-current={active ? 'page' : undefined}
               >
                 <div className="relative">
@@ -111,7 +114,7 @@ export function Sidebar({ currentView, onViewChange, taskCount, collapsed = fals
                     </span>
                   ) : null}
                 </div>
-                <span className="text-[10px] font-medium">{item.label}</span>
+                <span className="text-[10px] font-medium">{t(item.labelKey)}</span>
               </button>
             )
           })}

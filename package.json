@@ -1,11 +1,27 @@
 {
   "name": "ai-team-harness",
+  "private": true,
   "version": "0.1.0",
-  "description": "Open-source multi-agent execution harness with planning, review, recovery, and evidence-driven delivery.",
+  "description": "AI Team Harness monorepo planning scaffold. Existing src/ layout remains intact until an explicit migration is performed.",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@9",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "start": "node src/index.mjs",
+    "dev": "pnpm -r --if-present run dev",
+    "build": "pnpm -r --if-present run build",
+    "test": "node scripts/test-runner.mjs",
+    "test:unit": "node scripts/test-runner.mjs --pattern unit",
+    "test:integration": "node scripts/test-runner.mjs --pattern integration",
+    "test:watch": "node scripts/test-runner.mjs --watch",
+    "lint": "pnpm -r --if-present run lint",
+    "deploy": "bash scripts/deploy.sh",
+    "deploy:restart": "bash scripts/deploy.sh restart",
+    "deploy:stop": "bash scripts/deploy.sh stop",
+    "start:legacy": "node src/index.mjs",
     "smoke:team": "node scripts/smoke/team-mainline.mjs",
     "smoke:oss-minimal": "node scripts/team/team-oss-minimal-smoke.mjs",
     "smoke:team:batch": "node scripts/smoke/team-batch.mjs",
@@ -23,10 +39,12 @@
     "fixtures:route-derived": "node scripts/team/team-generate-route-derived-fixtures.mjs",
     "fixtures:real-run-published": "node scripts/team/team-generate-real-run-published-fixtures.mjs",
     "fixtures:real-run-provenance": "node scripts/team/team-published-fixture-provenance-summary.mjs",
-    "dashboard:build": "cd dashboard && npm ci && npm run build",
-    "dashboard:check-bundle": "cd dashboard && npm run scan:bundle",
+    "dashboard:build:legacy": "cd dashboard && npm ci && npm run build",
+    "dashboard:check-bundle:legacy": "cd dashboard && npm run scan:bundle",
     "dashboard:deploy:authority": "bash scripts/deploy/dashboard-from-source.sh",
     "dashboard:deploy:cloudbase": "bash scripts/deploy/dashboard-cloudbase.sh",
+    "electron:dev": "cd electron && npm run dev",
+    "electron:build": "cd electron && npm run build",
     "release:stage-artifacts": "node scripts/team/team-stage-release-artifacts.mjs",
     "release:notes": "node scripts/team/team-generate-release-notes.mjs",
     "acceptance:three-node-live": "node scripts/acceptance/canonical/team-three-node-live.mjs",
@@ -38,10 +56,12 @@
     "agent-harness",
     "workflow-orchestration",
     "broker",
-    "runtime"
+    "runtime",
+    "monorepo"
   ],
   "dependencies": {
     "@cloudbase/node-sdk": "^3.18.1",
-    "ws": "^8.19.0"
+    "ws": "^8.19.0",
+    "xml2js": "^0.6.2"
   }
 }

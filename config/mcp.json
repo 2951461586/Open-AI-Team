@@ -1,0 +1,16 @@
+{
+  "server": {
+    "port": 3002,
+    "token": "your-mcp-token",
+    "allowedTools": ["*"],
+    "allowedResources": ["*"]
+  },
+  "clients": [
+    {
+      "name": "filesystem",
+      "url": "http://localhost:8080",
+      "token": "",
+      "enabled": false
+    }
+  ]
+}

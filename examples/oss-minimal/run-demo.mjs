@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createStandaloneHarness } from './standalone-bootstrap.mjs';
+import { createStandaloneProductRuntime } from '../../src/agent-harness-core/standalone-product-runtime.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const manifestPath = path.join(__dirname, 'agent-manifest.json');
@@ -48,7 +48,7 @@ function parseArgs(argv = []) {
 
 const args = parseArgs(process.argv.slice(2));
 const userText = args.textParts.join(' ').trim() || defaultUserText;
-const harness = await createStandaloneHarness({
+const harness = await createStandaloneProductRuntime({
   manifestPath,
   runtimeOptions: {
     crashAfterCompletions: args.crashAfterCompletions,

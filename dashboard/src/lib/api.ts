@@ -366,6 +366,34 @@ export async function fetchThreadSummary(threadId: string): Promise<Response> {
   })
 }
 
+export async function fetchWorkbenchState(taskId: string): Promise<Response> {
+  return await fetch(`${API_BASE}/state/team/workbench?taskId=${encodeURIComponent(taskId)}`, {
+    cache: 'no-store',
+    mode: 'cors',
+    headers: authHeaders(),
+  })
+}
+
+export async function submitWorkbenchApproval(taskId: string, action: 'approve' | 'reject' | 'request_revision', reason = ''): Promise<Response> {
+  return await fetch(`${API_BASE}/api/dashboard/control`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({
+      taskId,
+      action: action === 'approve' ? 'mark_done' : action === 'reject' ? 'cancel' : 'request_replan',
+      reason,
+    }),
+  })
+}
+
+export async function fetchWorkbenchArtifacts(taskId: string): Promise<Response> {
+  return fetchTaskArtifacts(taskId)
+}
+
+export async function fetchWorkbenchEvidence(taskId: string): Promise<Response> {
+  return fetchTaskEvidence(taskId)
+}
+
 // ─── Agent Lifecycle ────────────────────────────────────────────────
 
 export interface AgentInfo {

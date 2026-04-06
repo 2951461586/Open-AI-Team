@@ -7,6 +7,7 @@ import { Sidebar } from '@/components/Sidebar'
 import type { View } from '@/components/Sidebar'
 import { RightPanel, isDetailTab, type DetailTab } from '@/components/RightPanel'
 import { AgentsView } from '@/components/views/AgentsView'
+import { useI18n } from '@/i18n/context'
 import { KanbanView } from '@/components/views/KanbanView'
 import { ChatView } from '@/components/views/ChatView'
 import { useTaskStore, useChatStore, useLiveStore } from '@/lib/store'
@@ -193,6 +194,7 @@ function MobileDrawer({ onClose, children }: { onClose: () => void; children: Re
 }
 
 export default function DashboardPage() {
+  const { t } = useI18n()
   const { tasks, nodes, loading, error, lastUpdate, selectedTaskId, setTasks, setNodes, upsertTask, setLoading, setError, setSelectedTaskId } = useTaskStore()
   const {
     messages,
@@ -810,7 +812,7 @@ export default function DashboardPage() {
         onRefresh={() => { loadData(); loadNodes() }}
         loading={loading}
         controlPlaneStatus={Object.values(nodes || {}).find((node: any) => node?.stats?.controlPlaneStatus)?.stats?.controlPlaneStatus || ''}
-        currentViewLabel={view === 'kanban' ? '任务台' : view === 'chat' ? '协作' : 'Agent · 节点'}
+        currentViewLabel={view === 'kanban' ? t('nav.kanban') : view === 'chat' ? t('nav.chat') : t('view.agentsWithNodes')}
         currentView={view}
         onSwitchView={setView}
         selectedTask={selectedTask ? {
@@ -920,9 +922,9 @@ export default function DashboardPage() {
         <div className="pointer-events-none fixed inset-x-0 bottom-[calc(env(safe-area-inset-bottom,0px)+82px)] z-40 px-3 md:hidden">
           <div className="pointer-events-auto mx-auto flex max-w-xl items-center justify-between gap-3 rounded-2xl border border-[var(--accent)]/18 bg-[var(--surface)]/96 px-3 py-2.5 shadow-[0_16px_36px_rgba(15,23,42,0.14)] backdrop-blur-md">
             <div className="min-w-0">
-              <div className="text-[10px] font-medium text-[var(--accent)]">当前现场</div>
+              <div className="text-[10px] font-medium text-[var(--accent)]">{t('header.currentSite')}</div>
               <div className="truncate text-[13px] font-semibold text-[var(--fg)]">{selectedTask.title || selectedTask.taskId}</div>
-              <div className="mt-0.5 text-[11px] text-[var(--fg-muted)]">{selectedTask.state} · {selectedTask.currentDriver || '团队推进中'}</div>
+              <div className="mt-0.5 text-[11px] text-[var(--fg-muted)]">{selectedTask.state} · {selectedTask.currentDriver || t('task.teamProgressing')}</div>
             </div>
             <div className="flex shrink-0 items-center gap-2">
               <button
@@ -930,14 +932,14 @@ export default function DashboardPage() {
                 onClick={openSelectedTaskWorkbench}
                 className="rounded-xl bg-[var(--accent)] px-3 py-2 text-[11px] font-medium text-white"
               >
-                回到现场
+                {t('header.backToSite')}
               </button>
               <button
                 type="button"
                 onClick={() => setSelectedTaskId(null)}
                 className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-[11px] font-medium text-[var(--fg-secondary)]"
               >
-                关闭
+                {t('header.close')}
               </button>
             </div>
           </div>

@@ -2,9 +2,11 @@
 
 import { RefreshCw } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { TaskState } from '@/lib/types'
 import type { View } from './Sidebar'
 import { stateLabel, nodeServiceStatusLabel } from '@/lib/utils'
+import { useI18n } from '@/i18n/context'
 
 interface Props {
   lastUpdate: number | null
@@ -19,26 +21,27 @@ interface Props {
   controlPlaneStatus?: string
 }
 
-function formatLastUpdate(lastUpdate: number | null) {
-  if (!lastUpdate) return '未同步'
-  return new Date(lastUpdate).toLocaleTimeString('zh-CN', {
+function formatLastUpdate(lastUpdate: number | null, locale: 'zh' | 'en', unsyncedLabel: string) {
+  if (!lastUpdate) return unsyncedLabel
+  return new Date(lastUpdate).toLocaleTimeString(locale === 'zh' ? 'zh-CN' : 'en-US', {
     hour: '2-digit',
     minute: '2-digit',
   })
 }
 
-const STAGE_CONFIG: { key: string; label: string; states: TaskState[]; color: string }[] = [
-  { key: 'active', label: '进行中', states: ['planning', 'plan_review', 'approved', 'revision_requested'], color: 'bg-[var(--accent)]' },
-  { key: 'pending', label: '待处理', states: ['pending'], color: 'bg-[var(--fg-ghost)]' },
-  { key: 'done', label: '已完成', states: ['done'], color: 'bg-[var(--success)]' },
-  { key: 'blocked', label: '阻塞', states: ['blocked'], color: 'bg-[var(--danger)]' },
+const STAGE_CONFIG: { key: string; labelKey: string; states: TaskState[]; color: string }[] = [
+  { key: 'active', labelKey: 'status.inProgress', states: ['planning', 'plan_review', 'approved', 'revision_requested'], color: 'bg-[var(--accent)]' },
+  { key: 'pending', labelKey: 'status.pending', states: ['pending'], color: 'bg-[var(--fg-ghost)]' },
+  { key: 'done', labelKey: 'status.done', states: ['done'], color: 'bg-[var(--success)]' },
+  { key: 'blocked', labelKey: 'status.blocked', states: ['blocked'], color: 'bg-[var(--danger)]' },
 ]
 
 function StageStrip({ tasks = [] }: { tasks?: { state: TaskState }[] }) {
+  const { t } = useI18n()
   if (tasks.length === 0) return null
   const counts = STAGE_CONFIG.map((cfg) => ({
     ...cfg,
-    count: tasks.filter((t) => cfg.states.includes(t.state)).length,
+    count: tasks.filter((task) => cfg.states.includes(task.state)).length,
   }))
 
   return (
@@ -47,18 +50,12 @@ function StageStrip({ tasks = [] }: { tasks?: { state: TaskState }[] }) {
         <div key={cfg.key} className="flex items-center gap-1.5">
           <span className={`h-1.5 w-1.5 rounded-full ${cfg.color}`} />
           <span className="text-[11px] text-[var(--fg-muted)]">
-            {cfg.label} <span className="font-semibold text-[var(--fg-secondary)]">{cfg.count}</span>
+            {t(cfg.labelKey)} <span className="font-semibold text-[var(--fg-secondary)]">{cfg.count}</span>
           </span>
         </div>
       ))}
     </div>
   )
-}
-
-const VIEW_LABELS: Record<View, string> = {
-  kanban: '任务台',
-  chat: '协作',
-  agents: 'Agent',
 }
 
 export function Header({
@@ -73,9 +70,16 @@ export function Header({
   tasks = [],
   controlPlaneStatus,
 }: Props) {
+  const { t, locale } = useI18n()
+  const viewLabels: Record<View, string> = {
+    kanban: t('nav.kanban'),
+    chat: t('nav.chat'),
+    agents: t('nav.agents'),
+  }
+
   const currentTaskPill = selectedTask?.taskId
     ? {
-        title: selectedTask.title || selectedTask.taskId || '任务现场',
+        title: selectedTask.title || selectedTask.taskId || t('task.scene'),
         state: String(selectedTask.state || '').trim(),
         driver: String(selectedTask.currentDriver || '').trim(),
       }
@@ -90,11 +94,11 @@ export function Header({
               {currentViewLabel}
             </h1>
             <span className="inline-flex shrink-0 rounded-md border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-1.5 py-0.5 text-[10px] text-[var(--fg-muted)]">
-              {formatLastUpdate(lastUpdate)}
+              {formatLastUpdate(lastUpdate, locale, t('header.unsynced'))}
             </span>
             {controlPlaneStatus ? (
               <span className="inline-flex shrink-0 rounded-md border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-1.5 py-0.5 text-[10px] text-[var(--fg-muted)]">
-                控制面：{nodeServiceStatusLabel({ controlPlaneStatus })}
+                {t('header.controlPlane')}：{nodeServiceStatusLabel({ controlPlaneStatus })}
               </span>
             ) : null}
             <StageStrip tasks={tasks} />
@@ -112,7 +116,7 @@ export function Header({
                       onClick={() => onSwitchView(view)}
                       className={`rounded-full px-3 py-1 text-[10px] font-medium transition ${active ? 'bg-[var(--surface)] text-[var(--fg)] shadow-[var(--shadow-xs)]' : 'text-[var(--fg-muted)] hover:text-[var(--fg-secondary)]'}`}
                     >
-                      {VIEW_LABELS[view]}
+                      {viewLabels[view]}
                     </button>
                   )
                 })}
@@ -126,7 +130,7 @@ export function Header({
                 className="inline-flex min-w-0 max-w-[280px] shrink-0 items-center gap-1.5 rounded-full border border-[var(--accent)]/20 bg-[var(--accent-soft)] px-2.5 py-1 text-[10px] font-medium text-[var(--accent)] transition hover:opacity-90"
                 title={currentTaskPill.title}
               >
-                <span className="truncate">现场：{currentTaskPill.title}</span>
+                <span className="truncate">{t('header.onSite')}：{currentTaskPill.title}</span>
                 {currentTaskPill.state ? <span className="text-[var(--accent)]/70">· {stateLabel(currentTaskPill.state as TaskState)}</span> : null}
               </button>
             ) : null}
@@ -134,15 +138,16 @@ export function Header({
         </div>
 
         <div className="flex shrink-0 items-center gap-2 self-center">
+          <LanguageSwitcher />
           <ThemeToggle />
           <button
             onClick={onRefresh}
             disabled={loading}
             className="btn-ghost gap-1.5"
-            aria-label="刷新数据"
+            aria-label={t('header.refreshData')}
           >
             <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-            <span className="hidden sm:inline">刷新</span>
+            <span className="hidden sm:inline">{t('header.refresh')}</span>
           </button>
         </div>
       </div>

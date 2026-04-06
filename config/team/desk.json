@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "storage": {
+    "baseDir": "state/desks",
+    "indexFileName": "index.json",
+    "useSqlite": false,
+    "sqliteFileName": "desk.sqlite",
+    "watch": false
+  },
+  "limits": {
+    "maxFileSizeBytes": 52428800,
+    "maxDeskSizeBytes": 536870912,
+    "maxNoteSizeBytes": 2097152
+  },
+  "files": {
+    "allowedMimeTypes": ["*/*"],
+    "allowedExtensions": ["*"]
+  },
+  "notes": {
+    "maxTags": 32
+  },
+  "collaboration": {
+    "dropboxDirName": "_shared"
+  }
+}

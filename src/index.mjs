@@ -4,7 +4,10 @@ import { loadIndexConfig } from './index-env.mjs';
 import { tryHandleTeamRoute } from './routes/index-routes-team.mjs';
 import { tryHandleHealthStateRoute } from './routes/index-routes-health-state.mjs';
 import { tryHandleEntryRoute } from './routes/index-routes-entry.mjs';
+import { tryHandleMcpRoute } from './routes/index-routes-mcp.mjs';
+import { tryHandleIMWebhookRoute } from './routes/index-routes-im-webhook.mjs';
 import { consumeWebhookEvent } from './webhook-event-router.mjs';
+import { createDeskApi } from './team/desk-api.mjs';
 
 function sendJson(res, code, body, extraHeaders = {}) {
   const s = JSON.stringify(body);
@@ -46,6 +49,12 @@ const {
 } = config;
 
 const ctx = await createAppContext(config);
+const deskApi = createDeskApi({
+  desk: ctx.deskStorage || ctx.desk || null,
+  eventBus: ctx.eventBus || null,
+  config,
+  logger: console,
+});
 
 function isOrchAuthorized(req) {
   if (!ORCH_KICK_TOKEN) return true;
@@ -75,6 +84,9 @@ function applyCors(req, res) {
 
 const baseRouteCtx = {
   ...ctx,
+  rootDir: process.cwd(),
+  deskStorage: ctx.deskStorage || ctx.desk || deskApi.desk,
+  deskApi,
   PORT,
   TEAM_DB_PATH,
   TEAM_JUDGE_TRUE_EXECUTION,
@@ -95,7 +107,9 @@ const server = http.createServer(async (req, res) => {
 
   if (tryHandleHealthStateRoute(req, res, baseRouteCtx)) return;
   if (tryHandleEntryRoute(req, res, baseRouteCtx)) return;
+  if (tryHandleIMWebhookRoute(req, res, baseRouteCtx)) return;
   if (tryHandleTeamRoute(req, res, baseRouteCtx)) return;
+  if (tryHandleMcpRoute(req, res, baseRouteCtx)) return;
 
   sendJson(res, 404, { ok: false, error: 'not_found' });
 });

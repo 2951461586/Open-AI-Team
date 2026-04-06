@@ -14,6 +14,8 @@ import { WorkbenchDeliveryOverviewSection } from '@/components/panels/WorkbenchD
 import { SummaryHeroSection } from '@/components/panels/SummaryHeroSection'
 import { PanelEmptyState, PanelErrorState, PanelLoadingState, PanelWarningState } from '@/components/ui/panel-states'
 import { WorkbenchChildTasksSection, WorkbenchExecutionSurfaceSection, WorkbenchLiveFeedSection, WorkbenchMemorySection, WorkbenchPeopleSection, WorkbenchReplanSection } from '@/components/panels/WorkbenchStructureSections'
+import { ArtifactPreview } from '@/components/panels/ArtifactPreview'
+import { DeliveryTimeline } from '@/components/panels/DeliveryTimeline'
 
 function activeStageDuration(events: LiveFlowEvent[], currentState: string): string {
   if (currentState === 'done' || currentState === 'cancelled' || currentState === 'blocked') return ''
@@ -444,6 +446,13 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
     mcpBoundCount?: number
   }
   const memoryLayers = (workbench?.summary?.memoryLayers || workbench?.board?.memoryLayers || summaryPayload?.memoryLayers || pipeline?.memoryLayers || {}) as any
+  const deliveryHistory = Array.isArray(workbench?.task?.metadata?.workbench?.history)
+    ? workbench.task.metadata.workbench.history
+    : Array.isArray(workbench?.board?.deliveryHistory)
+      ? workbench.board.deliveryHistory
+      : []
+  const currentSubmission = workbench?.task?.metadata?.workbench?.currentSubmission || deliveryHistory[0] || null
+  const previewArtifacts = Array.isArray(currentSubmission?.artifacts) ? currentSubmission.artifacts : []
 
   return (
     <>
@@ -655,6 +664,43 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
             />
 
             <SubtaskProgressPanel taskId={taskId} />
+
+            <DeliveryTimeline history={deliveryHistory} />
+
+            {previewArtifacts.length > 0 && (
+              <section className="surface-card p-4 md:p-5">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-[13px] font-semibold text-[var(--fg)]">交付物预览</div>
+                  <div className="text-[11px] text-[var(--fg-muted)]">当前版本 v{currentSubmission?.version || 0}</div>
+                </div>
+                <div className="mt-3 grid gap-3 xl:grid-cols-2">
+                  {previewArtifacts.slice(0, 4).map((artifact: any) => (
+                    <ArtifactPreview key={artifact.artifactId || artifact.title} artifact={artifact} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="surface-card p-4 md:p-5">
+              <div className="text-[13px] font-semibold text-[var(--fg)]">审批操作</div>
+              <div className="mt-2 text-[12px] text-[var(--fg-muted)]">使用上方动作区进行 approve / reject / request-revision，原因会随控制动作一起写回。</div>
+              {currentSubmission?.review && (
+                <div className="mt-3 grid gap-3 md:grid-cols-3">
+                  <div className="info-tile bg-[var(--surface-subtle)]">
+                    <div className="text-[10px] text-[var(--fg-ghost)]">Evidence 检查</div>
+                    <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{currentSubmission.review.evidenceCheck?.ok ? '通过' : '待补齐'}</div>
+                  </div>
+                  <div className="info-tile bg-[var(--surface-subtle)]">
+                    <div className="text-[10px] text-[var(--fg-ghost)]">Artifact 验证</div>
+                    <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{currentSubmission.review.artifactCheck?.ok ? '通过' : '待补齐'}</div>
+                  </div>
+                  <div className="info-tile bg-[var(--surface-subtle)]">
+                    <div className="text-[10px] text-[var(--fg-ghost)]">契约对照</div>
+                    <div className="mt-1 text-[12px] font-medium text-[var(--fg)]">{currentSubmission.review.contractCheck?.ok ? '通过' : '未达标'}</div>
+                  </div>
+                </div>
+              )}
+            </section>
 
             <WorkbenchPeopleSection
               peopleView={peopleView}

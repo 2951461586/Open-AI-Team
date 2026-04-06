@@ -1,0 +1,54 @@
+{
+  "$schema": "https://example.invalid/ai-team-harness/tools.schema.json",
+  "version": 1,
+  "defaults": {
+    "enabled": true,
+    "timeoutMs": 15000,
+    "userAgent": "ai-team-harness/0.1"
+  },
+  "providers": {
+    "calendar": {
+      "enabled": true,
+      "storagePath": "tmp/tool-data/calendar-events.json",
+      "defaultTimezone": "UTC",
+      "defaultReminderMinutes": 30,
+      "provider": "local-json"
+    },
+    "email": {
+      "enabled": true,
+      "storagePath": "tmp/tool-data/email-messages.json",
+      "sentPath": "tmp/tool-data/email-sent.json",
+      "provider": "local-json",
+      "defaultFrom": "agent@local.test"
+    },
+    "git": {
+      "enabled": true,
+      "defaultRepo": ".",
+      "allowPush": true,
+      "allowCommit": true,
+      "defaultBranchBase": "main"
+    },
+    "weather": {
+      "enabled": true,
+      "provider": "open-meteo",
+      "geocodeBaseUrl": "https://geocoding-api.open-meteo.com/v1/search",
+      "forecastBaseUrl": "https://api.open-meteo.com/v1/forecast",
+      "wttrBaseUrl": "https://wttr.in"
+    },
+    "reminder": {
+      "enabled": true,
+      "storagePath": "tmp/tool-data/reminders.json",
+      "defaultTimezone": "UTC"
+    },
+    "browser": {
+      "enabled": true,
+      "userAgent": "ai-team-harness/0.1",
+      "screenshotOutputDir": "tmp/browser-shots",
+      "defaultViewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "preferPlaywright": true
+    }
+  }
+}

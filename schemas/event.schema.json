@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.openai-team.dev/event.schema.json",
+  "title": "AI Team Harness Event Envelope",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": [
+        "task.created",
+        "task.completed",
+        "task.failed",
+        "agent.joined",
+        "agent.left",
+        "memory.written",
+        "channel.message",
+        "imc.request",
+        "imc.response",
+        "session.created",
+        "session.updated",
+        "session.linked",
+        "session.switched",
+        "session.migrated",
+        "event.replayed"
+      ]
+    },
+    "ts": { "type": "number" },
+    "source": { "type": "string" },
+    "version": { "type": "string" },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high", "critical"]
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["public", "internal", "audit"]
+    },
+    "teamId": { "type": "string" },
+    "sessionId": { "type": "string" },
+    "userId": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "causationId": { "type": "string" },
+    "routeKey": { "type": "string" },
+    "replay": { "type": "boolean" },
+    "important": { "type": "boolean" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": ["id", "type", "ts", "payload"]
+}

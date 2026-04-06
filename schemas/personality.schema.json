@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team-harness.local/schemas/personality.schema.json",
+  "title": "Agent Personality Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "personalities"],
+  "properties": {
+    "version": { "type": "string" },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mergeStrategy": { "type": "string", "enum": ["append", "prepend", "replace"] },
+        "fallbackPersonality": { "type": "string" },
+        "watch": { "type": "boolean" }
+      }
+    },
+    "personalities": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/personalityTemplate" }
+    }
+  },
+  "$defs": {
+    "personalityTemplate": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["name", "tone", "style", "traits", "responseLength", "emojiPreference"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "tone": { "type": "string" },
+        "style": { "type": "string" },
+        "traits": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "responseLength": { "type": "string", "enum": ["short", "medium", "long", "adaptive"] },
+        "emojiPreference": { "type": "string", "enum": ["none", "minimal", "moderate", "expressive", "auto"] },
+        "guidance": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "mergeStrategy": { "type": "string", "enum": ["append", "prepend", "replace"] },
+        "promptTemplate": { "type": "string" },
+        "metadata": { "type": "object" },
+        "scenarios": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "tone": { "type": "string" },
+              "style": { "type": "string" },
+              "traits": { "type": "array", "items": { "type": "string" } },
+              "responseLength": { "type": "string", "enum": ["short", "medium", "long", "adaptive"] },
+              "emojiPreference": { "type": "string", "enum": ["none", "minimal", "moderate", "expressive", "auto"] },
+              "guidance": { "type": "array", "items": { "type": "string" } },
+              "mergeStrategy": { "type": "string", "enum": ["append", "prepend", "replace"] },
+              "promptTemplate": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

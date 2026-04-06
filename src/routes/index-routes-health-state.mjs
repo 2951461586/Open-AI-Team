@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import { TEAM_ROLE_CONTRACTS } from '../team/team-role-contracts.mjs';
-import { getRoleExecutionSurfaceContract } from '../team/team-role-capability-contracts.mjs';
+import { getRoleExecutionSurfaceContract } from '../team-core/role-capability-contracts.mjs';
 import { loadTeamRolesConfig, reloadTeamRolesConfig, getTeamRolesConfigStatus } from '../team/team-roles-config.mjs';
 import { DEFAULT_NODE_ID, OBSERVER_NODE_ID, canonicalNodeId } from '../team/team-node-ids.mjs';
-import { buildStableEnvelope, buildStateQueryContracts } from '../team/query-api/query-contract.mjs';
+import { buildStableEnvelope, buildStateQueryContracts } from '../team-core/query-contract.mjs';
 import { tryHandleTeamNodesRoute } from './team-state/nodes.mjs';
 import { tryHandleTeamAgentsRoute } from './team-state/agents.mjs';
 import { tryHandleTeamWorkbenchRoute } from './team-state/workbench.mjs';

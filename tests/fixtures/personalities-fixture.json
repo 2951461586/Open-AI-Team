@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "defaults": {
+    "mergeStrategy": "append",
+    "fallbackPersonality": "executor",
+    "watch": false
+  },
+  "personalities": {
+    "executor": {
+      "name": "Executor Fixture",
+      "tone": "务实",
+      "style": "直接",
+      "traits": ["执行优先"],
+      "guidance": ["先做再说"],
+      "scenarios": {
+        "incident": {
+          "tone": "冷静",
+          "style": "短句"
+        }
+      }
+    },
+    "planner": {
+      "name": "Planner Fixture",
+      "tone": "严谨",
+      "style": "结构化",
+      "traits": ["先结论后展开"],
+      "guidance": ["显式列出边界"]
+    }
+  }
+}

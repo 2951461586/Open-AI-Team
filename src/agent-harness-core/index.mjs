@@ -1,3 +1,24 @@
+export { createSkillRegistry, parseSkillMarkdown } from './skill-registry.mjs';
+export { createSkillRuntime } from './skill-runtime.mjs';
+export { createLocalToolRuntime } from './tool-runtime.mjs';
+export { createToolAuditLog, appendToolAuditEntry } from './tool-audit.mjs';
+export { ModelRouter, createModelRouter, estimateComplexity } from './model-router.mjs';
+export { createDefaultToolProviders, createFsProvider, createSearchProvider, createWebFetcherProvider, createScreenshotProvider, createToolValidator } from './tool-providers.mjs';
+export { createCalendarProvider } from '../tools/tool-calendar.mjs';
+export { createEmailProvider } from '../tools/tool-email.mjs';
+export { createGitProvider } from '../tools/tool-git.mjs';
+export { createWeatherProvider } from '../tools/tool-weather.mjs';
+export { createReminderProvider } from '../tools/tool-reminder.mjs';
+export { createBrowserProvider } from '../tools/tool-browser.mjs';
+export {
+  buildCapabilitiesSnapshot,
+  matchAgentCapabilities,
+  normalizeAgentCapabilities,
+  selectBestAgent,
+  summarizeAgentCapabilities,
+  validateAgentCapabilities,
+} from './agent-capabilities.mjs';
+
 export function createWorkflowPack({ id = '', version = '1.0.0', label = '', buildPlan } = {}) {
   return {
     kind: 'workflow_pack',

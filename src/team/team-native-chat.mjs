@@ -10,6 +10,7 @@ export function createNativeChatRuntime({
   baseUrl = 'http://127.0.0.1:8317/v1',
   apiKey = '',
   model = 'gpt-5.4',
+  traceLogger = null,
 } = {}) {
 
   // Pre-resolve API key at construction time
@@ -41,10 +42,12 @@ export function createNativeChatRuntime({
   /**
    * generateReply — blocking, returns full response
    */
-  async function generateReply({ text = '', history = [], mode = 'chat', systemPrompt = '' } = {}) {
+  async function generateReply({ text = '', history = [], mode = 'chat', systemPrompt = '', model: overrideModel = '' } = {}) {
     if (!text.trim()) return { ok: false, error: 'empty_text' };
     if (!resolvedApiKey) return { ok: false, error: 'no_api_key' };
 
+    const selectedModel = String(overrideModel || model || '').trim();
+    const startedAt = Date.now();
     try {
       const res = await globalThis.fetch(completionsUrl, {
         method: 'POST',
@@ -53,7 +56,7 @@ export function createNativeChatRuntime({
           authorization: `Bearer ${resolvedApiKey}`,
         },
         body: JSON.stringify({
-          model,
+          model: selectedModel,
           messages: buildMessages(text, history, systemPrompt),
           stream: false,
           max_tokens: 2048,
@@ -63,24 +66,38 @@ export function createNativeChatRuntime({
 
       const data = await res.json().catch(() => ({}));
       const reply = data?.choices?.[0]?.message?.content || '';
-      if (!reply) return { ok: false, error: 'empty_response' };
-      return { ok: true, reply, source: 'openai_direct', model };
+      const usage = data?.usage || null;
+      const latencyMs = Date.now() - startedAt;
+      const cost = 0;
+      const out = reply
+        ? { ok: true, reply, source: 'openai_direct', model: selectedModel, tokenUsage: usage, latencyMs, cost }
+        : { ok: false, error: 'empty_response', model: selectedModel, tokenUsage: usage, latencyMs, cost };
+      if (typeof traceLogger === 'function') {
+        try { await traceLogger({ op: 'native_chat.generateReply', mode, model: selectedModel, tokenUsage: usage, latencyMs, cost, ok: out.ok !== false }); } catch {}
+      }
+      return out;
     } catch (err) {
+      const latencyMs = Date.now() - startedAt;
       console.error('[native-chat] generateReply error:', err?.message);
-      return { ok: false, error: String(err?.message || 'api_error') };
+      if (typeof traceLogger === 'function') {
+        try { await traceLogger({ op: 'native_chat.generateReply', mode, model: selectedModel, tokenUsage: null, latencyMs, cost: 0, ok: false, error: String(err?.message || 'api_error') }); } catch {}
+      }
+      return { ok: false, error: String(err?.message || 'api_error'), model: selectedModel, latencyMs, cost: 0 };
     }
   }
 
   /**
    * generateReplyStream — SSE streaming, calls onChunk(delta, fullText) per token
    */
-  async function generateReplyStream({ text = '', history = [], mode = 'chat', systemPrompt = '', onChunk } = {}) {
+  async function generateReplyStream({ text = '', history = [], mode = 'chat', systemPrompt = '', onChunk, model: overrideModel = '' } = {}) {
     if (!text.trim()) return { ok: false, error: 'empty_text' };
     if (!resolvedApiKey) return { ok: false, error: 'no_api_key' };
     if (typeof onChunk !== 'function') {
-      return generateReply({ text, history, mode, systemPrompt });
+      return generateReply({ text, history, mode, systemPrompt, model: overrideModel });
     }
 
+    const selectedModel = String(overrideModel || model || '').trim();
+    const startedAt = Date.now();
     try {
       const res = await globalThis.fetch(completionsUrl, {
         method: 'POST',
@@ -89,7 +106,7 @@ export function createNativeChatRuntime({
           authorization: `Bearer ${resolvedApiKey}`,
         },
         body: JSON.stringify({
-          model,
+          model: selectedModel,
           messages: buildMessages(text, history, systemPrompt),
           stream: true,
           max_tokens: 4096,
@@ -100,7 +117,11 @@ export function createNativeChatRuntime({
       if (!res.ok) {
         const errText = await res.text().catch(() => '');
         console.error('[native-chat] stream error:', res.status, errText.slice(0, 200));
-        return { ok: false, error: `api_${res.status}` };
+        const failed = { ok: false, error: `api_${res.status}`, model: selectedModel, latencyMs: Date.now() - startedAt, cost: 0 };
+        if (typeof traceLogger === 'function') {
+          try { await traceLogger({ op: 'native_chat.generateReplyStream', mode, model: selectedModel, tokenUsage: null, latencyMs: failed.latencyMs, cost: 0, ok: false, error: failed.error }); } catch {}
+        }
+        return failed;
       }
 
       let fullText = '';
@@ -121,7 +142,11 @@ export function createNativeChatRuntime({
             }
           } catch {}
         }
-        return { ok: true, reply: fullText, source: 'openai_stream', model };
+        const out = { ok: true, reply: fullText, source: 'openai_stream', model: selectedModel, tokenUsage: null, latencyMs: Date.now() - startedAt, cost: 0 };
+        if (typeof traceLogger === 'function') {
+          try { await traceLogger({ op: 'native_chat.generateReplyStream', mode, model: selectedModel, tokenUsage: null, latencyMs: out.latencyMs, cost: out.cost, ok: true }); } catch {}
+        }
+        return out;
       }
 
       const decoder = new TextDecoder();
@@ -164,10 +189,18 @@ export function createNativeChatRuntime({
         }
       }
 
-      return { ok: true, reply: fullText, source: 'openai_stream', model };
+      const out = { ok: true, reply: fullText, source: 'openai_stream', model: selectedModel, tokenUsage: null, latencyMs: Date.now() - startedAt, cost: 0 };
+      if (typeof traceLogger === 'function') {
+        try { await traceLogger({ op: 'native_chat.generateReplyStream', mode, model: selectedModel, tokenUsage: null, latencyMs: out.latencyMs, cost: out.cost, ok: true }); } catch {}
+      }
+      return out;
     } catch (err) {
+      const latencyMs = Date.now() - startedAt;
       console.error('[native-chat] stream error:', err?.message);
-      return { ok: false, error: String(err?.message || 'stream_error') };
+      if (typeof traceLogger === 'function') {
+        try { await traceLogger({ op: 'native_chat.generateReplyStream', mode, model: selectedModel, tokenUsage: null, latencyMs, cost: 0, ok: false, error: String(err?.message || 'stream_error') }); } catch {}
+      }
+      return { ok: false, error: String(err?.message || 'stream_error'), model: selectedModel, latencyMs, cost: 0 };
     }
   }
 

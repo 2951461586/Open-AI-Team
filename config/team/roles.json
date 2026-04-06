@@ -14,6 +14,12 @@
     "planner": {
       "displayName": "规划师",
       "description": "接收任务，拆解为结构化执行计划",
+      "personality": {
+        "default": "planner",
+        "active": "planner",
+        "activeScenario": "default",
+        "templates": ["planner"]
+      },
       "capabilities": ["planning", "decomposition", "task-design"],
       "preferredNode": "node-b",
       "fallbackNode": "node-a",
@@ -38,6 +44,12 @@
     "critic": {
       "displayName": "审查官",
       "description": "审查计划质量，给出结构化 review 与 issues",
+      "personality": {
+        "default": "critic",
+        "active": "critic",
+        "activeScenario": "default",
+        "templates": ["critic"]
+      },
       "capabilities": ["review", "risk-analysis", "consistency-check"],
       "preferredNode": "node-c",
       "fallbackNode": "node-a",
@@ -62,6 +74,12 @@
     "judge": {
       "displayName": "裁决官",
       "description": "基于 review 结果做最终裁决：approve / revise / escalate",
+      "personality": {
+        "default": "judge",
+        "active": "judge",
+        "activeScenario": "default",
+        "templates": ["judge"]
+      },
       "capabilities": ["decision", "approval", "escalation"],
       "preferredNode": "node-a",
       "fallbackNode": "node-a",
@@ -86,6 +104,12 @@
     "executor": {
       "displayName": "执行者",
       "description": "接收已批准的计划，执行具体任务",
+      "personality": {
+        "default": "executor",
+        "active": "executor",
+        "activeScenario": "default",
+        "templates": ["executor", "critic", "observer"]
+      },
       "capabilities": ["execution", "implementation", "drafting"],
       "preferredNode": "node-b",
       "fallbackNode": "node-a",
@@ -110,6 +134,12 @@
     "observer": {
       "displayName": "观察员",
       "description": "远端受限观察角色，仅上报心跳、节点健康和观察摘要，不参与普通用户对话",
+      "personality": {
+        "default": "observer",
+        "active": "observer",
+        "activeScenario": "heartbeat",
+        "templates": ["observer"]
+      },
       "capabilities": ["heartbeat", "observe", "node-health"],
       "preferredNode": "node-b",
       "fallbackNode": "node-a",

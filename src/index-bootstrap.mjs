@@ -3,12 +3,14 @@ import { randomUUID } from 'node:crypto';
 import { openTeamStore } from './team/team-store.mjs';
 import { loadTeamPolicy } from './team/team-policy.mjs';
 import { createTLRuntime } from './team/team-tl-runtime.mjs';
+import { createModelRouter } from './agent-harness-core/model-router.mjs';
 import { createNativeChatRuntime } from './team/team-native-chat.mjs';
 import { createSessionCompletionBus } from './team/team-session-completion-bus.mjs';
 import { loadTeamRoleDeployment } from './team/team-role-deployment.mjs';
 import { createTeamResidentRuntime } from './team/team-resident-runtime.mjs';
 import { createAgentLifecycleManager } from './team/team-agent-lifecycle.mjs';
 import { createGovernanceRuntime } from './team/team-governance-runtime.mjs';
+import { createGovernanceAuditor } from './team/governance-auditor.mjs';
 import { createCriticSessionRunner } from './team/team-agent-critic-session-runner.mjs';
 import { createNoopSessionRuntimeAdapter, createSessionRuntimeAdapter } from './team-runtime-adapters/session-runtime-adapter.mjs';
 import { createStandaloneProductRuntime } from './agent-harness-core/standalone-product-runtime.mjs';
@@ -17,6 +19,10 @@ import { resolveRemoteSessionHostBootstrap } from './integrations/host-bootstrap
 import { createTeamNodeHealth } from './team/team-node-health.mjs';
 import { createRuntimeExecutionAdapter } from './team-runtime-adapters/execution-harness.mjs';
 import { createControlPlaneClient } from './team-runtime-adapters/control-plane.mjs';
+import { createEventBus } from './team/event-bus.mjs';
+import { createIMChannelRouter } from './team/im-channel-router.mjs';
+import { createTraceCollector } from './observability/trace-span.mjs';
+import { FileTraceExporter } from './observability/trace-exporter.mjs';
 
 export async function createRemoteSessionHostBootstrap(config = {}) {
   return (await resolveRemoteSessionHostBootstrap(config)) || createHostAgnosticBootstrap(config);
@@ -221,7 +227,16 @@ export async function createAppContext(config = {}) {
   setInterval(() => { teamNodeHealth.refreshNodeStatus?.().catch(() => {}); }, 30000).unref?.();
 
   const governanceConfigPath = new URL('../config/team/governance.json', import.meta.url);
-  const governanceRuntime = createGovernanceRuntime(governanceConfigPath);
+  const teamEventBus = createEventBus();
+  const traceExporter = new FileTraceExporter(config.TRACE_LOG_PATH || 'state/observability/traces.jsonl');
+  const traceCollector = createTraceCollector({
+    traceLogPath: traceExporter.filePath,
+    exporter: traceExporter,
+    flushIntervalMs: Number(config.TRACE_FLUSH_INTERVAL_MS || 5000),
+    maxBufferSize: Number(config.TRACE_MAX_BUFFER_SIZE || 50),
+  });
+  const governanceAuditor = createGovernanceAuditor({ eventBus: teamEventBus });
+  const governanceRuntime = createGovernanceRuntime(governanceConfigPath, { eventBus: teamEventBus, teamStore, auditor: governanceAuditor });
   const governanceConfigMeta = governanceRuntime.getConfigMeta?.() || {};
   if (governanceConfigMeta.loaded) {
     console.log(`[governance] loaded version=${governanceConfigMeta.version || 'unknown'} path=${governanceConfigMeta.path || 'unknown'}${governanceConfigMeta.usedFallback ? ' fallback=true' : ''}`);
@@ -258,14 +273,38 @@ export async function createAppContext(config = {}) {
     model: hostConfig?.nativeChat?.model || 'gpt-5.4',
   });
   const sessionCompletionBus = createSessionCompletionBus();
+  const modelRouter = createModelRouter({
+    auditLogger: async ({ ok, response, error, routeInfo, selectedModel, fallbackUsed }) => {
+      await governanceAuditor?.logAgentBehavior?.({
+        action: 'llm.call',
+        role: 'tl',
+        message: ok ? 'model router call completed' : `model router call failed: ${String(error || response?.error || '')}`,
+        metadata: {
+          routePreset: routeInfo?.preset || '',
+          complexity: routeInfo?.complexity || null,
+          provider: response?.provider || selectedModel?.provider || '',
+          modelId: response?.model || selectedModel?.model || '',
+          tokenUsage: response?.tokenUsage || null,
+          latencyMs: Number(response?.latencyMs || 0),
+          cost: Number(response?.cost || 0),
+          fallbackUsed: !!fallbackUsed,
+        },
+      });
+    },
+    invoker: async ({ text, history, mode, systemPrompt, model }) => nativeChat.generateReply({ text, history, mode, systemPrompt, model }),
+  });
 
   const tlRuntime = createTLRuntime({
     teamStore,
     nativeChat,
+    modelRouter,
     runtimeAdapter,
     executionAdapter,
     governanceRuntime,
+    governanceAuditor,
     sessionCompletionBus,
+    eventBus: teamEventBus,
+    traceCollector,
     roleConfig: roleConfigForTL,
     workspaceRoot: hostConfig.taskWorkspaceRoot,
     now,
@@ -273,6 +312,12 @@ export async function createAppContext(config = {}) {
   });
 
   const criticSessionRunner = createCriticSessionRunner({ teamStore, tlRuntime });
+  const imChannelRouter = createIMChannelRouter({
+    tlRuntime,
+    teamStore,
+    governanceRuntime,
+  });
+  await imChannelRouter.initEnabledChannels();
 
   return {
     now,
@@ -286,6 +331,9 @@ export async function createAppContext(config = {}) {
     JUDGE_TRUE_EXECUTION_WIRED: true,
     criticSessionRunner,
     tlRuntime,
+    governanceAuditor,
+    traceCollector,
+    imChannelRouter,
     nativeChat,
     hostBootstrap,
     hostConfig,

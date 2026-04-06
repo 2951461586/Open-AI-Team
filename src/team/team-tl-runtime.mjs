@@ -44,14 +44,22 @@ import { createTLRuntimeExecutionHarness, isPersistentSessionBinding, isSessionM
 import { canFallbackToNativeChatByPolicy, ensureArray, ensureString, normalizeRiskLevel, parseJsonLoose } from '../team-core/common.mjs';
 import { createTLWorkItemHelpers } from '../team-core/work-item.mjs';
 import { createTLArtifactHelpers } from './tl-runtime/artifact.mjs';
+import { createEventBus } from './event-bus.mjs';
+import { createWorkbenchManager } from './workbench-manager.mjs';
+import { createDeliveryContract } from './delivery-contracts.mjs';
+import { createModelRouter } from '../agent-harness-core/model-router.mjs';
 
 export function createTLRuntime({
   teamStore,
   nativeChat,
+  modelRouter,
   runtimeAdapter,
   executionAdapter,
   governanceRuntime,
+  governanceAuditor,
   sessionCompletionBus,
+  eventBus,
+  traceCollector,
   spawnMemberSession,
   broadcastFn,
   roleConfig = {},
@@ -62,12 +70,31 @@ export function createTLRuntime({
   const nowFn = typeof now === 'function' ? now : () => Date.now();
   const id = typeof idgen === 'function' ? idgen : (prefix = 'id') => `${prefix}:${randomUUID()}`;
   let runtimeBroadcastFn = typeof broadcastFn === 'function' ? broadcastFn : null;
+  const runtimeEventBus = eventBus || createEventBus();
 
   const ROLE_LABELS = { planner: '规划师', critic: '审查官', judge: '裁决官', executor: '执行者', tl: 'TL', system: '系统' };
   function roleDisplayName(role) {
     const r = String(role || '').trim().toLowerCase();
     const cfg = roleConfig?.roles?.[r];
     return cfg?.displayName || ROLE_LABELS[r] || r;
+  }
+
+  async function withTraceSpan(operationName, fn, { parentContext = null, attributes = {} } = {}) {
+    if (!traceCollector?.withSpan) return fn(null, parentContext || null);
+    return traceCollector.withSpan(operationName, fn, { parentContext, attributes });
+  }
+
+  function markTraceError(error) {
+    if (!traceCollector?.annotateCurrentSpan) return;
+    traceCollector.annotateCurrentSpan('exception', {
+      name: error?.name || 'Error',
+      message: String(error?.message || error || ''),
+      stack: String(error?.stack || ''),
+    });
+  }
+
+  function currentTraceContext() {
+    return traceCollector?.getCurrentSpan?.() || null;
   }
 
   function broadcast(event) {
@@ -82,6 +109,31 @@ export function createTLRuntime({
     checked: false,
     reason: '',
   };
+
+  const llmRouter = modelRouter || createModelRouter({
+    auditLogger: async ({ ok, response, error, routeInfo, selectedModel, fallbackUsed }) => {
+      await governanceAuditor?.logAgentBehavior?.({
+        action: 'llm.call',
+        role: 'tl',
+        message: ok ? 'model router call completed' : `model router call failed: ${String(error || response?.error || '')}`,
+        metadata: {
+          routePreset: routeInfo?.preset || '',
+          complexity: routeInfo?.complexity || null,
+          provider: response?.provider || selectedModel?.provider || '',
+          modelId: response?.model || selectedModel?.model || '',
+          tokenUsage: response?.tokenUsage || null,
+          latencyMs: Number(response?.latencyMs || 0),
+          cost: Number(response?.cost || 0),
+          fallbackUsed: !!fallbackUsed,
+        },
+      });
+    },
+    invoker: async ({ text: requestText = '', history: requestHistory = [], mode = 'chat', systemPrompt = '', model: requestedModel = '' } = {}) => {
+      const fn = nativeChat?.generateReply;
+      if (!fn) return { ok: false, error: 'native_chat_unavailable', model: requestedModel };
+      return fn({ text: requestText, history: requestHistory, mode, systemPrompt, model: requestedModel });
+    },
+  });
 
   // ────────────────────────────────────────────────────────────────
   // Helpers
@@ -161,10 +213,14 @@ export function createTLRuntime({
     runtimeAdapter,
   });
 
+  const workbenchManager = teamStore ? createWorkbenchManager({ teamStore, randomUUID, now: nowFn }) : null;
+
   const tlPlanningHelpers = createTLPlanningHelpers({
     teamStore,
     governanceRuntime,
+    governanceAuditor,
     roleConfig,
+    eventBus: runtimeEventBus,
     appendMailbox,
     appendBlackboard,
     nowFn,
@@ -174,16 +230,19 @@ export function createTLRuntime({
     normalizeWorkItem,
     parseStructuredMemberResult,
     roleDisplayName,
+    createDeliveryContract,
   });
   const {
     createChildTask,
     synthesizeGovernedWorkItems,
+    initializeTaskDeliveryContract,
     summarizeMemberResultLine,
   } = tlPlanningHelpers;
 
   const tlExecutionHelpers = createTLExecutionHelpers({
     runtimeExecutionHarness,
     nativeChat,
+    eventBus: runtimeEventBus,
     spawnMemberSession,
     sessionCompletionBus,
     memberSessionSupport,
@@ -201,6 +260,9 @@ export function createTLRuntime({
     extractAndWriteBlackboard,
     teamStore,
     broadcast,
+    governanceRuntime,
+    governanceAuditor,
+    workbenchManager,
     nowFn,
     id,
     ensureArray,
@@ -270,6 +332,9 @@ export function createTLRuntime({
   const tlOrchestrationHelpers = createTLOrchestrationHelpers({
     teamStore,
     governanceRuntime,
+    governanceAuditor,
+    eventBus: runtimeEventBus,
+    traceCollector,
     roleConfig,
     ensureArray,
     ensureString,
@@ -285,6 +350,7 @@ export function createTLRuntime({
     appendBlackboard,
     appendArtifactForMemberResult,
     broadcast,
+    workbenchManager,
     nowFn,
     validateExecutionDag,
     validateWorkItemCapabilityContracts,
@@ -305,134 +371,148 @@ export function createTLRuntime({
     const onChunk = typeof opts.onChunk === 'function' ? opts.onChunk : null;
     if (!text) return { ok: false, error: 'empty_text' };
 
-    const members = Object.entries(roleConfig?.roles || {})
-      .filter(([key]) => !['observer', 'monitor', 'output', 'tl'].includes(key))
-      .map(([key, cfg]) => ({ role: key, displayName: cfg.displayName || key, description: cfg.description || '', capabilities: cfg.capabilities || [] }));
+    return withTraceSpan('tl.dispatch', async (dispatchSpan, dispatchContext) => {
+      const members = Object.entries(roleConfig?.roles || {})
+        .filter(([key]) => !['observer', 'monitor', 'output', 'tl'].includes(key))
+        .map(([key, cfg]) => ({ role: key, displayName: cfg.displayName || key, description: cfg.description || '', capabilities: cfg.capabilities || [] }));
 
-    const systemPrompt = buildTLSystemPrompt(members);
+      const systemPrompt = buildTLSystemPrompt(members);
+      let tlFullText = '';
+      const tlOnChunk = (delta, fullText) => {
+        tlFullText = String(fullText || delta || '');
+        if (onChunk) onChunk(delta, fullText);
+      };
 
-    // NOTE: TL role.started broadcast is deferred until after we know it's a task.
-    // Simple chat (direct reply) should produce zero dispatch noise.
+      const decision = await withTraceSpan('tl.planning', async () => {
+        const tlReply = nativeChat?.generateReplyStream && onChunk
+          ? await nativeChat.generateReplyStream({ text, history, mode: 'chat', systemPrompt, onChunk: tlOnChunk, model: llmRouter.route(text).primary?.model || '' })
+          : await llmRouter.execute({ text, history, mode: 'chat', systemPrompt });
 
-    let tlFullText = '';
-    const tlOnChunk = (delta, fullText) => {
-      tlFullText = String(fullText || delta || '');
-      if (onChunk) onChunk(delta, fullText);
-    };
-
-    const tlReply = nativeChat?.generateReplyStream && onChunk
-      ? await nativeChat.generateReplyStream({ text, history, mode: 'chat', systemPrompt, onChunk: tlOnChunk })
-      : await nativeChat?.generateReply?.({ text, history, mode: 'chat', systemPrompt });
-
-    const tlResponseText = tlReply?.reply || tlFullText || '';
-    const initialDecision = parseTLDecision(tlResponseText);
-    const synthesizedWorkItems = synthesizeGovernedWorkItems(initialDecision);
-    const decision = {
-      ...initialDecision,
-      workItems: synthesizedWorkItems,
-      governanceExpanded: synthesizedWorkItems.length !== ensureArray(initialDecision.workItems).length,
-    };
-
-    // Only broadcast TL dispatch events for actual task delegation.
-    // Simple chat (direct reply) should be invisible to the user — no "TL 分析完成" noise.
-    if (decision.type === 'direct') {
-      return { ok: true, action: 'tl_direct', reply: decision.directReply, decision };
-    }
-
-    const singleFlightCandidate = resolveSingleFlightReuse({ scopeKey, decision, text });
-    if (singleFlightCandidate) {
-      const reused = await handleSingleFlightReuse({
-        candidate: singleFlightCandidate,
-        decision,
-        text,
-        scopeKey,
-        history,
+        const tlResponseText = tlReply?.reply || tlFullText || '';
+        const initialDecision = parseTLDecision(tlResponseText);
+        const synthesizedWorkItems = synthesizeGovernedWorkItems(initialDecision);
+        return {
+          ...initialDecision,
+          workItems: synthesizedWorkItems,
+          governanceExpanded: synthesizedWorkItems.length !== ensureArray(initialDecision.workItems).length,
+          _initialDecision: initialDecision,
+        };
+      }, {
+        parentContext: dispatchContext,
+        attributes: { scopeKey, input: text.slice(0, 500) },
       });
-      if (reused?.ok) return reused;
-    }
 
-    // Task delegation path — now broadcast dispatch events
-    broadcast({
-      type: 'orchestration_event',
-      eventKind: 'role.started',
-      role: 'tl',
-      lane: 'tl',
-      title: 'TL 开始分析',
-      content: text.slice(0, 200),
-      scopeKey,
-      timestamp: nowFn(),
-    });
+      if (decision.type === 'direct') {
+        return { ok: true, action: 'tl_direct', reply: decision.directReply, decision };
+      }
 
-    broadcast({
-      type: 'orchestration_event',
-      eventKind: 'tl.analyzed',
-      role: 'tl',
-      lane: 'tl',
-      title: 'TL 分析完成',
-      content: `决策：分配给 ${[...new Set(initialDecision.workItems.map(a => roleDisplayName(a.role)))].join('、')}`,
-      scopeKey,
-      timestamp: nowFn(),
-    });
+      const singleFlightCandidate = resolveSingleFlightReuse({ scopeKey, decision, text });
+      if (singleFlightCandidate) {
+        const reused = await handleSingleFlightReuse({
+          candidate: singleFlightCandidate,
+          decision,
+          text,
+          scopeKey,
+          history,
+        });
+        if (reused?.ok) return reused;
+      }
 
-    const teamId = id('team');
-    const taskId = id('task');
-    const nowTs = nowFn();
+      broadcast({
+        type: 'orchestration_event',
+        eventKind: 'role.started',
+        role: 'tl',
+        lane: 'tl',
+        title: 'TL 开始分析',
+        content: text.slice(0, 200),
+        scopeKey,
+        timestamp: nowFn(),
+      });
 
-    teamStore?.createTeam?.({
-      teamId,
-      scopeKey,
-      mode: 'tl_runtime',
-      status: 'active',
-      metadata: { taskMode: decision.taskMode, riskLevel: decision.riskLevel },
-      createdAt: nowTs,
-      updatedAt: nowTs,
-    });
+      broadcast({
+        type: 'orchestration_event',
+        eventKind: 'tl.analyzed',
+        role: 'tl',
+        lane: 'tl',
+        title: 'TL 分析完成',
+        content: `决策：分配给 ${[...new Set((decision._initialDecision?.workItems || []).map((a) => roleDisplayName(a.role)))].join('、')}`,
+        scopeKey,
+        timestamp: nowFn(),
+      });
 
-    const parentTask = teamStore?.createTask?.({
-      taskId,
-      teamId,
-      parentTaskId: '',
-      title: text.slice(0, 120),
-      description: text,
-      state: 'planning',
-      ownerMemberId: '',
-      priority: decision.riskLevel === 'high' ? 20 : 10,
-      dependencies: [],
-      metadata: {
-        taskMode: decision.taskMode,
-        riskLevel: decision.riskLevel,
-        assignmentIds: decision.workItems.map(a => a.id),
-        sessionsByRole: {},
-        sessionsByAssignment: {},
-        primarySessionKey: '',
-        tlSessionKey: '',
-        followupRoute: 'tl',
-      },
-      createdAt: nowTs,
-      updatedAt: nowTs,
-    });
+      const teamId = id('team');
+      const taskId = id('task');
+      const nowTs = nowFn();
 
-    appendMailbox({
-      teamId,
-      taskId,
-      kind: 'tl.decision',
-      fromMemberId: 'member:tl',
-      payload: {
-        type: decision.type,
-        summary: decision.summary,
-        taskMode: decision.taskMode,
-        riskLevel: decision.riskLevel,
-        workItemIds: decision.workItems.map(x => x.id),
-        governanceExpanded: !!decision.governanceExpanded,
-      },
-    });
+      teamStore?.createTeam?.({
+        teamId,
+        scopeKey,
+        mode: 'tl_runtime',
+        status: 'active',
+        metadata: { taskMode: decision.taskMode, riskLevel: decision.riskLevel, traceId: dispatchSpan?.traceId || '' },
+        createdAt: nowTs,
+        updatedAt: nowTs,
+      });
 
-    return executeDelegatedPlan({
-      teamId,
-      taskId,
-      parentTask,
-      decision,
-      scopeKey,
+      const parentTask = teamStore?.createTask?.({
+        taskId,
+        teamId,
+        parentTaskId: '',
+        title: text.slice(0, 120),
+        description: text,
+        state: 'planning',
+        ownerMemberId: '',
+        priority: decision.riskLevel === 'high' ? 20 : 10,
+        dependencies: [],
+        metadata: {
+          taskMode: decision.taskMode,
+          riskLevel: decision.riskLevel,
+          assignmentIds: decision.workItems.map((a) => a.id),
+          sessionsByRole: {},
+          sessionsByAssignment: {},
+          primarySessionKey: '',
+          tlSessionKey: '',
+          followupRoute: 'tl',
+          traceId: dispatchSpan?.traceId || '',
+          rootSpanId: dispatchSpan?.spanId || '',
+        },
+        createdAt: nowTs,
+        updatedAt: nowTs,
+      });
+
+      appendMailbox({
+        teamId,
+        taskId,
+        kind: 'tl.decision',
+        fromMemberId: 'member:tl',
+        payload: {
+          type: decision.type,
+          summary: decision.summary,
+          taskMode: decision.taskMode,
+          riskLevel: decision.riskLevel,
+          workItemIds: decision.workItems.map((x) => x.id),
+          governanceExpanded: !!decision.governanceExpanded,
+          traceId: dispatchSpan?.traceId || '',
+        },
+      });
+
+      try {
+        initializeTaskDeliveryContract?.({ task: parentTask, decision });
+      } catch {}
+
+      const finalDecision = { ...decision };
+      delete finalDecision._initialDecision;
+
+      return withTraceSpan('tl.orchestration', async () => executeDelegatedPlan({
+        teamId,
+        taskId,
+        parentTask,
+        decision: finalDecision,
+        scopeKey,
+      }), {
+        parentContext: dispatchContext,
+        attributes: { teamId, taskId, scopeKey, workItemCount: finalDecision.workItems.length },
+      });
     });
   }
 
@@ -617,6 +697,7 @@ export function createTLRuntime({
     sendToTaskSession,
     createTeamRunFromEvent,
     setBroadcastFn,
+    eventBus: runtimeEventBus,
     _buildTLSystemPrompt: buildTLSystemPrompt,
     _parseTLDecision: parseTLDecision,
     _parseStructuredMemberResult: parseStructuredMemberResult,

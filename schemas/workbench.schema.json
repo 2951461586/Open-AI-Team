@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.openai-team.dev/workbench.schema.json",
+  "title": "AI Team Workbench",
+  "type": "object",
+  "required": ["taskId", "state", "history", "sourceCounts"],
+  "properties": {
+    "taskId": { "type": "string" },
+    "state": { "type": "string", "enum": ["draft", "submitted", "reviewing", "approved", "delivered"] },
+    "deliveryContract": { "$ref": "#/$defs/deliveryContract" },
+    "currentSubmission": { "$ref": "#/$defs/submission" },
+    "history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/submission" }
+    },
+    "lastReview": { "$ref": "#/$defs/reviewResult" },
+    "lastApproval": {
+      "type": ["object", "null"],
+      "properties": {
+        "action": { "type": "string" },
+        "reason": { "type": "string" },
+        "actor": { "type": "string" },
+        "approvedAt": { "type": "number" },
+        "reviewStatus": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "sourceCounts": {
+      "type": "object",
+      "required": ["artifacts", "evidence", "reviews", "decisions", "mailbox", "blackboard"],
+      "properties": {
+        "artifacts": { "type": "number" },
+        "evidence": { "type": "number" },
+        "reviews": { "type": "number" },
+        "decisions": { "type": "number" },
+        "mailbox": { "type": "number" },
+        "blackboard": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "deliveryContract": {
+      "type": "object",
+      "required": ["contractId", "taskId", "version", "expectedDeliverables"],
+      "properties": {
+        "contractId": { "type": "string" },
+        "taskId": { "type": "string" },
+        "planId": { "type": "string" },
+        "version": { "type": "number" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "expectedDeliverables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "artifactType", "required"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "artifactType": { "type": "string" },
+              "required": { "type": "boolean" },
+              "qualityCriteria": { "type": "array", "items": { "type": "string" } },
+              "acceptanceCriteria": { "type": "array", "items": { "type": "string" } },
+              "evidenceHints": { "type": "array", "items": { "type": "string" } },
+              "sourceStepIds": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "submission": {
+      "type": ["object", "null"],
+      "properties": {
+        "submissionId": { "type": "string" },
+        "version": { "type": "number" },
+        "taskId": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "submitted", "reviewing", "approved", "delivered"] },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" },
+        "deliveredAt": { "type": "number" },
+        "source": { "type": "string" },
+        "notes": { "type": "string" },
+        "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifactPreview" } },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "evidenceId": { "type": "string" },
+              "evidenceType": { "type": "string" },
+              "title": { "type": "string" },
+              "severity": { "type": "string" },
+              "createdAt": { "type": "number" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "review": { "$ref": "#/$defs/reviewResult" },
+        "approval": { "type": ["object", "null"] },
+        "stateTimeline": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "state": { "type": "string" },
+              "at": { "type": "number" },
+              "reason": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "artifactPreview": {
+      "type": "object",
+      "required": ["artifactId", "artifactType", "title", "status", "updatedAt"],
+      "properties": {
+        "artifactId": { "type": "string" },
+        "artifactType": { "type": "string" },
+        "title": { "type": "string" },
+        "role": { "type": "string" },
+        "status": { "type": "string" },
+        "updatedAt": { "type": "number" },
+        "path": { "type": "string" },
+        "previewText": { "type": "string" },
+        "language": { "type": "string" },
+        "mimeType": { "type": "string" },
+        "size": { "type": "number" }
+      },
+      "additionalProperties": true
+    },
+    "reviewResult": {
+      "type": ["object", "null"],
+      "properties": {
+        "reviewedAt": { "type": "number" },
+        "status": { "type": "string" },
+        "evidenceCheck": { "type": "object" },
+        "artifactCheck": { "type": "object" },
+        "contractCheck": { "type": "object" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

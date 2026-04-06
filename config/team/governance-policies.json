@@ -1,0 +1,57 @@
+{
+  "version": "2026-04-06.1",
+  "updatedAt": "2026-04-06T04:30:00.000Z",
+  "rules": [
+    {
+      "id": "deny-critical-destructive-exec",
+      "description": "Block destructive critical shell operations",
+      "priority": 10,
+      "decision": "deny",
+      "match": {
+        "operationType": "exec",
+        "riskLevel": ["critical"]
+      }
+    },
+    {
+      "id": "approval-high-risk-exec",
+      "description": "High-risk exec requires human approval",
+      "priority": 20,
+      "decision": "require-approval",
+      "match": {
+        "operationType": "exec",
+        "riskLevel": ["high", "critical"]
+      }
+    },
+    {
+      "id": "approval-external-write-network",
+      "description": "Network write actions require approval",
+      "priority": 30,
+      "decision": "require-approval",
+      "match": {
+        "operationType": "network"
+      },
+      "conditions": [
+        { "field": "method", "op": "in", "value": ["POST", "PUT", "PATCH", "DELETE"] }
+      ]
+    },
+    {
+      "id": "approval-sensitive-filesystem",
+      "description": "Sensitive filesystem writes require approval",
+      "priority": 40,
+      "decision": "require-approval",
+      "match": {
+        "operationType": "filesystem",
+        "path": ["/etc/*", "/root/*", "*.env", "*authorized_keys*"]
+      }
+    },
+    {
+      "id": "allow-low-risk-readonly",
+      "description": "Allow low-risk readonly actions",
+      "priority": 100,
+      "decision": "allow",
+      "match": {
+        "riskLevel": "low"
+      }
+    }
+  ]
+}

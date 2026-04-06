@@ -1,0 +1,12 @@
+{
+  "name": "@ai-team/team-runtime",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./*": "./src/*.mjs",
+    "./tl-runtime/*": "./src/tl-runtime/*.mjs"
+  },
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}

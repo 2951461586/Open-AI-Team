@@ -1,0 +1,37 @@
+name: ai-team-harness
+
+services:
+  ai-team:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: ai-team-harness:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${PORT:-3001}
+      BIND: ${BIND:-0.0.0.0}
+      TEAM_DB_PATH: ${TEAM_DB_PATH:-/app/state/team-runtime.db}
+      TEAM_TASK_WORKSPACE_ROOT: ${TEAM_TASK_WORKSPACE_ROOT:-/app/task_workspaces}
+    ports:
+      - "${PORT:-3001}:${PORT:-3001}"
+    volumes:
+      - ./state:/app/state
+      - ./task_workspaces:/app/task_workspaces
+      - ./config/team:/app/config/team:ro
+      - ./.env:/app/.env:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:${PORT:-3001}/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    networks:
+      - ai-team-net
+
+networks:
+  ai-team-net:
+    driver: bridge

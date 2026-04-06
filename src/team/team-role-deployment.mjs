@@ -35,6 +35,9 @@ export function loadTeamRoleDeployment(env = {}) {
       sessionTimeout: roleConfig.sessionTimeout || 120000,
       contract: roleConfig.contract || null,
       prompt: roleConfig.prompt || null,
+      personality: roleConfig.personality || null,
+      activePersonality: roleConfig.activePersonality || '',
+      scenarios: roleConfig.scenarios || null,
     };
   }
 

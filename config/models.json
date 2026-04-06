@@ -1,0 +1,12 @@
+{
+  "default": {
+    "chat": { "provider": "openai", "model": "gpt-4o-mini", "maxRetries": 1 },
+    "utility": { "provider": "openai", "model": "gpt-4o-mini", "maxRetries": 2 },
+    "reasoning": { "provider": "openai", "model": "gpt-4o", "maxRetries": 1 }
+  },
+  "fallback": {
+    "chat": { "provider": "openai", "model": "gpt-3.5-turbo" },
+    "utility": { "provider": "openai", "model": "gpt-3.5-turbo" },
+    "reasoning": { "provider": "openai", "model": "gpt-4o-mini" }
+  }
+}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { I18nProvider } from '@/i18n/context'
 
 export const metadata: Metadata = {
   title: '团队看板',
@@ -34,7 +35,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full" suppressHydrationWarning>
+    <html lang="zh" className="h-full" suppressHydrationWarning>
       <head>
         {/* Prevent flash of wrong theme */}
         <script dangerouslySetInnerHTML={{ __html: `
@@ -47,7 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}} />
       </head>
       <body className="h-screen overflow-hidden antialiased">
-        {children}
+        <I18nProvider defaultLocale="zh">
+          {children}
+        </I18nProvider>
       </body>
     </html>
   )

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/sandbox-config.schema.json",
+  "title": "AI Team Harness Sandbox Config",
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": ["auto", "pathguard", "docker"],
+      "default": "auto"
+    },
+    "workspaceDir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "writablePrefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["artifacts", "memory", "desk", "bridge"]
+        },
+        "readablePrefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [""]
+        },
+        "searchExcludePrefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["desk/outbox"]
+        },
+        "snapshotExcludePrefixes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["desk/outbox"]
+        },
+        "sensitivePaths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["/etc", "/root/.ssh"]
+        },
+        "allowNetwork": {
+          "type": "boolean",
+          "default": false
+        },
+        "allowedSyscalls": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "deniedSyscalls": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "seccompProfilePath": {
+          "type": "string"
+        },
+        "pidsLimit": {
+          "type": "integer",
+          "minimum": 16,
+          "default": 64
+        },
+        "maxWriteBytes": {
+          "type": "integer",
+          "minimum": 1024,
+          "default": 65536
+        },
+        "maxReadBytes": {
+          "type": "integer",
+          "minimum": 1024,
+          "default": 262144
+        }
+      },
+      "additionalProperties": true,
+      "default": {}
+    },
+    "docker": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "default": "node:22-alpine"
+        }
+      },
+      "additionalProperties": true,
+      "default": {}
+    },
+    "executorDefaults": {
+      "type": "object",
+      "properties": {
+        "timeoutMs": { "type": "integer", "minimum": 100, "default": 5000 },
+        "cpuSeconds": { "type": "integer", "minimum": 1, "default": 2 },
+        "memoryMb": { "type": "integer", "minimum": 64, "default": 256 },
+        "maxStdoutBytes": { "type": "integer", "minimum": 1024, "default": 131072 },
+        "maxStderrBytes": { "type": "integer", "minimum": 1024, "default": 131072 }
+      },
+      "additionalProperties": true,
+      "default": {}
+    }
+  },
+  "additionalProperties": true
+}

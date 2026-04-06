@@ -23,7 +23,7 @@ npm run doctor:oss-minimal   # health check
 
 | File | Purpose |
 |---|---|
-| `standalone-bootstrap.mjs` | Bootstrap entry point |
+| `../../src/agent-harness-core/standalone-product-runtime.mjs` | Canonical bootstrap/runtime entry |
 | `product-shell.mjs` | Interactive shell |
 | `agent-shell.mjs` | Agent lifecycle demo |
 | `run-demo.mjs` | Full demo runner |

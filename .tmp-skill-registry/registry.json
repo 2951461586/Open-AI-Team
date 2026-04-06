@@ -1,0 +1,87 @@
+{
+  "contractVersion": "skill-registry.v1",
+  "generatedAt": "2026-04-06T03:50:13.396Z",
+  "skills": {
+    "sample-skill": {
+      "id": "sample-skill",
+      "name": "sample-skill",
+      "version": "1.0.0",
+      "displayName": "Sample Skill",
+      "description": "Example first-class skill for AI Team Harness.",
+      "installedAt": "2026-04-06T03:50:13.395Z",
+      "updatedAt": "2026-04-06T03:50:13.396Z",
+      "enabled": true,
+      "active": true,
+      "source": {
+        "type": "directory",
+        "path": "/root/.openclaw/workspace/examples/skills/sample-skill"
+      },
+      "paths": {
+        "rootDir": ".tmp-skill-registry/installed/sample-skill",
+        "manifestPath": ".tmp-skill-registry/installed/sample-skill/skill.json",
+        "skillMdPath": ".tmp-skill-registry/installed/sample-skill/SKILL.md",
+        "runtimePath": "/root/.openclaw/workspace/.tmp-skill-registry/installed/sample-skill/tools/runtime.mjs"
+      },
+      "metadata": {
+        "schemaVersion": "skill-manifest.v1",
+        "name": "sample-skill",
+        "version": "1.0.0",
+        "displayName": "Sample Skill",
+        "description": "Example first-class skill for AI Team Harness.",
+        "entry": {
+          "skillMd": "SKILL.md",
+          "runtime": "tools/runtime.mjs",
+          "toolsDir": "tools",
+          "referencesDir": "references"
+        },
+        "permissions": {
+          "level": "restricted",
+          "allow": [
+            "read",
+            "web_fetch"
+          ],
+          "deny": [
+            "exec"
+          ],
+          "unsafe": false
+        },
+        "runtime": {
+          "injectPrompt": true,
+          "injectTools": true,
+          "hooks": [
+            "activate",
+            "beforeTool",
+            "afterTool"
+          ]
+        },
+        "keywords": [
+          "example",
+          "sample",
+          "openclaw-compatible"
+        ],
+        "references": [
+          "references/guide.md"
+        ],
+        "format": "openclaw-frontmatter"
+      },
+      "parsedSkillMd": {
+        "frontmatter": {
+          "name": "sample-skill",
+          "description": "Example first-class skill for AI Team Harness. Demonstrates OpenClaw-style SKILL.md metadata and runtime extension points.",
+          "permissions": "restricted",
+          "tools": [
+            "read",
+            "web_fetch"
+          ],
+          "references": [
+            "references/guide.md"
+          ],
+          "runtime": "tools/runtime.mjs"
+        },
+        "body": "\n# Sample Skill\n\nUse this skill when the task is about demonstrating the harness skill framework, prompt injection, or runtime tool extension.\n\n## Activation\n\n- Activate when the request explicitly asks for the sample skill or a minimal skill example.\n- Prefer this skill over generic behavior when showcasing skill loading, metadata parsing, or prompt/tool injection.\n\n## Behavior\n\n- Add a short system-prompt appendix explaining that this is sample-skill.\n- Expose one synthetic runtime tool: `sample.echo`.\n- Stay inside restricted tool access.\n\n## Files\n\n- Runtime entry: `tools/runtime.mjs`\n- Reference note: `references/guide.md`\n",
+        "format": "openclaw-frontmatter"
+      },
+      "fingerprint": "c5c8e195510cb73269e6aa1ea626323d770df1040f177d1c5b5eccaa89fdb38c"
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team-harness.local/schemas/tool-registration.schema.json",
+  "title": "Tool Registration",
+  "description": "OpenAPI-like tool registration contract for the AI Team Harness tool runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "description", "inputSchema", "outputSchema"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9._:-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["core", "provider", "skill", "plugin", "custom"]
+        },
+        "name": {
+          "type": "string"
+        },
+        "skillId": {
+          "type": "string"
+        },
+        "private": {
+          "type": "boolean"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "public": {
+          "type": "boolean"
+        },
+        "allowRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "denyRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "requiresConfirmation": {
+          "type": "boolean"
+        }
+      }
+    },
+    "inputSchema": {
+      "$ref": "#/$defs/jsonSchema"
+    },
+    "outputSchema": {
+      "$ref": "#/$defs/jsonSchema"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": { "type": "string" },
+          "input": {},
+          "output": {}
+        }
+      }
+    },
+    "x-runtime": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "timeoutMs": { "type": "integer", "minimum": 1 },
+        "private": { "type": "boolean" },
+        "provider": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "jsonSchema": {
+      "type": "object",
+      "description": "Embedded JSON Schema object.",
+      "required": ["type"],
+      "properties": {
+        "$schema": { "type": "string" },
+        "$id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "type": {
+          "anyOf": [
+            { "type": "string" },
+            {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1
+            }
+          ]
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/jsonSchemaNode" }
+        },
+        "required": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "items": {
+          "$ref": "#/$defs/jsonSchemaNode"
+        },
+        "enum": {
+          "type": "array"
+        },
+        "default": {},
+        "additionalProperties": {
+          "anyOf": [
+            { "type": "boolean" },
+            { "$ref": "#/$defs/jsonSchemaNode" }
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "jsonSchemaNode": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

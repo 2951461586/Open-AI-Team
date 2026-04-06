@@ -1,0 +1,8 @@
+{
+  "name": "@ai-team/event-bus",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "dependencies": {}
+}

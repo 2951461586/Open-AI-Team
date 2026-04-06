@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "roles": {
+    "planner": {
+      "displayName": "规划师",
+      "description": "拆解任务并给出结构化方案",
+      "capabilities": ["planning", "analysis"]
+    },
+    "executor": {
+      "displayName": "执行者",
+      "description": "执行任务并交付结果",
+      "capabilities": ["implementation", "verification"]
+    },
+    "critic": {
+      "displayName": "审查官",
+      "description": "评审结果与风险",
+      "capabilities": ["review", "risk-analysis"]
+    },
+    "judge": {
+      "displayName": "裁决官",
+      "description": "做最终判断",
+      "capabilities": ["decision-making"]
+    }
+  }
+}

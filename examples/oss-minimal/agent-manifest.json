@@ -9,7 +9,7 @@
   "version": "0.12.0",
   "runtime": {
     "kind": "standalone-harness",
-    "bootstrap": "./standalone-bootstrap.mjs",
+    "bootstrap": "../../src/agent-harness-core/standalone-product-runtime.mjs",
     "entry": "./run-demo.mjs",
     "workerEntry": "../../src/agent-harness-core/role-worker.mjs",
     "brokerEntry": "../../src/agent-harness-core/remote-broker-server.mjs",

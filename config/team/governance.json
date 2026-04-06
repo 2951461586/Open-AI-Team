@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "output": {
     "defaultMode": "aggregated",
     "allowUserVisibleOnApprovedDoneOnly": true,
@@ -84,5 +84,76 @@
     "teamRecentTaskLimit": 50,
     "activeTaskSummaryLimit": 20,
     "historyLimit": 100
+  },
+  "governanceRuntime": {
+    "audit": {
+      "enabled": true,
+      "auditDir": "state/governance/audit",
+      "auditLogPath": "state/governance/audit/audit.jsonl",
+      "retention": { "maxEntries": 5000 }
+    },
+    "risk": {
+      "enabled": true,
+      "thresholds": {
+        "mediumMin": 30,
+        "highMin": 65,
+        "criticalMin": 90,
+        "approvalMinLevel": "high",
+        "blockMinLevel": "critical"
+      },
+      "weights": {
+        "exec": 35,
+        "network": 25,
+        "filesystem": 20,
+        "destructive": 30,
+        "privileged": 25,
+        "externalWrite": 20,
+        "unknownTool": 15,
+        "sensitivePath": 15
+      },
+      "indicators": {
+        "destructiveCommands": ["rm ", "mkfs", "dd ", "shutdown", "reboot", "chmod 777", "chown -R", "iptables", "ufw reset"],
+        "privilegedCommands": ["sudo ", "su ", "doas "],
+        "networkCommands": ["curl ", "wget ", "nc ", "ssh ", "scp ", "rsync ", "http://", "https://"],
+        "sensitivePaths": ["/etc/", "/root/", "~/.ssh", ".env", "id_rsa", "authorized_keys"]
+      }
+    },
+    "policy": {
+      "enabled": true,
+      "defaultDecision": "allow",
+      "policyPath": "config/team/governance-policies.json",
+      "hotReload": true
+    },
+    "approvals": {
+      "requiredFor": ["high", "critical"],
+      "humanQueue": "team_lead",
+      "ttlMs": 900000
+    }
+  },
+  "escalation": {
+    "escalateToHuman": {
+      "conditions": [
+        { "when": "riskLevel == critical", "action": "block_and_notify" },
+        { "when": "anyNeedsHuman == true", "action": "notify" },
+        { "when": "anyFailed == true && riskLevel >= 3", "action": "notify" }
+      ]
+    }
+  },
+  "routing": {
+    "strategy": "static",
+    "affinityBonus": 15,
+    "fallbackPolicy": "degrade_to_available",
+    "nodeConstraints": {}
+  },
+  "lifecycle": {
+    "heartbeatIntervalMs": 60000,
+    "leaseDefaultMs": 300000,
+    "gracePeriodMs": 90000,
+    "sweepIntervalMs": 30000
+  },
+  "observability": {
+    "emitGovernanceEvents": true,
+    "emitAuditEvents": true,
+    "includeRiskSummary": true
   }
 }

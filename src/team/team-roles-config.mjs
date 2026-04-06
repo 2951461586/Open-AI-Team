@@ -138,6 +138,9 @@ function normalizeConfig(raw = {}) {
       sessionTimeout: Number(role.sessionTimeout || defaults.sessionTimeout || 120000),
       contract: role.contract || null,
       prompt: role.prompt || null,
+      personality: role.personality && typeof role.personality === 'object' ? role.personality : null,
+      activePersonality: String(role.activePersonality || role.personality?.active || ''),
+      scenarios: role.scenarios && typeof role.scenarios === 'object' ? role.scenarios : null,
     };
   }
 

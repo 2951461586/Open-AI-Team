@@ -1,6 +1,11 @@
+import { TEAM_EVENT_TYPES } from '../event-types.mjs';
+
 export function createTLOrchestrationHelpers({
   teamStore,
   governanceRuntime,
+  governanceAuditor,
+  eventBus,
+  traceCollector,
   roleConfig,
   ensureArray,
   ensureString,
@@ -16,6 +21,7 @@ export function createTLOrchestrationHelpers({
   appendBlackboard,
   appendArtifactForMemberResult,
   broadcast,
+  workbenchManager,
   nowFn,
   validateExecutionDag,
   validateWorkItemCapabilityContracts,
@@ -27,7 +33,32 @@ export function createTLOrchestrationHelpers({
   formatExecutionSurfaceContractErrors,
   formatDagValidationErrors,
 } = {}) {
+  function publishEvent(type, payload = {}, meta = {}) {
+    if (!eventBus?.publish) return;
+    void eventBus.publish({
+      type,
+      teamId: String(meta?.teamId || payload?.teamId || ''),
+      source: 'tl-runtime',
+      payload,
+      meta,
+    }).catch(() => {});
+  }
+
   async function executeDelegatedPlan({ teamId, taskId, parentTask, decision, scopeKey } = {}) {
+    const orchestrationContext = traceCollector?.getCurrentSpan?.() || null;
+    await governanceAuditor?.logTaskLifecycle?.({
+      action: 'orchestration_started',
+      status: 'running',
+      taskId,
+      teamId,
+      role: 'tl',
+      agentId: 'member:tl',
+      scopeKey,
+      message: `orchestrating ${ensureArray(decision?.workItems).length} work items`,
+      risk: { level: decision?.riskLevel || 'medium' },
+      policy: { decision: 'allow', ruleId: 'tl_orchestration' },
+      metadata: { taskMode: decision?.taskMode || 'general' },
+    });
     const planSteps = decision.workItems.map((workItem) => ({
       id: workItem.id,
       role: workItem.role,
@@ -73,7 +104,7 @@ export function createTLOrchestrationHelpers({
       });
     }
 
-    const childTasks = decision.workItems.map((workItem) => createChildTask({ parentTask, workItem, teamId }));
+    const childTasks = decision.workItems.map((workItem) => createChildTask({ parentTask, workItem, teamId, scopeKey }));
 
     teamStore?.updateTaskMetadata?.({
       taskId,
@@ -296,7 +327,13 @@ export function createTLOrchestrationHelpers({
         timestamp: nowFn(),
       });
 
-      const results = await Promise.all(layer.map((item) => runWithRetry({ payload: item.payload })));
+      const results = await Promise.all(layer.map((item) => {
+        const role = String(item?.payload?.workItem?.role || 'member');
+        const assignmentId = String(item?.payload?.workItem?.id || '');
+        return traceCollector?.withSpan
+          ? traceCollector.withSpan(`tl.delegation.${role}`, async () => traceCollector.withSpan(`tl.execution.${role}`, async () => runWithRetry({ payload: item.payload }), { attributes: { assignmentId, role, taskId, teamId } }), { parentContext: orchestrationContext, attributes: { assignmentId, role, taskId, teamId } })
+          : runWithRetry({ payload: item.payload });
+      }));
 
       for (const r of results) {
         if (r.assignmentId) resultsByAssignment[r.assignmentId] = r;
@@ -486,6 +523,23 @@ export function createTLOrchestrationHelpers({
               timestamp: nowFn(),
             },
           });
+
+          publishEvent(TEAM_EVENT_TYPES.TASK_REPLANNED, {
+            taskId: taskId || '',
+            teamId: teamId || '',
+            scope: scopeKey || '',
+            timestamp: nowFn(),
+            state: 'replanned',
+            addedLayerCount: dynamicLayers.length,
+            addedWorkItemCount: dynamicWorkItems.length,
+            addedWorkItemIds: dynamicWorkItems.map((w) => w.id),
+            triggeredByAssignmentIds: results.filter((r) => ensureArray(r.structured?.additionalWorkItems).length > 0).map((r) => r.assignmentId),
+          }, {
+            scopeKey,
+            phase: 'orchestration',
+            event: 'replanned',
+            teamId,
+          });
         }
       }
 
@@ -547,6 +601,10 @@ export function createTLOrchestrationHelpers({
     if (escalation?.escalate) finalReplyParts.push(`### escalate_human\n- action: ${escalation.action || 'notify'}\n- reason: ${escalation.reason || ''}`);
     const finalReply = finalReplyParts.join('\n\n');
 
+    if (taskId && workbenchManager?.runReviewPipeline && memberResults.some((r) => ['critic', 'judge'].includes(String(r?.role || '').toLowerCase()))) {
+      try { workbenchManager.runReviewPipeline(taskId, { reason: 'tl_runtime_review_stage' }); } catch {}
+    }
+
     const finalState = dagFailed ? 'blocked' : (partialSuccess ? 'partial' : (anyFailed ? 'blocked' : 'done'));
     teamStore?.updateTaskState?.({ taskId, state: finalState, updatedAt: nowFn() });
     teamStore?.updateTeamStatus?.({ teamId, status: anyFailed ? 'needs_attention' : 'done', updatedAt: nowFn() });
@@ -581,6 +639,54 @@ export function createTLOrchestrationHelpers({
           assignmentId: r.assignmentId,
           childTaskId: r.childTaskId,
         })),
+      },
+    });
+
+    publishEvent(TEAM_EVENT_TYPES.TASK_COMPLETED, {
+      taskId: taskId || '',
+      teamId: teamId || '',
+      scope: scopeKey || '',
+      timestamp: nowFn(),
+      state: finalState,
+      anyFailed,
+      anyNeedsHuman,
+      partialSuccess,
+      successCount,
+      failCount,
+      escalation: escalation?.escalate ? escalation : null,
+    }, {
+      scopeKey,
+      phase: 'orchestration',
+      event: 'completed',
+      teamId,
+    });
+
+    if (taskId && workbenchManager) {
+      try {
+        if (finalState === 'done' && workbenchManager.deliver) {
+          workbenchManager.deliver(taskId, 'tl_runtime_finalized');
+        }
+      } catch {}
+    }
+
+    await governanceAuditor?.logTaskLifecycle?.({
+      action: 'orchestration_completed',
+      status: finalState,
+      taskId,
+      teamId,
+      role: 'tl',
+      agentId: 'member:tl',
+      scopeKey,
+      message: `success=${successCount}, fail=${failCount}`,
+      risk: { level: decision?.riskLevel || 'medium' },
+      policy: { decision: anyFailed ? 'partial' : 'allow', ruleId: 'tl_orchestration' },
+      metadata: {
+        anyFailed,
+        anyNeedsHuman,
+        partialSuccess,
+        successCount,
+        failCount,
+        escalation: escalation?.escalate ? escalation : null,
       },
     });
 

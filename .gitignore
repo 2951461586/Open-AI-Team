@@ -63,6 +63,9 @@ codex/
 /.release-artifacts/
 /.release-bundles/
 
+# Electron build outputs
+electron/dist/
+
 # workspace-private / non-product surfaces
 .learnings/
 .openclaw/

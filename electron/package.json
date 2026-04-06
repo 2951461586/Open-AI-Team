@@ -1,0 +1,21 @@
+{
+  "name": "ai-team-dashboard-electron",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "main.mjs",
+  "scripts": {
+    "dev": "ELECTRON_DEV=1 electron .",
+    "build": "electron-builder --config electron-builder.json --dir",
+    "package": "electron-builder --config electron-builder.json",
+    "electron:dev": "npm run dev",
+    "electron:build": "npm run build",
+    "electron:package": "npm run package"
+  },
+  "dependencies": {
+    "electron": "^31.7.7"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.13.3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@ai-team/agent-harness",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./*": "./src/*.mjs"
+  },
+  "dependencies": {}
+}

@@ -26,6 +26,8 @@ import { tryHandleTeamResidentRoute } from './team-route-resident.mjs';
 import { tryHandleTeamRuntimeExecRoute } from './team-route-runtime-exec.mjs';
 import { tryHandleTeamControlRoute } from './team-route-control.mjs';
 import { tryHandleTeamDispatchRoute as tryHandleTeamDispatchRouteV2 } from './team-route-dispatch-v2.mjs';
+import { tryHandleIMWebhookRoute } from './index-routes-im-webhook.mjs';
+import { tryHandleDeskApiRoute } from '../team/desk-api.mjs';
 
 // ── Shared 410 helper ───────────────────────────────────────────────
 function send410(res, sendJson, route) {
@@ -46,6 +48,9 @@ export function tryHandleTeamRoute(req, res, ctx = {}) {
     teamStore,
   } = ctx;
 
+  // ── Desk API (/desks/*) ──
+  if (req.url?.startsWith('/desks/') && tryHandleDeskApiRoute(req, res, ctx)) return true;
+
   // ── /internal/team/task — thin store write (kept for regression + manual recovery) ──
   if (req.method === 'POST' && req.url === '/internal/team/task') {
     if (!isOrchAuthorized(req)) {
@@ -55,6 +60,9 @@ export function tryHandleTeamRoute(req, res, ctx = {}) {
     handleJsonBody(req, res, (body) => ({ ok: true, task: teamStore.createTask(body || {}) }));
     return true;
   }
+
+  // ── IM webhooks (alive) ──
+  if (tryHandleIMWebhookRoute(req, res, ctx)) return true;
 
   // ── Resident heartbeat (alive) ──
   if (tryHandleTeamResidentRoute(req, res, ctx)) return true;

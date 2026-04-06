@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "defaultRoute": {
+    "taskMode": "general",
+    "riskLevel": "medium",
+    "deliveryMode": "reply"
+  },
+  "queue": {
+    "maxSize": 1000,
+    "replayOnRestart": false,
+    "dropPolicy": "oldest"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": false,
+      "adapter": "telegram",
+      "mode": "polling",
+      "botToken": "<telegram-bot-token>",
+      "polling": {
+        "timeoutSeconds": 25,
+        "limit": 50,
+        "allowedUpdates": ["message", "edited_message", "callback_query"]
+      },
+      "webhook": {
+        "secretToken": "",
+        "url": "https://example.com/hooks/telegram"
+      }
+    },
+    "feishu": {
+      "enabled": false,
+      "adapter": "feishu",
+      "appId": "<feishu-app-id>",
+      "appSecret": "<feishu-app-secret>",
+      "encryptKey": "",
+      "verificationToken": "",
+      "endpoint": "https://open.feishu.cn"
+    },
+    "qq": {
+      "enabled": false,
+      "adapter": "qq",
+      "appId": "<qq-app-id>",
+      "appSecret": "<qq-app-secret>",
+      "sandbox": false,
+      "endpoint": "https://api.sgroup.qq.com"
+    },
+    "wechat": {
+      "enabled": false,
+      "adapter": "wechat",
+      "appId": "<wechat-app-id>",
+      "appSecret": "<wechat-app-secret>",
+      "token": "<wechat-token>",
+      "encodingAESKey": "",
+      "endpoint": "https://api.weixin.qq.com",
+      "webhook": {
+        "url": "https://example.com/webhook/wechat"
+      },
+      "autoReplyOnSubscribe": ""
+    }
+  }
+}

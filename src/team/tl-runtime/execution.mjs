@@ -1,6 +1,9 @@
+import { TEAM_EVENT_TYPES } from '../event-types.mjs';
+
 export function createTLExecutionHelpers({
   runtimeExecutionHarness,
   nativeChat,
+  eventBus,
   spawnMemberSession,
   sessionCompletionBus,
   memberSessionSupport,
@@ -18,10 +21,24 @@ export function createTLExecutionHelpers({
   extractAndWriteBlackboard,
   teamStore,
   broadcast,
+  governanceRuntime,
+  governanceAuditor,
+  workbenchManager,
   nowFn,
   id,
   ensureArray,
 } = {}) {
+  function publishEvent(type, payload = {}, meta = {}) {
+    if (!eventBus?.publish) return;
+    void eventBus.publish({
+      type,
+      teamId: String(meta?.teamId || payload?.teamId || ''),
+      source: 'tl-runtime',
+      payload,
+      meta,
+    }).catch(() => {});
+  }
+
   async function unifiedSpawnSession({ role, ...spawnArgs } = {}) {
     try {
       const result = await runtimeExecutionHarness.spawnForRole({ role, ...spawnArgs });
@@ -313,6 +330,83 @@ export function createTLExecutionHelpers({
 
   async function runMemberWithSession({ role, task, objective, acceptance, deliverables, assignmentId, teamId, parentTask, childTask, scopeKey, context = '', timeoutMs, workItem, resultsByAssignment = {} } = {}) {
     const startedAt = nowFn();
+    const governanceCheck = governanceRuntime?.checkExecutionPermission?.({
+      taskMode: 'execution',
+      role,
+      taskId: parentTask?.taskId,
+      childTaskId: childTask?.taskId,
+      assignmentId,
+      riskLevel: workItem?.riskLevel,
+      executionSurfaces: workItem?.executionSurfaces || workItem?.tools || [],
+      operationType: Array.isArray(workItem?.executionSurfaces) && workItem.executionSurfaces.length === 1
+        ? String(workItem.executionSurfaces[0]?.type || workItem.executionSurfaces[0] || '').toLowerCase()
+        : '',
+      command: workItem?.command || '',
+      path: workItem?.path || '',
+      url: workItem?.url || '',
+      method: workItem?.method || '',
+    }) || { decision: 'allow', risk: { level: workItem?.riskLevel || 'low' }, policy: { decision: 'allow' } };
+
+    await governanceRuntime?.auditTaskEvent?.({
+      action: 'execute',
+      status: governanceCheck.decision === 'allow' ? 'started' : governanceCheck.decision,
+      taskId: parentTask?.taskId,
+      childTaskId: childTask?.taskId,
+      assignmentId,
+      teamId,
+      role,
+      agentId: `member:${role}`,
+      scopeKey,
+      message: `preflight:${governanceCheck.decision}`,
+      risk: governanceCheck.risk,
+      policy: governanceCheck.policy,
+      metadata: { title: workItem?.title || childTask?.title || '', objective },
+    });
+
+    if (governanceCheck.decision === 'deny') {
+      const errorText = 'governance_policy_denied';
+      await governanceRuntime?.auditAgentBehavior?.({
+        action: 'execution_denied',
+        taskId: parentTask?.taskId,
+        childTaskId: childTask?.taskId,
+        assignmentId,
+        teamId,
+        role,
+        agentId: `member:${role}`,
+        message: errorText,
+        overreach: true,
+        sensitiveOperation: true,
+        categories: ['policy-deny', 'preflight'],
+        risk: governanceCheck.risk,
+        policy: governanceCheck.policy,
+        metadata: { workItem },
+      });
+      teamStore?.updateTaskState?.({ taskId: childTask?.taskId, state: 'blocked', updatedAt: nowFn() });
+      return { ok: false, role, assignmentId, childTaskId: childTask?.taskId, error: errorText, result: errorText, summary: errorText, routedNode: '', degraded: false, degradedReason: '', via: 'governance_deny', governance: governanceCheck };
+    }
+
+    if (governanceCheck.decision === 'require-approval') {
+      const errorText = 'governance_approval_required';
+      await governanceRuntime?.auditAgentBehavior?.({
+        action: 'approval_required',
+        taskId: parentTask?.taskId,
+        childTaskId: childTask?.taskId,
+        assignmentId,
+        teamId,
+        role,
+        agentId: `member:${role}`,
+        message: errorText,
+        overreach: false,
+        sensitiveOperation: true,
+        categories: ['approval-gate', 'preflight'],
+        risk: governanceCheck.risk,
+        policy: governanceCheck.policy,
+        metadata: { workItem },
+      });
+      teamStore?.updateTaskState?.({ taskId: childTask?.taskId, state: 'blocked', updatedAt: nowFn() });
+      return { ok: false, role, assignmentId, childTaskId: childTask?.taskId, error: errorText, result: errorText, summary: errorText, routedNode: '', degraded: false, degradedReason: '', via: 'governance_approval_required', governance: governanceCheck };
+    }
+
     appendMailbox({
       teamId,
       taskId: parentTask?.taskId,
@@ -336,6 +430,26 @@ export function createTLExecutionHelpers({
       timestamp: startedAt,
     });
 
+    publishEvent(TEAM_EVENT_TYPES.TASK_EXECUTION_STARTED, {
+      taskId: parentTask?.taskId || '',
+      childTaskId: childTask?.taskId || '',
+      assignmentId: assignmentId || '',
+      teamId: teamId || '',
+      role: role || '',
+      scope: scopeKey || '',
+      timestamp: startedAt,
+      state: 'started',
+      title: workItem?.title || childTask?.title || '',
+      objective: objective || workItem?.objective || '',
+      riskLevel: workItem?.riskLevel || governanceCheck?.risk?.level || 'low',
+    }, {
+      scopeKey,
+      phase: 'execution',
+      event: 'started',
+      teamId,
+      governanceDecision: governanceCheck?.decision || 'allow',
+    });
+
     const spawn = await spawnAgentSession({
       role,
       task,
@@ -354,6 +468,22 @@ export function createTLExecutionHelpers({
 
     if (!spawn?.ok) {
       const errorText = String(spawn?.error || 'spawn_failed');
+      await governanceAuditor?.logAgentBehavior?.({
+        action: 'spawn_failed',
+        taskId: parentTask?.taskId,
+        childTaskId: childTask?.taskId,
+        assignmentId,
+        teamId,
+        role,
+        agentId: `member:${role}`,
+        message: errorText,
+        overreach: false,
+        sensitiveOperation: false,
+        categories: ['execution', 'spawn'],
+        risk: governanceCheck.risk,
+        policy: governanceCheck.policy,
+        metadata: { via: spawn?.via || 'spawn_failed', scopeKey },
+      });
       const result = {
         ok: false,
         role,
@@ -382,6 +512,27 @@ export function createTLExecutionHelpers({
     }
 
     if (spawn.sessionKey) {
+      await governanceAuditor?.logTaskLifecycle?.({
+        action: 'session_bound',
+        status: 'active',
+        taskId: parentTask?.taskId,
+        childTaskId: childTask?.taskId,
+        assignmentId,
+        teamId,
+        role,
+        agentId: `member:${role}`,
+        scopeKey,
+        message: `session:${spawn.sessionKey}`,
+        risk: governanceCheck.risk,
+        policy: governanceCheck.policy,
+        metadata: {
+          sessionKey: spawn.sessionKey,
+          runId: spawn.runId || '',
+          via: spawn.via || 'unknown',
+          routedNode: spawn.routedNode || '',
+          sessionMode: spawn.sessionMode || 'run',
+        },
+      });
       writeSessionToTask({
         taskId: parentTask?.taskId,
         role,
@@ -458,6 +609,32 @@ export function createTLExecutionHelpers({
       },
       artifactType: role === 'critic' ? 'review' : role === 'judge' ? 'decision' : 'member_result',
     });
+
+    if (parentTask?.taskId && workbenchManager?.collectArtifacts) {
+      try {
+        const submission = await workbenchManager.collectArtifacts(parentTask.taskId, {
+          source: `tl_runtime:${role}`,
+          notes: structured.summary || rawResultText || '',
+        });
+        const task = teamStore?.getTaskById?.(parentTask.taskId);
+        const workbench = task?.metadata?.workbench || {};
+        teamStore?.updateTaskMetadata?.({
+          taskId: parentTask.taskId,
+          metadata: {
+            ...(task?.metadata || {}),
+            workbench: {
+              ...workbench,
+              artifacts: ensureArray(submission?.artifacts),
+              latestArtifactCollectionAt: nowFn(),
+              latestArtifactCollectionBy: role,
+              latestArtifactCollectionAssignmentId: assignmentId || '',
+              latestArtifactCollectionChildTaskId: childTask?.taskId || '',
+            },
+          },
+          updatedAt: nowFn(),
+        });
+      } catch {}
+    }
 
     appendMailbox({
       teamId,
@@ -536,6 +713,24 @@ export function createTLExecutionHelpers({
       });
     }
 
+    await governanceAuditor?.logAgentBehavior?.({
+      action: ok ? 'execution_completed' : 'execution_failed',
+      taskId: parentTask?.taskId,
+      childTaskId: childTask?.taskId,
+      assignmentId,
+      teamId,
+      role,
+      agentId: `member:${role}`,
+      message: structured.summary || rawResultText || '',
+      overreach: false,
+      sensitiveOperation: !!governanceCheck?.requiresApproval || !!workItem?.requiresApproval,
+      categories: ['execution', ok ? 'completed' : 'failed'],
+      target: { childTaskId: childTask?.taskId || '', sessionKey: spawn.sessionKey || '' },
+      risk: governanceCheck.risk,
+      policy: governanceCheck.policy,
+      metadata: { via: spawn.via || 'unknown', routedNode: spawn.routedNode || '', scopeKey },
+    });
+
     const result = {
       ok,
       role,
@@ -547,8 +742,49 @@ export function createTLExecutionHelpers({
       degraded: !!spawn.degraded,
       degradedReason: spawn.degradedReason || '',
       via: spawn.via || 'unknown',
+      governance: governanceCheck,
       structured,
     };
+
+    await governanceRuntime?.auditTaskEvent?.({
+      action: ok ? 'complete' : 'fail',
+      status: ok ? 'done' : 'failed',
+      taskId: parentTask?.taskId,
+      childTaskId: childTask?.taskId,
+      assignmentId,
+      teamId,
+      role,
+      agentId: `member:${role}`,
+      scopeKey,
+      message: structured.summary || rawResultText || '',
+      risk: governanceCheck.risk,
+      policy: governanceCheck.policy,
+      metadata: { via: spawn.via || 'unknown', routedNode: spawn.routedNode || '' },
+    });
+
+    publishEvent(ok ? TEAM_EVENT_TYPES.TASK_EXECUTION_COMPLETED : TEAM_EVENT_TYPES.TASK_EXECUTION_FAILED, {
+      taskId: parentTask?.taskId || '',
+      childTaskId: childTask?.taskId || '',
+      assignmentId: assignmentId || '',
+      teamId: teamId || '',
+      role: role || '',
+      scope: scopeKey || '',
+      timestamp: nowFn(),
+      state: ok ? 'done' : 'failed',
+      summary: structured.summary || '',
+      error: ok ? '' : String(waitResult?.error || structured.error || rawResultText || 'execution_failed'),
+      outputType: structured.outputType || '',
+      contractVersion: structured.contractVersion || '',
+      routedNode: spawn.routedNode || '',
+      via: spawn.via || 'unknown',
+    }, {
+      scopeKey,
+      phase: 'execution',
+      event: ok ? 'completed' : 'failed',
+      teamId,
+      assignmentId,
+      childTaskId: childTask?.taskId || '',
+    });
 
     broadcast({
       type: 'orchestration_event',

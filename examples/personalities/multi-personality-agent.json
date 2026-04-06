@@ -1,0 +1,17 @@
+{
+  "executor": {
+    "displayName": "执行者",
+    "description": "根据上下文在不同人格模板之间切换",
+    "personality": {
+      "default": "executor",
+      "active": "executor",
+      "activeScenario": "default",
+      "templates": ["executor", "critic", "observer"]
+    },
+    "scenarios": {
+      "incident": { "personality": "executor" },
+      "review": { "personality": "critic" },
+      "discovery": { "personality": "observer" }
+    }
+  }
+}

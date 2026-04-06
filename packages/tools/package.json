@@ -1,0 +1,9 @@
+{
+  "name": "@ai-team/tools",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./*": "./src/*.mjs"
+  },
+  "dependencies": {}
+}

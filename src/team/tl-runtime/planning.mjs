@@ -1,7 +1,11 @@
+import { TEAM_EVENT_TYPES } from '../event-types.mjs';
+
 export function createTLPlanningHelpers({
   teamStore,
   governanceRuntime,
+  governanceAuditor,
   roleConfig,
+  eventBus,
   appendMailbox,
   appendBlackboard,
   nowFn,
@@ -11,8 +15,20 @@ export function createTLPlanningHelpers({
   normalizeWorkItem,
   parseStructuredMemberResult,
   roleDisplayName,
+  createDeliveryContract,
 } = {}) {
-  function createChildTask({ parentTask, workItem, teamId } = {}) {
+  function publishEvent(type, payload = {}, meta = {}) {
+    if (!eventBus?.publish) return;
+    void eventBus.publish({
+      type,
+      teamId: String(meta?.teamId || payload?.teamId || ''),
+      source: 'tl-runtime',
+      payload,
+      meta,
+    }).catch(() => {});
+  }
+
+  function createChildTask({ parentTask, workItem, teamId, scopeKey = '' } = {}) {
     const childTaskId = id('task');
     const meta = {
       parentTaskId: parentTask?.taskId || '',
@@ -88,6 +104,73 @@ export function createTLPlanningHelpers({
       },
     });
 
+    void governanceRuntime?.auditTaskEvent?.({
+      action: 'create',
+      status: 'approved',
+      taskId: parentTask?.taskId,
+      childTaskId,
+      assignmentId: workItem.id,
+      teamId,
+      role: workItem.role,
+      agentId: 'member:tl',
+      scopeKey,
+      message: `create_child_task:${workItem.title || workItem.id}`,
+      risk: { level: workItem.riskLevel || 'low' },
+      policy: { decision: 'allow', ruleId: 'tl_delegate' },
+      metadata: { dependencies: workItem.dependencies, taskMode: meta.taskMode },
+    });
+
+    void governanceRuntime?.auditTaskEvent?.({
+      action: 'delegate',
+      status: 'queued',
+      taskId: parentTask?.taskId,
+      childTaskId,
+      assignmentId: workItem.id,
+      teamId,
+      role: workItem.role,
+      agentId: 'member:tl',
+      scopeKey,
+      message: `delegate:${workItem.title || workItem.id}`,
+      risk: { level: workItem.riskLevel || 'low' },
+      policy: { decision: 'allow', ruleId: 'tl_delegate' },
+      metadata: { objective: workItem.objective, acceptance: workItem.acceptance },
+    });
+
+    void governanceAuditor?.logAgentBehavior?.({
+      action: 'task_delegated',
+      taskId: parentTask?.taskId,
+      childTaskId,
+      assignmentId: workItem.id,
+      teamId,
+      role: workItem.role,
+      agentId: 'member:tl',
+      message: `tl delegated work item ${workItem.id}`,
+      overreach: false,
+      sensitiveOperation: normalizeRiskLevel(workItem.riskLevel) === 'high',
+      categories: ['delegation', 'planning'],
+      target: { childTaskId, title: workItem.title || '' },
+      risk: { level: workItem.riskLevel || 'low' },
+      policy: { decision: 'allow', ruleId: 'tl_delegate' },
+      metadata: { scopeKey, dependencies: ensureArray(workItem.dependencies) },
+    });
+
+    const basePayload = {
+      taskId: parentTask?.taskId || '',
+      childTaskId,
+      assignmentId: workItem.id,
+      teamId: teamId || '',
+      role: workItem.role || '',
+      scope: scopeKey || '',
+      timestamp: nowFn(),
+      state: 'approved',
+      title: workItem.title || '',
+      objective: workItem.objective || '',
+      dependencies: ensureArray(workItem.dependencies),
+      riskLevel: workItem.riskLevel || 'low',
+    };
+    publishEvent(TEAM_EVENT_TYPES.TASK_CHILD_CREATED, basePayload, { scopeKey, phase: 'planning', event: 'child_created', teamId });
+    publishEvent(TEAM_EVENT_TYPES.TASK_DELEGATED, basePayload, { scopeKey, phase: 'planning', event: 'delegated', teamId });
+
     return childTask;
   }
 
@@ -147,6 +230,59 @@ export function createTLPlanningHelpers({
     return out;
   }
 
+  function initializeTaskDeliveryContract({ task, decision } = {}) {
+    if (!task?.taskId || !teamStore?.updateTaskMetadata || typeof createDeliveryContract !== 'function') return null;
+
+    const rawDecision = decision?.raw && typeof decision.raw === 'object' ? decision.raw : {};
+    const expectedDeliverables = ensureArray(
+      rawDecision.expectedDeliverables
+      || rawDecision.delivery?.expectedDeliverables
+      || rawDecision.deliveryExpectations
+    );
+    const inferredDeliverables = expectedDeliverables.length > 0
+      ? expectedDeliverables
+      : ensureArray(decision?.workItems)
+        .flatMap((item, index) => ensureArray(item?.deliverables).map((deliverable, dIndex) => ({
+          id: `${item?.id || `workitem:${index + 1}`}:deliverable:${dIndex + 1}`,
+          title: typeof deliverable === 'string' ? deliverable : (deliverable?.title || deliverable?.name || `Deliverable ${dIndex + 1}`),
+          artifactType: typeof deliverable === 'object' ? deliverable?.artifactType : undefined,
+          required: typeof deliverable === 'object' ? deliverable?.required : true,
+          acceptanceCriteria: ensureArray(typeof deliverable === 'object' ? deliverable?.acceptanceCriteria : []),
+          qualityCriteria: ensureArray(typeof deliverable === 'object' ? deliverable?.qualityCriteria : []),
+          sourceStepIds: [item?.id || `workitem:${index + 1}`],
+        })));
+
+    if (inferredDeliverables.length === 0) return null;
+
+    const contract = createDeliveryContract({
+      taskId: task.taskId,
+      title: task.title,
+      summary: decision?.summary || task.description || task.title,
+      expectedDeliverables: inferredDeliverables,
+      metadata: {
+        source: 'tl_runtime_plan',
+        taskMode: decision?.taskMode || task?.metadata?.taskMode || 'general',
+        riskLevel: decision?.riskLevel || task?.metadata?.riskLevel || 'medium',
+      },
+    });
+
+    const currentMetadata = task?.metadata || {};
+    const currentWorkbench = currentMetadata.workbench || {};
+    teamStore.updateTaskMetadata({
+      taskId: task.taskId,
+      metadata: {
+        ...currentMetadata,
+        workbench: {
+          ...currentWorkbench,
+          deliveryContract: contract,
+          updatedAt: nowFn(),
+        },
+      },
+      updatedAt: nowFn(),
+    });
+    return contract;
+  }
+
   function summarizeMemberResultLine(r = {}) {
     const s = r.structured || parseStructuredMemberResult(r.result || '', { ok: r.ok !== false, summary: r.summary || r.result || r.error || '' });
     return `### ${roleDisplayName(r.role)} ${r.ok ? '✅' : '❌'}${r.routedNode ? ` [${r.routedNode}]` : ''}\n- 摘要：${s.summary || r.result || r.error || ''}\n- 交付物：${ensureArray(s.deliverables).length} 个`;
@@ -155,6 +291,7 @@ export function createTLPlanningHelpers({
   return {
     createChildTask,
     synthesizeGovernedWorkItems,
+    initializeTaskDeliveryContract,
     summarizeMemberResultLine,
   };
 }

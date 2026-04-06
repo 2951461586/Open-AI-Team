@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "reviewLoop": {
+    "enabled": true,
+    "maxRounds": 2
+  },
+  "riskRouting": {
+    "high": ["critic", "judge"],
+    "medium": ["critic"],
+    "low": []
+  },
+  "executionPolicy": {
+    "allowNativeFallback": true,
+    "requireAcceptance": true
+  }
+}

@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { buildAgentSystemPrompt } from '../agent-personality.mjs';
 
 export function createTLPromptHelpers({
   teamStore,
@@ -58,8 +59,15 @@ export function createTLPromptHelpers({
       .join('\n');
 
     const taskSnapshot = buildTaskStateSnapshot();
-
-    return `你是 AI Team 的 Team Lead（TL）。你负责接收用户任务，分析、拆解、路由，并对最终结果负责。
+    const tlConfig = roleConfig?.roles?.tl || {};
+    const scenario = String(tlConfig?.personality?.activeScenario || 'default').trim();
+    const personalitySelection = String(
+      tlConfig?.activePersonality
+      || tlConfig?.personality?.active
+      || tlConfig?.personality?.default
+      || ''
+    ).trim();
+    const basePrompt = `你是 AI Team 的 Team Lead（TL）。你负责接收用户任务，分析、拆解、路由，并对最终结果负责。
 
 ## 你的团队成员
 ${memberList || '（暂无成员）'}
@@ -132,6 +140,23 @@ ${taskSnapshot}
 - 如果高风险，明确标记 riskLevel=high。
 - **当用户提到"已阻塞的任务"、"blocked 任务"或类似表述时，必须结合上面的「当前团队任务状态」来定位具体任务，不要反问用户要哪些任务。如果能从状态里匹配到，就直接对这些任务进行操作。**
 - **当用户要求对已有任务做操作（清理、重启、关闭、重排等），你必须分配给 executor 去执行，而不是直接回答。**`;
+
+    const promptBuild = buildAgentSystemPrompt({
+      agentName: tlConfig.displayName || 'Team Lead',
+      role: 'tl',
+      rolePrompt: basePrompt,
+      roleConfig: {
+        ...tlConfig,
+        personality: {
+          ...(tlConfig?.personality || {}),
+          mergeStrategy: 'prepend',
+        },
+      },
+      personalityId: personalitySelection,
+      scenario,
+    });
+
+    return promptBuild.systemPrompt;
   }
 
   function buildCompletionFilePath({ taskWorkspace, assignmentId, role, sessionKey = '' } = {}) {
@@ -147,9 +172,27 @@ ${taskSnapshot}
     const taskWorkspace = `${workspaceRoot}/${String(workDirId).replace(/[^a-zA-Z0-9_:-]/g, '_')}`;
     const completionFilePath = buildCompletionFilePath({ taskWorkspace, assignmentId, role, sessionKey });
     const threeLayerMemory = buildThreeLayerMemorySnapshot({ taskId, context, workItem, resultsByAssignment });
+    const scenario = String(workItem?.scenario || memberConfig?.personality?.activeScenario || 'default').trim();
+    const personalitySelection = String(
+      workItem?.personality
+      || workItem?.personalityId
+      || memberConfig?.activePersonality
+      || memberConfig?.personality?.active
+      || memberConfig?.personality?.default
+      || ''
+    ).trim();
+    const baseIdentityPrompt = `你是 AI Team 中的 ${memberConfig.displayName || role}。`;
+    const promptBuild = buildAgentSystemPrompt({
+      agentName: memberConfig.displayName || role,
+      role,
+      rolePrompt: baseIdentityPrompt,
+      roleConfig: memberConfig,
+      personalityId: personalitySelection,
+      scenario,
+    });
 
     return {
-      memberPrompt: `你是 AI Team 中的 ${memberConfig.displayName || role}。
+      memberPrompt: `${promptBuild.systemPrompt}
 
 ## 任务目标
 ${objective || task}

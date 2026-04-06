@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.openai-team.dev/agent-capabilities.schema.json",
+  "title": "Agent Capabilities",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": { "type": "string", "default": "agent-capabilities.v1" },
+    "tools": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "default": []
+    },
+    "memory": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "default": []
+    },
+    "channels": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "routeKey": { "type": "string", "minLength": 1 },
+          "channel": { "type": "string" },
+          "priority": { "type": "number", "default": 1 },
+          "modes": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["ingress", "egress", "relay", "broadcast"] },
+            "default": ["ingress", "egress"]
+          },
+          "metadata": { "type": "object", "additionalProperties": true }
+        },
+        "required": ["routeKey"]
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "default": []
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "maxConcurrentTasks": { "type": "integer", "minimum": 1, "default": 1 },
+        "maxQueueDepth": { "type": "integer", "minimum": 0, "default": 0 }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "default": {}
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "mode": { "type": "string", "enum": ["declarative", "probe", "attested"], "default": "declarative" },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "default": []
+        },
+        "verifiedAt": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

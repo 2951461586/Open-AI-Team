@@ -1,5 +1,48 @@
+import path from 'node:path';
 import { resolveDeliveryTarget } from '../team/team-delivery-target.mjs';
 import { isTeamOutputReceipt, handleTeamOutputReceipt } from '../team/team-output-receipt-host.mjs';
+import { PersonalAgent } from '../personal-agent/personal-agent.mjs';
+import { loadPersonalConfig, savePersonalConfig } from '../personal-agent/personal-agent-config.mjs';
+
+const DEFAULT_PERSONAL_CONFIG_PATH = path.resolve(process.cwd(), 'config', 'personal-agent.json');
+const personalAgentRegistry = new Map();
+
+function resolvePersonalConfigPath(body = {}, reqUrl = '') {
+  const fallback = DEFAULT_PERSONAL_CONFIG_PATH;
+  let queryPath = '';
+  try {
+    const u = new URL(reqUrl || '', 'http://127.0.0.1');
+    queryPath = String(u.searchParams.get('path') || '').trim();
+  } catch {}
+  return path.resolve(String(body?.path || body?.configPath || queryPath || fallback));
+}
+
+function getOrCreatePersonalAgent(config) {
+  const normalized = loadPersonalConfig(resolvePersonalConfigPath(config, ''));
+  const cacheKey = normalized.id;
+  const existing = personalAgentRegistry.get(cacheKey);
+  if (existing) {
+    existing.config = normalized;
+    return existing;
+  }
+  const agent = new PersonalAgent(normalized);
+  personalAgentRegistry.set(cacheKey, agent);
+  return agent;
+}
+
+async function handlePersonalMessage(body = {}, sendJson, res) {
+  const configPath = resolvePersonalConfigPath(body, '');
+  const config = loadPersonalConfig(configPath);
+  const agent = personalAgentRegistry.get(config.id) || new PersonalAgent(config);
+  personalAgentRegistry.set(config.id, agent);
+  const out = await agent.process(String(body?.message || body?.text || ''), body?.context || {});
+  sendJson(res, 200, {
+    ok: true,
+    configPath,
+    agent: agent.getState(),
+    result: out,
+  });
+}
 
 function buildNormalizedIngressEvent(body = {}) {
   const kind = String(body?.kind || '').trim();
@@ -80,6 +123,17 @@ function readJsonBody(req, res, sendJson, onBody) {
   });
 }
 
+function governanceActorFromRequest(req, body = {}) {
+  return String(
+    body?.approvedBy
+    || body?.rejectedBy
+    || body?.operator
+    || req?.headers?.['x-governance-actor']
+    || req?.headers?.['x-actor-id']
+    || 'orchestrator'
+  ).trim();
+}
+
 function buildRetiredLegacyRouteBody({
   surface = '',
   method = '',
@@ -105,7 +159,44 @@ export function tryHandleEntryRoute(req, res, ctx = {}) {
     isOrchAuthorized,
     sendJson,
     consumeWebhookEvent,
+    governanceRuntime,
   } = ctx;
+
+  if (req.method === 'POST' && req.url === '/api/personal') {
+    readJsonBody(req, res, sendJson, async (body) => {
+      await handlePersonalMessage(body, sendJson, res);
+    });
+    return true;
+  }
+
+  if (req.method === 'GET' && (req.url === '/api/personal/config' || req.url.startsWith('/api/personal/config?'))) {
+    try {
+      const configPath = resolvePersonalConfigPath({}, req.url);
+      const config = loadPersonalConfig(configPath);
+      sendJson(res, 200, { ok: true, configPath, config });
+    } catch (e) {
+      sendJson(res, 400, { ok: false, error: String(e) });
+    }
+    return true;
+  }
+
+  if (req.method === 'POST' && req.url === '/api/personal/config') {
+    readJsonBody(req, res, sendJson, async (body) => {
+      try {
+        const configPath = resolvePersonalConfigPath(body, req.url);
+        const next = savePersonalConfig(body?.config || body || {}, configPath);
+        const existing = personalAgentRegistry.get(next.id);
+        if (existing) {
+          await existing.shutdown();
+          personalAgentRegistry.delete(next.id);
+        }
+        sendJson(res, 200, { ok: true, configPath, config: next });
+      } catch (e) {
+        sendJson(res, 400, { ok: false, error: String(e) });
+      }
+    });
+    return true;
+  }
 
   if (req.method === 'POST' && req.url === '/webhook/qq') {
     readJsonBody(req, res, sendJson, async (body) => {
@@ -134,6 +225,99 @@ export function tryHandleEntryRoute(req, res, ctx = {}) {
       }
       sendJson(res, out?.ok === false ? 400 : 200, out, out?.extraHeaders || {});
     });
+    return true;
+  }
+
+  if (req.method === 'GET' && (req.url === '/internal/team/governance/pending' || req.url.startsWith('/internal/team/governance/pending?'))) {
+    if (!isOrchAuthorized(req)) {
+      sendJson(res, 401, { ok: false, error: 'unauthorized' });
+      return true;
+    }
+    try {
+      const u = new URL(req.url, 'http://127.0.0.1');
+      const scope = String(u.searchParams.get('scope') || '').trim();
+      const out = governanceRuntime?.listPendingApprovals?.(scope) || { ok: true, items: [], total: 0, scope };
+      sendJson(res, 200, out);
+    } catch (e) {
+      sendJson(res, 400, { ok: false, error: String(e) });
+    }
+    return true;
+  }
+
+  if (req.method === 'POST' && req.url === '/internal/team/governance/approve') {
+    if (!isOrchAuthorized(req)) {
+      sendJson(res, 401, { ok: false, error: 'unauthorized' });
+      return true;
+    }
+    readJsonBody(req, res, sendJson, async (body) => {
+      try {
+        const approvalId = String(body?.approvalId || '').trim();
+        if (!approvalId) {
+          sendJson(res, 400, { ok: false, error: 'approvalId_required' });
+          return;
+        }
+        const approvedBy = governanceActorFromRequest(req, body);
+        const comment = String(body?.comment || '').trim();
+        const out = governanceRuntime?.approvePending?.(approvalId, approvedBy, comment);
+        sendJson(res, 200, out || { ok: false, error: 'governance_runtime_unavailable' });
+      } catch (e) {
+        sendJson(res, 400, { ok: false, error: String(e) });
+      }
+    });
+    return true;
+  }
+
+  if (req.method === 'POST' && req.url === '/internal/team/governance/reject') {
+    if (!isOrchAuthorized(req)) {
+      sendJson(res, 401, { ok: false, error: 'unauthorized' });
+      return true;
+    }
+    readJsonBody(req, res, sendJson, async (body) => {
+      try {
+        const approvalId = String(body?.approvalId || '').trim();
+        if (!approvalId) {
+          sendJson(res, 400, { ok: false, error: 'approvalId_required' });
+          return;
+        }
+        const rejectedBy = governanceActorFromRequest(req, body);
+        const comment = String(body?.comment || '').trim();
+        const out = governanceRuntime?.rejectPending?.(approvalId, rejectedBy, comment);
+        sendJson(res, 200, out || { ok: false, error: 'governance_runtime_unavailable' });
+      } catch (e) {
+        sendJson(res, 400, { ok: false, error: String(e) });
+      }
+    });
+    return true;
+  }
+
+
+  if (req.method === 'GET' && req.url?.startsWith('/api/trace/recent')) {
+    try {
+      const u = new URL(req.url, 'http://127.0.0.1');
+      const limit = Math.max(1, Number(u.searchParams.get('limit') || 50));
+      Promise.resolve(ctx.traceCollector?.listRecent?.(limit) || { ok: true, traces: [] })
+        .then((out) => sendJson(res, 200, out || { ok: true, traces: [] }))
+        .catch((e) => sendJson(res, 400, { ok: false, error: String(e) }));
+    } catch (e) {
+      sendJson(res, 400, { ok: false, error: String(e) });
+    }
+    return true;
+  }
+
+  if (req.method === 'GET' && req.url?.startsWith('/api/trace?')) {
+    try {
+      const u = new URL(req.url, 'http://127.0.0.1');
+      const traceId = String(u.searchParams.get('traceId') || '').trim();
+      if (!traceId) {
+        sendJson(res, 400, { ok: false, error: 'traceId_required' });
+        return true;
+      }
+      Promise.resolve(ctx.traceCollector?.queryByTraceId?.(traceId) || { ok: true, traceId, spans: [], tree: [] })
+        .then((out) => sendJson(res, 200, out || { ok: true, traceId, spans: [], tree: [] }))
+        .catch((e) => sendJson(res, 400, { ok: false, error: String(e) }));
+    } catch (e) {
+      sendJson(res, 400, { ok: false, error: String(e) });
+    }
     return true;
   }
 

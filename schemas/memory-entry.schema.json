@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team-harness.local/schemas/memory-entry.schema.json",
+  "title": "AI Team Harness Memory Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "scope",
+    "agentId",
+    "text",
+    "category",
+    "importance",
+    "createdAt",
+    "updatedAt",
+    "keywords",
+    "embedding",
+    "strength",
+    "version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 4,
+      "pattern": "^[A-Za-z0-9:_-]+$"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 3,
+      "pattern": "^[A-Za-z0-9/_-]+$",
+      "examples": ["team/planner", "team/executor", "team/runtime"]
+    },
+    "agentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000
+    },
+    "category": {
+      "type": "string",
+      "enum": ["fact", "decision", "plan", "artifact", "observation", "conversation", "other"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "default": []
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true
+    },
+    "importance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "createdAt": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix epoch milliseconds"
+    },
+    "updatedAt": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix epoch milliseconds"
+    },
+    "lastAccessedAt": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Unix epoch milliseconds"
+    },
+    "accessCount": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "archivedAt": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Unix epoch milliseconds when archived"
+    },
+    "metadata": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": true
+    },
+    "embedding": {
+      "type": "array",
+      "minItems": 32,
+      "maxItems": 2048,
+      "items": { "type": "number" }
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

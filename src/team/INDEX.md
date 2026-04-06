@@ -13,6 +13,9 @@
 - `team-resident-runtime.mjs`
 - `team-governance-runtime.mjs`
 - `team-session-completion-bus.mjs`
+- `event-types.mjs`
+- `event-bus.mjs`
+- `session-bus.mjs`
 
 ## Deleted Legacy Shell
 

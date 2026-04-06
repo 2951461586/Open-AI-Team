@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { createWorkspaceSandbox } from './sandbox.mjs';
-import { createLocalToolRuntime } from './tool-runtime.mjs';
+import { createWorkspaceSandbox } from '../../src/agent-harness-core/sandbox-core.mjs';
+import { createLocalToolRuntime } from '../../src/agent-harness-core/tool-runtime.mjs';
 import { createFileStateBackend } from './backend-provider.mjs';
 import { createLocalHostLayer } from './host-layer.mjs';
 import { createCommandRuntime } from './command-runtime.mjs';

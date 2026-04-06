@@ -9,8 +9,12 @@
  */
 
 import { existsSync, readFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createGovernanceAuditor } from './governance-auditor.mjs';
+import { createGovernanceRiskAssessment } from './governance-risk-assessment.mjs';
+import { createGovernancePolicyEngine } from './governance-policy-engine.mjs';
+import { createGovernanceApprovalQueue } from './governance-approval-queue.mjs';
 
 const __dirname = typeof import.meta?.url === 'string'
   ? dirname(fileURLToPath(import.meta.url))
@@ -103,7 +107,7 @@ function evaluateCondition(expr = '', ctx = {}) {
   }
 }
 
-export function createGovernanceRuntime(configPath) {
+export function createGovernanceRuntime(configPath, options = {}) {
   const loaded = loadGovernanceConfig(configPath);
   const config = loaded?.config || null;
   const configMeta = loaded?.meta || { path: '', explicit: false, usedFallback: false };
@@ -116,6 +120,35 @@ export function createGovernanceRuntime(configPath) {
   const lifecycle = config?.lifecycle || {};
   const observability = config?.observability || {};
   const errorRecovery = config?.errorRecovery || {};
+  const governanceRuntimeConfig = config?.governanceRuntime || {};
+  const runtimeRoot = join(__dirname, '..', '..');
+  const resolveFromRoot = (value, fallback) => resolve(runtimeRoot, String(value || fallback || ''));
+  const auditor = options.auditor || createGovernanceAuditor({
+    ...(governanceRuntimeConfig.audit || {}),
+    auditDir: resolveFromRoot(governanceRuntimeConfig?.audit?.auditDir, 'state/governance/audit'),
+    auditLogPath: resolveFromRoot(governanceRuntimeConfig?.audit?.auditLogPath, 'state/governance/audit/audit.jsonl'),
+    eventBus: options.eventBus,
+  });
+  const riskAssessment = createGovernanceRiskAssessment(governanceRuntimeConfig.risk || {});
+  const policyEngine = createGovernancePolicyEngine({
+    ...(governanceRuntimeConfig.policy || {}),
+    policyPath: resolveFromRoot(governanceRuntimeConfig?.policy?.policyPath, 'config/team/governance-policies.json'),
+    eventBus: options.eventBus,
+  });
+  const approvalQueue = createGovernanceApprovalQueue({
+    ...(governanceRuntimeConfig.approvals || {}),
+    pendingDir: resolveFromRoot(governanceRuntimeConfig?.approvals?.pendingDir, 'state/governance/pending'),
+    auditor,
+    teamStore: options.teamStore,
+  });
+
+  function mapRiskToOperationType(task = {}) {
+    const surfaces = Array.isArray(task?.executionSurfaces) ? task.executionSurfaces : [];
+    if (surfaces.some((s) => String(s?.type || s).toLowerCase() === 'exec')) return 'exec';
+    if (surfaces.some((s) => String(s?.type || s).toLowerCase() === 'network')) return 'network';
+    if (surfaces.some((s) => String(s?.type || s).toLowerCase() === 'filesystem')) return 'filesystem';
+    return String(task?.operationType || '').toLowerCase();
+  }
 
   /**
    * Check if a pipeline stage should be skipped for a given task context.
@@ -307,6 +340,94 @@ export function createGovernanceRuntime(configPath) {
     };
   }
 
+  function evaluateTaskRisk(task = {}) {
+    return riskAssessment.assessTask(task);
+  }
+
+  function evaluatePolicy(context = {}) {
+    return policyEngine.evaluate(context);
+  }
+
+  function checkExecutionPermission(task = {}) {
+    const risk = evaluateTaskRisk(task);
+    const operationType = mapRiskToOperationType(task);
+    const policy = evaluatePolicy({
+      ...task,
+      operationType,
+      riskLevel: risk.level,
+    });
+    const decision = policy.decision === 'deny'
+      ? 'deny'
+      : ((policy.decision === 'require-approval' || risk.requiresApproval) ? 'require-approval' : 'allow');
+
+    let approval = null;
+    if (decision === 'require-approval') {
+      const submitted = approvalQueue.submitApprovalRequest({
+        taskId: task.taskId,
+        riskLevel: risk.level,
+        reason: [
+          String(policy.reason || '').trim(),
+          ...(Array.isArray(risk.reasons) ? risk.reasons : []),
+        ].filter(Boolean).join(', ') || 'approval_required',
+        operator: String(task.role || task.operator || task.agentId || 'unknown'),
+        scope: String(task.scope || task.scopeKey || ''),
+        details: {
+          assignmentId: String(task.assignmentId || ''),
+          childTaskId: String(task.childTaskId || ''),
+          taskMode: String(task.taskMode || ''),
+          operationType,
+          command: String(task.command || ''),
+          path: String(task.path || ''),
+          url: String(task.url || ''),
+          method: String(task.method || ''),
+          executionSurfaces: Array.isArray(task.executionSurfaces) ? task.executionSurfaces : [],
+          risk,
+          policy,
+        },
+      });
+      approval = { approvalId: submitted.approvalId, status: 'pending' };
+    }
+
+    return {
+      ok: decision !== 'deny',
+      decision,
+      risk,
+      policy: { ...policy, decision },
+      requiresApproval: decision === 'require-approval',
+      blocked: decision === 'deny' || risk.blocked,
+      approval,
+      approvalId: approval?.approvalId || '',
+    };
+  }
+
+  async function auditTaskEvent(payload = {}) {
+    return auditor.logTaskLifecycle(payload);
+  }
+
+  async function auditAgentBehavior(payload = {}) {
+    return auditor.logAgentBehavior(payload);
+  }
+
+  async function queryAuditTrail(query = {}) {
+    return auditor.query(query);
+  }
+
+  async function reloadPolicies() {
+    return policyEngine.reload();
+  }
+
+  function listPendingApprovals(scope = '') {
+    return approvalQueue.listPending(scope);
+  }
+
+  function approvePending(approvalId = '', approvedBy = '', comment = '') {
+    return approvalQueue.approve(approvalId, approvedBy, comment);
+  }
+
+  function rejectPending(approvalId = '', rejectedBy = '', comment = '') {
+    return approvalQueue.reject(approvalId, rejectedBy, comment);
+  }
+
   return {
     shouldSkipStage,
     getStageTimeout,
@@ -323,6 +444,20 @@ export function createGovernanceRuntime(configPath) {
     getErrorRecoveryConfig,
     isRetryableError,
     getDynamicReplanConfig,
+    evaluateTaskRisk,
+    evaluatePolicy,
+    checkExecutionPermission,
+    auditTaskEvent,
+    auditAgentBehavior,
+    queryAuditTrail,
+    reloadPolicies,
+    listPendingApprovals,
+    approvePending,
+    rejectPending,
+    auditor,
+    riskAssessment,
+    policyEngine,
+    approvalQueue,
     observability,
   };
 }

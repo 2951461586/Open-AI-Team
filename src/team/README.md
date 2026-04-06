@@ -28,6 +28,9 @@
 ### agent / session / adapters
 - `team-agent-*.mjs`
 - `team-session-completion-bus.mjs`
+- `event-types.mjs`
+- `event-bus.mjs`
+- `session-bus.mjs`
 - `tl-runtime/*`
 
 ### routing / reroute / claim

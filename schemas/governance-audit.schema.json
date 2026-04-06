@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://openclaw.local/schemas/governance-audit.schema.json",
+  "title": "Governance Audit Record",
+  "type": "object",
+  "required": ["id", "timestamp", "type", "level", "agent", "behavior", "risk", "policy", "metadata"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "type": { "type": "string", "minLength": 1 },
+    "action": { "type": "string" },
+    "status": { "type": "string" },
+    "level": { "type": "string", "enum": ["debug", "info", "warn", "error", "critical"] },
+    "message": { "type": "string" },
+    "taskId": { "type": "string" },
+    "childTaskId": { "type": "string" },
+    "assignmentId": { "type": "string" },
+    "teamId": { "type": "string" },
+    "scopeKey": { "type": "string" },
+    "agent": {
+      "type": "object",
+      "required": ["id", "role", "node", "sessionKey"],
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "node": { "type": "string" },
+        "sessionKey": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "behavior": {
+      "type": "object",
+      "required": ["overreach", "sensitiveOperation", "categories"],
+      "properties": {
+        "overreach": { "type": "boolean" },
+        "sensitiveOperation": { "type": "boolean" },
+        "categories": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "target": { "type": "object", "additionalProperties": true },
+    "risk": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "score": { "type": "number" },
+        "reasons": { "type": "array", "items": { "type": "string" } },
+        "requiresApproval": { "type": "boolean" },
+        "blocked": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "policy": {
+      "type": "object",
+      "properties": {
+        "decision": { "type": "string", "enum": ["allow", "deny", "require-approval"] },
+        "ruleId": { "type": "string" },
+        "version": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "sensitive": { "type": "boolean" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team-harness.local/schemas/desk-file.schema.json",
+  "title": "Agent Desk File Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "role",
+    "path",
+    "relativePath",
+    "mimeType",
+    "size",
+    "tags",
+    "createdAt",
+    "updatedAt",
+    "type",
+    "shared"
+  ],
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "title": { "type": "string" },
+    "role": { "type": "string", "minLength": 1 },
+    "sourceRole": { "type": "string" },
+    "path": { "type": "string", "minLength": 1 },
+    "relativePath": { "type": "string", "minLength": 1 },
+    "mimeType": { "type": "string", "minLength": 1 },
+    "size": { "type": "integer", "minimum": 0 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "taskId": { "type": "string" },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "type": {
+      "type": "string",
+      "enum": ["file", "artifact", "attachment", "handoff", "shared"]
+    },
+    "shared": { "type": "boolean" }
+  }
+}

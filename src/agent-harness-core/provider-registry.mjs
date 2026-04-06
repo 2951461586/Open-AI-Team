@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { createWorkspaceSandbox } from './sandbox.mjs';
+import { createSandboxCore } from './sandbox-core.mjs';
 import { createLocalToolRuntime } from './tool-runtime.mjs';
+import { createDefaultToolProviders } from './tool-providers.mjs';
 import { createFileStateBackend } from './backend-provider.mjs';
 import { createLocalHostLayer } from './host-layer.mjs';
 import { createCommandRuntime } from './command-runtime.mjs';
@@ -145,8 +146,8 @@ export function createLocalArtifactStore({ artifactDir = '' } = {}) {
   };
 }
 
-export function createLocalSandboxProvider({ workspaceDir = '', policy = {} } = {}) {
-  return createWorkspaceSandbox({ workspaceDir, policy });
+export function createLocalSandboxProvider({ workspaceDir = '', policy = {}, mode = 'auto', docker = {}, executorDefaults = {} } = {}) {
+  return createSandboxCore({ workspaceDir, policy, mode, docker, executorDefaults });
 }
 
 export function createLocalToolProvider({ toolRegistry = [], toolRuntime = null } = {}) {
@@ -163,8 +164,22 @@ export function createLocalToolProvider({ toolRegistry = [], toolRuntime = null 
   };
 }
 
-export function createLocalToolRuntimeProvider({ sandbox, eventBus = null, outputDir = '', memoryProvider = null, commandRuntime = null, bridgeHost = null, lifecycleRuntime = null, productShell = null, capabilityGate = null, initialRuns = [] } = {}) {
-  return createLocalToolRuntime({ sandbox, eventBus, outputDir, memoryProvider, commandRuntime, bridgeHost, lifecycleRuntime, productShell, capabilityGate, initialRuns });
+export function createLocalToolRuntimeProvider({ sandbox, eventBus = null, outputDir = '', memoryProvider = null, commandRuntime = null, bridgeHost = null, lifecycleRuntime = null, productShell = null, capabilityGate = null, initialRuns = [], toolRegistry = [], providers = null, roles = {} } = {}) {
+  return createLocalToolRuntime({
+    sandbox,
+    eventBus,
+    outputDir,
+    memoryProvider,
+    commandRuntime,
+    bridgeHost,
+    lifecycleRuntime,
+    productShell,
+    capabilityGate,
+    initialRuns,
+    toolRegistry,
+    providers: Array.isArray(providers) ? providers : createDefaultToolProviders({ fs: { rootDir: sandbox?.baseDir || process.cwd(), allowedScopes: ['artifacts', 'memory', 'desk', 'run', 'tmp'] } }),
+    roles,
+  });
 }
 
 export function createCommandRuntimeProvider({ workspaceDir = '', policy = {} } = {}) {
