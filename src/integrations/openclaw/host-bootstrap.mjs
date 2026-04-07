@@ -69,7 +69,7 @@ export function createOpenClawRemoteSessionHostBootstrap(config = {}) {
         lebangWebhookPort: Number(reviewNode?.webhookPort || reviewCompatNode?.services?.webhookTunnelAlias?.port || 19092),
         lebangControlBaseUrl: reviewControlUrl,
         lebangControlToken: reviewControlToken,
-        controlPlaneSystemdUnit: String(hostConfig?.local?.controlPlaneSystemdUnit || 'orchestrator.service'),
+        controlPlaneSystemdUnit: String(hostConfig?.local?.controlPlaneSystemdUnit || 'liziai-api.service'),
         localControlUrl,
         teamStore,
       });
