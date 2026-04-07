@@ -1,12 +1,12 @@
 {
   "default": {
-    "chat": { "provider": "openai", "model": "gpt-4o-mini", "maxRetries": 1 },
-    "utility": { "provider": "openai", "model": "gpt-4o-mini", "maxRetries": 2 },
-    "reasoning": { "provider": "openai", "model": "gpt-4o", "maxRetries": 1 }
+    "chat": { "provider": "openai", "model": "gpt-5.4", "maxRetries": 1 },
+    "utility": { "provider": "openai", "model": "gpt-5.4", "maxRetries": 2 },
+    "reasoning": { "provider": "openai", "model": "gpt-5.4", "maxRetries": 1 }
   },
   "fallback": {
-    "chat": { "provider": "openai", "model": "gpt-3.5-turbo" },
-    "utility": { "provider": "openai", "model": "gpt-3.5-turbo" },
+    "chat": { "provider": "openai", "model": "gpt-4o" },
+    "utility": { "provider": "openai", "model": "gpt-4o" },
     "reasoning": { "provider": "openai", "model": "gpt-4o-mini" }
   }
 }
