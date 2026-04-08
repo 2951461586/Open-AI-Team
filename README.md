@@ -1,5 +1,7 @@
 # AI Team Runtime
 
+[English](./README.md) | [简体中文](./README.zh-CN.md)
+
 An open-source **team-oriented multi-agent runtime** for planning, delegation, review, and evidence-driven delivery.
 
 It is designed for people building systems that need more than chat:
