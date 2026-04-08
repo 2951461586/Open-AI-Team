@@ -1,49 +1,38 @@
 # `src/team/` 目录说明
 
-## 目录职责
+`src/team/` 现在不是单一 authority 目录，而是一个 **mixed compatibility surface**。
 
-集中存放 Team Runtime 主域：
+## 现在该怎么理解
 
-- `team-tl-runtime.mjs` 驱动的 TL-first authority 与 delegated execution 主链
-- callback / completion / spawn session 适配层
-- capability routing / fallback routing
-- output gate / output bridge / reroute / claim runtime
-- team store / team policy / resident / node health / governance host
+### 已完成 package flip 的覆盖面
+对已经进入 `packages/team-runtime/` 的运行时/编排导出面：
+- `src/team/*.mjs`
+- `src/team/tl-runtime/*.mjs`
+中的覆盖文件应视为 **compatibility shims**。
 
-## 当前主线入口
+这些区域的新实现应进入：
+- `packages/team-runtime/`
 
-### authority / runtime
-- `team-tl-runtime.mjs` — **当前唯一对话 authority + 任务编排 authority**
-- `team-store.mjs`
-- `team-policy.mjs`
-- `team-resident-runtime.mjs`
-- `team-governance-runtime.mjs`
-- `team-node-health.mjs` — facade
-- `team-node-health-core.mjs` — 节点打分 / 选路 authority
-- `team-node-health-probes.mjs` — 本地/远端健康探针采集
+### 仍留在本地的非 package 面
+目前仍主要包括：
+- `query-api/*`
+- repo-local docs/index/readme
+- 指向 app/server-owned surface 的 compatibility seams
+- 其它尚未正式进入 package 合同面的 team 子域
 
-### retired / deleted surfaces
-- 旧 `team-runtime.mjs` / `team-agent-harness.mjs` / `team-multi-node-gateway.mjs` 已完成**物理清退**，不再保留壳文件
+## 阅读建议
 
-### agent / session / adapters
-- `team-agent-*.mjs`
-- `team-session-completion-bus.mjs`
-- `event-types.mjs`
-- `event-bus.mjs`
-- `session-bus.mjs`
-- `tl-runtime/*`
+如果你想看当前主 runtime：
+- 先读 `../../packages/team-runtime/README.md`
+- 再读 `../../docs/architecture/current-team-runtime-architecture.md`
 
-### routing / reroute / claim
-- `team-capability-router.mjs`
-- `team-fallback-router.mjs`
-- `team-reroute-*.mjs`
-- `team-route-claim-guard.mjs`
-- `team-task-claim-runtime.mjs`
+如果你想看当前 source inventory：
+- 读 `./INDEX.md`
 
-## 维护原则
+如果你想看 host/runtime adapter：
+- 读 `../team-runtime-adapters/`
 
-- Team cluster 内部允许细分，但不要再把 team 文件放回 `src/` 根目录。
-- `team-tl-runtime.mjs` 负责 authority + wiring；大块执行细节继续下沉到 `tl-runtime/`。
-- 已物理清退的 compat 壳不得回流工作树；若未来需要兼容层，必须走新的中性命名面，而不是恢复旧文件名。
-- 新的 team smoke / regression 优先放 `scripts/team/`。
-- source index、README、smoke 口径必须同步把 `team-tl-runtime.mjs` 视为主链，把 compat 壳视为边界而不是入口。
+## 维护规则
+
+- 不要把 package-owned surface 的新逻辑写回这里
+- 这里的 README 只负责解释 mixed/compat 状态，不再承担主 runtime 文档角色

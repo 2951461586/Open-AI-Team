@@ -49,3 +49,16 @@ bash scripts/deploy/dashboard-cloudbase.sh
 ## Recommended Rule
 
 Treat `scripts/deploy/dashboard-cloudbase.sh` as a **maintainer-friendly deploy entry**, not as proof that all public users should mirror the same host layout.
+
+## Reverse Proxy Example (Caddy)
+
+A reusable split deployment template now lives at:
+
+- `scripts/deploy/Caddyfile.dashboard-api.example`
+
+It reflects the currently working production shape:
+- board domain serves static dashboard files
+- api domain reverse-proxies the orchestrator
+- API origin explicitly answers CORS preflight for the board origin
+- `/ws/*` is forwarded with HTTP/1.1 for WebSocket traffic
+- `/` on the API origin returns an explicit JSON health-style payload instead of hanging

@@ -84,3 +84,4 @@ It should continue to validate things like:
 - do not reintroduce retired legacy seams as default npm aliases
 - keep maintainer/private assumptions out of default smoke entrypoints whenever possible
 - if a script primarily serves live infra or a maintainer environment, classify it as such
+- do not let scripts for `plugins/`, `services/`, `electron/`, `projects/`, `shared/`, or runtime/generated directories redefine the default public validation story

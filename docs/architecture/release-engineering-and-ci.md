@@ -88,6 +88,7 @@ In other words:
 A GitHub-facing release should keep the following green:
 
 ### Required public-safe gates
+- `npm run audit:repo-hygiene`
 - `npm run smoke:team`
 - `npm run fixtures:route-derived`
 - `npm run smoke:public-schemas`
@@ -112,7 +113,7 @@ A GitHub-facing release should keep the following green:
 
 ### Required boundary truths
 - public CI must not depend on private hosts or live infra
-- public CI must not depend on `scripts/ops/`
+- public CI may run public-safe repository hygiene checks such as `npm run audit:repo-hygiene`, but must not depend on maintainer-only operational scripts beyond that
 - public CI must not pretend `config/team/` is the default public example surface
 - public CI must not treat optional integrations as the main product story
 - dashboard repo-scoped contract validation and workspace-only app build reality must stay clearly separated

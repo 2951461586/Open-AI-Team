@@ -1,26 +1,27 @@
 import fs from 'node:fs';
 import { randomUUID } from 'node:crypto';
-import { openTeamStore } from '../../../src/team/team-store.mjs';
-import { loadTeamPolicy } from '../../../src/team/team-policy.mjs';
-import { createTLRuntime } from '../../../src/team/team-tl-runtime.mjs';
-import { createModelRouter } from '../../../src/agent-harness-core/model-router.mjs';
-import { createNativeChatRuntime } from '../../../src/team/team-native-chat.mjs';
-import { createSessionCompletionBus } from '../../../src/team/team-session-completion-bus.mjs';
-import { loadTeamRoleDeployment } from '../../../src/team/team-role-deployment.mjs';
-import { createTeamResidentRuntime } from '../../../src/team/team-resident-runtime.mjs';
-import { createAgentLifecycleManager } from '../../../src/team/team-agent-lifecycle.mjs';
-import { createGovernanceRuntime } from '../../../src/team/team-governance-runtime.mjs';
-import { createGovernanceAuditor } from '../../../src/team/governance-auditor.mjs';
-import { createCriticSessionRunner } from '../../../src/team/team-agent-critic-session-runner.mjs';
+import {
+  openTeamStore,
+  loadTeamPolicy,
+  createTLRuntime,
+  createNativeChatRuntime,
+  createSessionCompletionBus,
+  loadTeamRoleDeployment,
+  createTeamResidentRuntime,
+  createAgentLifecycleManager,
+  createGovernanceRuntime,
+  createGovernanceAuditor,
+  createCriticSessionRunner,
+  createTeamNodeHealth,
+  createEventBus,
+  createIMChannelRouter,
+} from '@ai-team/team-runtime';
+import { createModelRouter, createStandaloneProductRuntime } from '@ai-team/agent-harness';
 import { createNoopSessionRuntimeAdapter, createSessionRuntimeAdapter } from '../../../src/team-runtime-adapters/session-runtime-adapter.mjs';
-import { createStandaloneProductRuntime } from '../../../src/agent-harness-core/standalone-product-runtime.mjs';
 import { loadHostRuntimeConfig } from '../../../src/index-host-config.mjs';
 import { resolveRemoteSessionHostBootstrap } from '../../../src/integrations/host-bootstrap-selector.mjs';
-import { createTeamNodeHealth } from '../../../src/team/team-node-health.mjs';
 import { createRuntimeExecutionAdapter } from '../../../src/team-runtime-adapters/execution-harness.mjs';
 import { createControlPlaneClient } from '../../../src/team-runtime-adapters/control-plane.mjs';
-import { createEventBus } from '../../../src/team/event-bus.mjs';
-import { createIMChannelRouter } from '../../../src/team/im-channel-router.mjs';
 import { createTraceCollector } from '../../../src/observability/trace-span.mjs';
 import { FileTraceExporter } from '../../../src/observability/trace-exporter.mjs';
 

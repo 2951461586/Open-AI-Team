@@ -13,18 +13,22 @@ function assert(condition, label, detail = '') {
 }
 
 const bootstrap = fs.readFileSync(new URL('../../src/index-bootstrap.mjs', import.meta.url), 'utf8');
-const tlRuntime = fs.readFileSync(new URL('../../src/team/team-tl-runtime.mjs', import.meta.url), 'utf8');
-const tlExecution = fs.readFileSync(new URL('../../src/team/tl-runtime/execution.mjs', import.meta.url), 'utf8');
-const tlFollowup = fs.readFileSync(new URL('../../src/team/tl-runtime/followup.mjs', import.meta.url), 'utf8');
-const tlRuntimeHarness = fs.readFileSync(new URL('../../src/team/tl-runtime/runtime-harness.mjs', import.meta.url), 'utf8');
+const tlRuntime = fs.readFileSync(new URL('../../packages/team-runtime/src/team-tl-runtime.mjs', import.meta.url), 'utf8');
+const tlExecution = fs.readFileSync(new URL('../../packages/team-runtime/src/tl-runtime/execution.mjs', import.meta.url), 'utf8');
+const tlFollowup = fs.readFileSync(new URL('../../packages/team-runtime/src/tl-runtime/followup.mjs', import.meta.url), 'utf8');
+const tlRuntimeHarness = fs.readFileSync(new URL('../../packages/team-runtime/src/tl-runtime/runtime-harness.mjs', import.meta.url), 'utf8');
 const platformRuntimeAdapter = fs.readFileSync(new URL('../../src/team-runtime-adapters/runtime-adapter.mjs', import.meta.url), 'utf8');
 const controlPlaneSurface = fs.readFileSync(new URL('../../src/team-runtime-adapters/control-plane.mjs', import.meta.url), 'utf8');
 const remoteSessionControlPlane = fs.readFileSync(new URL('../../src/team-runtime-adapters/remote-session-control-plane.mjs', import.meta.url), 'utf8');
 const sessionRuntimeAdapter = fs.readFileSync(new URL('../../src/team-runtime-adapters/session-runtime-adapter.mjs', import.meta.url), 'utf8');
 const executionAdapter = fs.readFileSync(new URL('../../src/team-runtime-adapters/execution-harness.mjs', import.meta.url), 'utf8');
-const safety = fs.readFileSync(new URL('../../src/team-core/execution-safety-contracts.mjs', import.meta.url), 'utf8');
-const standaloneRuntime = fs.readFileSync(new URL('../../src/agent-harness-core/standalone-product-runtime.mjs', import.meta.url), 'utf8');
+const safety = fs.readFileSync(new URL('../../packages/team-core/src/execution-safety-contracts.mjs', import.meta.url), 'utf8');
+const packageReadme = fs.readFileSync(new URL('../../packages/agent-harness/README.md', import.meta.url), 'utf8');
+const packageStandaloneRuntime = fs.readFileSync(new URL('../../packages/agent-harness/src/standalone-product-runtime.mjs', import.meta.url), 'utf8');
+const shimStandaloneRuntime = fs.readFileSync(new URL('../../src/agent-harness-core/standalone-product-runtime.mjs', import.meta.url), 'utf8');
 
+assert(packageReadme.includes('canonical implementation authority'), 'agent-harness package README declares package authority');
+assert(shimStandaloneRuntime.includes("export * from '../../packages/agent-harness/src/standalone-product-runtime.mjs';"), 'src harness standalone runtime is shim');
 assert(bootstrap.includes('createRemoteSessionHostBootstrap'), 'bootstrap exposes neutral remote-session host bootstrap wrapper');
 assert(bootstrap.includes('resolveRemoteSessionHostBootstrap'), 'bootstrap delegates host-specific implementation to optional integration selector');
 assert(!bootstrap.includes("from './integrations/openclaw/host-bootstrap.mjs'"), 'bootstrap no longer statically imports OpenClaw integration');
@@ -61,15 +65,15 @@ assert(sessionRuntimeAdapter.includes("error: 'session_substrate_unavailable'"),
 assert(executionAdapter.includes('export function createRuntimeExecutionAdapter'), 'execution adapter exists');
 assert(!executionAdapter.includes('gateway = {}'), 'execution adapter no longer accepts gateway fallback');
 assert(!executionAdapter.includes('spawnSessionAdapter'), 'execution adapter no longer accepts spawnSessionAdapter fallback');
-assert(standaloneRuntime.includes('export async function createStandaloneProductRuntime'), 'standalone product runtime exists');
-assert(standaloneRuntime.includes("transport: {\n        kind: 'remote_broker_http'"), 'standalone runtime is broker-first');
-assert(standaloneRuntime.includes("import { createOssMinimalWorkflowPack } from './workflow-pack.mjs';"), 'standalone runtime uses productized workflow pack');
-assert(standaloneRuntime.includes("import { createOssMinimalPolicyPack } from './policy-pack.mjs';"), 'standalone runtime uses productized policy pack');
-assert(standaloneRuntime.includes("from './provider-registry.mjs';"), 'standalone runtime uses productized provider registry');
-assert(standaloneRuntime.includes("from './backend-provider.mjs';"), 'standalone runtime uses productized backend provider');
-assert(standaloneRuntime.includes("from './remote-broker-runtime-adapter.mjs';"), 'standalone runtime uses productized broker runtime adapter');
-assert(standaloneRuntime.includes("const DEFAULT_WORKER_ENTRY = path.resolve(__dirname, './role-worker.mjs');"), 'standalone runtime uses productized worker entry');
-assert(standaloneRuntime.includes("const DEFAULT_BROKER_ENTRY = path.resolve(__dirname, './remote-broker-server.mjs');"), 'standalone runtime uses productized broker entry');
+assert(packageStandaloneRuntime.includes('export async function createStandaloneProductRuntime'), 'standalone product runtime exists in package authority');
+assert(packageStandaloneRuntime.includes("transport: {\n        kind: 'remote_broker_http'"), 'standalone runtime is broker-first');
+assert(packageStandaloneRuntime.includes("import { createOssMinimalWorkflowPack } from './workflow-pack.mjs';"), 'standalone runtime uses productized workflow pack');
+assert(packageStandaloneRuntime.includes("import { createOssMinimalPolicyPack } from './policy-pack.mjs';"), 'standalone runtime uses productized policy pack');
+assert(packageStandaloneRuntime.includes("from './provider-registry.mjs';"), 'standalone runtime uses productized provider registry');
+assert(packageStandaloneRuntime.includes("from './backend-provider.mjs';"), 'standalone runtime uses productized backend provider');
+assert(packageStandaloneRuntime.includes("from './remote-broker-runtime-adapter.mjs';"), 'standalone runtime uses productized broker runtime adapter');
+assert(packageStandaloneRuntime.includes("const DEFAULT_WORKER_ENTRY = path.resolve(__dirname, './role-worker.mjs');"), 'standalone runtime uses productized worker entry');
+assert(packageStandaloneRuntime.includes("const DEFAULT_BROKER_ENTRY = path.resolve(__dirname, './remote-broker-server.mjs');"), 'standalone runtime uses productized broker entry');
 assert(tlRuntime.includes('createTLRuntimeExecutionHarness({'), 'TL runtime builds runtime execution harness via helper');
 assert(tlRuntime.includes('executionAdapter,'), 'TL runtime accepts execution adapter');
 assert(tlRuntime.includes('runtimeAdapter,'), 'TL runtime accepts runtime adapter');
@@ -88,8 +92,16 @@ assert(tlExecution.includes('runtimeExecutionHarness.sendToSession'), 'execution
 assert(tlExecution.includes('runtimeExecutionHarness.listSessionsForSession'), 'execution helper lists sessions via runtimeExecutionHarness');
 assert(tlExecution.includes('runtimeExecutionHarness.getSessionHistory'), 'execution helper gets history via runtimeExecutionHarness');
 assert(tlFollowup.includes('runtimeExecutionHarness.sendToSession'), 'followup helper sends via runtimeExecutionHarness');
-assert(tlRuntime.includes("import { buildSearchEvidenceSafetyPrompt } from '../team-core/execution-safety-contracts.mjs';"), 'TL runtime imports shared search safety helper');
+assert(tlRuntime.includes("import { buildSearchEvidenceSafetyPrompt } from '../../team-core/src/execution-safety-contracts.mjs';"), 'TL runtime imports shared search safety helper');
 assert(safety.includes('export function buildSearchEvidenceSafetyPrompt'), 'shared execution safety helper exists');
 
-console.log(`harness authority summary ${passed}/${passed + failed} passed`);
+console.log(JSON.stringify({
+  ok: failed === 0,
+  summary: {
+    ok: failed === 0,
+    passed,
+    failed,
+    boundary: 'team-harness-authority.v2',
+  },
+}, null, 2));
 if (failed > 0) process.exit(1);

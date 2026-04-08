@@ -10,7 +10,8 @@
 
 | 入口层 | 当前定位 | 是否默认对外入口 |
 |---|---|---|
-| `src/agent-harness-core/` | standalone harness canonical baseline authority | **是** |
+| `packages/agent-harness/` | standalone harness canonical baseline authority | **是** |
+| `src/agent-harness-core/` | compatibility shim / compatibility asset surface | 否 |
 | `examples/oss-minimal/` | wrapper / regression facade / runnable sample | **是，但仅作为 facade** |
 | OpenClaw host / gateway / session substrate | 宿主实现 / compat / 接线背景 | **否** |
 
@@ -36,11 +37,11 @@
 
 | 路径 | 定位 |
 |---|---|
-| `src/agent-harness-core/index.mjs` | Harness SDK / contract builders authority |
-| `src/agent-harness-core/standalone-product-runtime.mjs` | 正式 product runtime authority |
-| `src/agent-harness-core/oss-agent-manifest.json` | 正式 runtime / provider / role authority |
-| `src/agent-harness-core/oss-agent-package.json` | 正式 package / shell / plugin / bridge authority |
-| `src/agent-harness-core/agent-shell.mjs` | 正式 shell / onboarding / doctor authority |
+| `packages/agent-harness/src/index.mjs` | Harness SDK / contract builders authority |
+| `packages/agent-harness/src/standalone-product-runtime.mjs` | 正式 product runtime authority |
+| `packages/agent-harness/src/oss-agent-manifest.json` | 正式 runtime / provider / role authority |
+| `packages/agent-harness/src/oss-agent-package.json` | 正式 package / shell / plugin / bridge authority |
+| `packages/agent-harness/src/agent-shell.mjs` | 正式 shell / onboarding / doctor authority |
 | `examples/oss-minimal/*` | facade / sample / regression authority |
 
 ### 2.2 对外交付能力面
@@ -62,7 +63,7 @@
 
 | 维度 | 权威文档 |
 |---|---|
-| 基线总览 | `src/agent-harness-core/README.md` |
+| 基线总览 | `packages/agent-harness/README.md` |
 | 独立接入 | `docs/architecture/independent-agent-onboarding.md` |
 | 黄金基线发布面 | `docs/architecture/standalone-harness-baseline-release.md` |
 | 样板 / facade 使用 | `examples/oss-minimal/README.md` |

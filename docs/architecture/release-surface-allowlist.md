@@ -77,6 +77,13 @@ These paths are allowed only as **optional integrations**, not as the primary pr
 - compatibility ingress layers for QQ / webhook / NapCat
 - host-specific control-plane wiring
 - compatibility field normalization for legacy envelopes
+- `plugins/`
+- `services/`
+- `electron/`
+
+Note:
+- `projects/` should be treated as related/experimental side-project space, not a mainline integration surface
+- `shared/` should be treated as low-authority shared/output space, not a mainline integration surface
 
 Rule:
 - may exist
@@ -85,7 +92,22 @@ Rule:
 
 ---
 
-## 4. Maintainer / Private / Live-Ops Surface
+## 4. Directory-level cleanup hotspots
+
+The following top-level directories are especially likely to create open-source confusion if left unexplained:
+- `projects/`
+- `services/`
+- `plugins/`
+- `shared/`
+- `electron/`
+- runtime/generated directories such as `state/`, `data/`, `run/`, `logs/`, `tmp/`, `artifacts/`, `reports/`
+
+Rule:
+- each must be either clearly classified, clearly documented, or clearly excluded from the public mainline story
+- runtime/generated directories must never be mistaken for product authority
+- optional ecosystems must not overshadow the main runtime/harness/dashboard surfaces
+
+## 5. Maintainer / Private / Live-Ops Surface
 
 These paths or materials should be treated as maintainer-facing, private, or candidates for future split/quarantine.
 
@@ -102,7 +124,7 @@ Rule:
 
 ---
 
-## 5. Historical / Archive Surface
+## 6. Historical / Archive Surface
 
 These paths are historical reference only:
 - `docs/archive/`
@@ -116,7 +138,7 @@ Rule:
 
 ---
 
-## 6. Contribution Rule of Thumb
+## 7. Contribution Rule of Thumb
 
 Before adding or editing a path, ask:
 
@@ -129,7 +151,7 @@ If the answer is unclear, it does **not** belong in the primary public surface b
 
 ---
 
-## 7. P0 Release Guardrail
+## 8. P0 Release Guardrail
 
 A GitHub-facing release should make it easy to identify:
 - what the product is

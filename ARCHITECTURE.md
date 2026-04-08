@@ -1,325 +1,258 @@
-# AI Team Harness / Architecture
+# Architecture
 
-> Repository layering authority for the public product family.
-> If `README.md` answers **what this project is**, this file answers **how the repository is layered**.
+This file explains the **public product architecture** of the repository.
+If `README.md` answers **what this project is**, this file answers **how the main product surfaces fit together**.
 
 ---
 
-## 1. Final Product Positioning
+## 1. Product family
 
-This repository now has **four explicit surfaces**:
+This repository is one open-source product family with four surfaces:
 
-### A. AI Team Runtime — primary product
-The main orchestration/runtime product for planning, delegation, review, and evidence-driven delivery.
+### A. AI Team Runtime — primary runtime product
+A team-oriented multi-agent runtime for:
+- planning
+- delegation
+- review
+- evidence-driven delivery
+- follow-up and closure
 
-Primary code surface:
+Primary code surfaces:
+- `packages/team-runtime/`
 - `src/team/`
-- `src/team-core/`
 - `src/team-runtime-adapters/`
 - `src/routes/`
+- `apps/api-server/`
 
-### B. Dashboard — primary application UI
-The operational workbench and visualization layer for tasks, artifacts, timelines, node/runtime visibility, and chat.
+### B. Dashboard — primary UI product
+The dashboard/workbench is the operator-facing observation and interaction layer.
 
-Primary code surface:
-- `dashboard/src/`
+Primary code surfaces:
+- `dashboard/`
+- `apps/dashboard/` (transition/app packaging surface)
 
-### C. Harness Core + Agent Package SDK — reusable substrate
-The reusable execution substrate plus explicit contracts for third-party or independent-agent onboarding.
+### C. Agent Harness — reusable execution substrate
+A reusable harness substrate for standalone or third-party agents.
 
-Primary code surface:
-- `src/agent-harness-core/`
-- `schemas/`
+Primary code surfaces:
+- `packages/agent-harness/`
 - `examples/oss-minimal/`
 - `examples/third-party-agent-sample/`
+- `schemas/`
 
-### D. Optional Integrations — non-primary surface
-Host-, channel-, or environment-specific integrations.
+### D. Optional Integrations — secondary surfaces
+Host-, channel-, and deployment-specific integrations.
 
 Examples:
 - `src/integrations/openclaw/`
-- compatibility ingress surfaces
-- maintainer-host / live deployment wiring
+- channel adapters
+- maintainer-host wiring
+- plugin ecosystems under `plugins/`
+- optional/companion services under `services/`
+- secondary desktop shell work under `electron/`
 
-Rule:
-- **A / B / C are the public product family**.
-- **D is optional integration surface, not required to understand the mainline product**.
+These are useful but **not required** to understand the mainline product.
+Related/experimental side projects under `projects/` and low-authority shared/output areas under `shared/` are also outside the primary architecture story.
 
 ---
 
-## 2. Authority Order
+## 2. Runtime execution model
 
-Current authority order for understanding the repository:
+The primary execution story is:
+
+```text
+Ingress (dashboard / HTTP / compat inputs)
+  -> dispatch / route surface
+  -> TL runtime
+  -> decision: direct | confirm | partial_delegate | delegate | followup
+  -> runtime adapters / execution harness
+  -> member sessions / execution roles
+  -> artifacts / evidence / review / acceptance
+  -> dashboard + API response surfaces
+```
+
+This is a **TL-first runtime**, not a chat-first runtime.
+
+### TL-first means
+The Team Leader runtime is the main authority for deciding whether a request should:
+- be answered directly
+- become a task
+- continue an existing task thread
+- delegate to one or more members
+- enter review / replan / closure
+
+### Why this matters
+It gives the product a stable execution contract instead of ad-hoc agent routing.
+
+---
+
+## 3. Stable execution contract
+
+The runtime is converging around four stable layers:
+
+### 1) Routing and decision
+- classify request shape
+- normalize task intent
+- decide direct vs delegated paths
+
+### 2) Delegation and orchestration
+- planner / executor / critic / judge style coordination
+- work-item expansion
+- follow-up continuation
+- replan / fail-fast / fallback handling
+
+### 3) Delivery closure
+- deliverables
+- artifacts
+- evidence
+- review signals
+- acceptance / final closure
+
+### 4) Observation
+- dashboard read models
+- task timeline
+- runtime status
+- task/workbench views
+- operator follow-up and inspection
+
+This is the reason the project is more than “agents chatting to tools”.
+
+---
+
+## 4. Package surfaces
+
+## 4.1 `packages/agent-harness/`
+This is the canonical package authority for the standalone harness substrate.
+
+It owns:
+- contract builders
+- provider registry
+- workflow / policy abstractions
+- shell / doctor / activation surface
+- standalone product runtime assets
+- host-neutral onboarding contracts
+
+Use this when you want a **forkable execution base** for independent agents.
+
+## 4.2 `packages/team-runtime/`
+This is the canonical package authority for the packaged team-runtime export surface.
+
+It owns the current package-level runtime/orchestration surface including:
+- TL runtime exports
+- governance/lifecycle/workbench packaged exports
+- desk/delivery/runtime helper exports
+- packaged channel/runtime modules already migrated into the package-owned surface
+
+Use this when you want the **platform runtime package**, not just the low-level harness.
+
+## 4.3 `packages/team-core/`
+Platform-neutral semantics, contracts, and domain helpers.
+
+## 4.4 `packages/tools/`
+Public tool/provider surface.
+
+---
+
+## 5. App and mixed surfaces
+
+### `apps/api-server/`
+Current app/server authority for server entry and route surface.
+
+### `src/team/`
+Compatibility shims plus still-local runtime areas that have not yet moved behind package/app authority.
+
+### `src/team-runtime-adapters/`
+Runtime/control-plane/session adapter layer.
+
+### `src/integrations/`
+Optional integrations only.
+
+### `dashboard/`
+Current primary dashboard UI authority.
+
+---
+
+## 6. Independent-agent onboarding model
+
+Third-party agents are expected to integrate through explicit contracts, not through private host/session internals.
+
+The public onboarding story is:
+- manifest
+- package
+- provider registry
+- shell
+- doctor
+- activation checklist
+- session / desk / bridge / lifecycle contracts
+
+This is the key bridge between:
+- AI Team Runtime as a product
+- Agent Harness as a reusable substrate
+- Open-source onboarding as a credible external path
+
+Read next:
+- `docs/architecture/independent-agent-onboarding.md`
+- `packages/agent-harness/README.md`
+- `examples/third-party-agent-sample/README.md`
+
+---
+
+## 7. Optional integrations boundary
+
+Optional integrations are intentionally outside the main product story.
+
+That means:
+- OpenClaw-specific wiring is optional
+- channel-specific wiring is optional
+- maintainer-host deployment specifics are optional
+- none of these should redefine the public architecture narrative
+
+This is important for open-source clarity.
+
+---
+
+## 8. Dashboard role
+
+The dashboard should be understood as the **execution visibility front-end**, not just a chat UI.
+
+Its job is to surface:
+- task graph / task flow
+- member execution progress
+- runtime status
+- artifacts and evidence
+- review/acceptance state
+- operator follow-up context
+
+A strong dashboard is what makes the runtime feel observable and operational rather than opaque.
+
+---
+
+## 9. Release and OSS engineering
+
+Open-source quality here is not only about code structure.
+It also depends on:
+- public-safe boundaries
+- release-surface allowlists
+- smoke tests
+- example validity
+- documentation alignment
+- optional integration containment
+
+Read next:
+- `docs/architecture/release-surface-allowlist.md`
+- `docs/oss/dashboard-observability-surface.md`
+- `docs/oss/open-source-release-engineering.md`
+
+---
+
+## 10. Recommended reading order
 
 1. `README.md`
 2. `GETTING-STARTED.md`
 3. `ARCHITECTURE.md`
 4. `docs/architecture/product-surface-and-repo-map.md`
-5. `docs/architecture/release-surface-allowlist.md`
-6. `docs/architecture/current-team-runtime-architecture.md`
-7. `docs/architecture/session-capability-and-followup-fallback.md`
+5. `docs/oss/repo-authority.md`
+6. `docs/oss/what-is-ai-team-runtime.md`
+7. `docs/architecture/current-team-runtime-architecture.md`
 8. `docs/architecture/independent-agent-onboarding.md`
-9. `docs/architecture/standalone-harness-baseline-release.md`
-10. `docs/architecture/execution-state-and-read-model-authority.md`
-- [OpenClaw integration retirement plan](./docs/archive/openclaw-integration-retirement-plan.md)
-12. [Repo shape migration plan](./docs/archive/repo-shape-migration-plan.md)
-13. `docs/architecture/release-engineering-and-ci.md`
-14. `docs/architecture/release-artifacts-and-publishing.md`
-15. `docs/architecture/release-notes-provenance-and-version-story.md`
-
-If an archived or maintainer-facing document disagrees with this stack, prefer this stack.
-
----
-
-## 3. Current Top-Level Layering
-
-```text
-Repository
-├── README.md
-├── GETTING-STARTED.md
-├── ARCHITECTURE.md
-├── docs/
-├── config/
-├── src/
-├── dashboard/
-├── examples/
-├── schemas/
-├── fixtures/
-└── scripts/
-```
-
-This is the **current** repo shape.
-The **target** repo shape remains:
-
-```text
-packages/
-  harness-core/
-  team-runtime/
-  agent-package-sdk/
-  integration-openclaw/
-  integration-qq/
-apps/
-  dashboard/
-examples/
-  oss-minimal/
-  third-party-agent/
-docs/
-archive/
-```
-
-That target shape is the structural north star for future extraction and cleanup.
-
----
-
-## 4. Source Tree Responsibilities
-
-## 4.1 `src/agent-harness-core/`
-**Role:** reusable execution substrate and contract authority.
-
-This layer owns:
-- runtime contracts
-- workflow / policy abstractions
-- provider / backend / worker / broker contracts
-- shell / plugin / bridge / session / desk / lifecycle contracts
-- standalone product runtime assets
-
-This is the canonical authority for the reusable substrate.
-
----
-
-## 4.2 `src/team-core/`
-**Role:** platform-neutral team semantics.
-
-This layer should contain only:
-- data contracts
-- work item normalization
-- decision parsing
-- query contracts
-- pure safety / helper logic
-
-It should not contain host-specific transport or operational wiring.
-
----
-
-## 4.3 `src/team-runtime-adapters/`
-**Role:** neutral adapter layer between platform-neutral semantics and concrete runtime/control-plane capabilities.
-
-This layer owns:
-- control-plane client abstractions
-- runtime adapter wiring
-- execution adapter wiring
-- transport-facing contract surfaces
-- capability mediation between product runtime and live execution substrate
-
-This layer is public-safe only when it stays contract-first and host-neutral in narrative.
-
----
-
-## 4.4 `src/team/`
-**Role:** active Team Runtime product logic.
-
-This layer owns:
-- TL runtime
-- planner / executor / critic / judge orchestration
-- dispatch / governance runtime integration
-- artifacts / memory / follow-up orchestration
-- team execution coordination
-
-This is the main operational heart of the primary product.
-
----
-
-## 4.5 `src/routes/`
-**Role:** ingress, state routes, and delivery/query-facing runtime surface.
-
-This layer owns:
-- route registration
-- task dispatch entrypoints
-- health/state endpoints
-- query/read-model surfaces
-- runtime control routes
-
-This is the HTTP/control-facing surface of the Team Runtime.
-
----
-
-## 4.6 `src/integrations/`
-**Role:** optional integrations only.
-
-This tree may contain:
-- OpenClaw-specific wiring
-- channel-specific compatibility layers
-- host-specific control-plane mappings
-
-It must not redefine the primary repository mental model.
-
----
-
-## 4.7 `dashboard/src/`
-**Role:** primary application UI.
-
-This layer owns:
-- task/workbench presentation
-- node and runtime visibility
-- timeline/artifact presentation
-- chat and operator interaction
-
-It should align to public-neutral schemas and read models, not private host fields.
-
----
-
-## 4.8 `examples/`
-**Role:** public runnable/forkable examples.
-
-- `examples/oss-minimal/` = runnable standalone sample and regression facade
-- `examples/third-party-agent-sample/` = minimal external onboarding template
-- `examples/team-runtime-public/` = public-facing Team Runtime example track
-
-Examples exist to help people run or fork the system.
-They are not the primary definition authority for the product.
-
----
-
-## 5. Documentation Layering
-
-### Current authority docs
-- `README.md`
-- `GETTING-STARTED.md`
-- `ARCHITECTURE.md`
-- `docs/architecture/`
-- `docs/api/`
-- `docs/index.md`
-
-### Maintainer / operational docs
-- `docs/archive/maintainer-private-ops-boundary.md`
-- `docs/ops/README.md`
-- `docs/ops/`
-- `docs/changelog/`
-- selected deployment and investigation notes
-
-### Secondary / background / sample surfaces
-- `config/README.md`
-- `fixtures/README.md`
-- `references/README.md`
-- `memory/README.md`
-
-### Historical docs
-- `docs/archive/`
-
-Rule:
-- current truth lives in `README.md`, `GETTING-STARTED.md`, `ARCHITECTURE.md`, and `docs/architecture/`
-- fixtures are public-safe sample/validation material, not primary source authority
-- references are background context, not repository authority
-- memory is continuity/derived maintainer context, not the public product story
-- maintainer/private operational context should not become the public mental model
-- historical context belongs in archive only
-
----
-
-## 6. Script Layering
-
-### Public mainline validation
-- `scripts/smoke/`
-- public-safe parts of `scripts/team/`
-
-### Higher-cost or live validation
-- `scripts/acceptance/`
-
-### Maintainer / investigation utilities
-- `scripts/ops/`
-- `scripts/index-surface/`
-
-Recommended mental model:
-- `scripts/smoke/*` = default public-safe regression gate
-- `scripts/team/*` = product/baseline-specific guards
-- `scripts/acceptance/*` = higher-cost or live validation
-- `scripts/ops/*` = maintainer/investigation utilities
-
----
-
-## 7. Canonical Mental Model
-
-### Primary product path
-
-```text
-Ingress / routes
-  -> Team Runtime
-  -> TL orchestration
-  -> runtimeAdapter + executionAdapter
-  -> member execution
-  -> artifacts / evidence / memory / review loop
-  -> dashboard / state surface / response
-```
-
-### Reusable substrate path
-
-```text
-Harness Core contracts
-  -> standalone runtime
-  -> broker / worker / scheduler / state
-  -> shell / doctor / activation / recovery
-  -> independent agent package onboarding
-```
-
-### Optional integration path
-
-```text
-OpenClaw / channel / host-specific integration
-  -> adapter / normalization layer
-  -> Team Runtime or Harness Core
-```
-
-Optional integrations may connect to the product, but they are not the product definition.
-
----
-
-## 8. P0 Boundary Rule
-
-Any new document, script, route, or directory should now be easy to classify as one of:
-- primary product
-- reusable substrate
-- optional integration
-- maintainer/private ops
-- archive
-
-If it is not clear which one it belongs to, it does not belong in the primary public story by default.
+9. `docs/oss/open-source-release-engineering.md`

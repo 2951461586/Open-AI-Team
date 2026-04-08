@@ -1,1 +1,1 @@
-export * from '../team/skill-registry.mjs';
+export * from '../../packages/agent-harness/src/skill-registry.mjs';

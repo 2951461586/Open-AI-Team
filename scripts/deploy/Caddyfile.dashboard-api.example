@@ -1,0 +1,65 @@
+# Example Caddyfile for a split dashboard/API deployment
+# Replace the placeholder domains/paths/ports with your instance values.
+
+{$BOARD_DOMAIN} {
+	encode gzip zstd
+	root * {$BOARD_ROOT}
+	try_files {path} {path}/ /index.html
+	file_server
+
+	header {
+		Cache-Control "public, max-age=120"
+	}
+
+	@staticAssets path /_next/* *.css *.js *.png *.jpg *.jpeg *.gif *.svg *.webp *.ico *.txt *.map *.woff *.woff2 *.ttf *.webmanifest
+	header @staticAssets Cache-Control "public, max-age=31536000, immutable"
+}
+
+{$API_DOMAIN} {
+	encode gzip zstd
+
+	# CORS preflight for browser requests from the dashboard origin
+	@cors_preflight method OPTIONS
+	handle @cors_preflight {
+		header Access-Control-Allow-Origin "https://{$BOARD_DOMAIN}"
+		header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+		header Access-Control-Allow-Headers "Authorization, Content-Type, X-Requested-With, x-dashboard-token, x-orch-token"
+		header Access-Control-Allow-Credentials "true"
+		header Access-Control-Max-Age "86400"
+		header Vary "Origin"
+		respond "" 204
+	}
+
+	# CORS headers for normal API responses
+	header {
+		Access-Control-Allow-Origin "https://{$BOARD_DOMAIN}"
+		Access-Control-Allow-Credentials "true"
+		Vary "Origin"
+	}
+
+	# Explicit root response avoids hanging or ambiguous / behavior
+	@api_root path /
+	handle @api_root {
+		header Content-Type "application/json; charset=utf-8"
+		respond "{\"name\":\"dashboard-api\",\"status\":\"ok\"}" 200
+	}
+
+	# WebSocket endpoint
+	@websocket {
+		path /ws/*
+	}
+	handle @websocket {
+		reverse_proxy {$API_UPSTREAM} {
+			transport http {
+				read_timeout 0
+				write_timeout 0
+				versions 1.1
+			}
+		}
+	}
+
+	# Other API routes
+	handle {
+		reverse_proxy {$API_UPSTREAM}
+	}
+}

@@ -142,14 +142,16 @@ deleted legacy shell
 
 - **`team-core/`**：平台无关语义层
 - **`team-runtime-adapters/`**：宿主 / provider 接线层
-- **`src/team/`**：现役产品 runtime 与兼容入口
+- **`packages/team-runtime/`**：当前 packaged team-runtime export surface authority
+- **`src/team/`**：mixed surface（covered packaged runtime shims + remaining local team surfaces）
 - **`dashboard/src/*` + `src/routes/team-state/*`**：UAT 前端 / 观察面承载层；当前主口径已切到 **control-plane-neutral / host-neutral**，现役类型与标签优先使用 `controlBaseUrl / controlHost / controlPort / controlPlaneStatus`，旧 `gateway* / openclaw*` 仅允许存在于前端兼容归一层，不再作为主字段继续外扩
 
 ### 2.3.3 `src/agent-harness-core/*` 与 `examples/oss-minimal/*`
 
 当前 standalone broker execution substrate 的权威口径已经收敛为：
 
-- **`src/agent-harness-core/` = canonical baseline authority**
+- **`packages/agent-harness/` = canonical baseline authority**
+- `src/agent-harness-core/` = compatibility shim / compatibility asset surface
 - `examples/oss-minimal/` = **wrapper / regression facade / runnable sample**
 
 也就是说：

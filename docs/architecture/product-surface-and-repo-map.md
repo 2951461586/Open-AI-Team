@@ -39,10 +39,14 @@ Examples:
 - `src/integrations/openclaw/`
 - QQ / webhook / NapCat compatibility surfaces
 - maintainer-host deployment and live acceptance wiring
+- plugin ecosystems under `plugins/`
+- optional/companion service surfaces under `services/`
+- secondary desktop shell work under `electron/`
 
 Rule:
 - **A / B / C are the public product family**.
 - **D is optional integration surface, not part of the minimum product story**.
+- Related/experimental side projects under `projects/` and low-authority shared/output areas under `shared/` are outside the default first-read product story.
 
 ---
 

@@ -64,7 +64,7 @@
 - 改 entry / governance / webhook / sent / receipt：先跑 `index-remaining-surface-*`
 
 ### 大改动
-- 若改了 `src/index.mjs`、`src/routes/`、route registrar 或 surface wiring：
+- 若改了 `apps/api-server/src/index.mjs`、`src/routes/`、route registrar 或 surface wiring：
   - 先跑对应主题脚本
   - 再补跑 `index-remaining-surface-split-smoke.mjs`
 

@@ -1,91 +1,156 @@
 # Getting Started
 
-## 1. 5 Minutes
+This repository supports three main entry paths. Pick one based on what you want to understand.
 
-See it running — no configuration needed:
+---
+
+## Path A — Run the main product
+
+Use this path if you want to understand **AI Team Runtime + Dashboard**.
 
 ```bash
-git clone <your-repo-url> ai-team-harness
-cd ai-team-harness
 npm install
 cp .env.example .env
-npm run smoke:team          # should pass in ~30s
-node examples/oss-minimal/product-shell.mjs  # run a demo task
-cd dashboard && npm run dev  # open http://localhost:3000
+npm run smoke:team
+npm run dashboard:build
+npm start
 ```
 
-That's it. You should see the dashboard with a task timeline.
+Then open the runtime/dashboard entry your local setup exposes.
+If you are validating the repo-local dashboard surface explicitly, also read `dashboard/README.md` and use `npm run dashboard:build` as the dashboard build authority.
+
+What you are looking at:
+- a TL-first team runtime
+- task/workbench execution flow
+- artifacts/evidence/review-oriented delivery
+- dashboard/operator visibility
+
+Read next:
+1. `ARCHITECTURE.md`
+2. `docs/oss/what-is-ai-team-runtime.md`
+3. `docs/architecture/current-team-runtime-architecture.md`
 
 ---
 
-## 2. Understand What You're Looking At
+## Path B — Run the forkable agent harness baseline
 
-```
-src/team/          → Multi-agent runtime (Planner, Executor, Critic, Judge)
-src/routes/        → HTTP API routes
-dashboard/         → Next.js web UI
-examples/          → Runnable demos
-schemas/           → Machine-readable API contracts
-scripts/team/      → Smoke tests (each validates one boundary)
-```
+Use this path if you want the **independent execution substrate**.
 
-## 3. Choose Your Interest
-
-Don't try to understand the whole repo at once. Pick one:
-
-### I want the team workflow
-Read: `ARCHITECTURE.md` → `src/team/`
-
-### I want the dashboard / frontend
 ```bash
-cd dashboard && npm install && npm run dev
+npm install
+npm run demo:oss-minimal
+npm run status:oss-minimal
+npm run doctor:oss-minimal
 ```
-Key files: `dashboard/src/components/panels/WorkbenchPanel.tsx`, `dashboard/src/components/TaskCard.tsx`
 
-### I want the agent substrate (forkable core)
-Read: `src/agent-harness-core/README.md` → `examples/oss-minimal/`
+What you are looking at:
+- standalone harness lifecycle
+- shell / doctor / activation shape
+- provider registry and runtime wiring
+- role-based execution and resume path
 
-### I want to contribute a third-party agent
-Read: `examples/third-party-agent-sample/README.md`
-
----
-
-## 4. Deep Dives
-
-Once you've picked a focus:
-
-- **Runtime architecture:** `docs/architecture/current-team-runtime-architecture.md`
-- **Execution contracts:** `docs/architecture/execution-product-surface-and-delivery-closure.md`
-- **Dashboard contracts:** `docs/deploy/dashboard-source-authority.md`
-- **API reference:** `docs/api/`
-- **Repo map (detailed):** `docs/architecture/product-surface-and-repo-map.md`
+Read next:
+1. `packages/agent-harness/README.md`
+2. `examples/oss-minimal/README.md`
+3. `docs/architecture/independent-agent-onboarding.md`
 
 ---
 
-## 5. Contributing
+## Path C — Explore third-party agent onboarding
 
-1. Keep host-neutral logic in `src/team-core/` and `src/agent-harness-core/`
-2. Each new surface needs a smoke test in `scripts/team/`
-3. Update docs for user-visible changes
-4. No hard-coded host paths, machine names, or platform assumptions in public defaults
+Use this path if you want to see how an external agent integrates without depending on OpenClaw internals.
 
-Before making a PR, run `npm run smoke:team` and make sure it passes.
+```bash
+npm install
+npm run validate:third-party-agent
+npm run smoke:third-party-agent
+node examples/third-party-agent-sample/agent-shell.mjs package
+node examples/third-party-agent-sample/agent-shell.mjs onboarding
+```
+
+What you are looking at:
+- explicit manifest/package contracts
+- session / desk / bridge / lifecycle / shell surfaces
+- onboarding and doctor entrypoints
+- a host-neutral third-party agent template
+
+Read next:
+1. `examples/third-party-agent-sample/README.md`
+2. `docs/architecture/independent-agent-onboarding.md`
+3. `docs/oss/dashboard-observability-surface.md`
+4. `docs/oss/open-source-release-engineering.md`
 
 ---
 
-## 6. Troubleshooting
+## Repository mental model
 
-- `npm run smoke:team` fails → check Node version (need 22+)
-- dashboard won't build → run `npm ci` in `dashboard/` first
-- dashboard contract / build validation → `npm run dashboard:build` from repo root
-- API port conflict → set `PORT=19090` in `.env` or pick another port
+Do **not** try to understand the repo through historical migration layers first.
+Use this product-first model instead:
+
+### Primary product surfaces
+- **AI Team Runtime**
+- **Dashboard**
+- **Agent Harness**
+
+### Secondary / non-mainline surfaces
+- **Optional Integrations**
+- **Plugins** (`plugins/`) — optional ecosystem, not core onboarding
+- **Services** (`services/`) — optional/companion services, not core onboarding
+- **Electron** (`electron/`) — secondary desktop shell
+- **Projects** (`projects/`) — related/experimental side projects
+- **Shared** (`shared/`) — low-authority shared/output area
+
+### Current authority summary
+- `packages/agent-harness/` = canonical harness substrate
+- `packages/team-runtime/` = canonical packaged team-runtime export surface
+- `apps/api-server/` = current app/server authority for server entry and route surface
+- `src/team/` = compatibility shims + still-local runtime areas not yet moved behind package/app authority
+- `dashboard/` = current primary dashboard UI authority
+- `plugins/`, `services/`, `electron/`, `projects/`, and `shared/` = secondary/optional/non-mainline surfaces unless explicitly documented otherwise
+
+For deeper authority detail, read:
+- `docs/oss/repo-authority.md`
+- `docs/oss/dashboard-authority-and-transition.md`
+- `docs/architecture/product-surface-and-repo-map.md`
 
 ---
 
-## 7. Repository Boundaries
+## What to read if you only have 15 minutes
 
-- **Public primary surfaces:** `src/`, `dashboard/`, `schemas/`, `examples/`
-- **Maintainer-only surfaces:** `config/team/`, `docs/ops/`, `scripts/ops/`
-- **Historical reference:** `docs/archive/` — context only, not current authority
+1. `README.md`
+2. `ARCHITECTURE.md`
+3. `docs/oss/what-is-ai-team-runtime.md`
+4. `packages/agent-harness/README.md`
+5. `packages/team-runtime/README.md`
 
-Start with the public surfaces. Only look at the rest when you have a specific reason.
+---
+
+## Troubleshooting
+
+### `npm run smoke:team` fails
+Check Node.js version. This repo expects Node 22+.
+
+### `npm start` runs but the UI is unclear
+Read:
+- `docs/oss/what-is-ai-team-runtime.md`
+- `docs/architecture/current-team-runtime-architecture.md`
+
+### You only care about the harness, not the whole runtime
+Skip directly to:
+- `packages/agent-harness/README.md`
+- `examples/oss-minimal/README.md`
+
+### You only care about third-party agent onboarding
+Skip directly to:
+- `examples/third-party-agent-sample/README.md`
+- `docs/architecture/independent-agent-onboarding.md`
+
+---
+
+## Contribution guardrails
+
+- Put new harness logic in `packages/agent-harness/`, not legacy compatibility paths
+- Put new packaged runtime logic in `packages/team-runtime/` when the surface is already package-owned
+- Do not expand optional integrations into the default product story
+- Keep public docs host-neutral and public-safe by default
+- Update docs together with authority changes

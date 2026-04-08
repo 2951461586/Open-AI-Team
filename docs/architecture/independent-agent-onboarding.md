@@ -10,12 +10,14 @@
 
 | 层 | 角色 | 权威性 |
 |---|---|---|
-| `src/agent-harness-core/` | 正式产品资产、合同、runtime、shell、provider registry | **主 authority** |
+| `packages/agent-harness/` | 正式产品资产、合同、runtime、shell、provider registry | **主 authority** |
+| `src/agent-harness-core/` | 兼容入口路径、兼容资产路径 | 兼容层 |
 | `examples/oss-minimal/` | wrapper / regression facade / runnable sample | **从 authority** |
 
 因此，外部接入方默认应：
 
-- **先看** `src/agent-harness-core/`
+- **先看** `packages/agent-harness/`
+- 如需兼容历史命令/路径，再看 `src/agent-harness-core/`
 - **再用** `examples/oss-minimal/` 跑 demo / run / resume / doctor / crash-resume
 - **不要**从 OpenClaw 宿主路径、OpenClaw session 语义、或 gateway 私有接线倒推 baseline
 

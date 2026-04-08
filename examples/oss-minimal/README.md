@@ -1,41 +1,72 @@
 # OSS Minimal Example
 
-A standalone agent harness demo — no orchestrator, no dashboard, no host dependencies.
+A **minimal runnable baseline** for the standalone Agent Harness.
 
-## Quick Run
+This example exists to make the harness tangible in a few commands. It is intentionally small, host-neutral, and oriented around the package-owned harness story.
+
+---
+
+## What this example demonstrates
+
+- harness bootstrap and activation
+- shell / doctor / status flow
+- role-based execution lifecycle
+- local runtime adapter usage
+- resume/crash-recovery shaped behavior
+- a minimal, forkable baseline for independent execution
+
+---
+
+## Quick run
 
 ```bash
 npm install
-npm run demo:oss-minimal     # run the demo
-npm run status:oss-minimal   # check status
-npm run doctor:oss-minimal   # health check
+npm run demo:oss-minimal
+npm run status:oss-minimal
+npm run doctor:oss-minimal
 ```
 
-## What It Shows
+---
 
-- Agent lifecycle (bootstrap → activation → execution → completion)
-- Plugin system and provider registry
-- Local runtime adapter (no external broker needed)
-- Role-based task execution
-- Crash/resume behavior
+## Why this example exists
 
-## Key Files
+This directory is the shortest concrete answer to:
+
+> “What does the standalone harness feel like when I run it locally?”
+
+It is useful for:
+- first-time repo readers
+- harness-only evaluators
+- third-party integrators who want the smallest working baseline
+- smoke/regression verification
+
+---
+
+## Key files
 
 | File | Purpose |
 |---|---|
-| `../../src/agent-harness-core/standalone-product-runtime.mjs` | Canonical bootstrap/runtime entry |
-| `product-shell.mjs` | Interactive shell |
-| `agent-shell.mjs` | Agent lifecycle demo |
-| `run-demo.mjs` | Full demo runner |
+| `../../packages/agent-harness/src/standalone-product-runtime.mjs` | canonical runtime/bootstrap entry |
+| `product-shell.mjs` | product-facing shell demo |
+| `agent-shell.mjs` | shell/doctor/status flow |
+| `run-demo.mjs` | runnable demo path |
 
-## What This Is Not
+---
 
-This is a **wrapper / regression facade / runnable sample**, not the canonical standalone runtime. The actual substrate lives in `src/agent-harness-core/`.
+## Position in the repo
 
-## Regression
+This example is:
+- a **minimal runnable baseline**
+- a **regression facade**
+- a **public-facing harness sample**
 
-This directory also serves as a regression facade. Run `.runs/` artifacts stay out of git.
+It is **not** the canonical implementation authority. The canonical substrate lives in:
+- `../../packages/agent-harness/`
 
-```bash
-npm run smoke:oss-minimal
-```
+---
+
+## What to read next
+
+1. `../../packages/agent-harness/README.md`
+2. `../../docs/architecture/independent-agent-onboarding.md`
+3. `../third-party-agent-sample/README.md`

@@ -102,7 +102,7 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
       const res = await fetchDashboard(100, cursor)
       if (!res.ok) throw new Error(`API error: ${res.status}`)
       const json = await res.json()
-      const dashboard = json?.payload?.dashboard
+      const dashboard = json?.dashboard || json?.payload?.dashboard
       if (!dashboard || typeof dashboard !== 'object') throw new Error('Invalid dashboard payload')
       const cards = Array.isArray(dashboard.cards) ? dashboard.cards : []
       useTaskStore.getState().appendTasks(

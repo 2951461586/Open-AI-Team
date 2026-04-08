@@ -7,6 +7,8 @@
     "./tl-runtime/*": "./src/tl-runtime/*.mjs"
   },
   "dependencies": {
+    "@ai-team/team-core": "workspace:*",
+    "@ai-team/agent-harness": "workspace:*",
     "xml2js": "^0.6.2"
   }
 }

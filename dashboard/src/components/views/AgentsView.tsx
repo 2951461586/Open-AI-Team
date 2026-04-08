@@ -312,8 +312,8 @@ export function AgentsView() {
       const res = await fetchNodes()
       if (!res.ok) return
       const json = await res.json()
-      const rawNodes = json?.payload?.nodes || json?.nodes || {}
-      const deployment = json?.payload?.deployment || json?.deployment || {}
+      const rawNodes = json?.nodes || json?.payload?.nodes || {}
+      const deployment = json?.deployment || json?.payload?.deployment || {}
       const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
       const list = Object.entries(rawNodes)
         .filter(([key, value]) => key !== 'ts' && value && typeof value === 'object')

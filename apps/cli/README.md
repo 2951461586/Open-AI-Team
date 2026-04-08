@@ -1,13 +1,15 @@
-# apps/cli
+# @ai-team/cli
 
-Placeholder for future CLI tooling.
+Retired secondary CLI scaffold.
 
-Potential future responsibilities:
-- developer diagnostics
-- local bootstrap commands
-- operational utilities
-- migration and maintenance commands
+## Current status
 
-Current status:
-- scaffold only
-- no CLI implementation exists here yet
+- not part of the public mainline product story
+- retained only as a minimal compatibility/developer convenience surface
+- must not grow into a primary surface without a dedicated owner and public documentation refresh
+
+## Scope
+
+Allowed use here is limited to lightweight developer wrappers around existing root scripts.
+
+If a real CLI product is revived later, treat it as a fresh authority decision instead of silently expanding this placeholder.

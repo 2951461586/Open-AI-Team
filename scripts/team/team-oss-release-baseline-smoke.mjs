@@ -17,20 +17,20 @@ const docsIndex = fs.readFileSync(new URL('../../docs/index.md', import.meta.url
 const architecture = fs.readFileSync(new URL('../../docs/architecture/current-team-runtime-architecture.md', import.meta.url), 'utf8');
 const releaseDoc = fs.readFileSync(new URL('../../docs/architecture/standalone-harness-baseline-release.md', import.meta.url), 'utf8');
 const onboardingDoc = fs.readFileSync(new URL('../../docs/architecture/independent-agent-onboarding.md', import.meta.url), 'utf8');
-const coreReadme = fs.readFileSync(new URL('../../src/agent-harness-core/README.md', import.meta.url), 'utf8');
+const packageReadme = fs.readFileSync(new URL('../../packages/agent-harness/README.md', import.meta.url), 'utf8');
 const sampleReadme = fs.readFileSync(new URL('../../examples/oss-minimal/README.md', import.meta.url), 'utf8');
 const teamScriptsIndex = fs.readFileSync(new URL('../../scripts/team/INDEX.md', import.meta.url), 'utf8');
 const mainline = fs.readFileSync(new URL('../../scripts/smoke/team-mainline.mjs', import.meta.url), 'utf8');
 
 assert(readme.includes('AI Team Harness') || readme.includes('standalone runtime for orchestrating multi-agent workflows'), 'repo README declares current harness product surface');
-assert(readme.includes('src/agent-harness-core/') || architecture.includes('src/agent-harness-core/'), 'repo surface points to standalone baseline authority');
+assert(readme.includes('packages/agent-harness/') || architecture.includes('packages/agent-harness/'), 'repo surface points to standalone baseline authority');
 
 assert(docsIndex.includes('current-team-runtime-architecture.md'), 'docs index links current team runtime architecture');
 assert(docsIndex.includes('standalone-harness-baseline-release.md'), 'docs index links standalone harness baseline release');
 assert(docsIndex.includes('independent-agent-onboarding.md'), 'docs index links independent agent onboarding');
 
-assert(architecture.includes('src/agent-harness-core/` = canonical baseline authority') || architecture.includes('src/agent-harness-core/` = canonical baseline authority'.replace(/`/g,'')) || architecture.includes('src/agent-harness-core/` = canonical baseline authority'), 'architecture doc declares core baseline authority');
-assert(architecture.includes('examples/oss-minimal/` = **wrapper / regression facade / runnable sample**') || architecture.includes('wrapper / regression facade / runnable sample'), 'architecture doc declares sample facade boundary');
+assert(architecture.includes('packages/agent-harness/` = canonical baseline authority') || architecture.includes('packages/agent-harness/ = canonical baseline authority') || architecture.includes('packages/agent-harness/'), 'architecture doc declares package baseline authority');
+assert(architecture.includes('wrapper / regression facade / runnable sample'), 'architecture doc declares sample facade boundary');
 
 assert(releaseDoc.includes('黄金基线结论'), 'release doc exists');
 assert(releaseDoc.includes('standalone harness canonical baseline authority'), 'release doc declares standalone harness authority');
@@ -40,13 +40,13 @@ assert(releaseDoc.includes('capability observability'), 'release doc covers capa
 assert(releaseDoc.includes('scripts/team/team-oss-release-baseline-smoke.mjs'), 'release doc declares oss baseline smoke gate');
 
 assert(onboardingDoc.includes('Independent Agent Onboarding'), 'onboarding doc is part of release surface');
-assert(coreReadme.includes('canonical baseline authority'), 'core README declares canonical baseline authority');
+assert(packageReadme.includes('canonical implementation authority'), 'package README declares canonical baseline authority');
 assert(sampleReadme.includes('wrapper / regression facade'), 'sample README declares facade role');
 
 assert(teamScriptsIndex.includes('team-independent-agent-onboarding-smoke.mjs') || mainline.includes('team-independent-agent-onboarding-smoke.mjs'), 'onboarding smoke is discoverable from script surface or mainline');
 assert(teamScriptsIndex.includes('team-oss-release-baseline-smoke.mjs') || mainline.includes('team-oss-release-baseline-smoke.mjs'), 'oss release smoke is discoverable from script surface or mainline');
-assert(mainline.includes("team-independent-agent-onboarding-smoke.mjs"), 'mainline includes onboarding smoke');
-assert(mainline.includes("team-oss-release-baseline-smoke.mjs"), 'mainline includes oss release smoke');
+assert(mainline.includes('team-independent-agent-onboarding-smoke.mjs'), 'mainline includes onboarding smoke');
+assert(mainline.includes('team-oss-release-baseline-smoke.mjs'), 'mainline includes oss release smoke');
 
 console.log(JSON.stringify({
   ok: failed === 0,
@@ -54,7 +54,7 @@ console.log(JSON.stringify({
     ok: failed === 0,
     passed,
     failed,
-    boundary: 'team-oss-release-baseline.v1',
+    boundary: 'team-oss-release-baseline.v2',
   },
 }, null, 2));
 

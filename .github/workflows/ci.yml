@@ -21,6 +21,12 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Repo hygiene audit
+        run: npm run audit:repo-hygiene
+
+      - name: Repo boundary guard
+        run: npm run audit:repo-boundary
+
       - name: Mainline smoke
         run: npm run smoke:team
 

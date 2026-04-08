@@ -14,6 +14,8 @@ export * from './im-channel-router.mjs';
 export * from './memory-settings.mjs';
 export * from './personality-prompt-injector.mjs';
 export * from './session-bus.mjs';
+export * from './skill-registry.mjs';
+export * from './skill-runtime.mjs';
 export * from './team-agent-critic-session-runner.mjs';
 export * from './team-agent-lifecycle.mjs';
 export * from './team-delivery-target.mjs';

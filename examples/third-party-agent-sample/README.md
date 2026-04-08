@@ -1,64 +1,70 @@
 # Third-Party Agent Sample
 
-This sample is the **productized template** for external independent-agent onboarding.
+A **host-neutral productized template** for external independent agents.
 
-## Goal
+This sample is the public-facing answer to:
 
-Show that a third-party agent can integrate through explicit contracts instead of host-private runtime knowledge.
+> “How do I integrate an agent into this ecosystem without learning private host/session internals?”
 
-## Included Files
+---
+
+## What this sample demonstrates
+
+- explicit agent manifest and agent package contracts
+- shell-driven onboarding path
+- doctor/package/onboarding entrypoints
+- session / desk / bridge / lifecycle / capability-gate surfaces
+- compatibility with public schema and dashboard-facing read models
+
+---
+
+## Included files
 
 - `agent-manifest.json`
 - `agent-package.json`
 - `agent-shell.mjs`
 
-## Usage
+---
 
-Treat these files as a minimal forkable **productized template** for external agent onboarding.
-
-If you are new to the repository, read these first:
-- `../README.md`
-- `../GETTING-STARTED.md`
-- `../src/agent-harness-core/README.md`
-
-They are intentionally:
-- host-neutral
-- provider-neutral
-- free of private node names
-- free of OpenClaw-only assumptions
-
-## Productized validation path
+## Validation path
 
 ```bash
+npm install
 npm run validate:third-party-agent
 npm run smoke:third-party-agent
+node examples/third-party-agent-sample/run-demo.mjs --start-only
 node examples/third-party-agent-sample/agent-shell.mjs package
 node examples/third-party-agent-sample/agent-shell.mjs onboarding
 ```
 
-## What this template now demonstrates
+---
 
-- productized `agent manifest` contract
-- productized `agent package` contract
-- provider-registry-facing onboarding shape
-- explicit `session / desk / host-layer / bridge / capability gate / lifecycle / shell` surfaces
-- shell wrapper for package/onboarding/doctor entrypoints
-- validator-compatible external onboarding template
+## Why this matters
 
-## Public Contract Alignment
+This sample turns “independent agent onboarding” from a documentation claim into something you can actually see:
+- explicit package/manifest shapes
+- shell-driven activation
+- public-safe contract alignment
+- no OpenClaw-only assumptions
 
-This sample now aligns with the public schema layer under `schemas/`:
+That is what makes the onboarding story externally credible.
 
-- `schemas/agent-manifest.schema.json`
-- `schemas/agent-package.schema.json`
-- `schemas/work-item.schema.json`
-- `schemas/run-report.schema.json`
-- `schemas/artifact-manifest.schema.json`
-- `schemas/completion-result.schema.json`
-- `schemas/artifact-file-response.schema.json`
-- `schemas/dashboard-task-card.schema.json`
-- `schemas/dashboard-node-summary.schema.json`
-- `schemas/dashboard-thread-summary.schema.json`
-- `schemas/dashboard-timeline-entry.schema.json`
+---
 
-This means a third-party sample is no longer only a backend/runtime example; it is also expected to stay compatible with the dashboard read model and public contract surface.
+## Public contract alignment
+
+This sample aligns with public schemas under `schemas/`, including:
+- agent/package contracts
+- work item / run report contracts
+- artifact and completion contracts
+- dashboard-facing task/node/thread/timeline read models
+
+This means the sample is not only a runtime example. It is also a public contract example.
+
+---
+
+## What to read next
+
+1. `../../packages/agent-harness/README.md`
+2. `../../docs/architecture/independent-agent-onboarding.md`
+3. `../../docs/oss/open-source-release-engineering.md`

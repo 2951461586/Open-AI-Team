@@ -1,1 +1,1 @@
-export * from '../../../src/agent-harness-core/skill-runtime.mjs';
+export { SkillRuntime } from '../../../src/team/skill-runtime.mjs';

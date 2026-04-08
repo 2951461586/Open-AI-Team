@@ -2,6 +2,10 @@
 
 Next.js web UI for the AI Team Runtime. Shows tasks, agents, workbench, and timeline.
 
+> Repository note: `dashboard/` is the **current primary dashboard product authority**.
+> `apps/dashboard/` is still a transition/app-packaging surface and should not be treated as the canonical UI implementation authority yet.
+> Optional plugin/service/electron/project surfaces elsewhere in the repo are not part of this dashboard's mainline onboarding path.
+
 ## Quick Start
 
 ```bash

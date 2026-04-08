@@ -15,6 +15,7 @@ function assert(condition, label, detail = '') {
 const dashboardTypes = fs.readFileSync(new URL('../../dashboard/src/lib/types.ts', import.meta.url), 'utf8');
 const dashboardApi = fs.readFileSync(new URL('../../dashboard/src/lib/api.ts', import.meta.url), 'utf8');
 const dashboardReadme = fs.readFileSync(new URL('../../dashboard/README.md', import.meta.url), 'utf8');
+const dashboardNextConfig = fs.readFileSync(new URL('../../dashboard/next.config.js', import.meta.url), 'utf8');
 const contractsDoc = fs.readFileSync(new URL('../../docs/archive/dashboard-contract-alignment.md', import.meta.url), 'utf8');
 const publicSchemasSmoke = fs.readFileSync(new URL('./team-public-schema-fixtures-smoke.py', import.meta.url), 'utf8');
 const fixtureGenerator = fs.readFileSync(new URL('./team-generate-route-derived-fixtures.mjs', import.meta.url), 'utf8');
@@ -47,9 +48,8 @@ assert(dashboardApi.includes('fetchPipeline'), 'dashboard api exposes pipeline f
 assert(dashboardApi.includes('fetchResidents'), 'dashboard api exposes residents fetch');
 assert(dashboardApi.includes('fetchThreads'), 'dashboard api exposes threads fetch');
 assert(dashboardApi.includes('fetchThreadSummary'), 'dashboard api exposes thread summary fetch');
-assert(dashboardApi.includes('normalizeTaskCard'), 'dashboard api normalizes task cards');
-assert(dashboardApi.includes('normalizeNodeStats'), 'dashboard api normalizes node stats compat fields');
-assert(dashboardApi.includes('normalizeConnectivity'), 'dashboard api normalizes node connectivity compat fields');
+assert(dashboardApi.includes("normalizeDashboardEnvelope"), 'dashboard api reuses shared dashboard envelope normalizer');
+assert(dashboardApi.includes("normalizeNodesEnvelope"), 'dashboard api reuses shared nodes envelope normalizer');
 
 for (const schema of schemas) {
   assert(schema.includes('$schema') && schema.includes('$id'), 'dashboard wrapper schema has JSON Schema metadata');
@@ -70,6 +70,7 @@ assert(fixtureGenerator.includes('dashboard-thread-detail-payload.derived.fixtur
 assert(dashboardReadme.includes('/state/team/dashboard') && dashboardReadme.includes('/state/team/nodes'), 'dashboard README declares public contract routes');
 assert(dashboardReadme.includes('/state/team/threads') && dashboardReadme.includes('/state/team/thread-summary'), 'dashboard README declares thread routes');
 assert(dashboardReadme.includes('single-repo build authority'), 'dashboard README documents single-repo build authority');
+assert(dashboardNextConfig.includes('externalDir') && dashboardNextConfig.includes('@ai-team/team-core'), 'dashboard build config allows shared team-core read-model import');
 assert(contractsDoc.includes('schemas/dashboard-task-card.schema.json'), 'dashboard contract doc references task card schema');
 assert(contractsDoc.includes('schemas/dashboard-thread-summary.schema.json'), 'dashboard contract doc references thread summary schema');
 assert(contractsDoc.includes('schemas/dashboard-node-summary.schema.json'), 'dashboard contract doc references node summary schema');

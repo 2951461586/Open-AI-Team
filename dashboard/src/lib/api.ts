@@ -1,3 +1,5 @@
+import { normalizeDashboardEnvelope, normalizeNodesEnvelope } from '@ai-team/team-core'
+
 const DEFAULT_LOCAL_API_BASE = 'http://127.0.0.1:19090'
 
 export const API_BASE = String(process.env.NEXT_PUBLIC_API_BASE || '').trim() || DEFAULT_LOCAL_API_BASE
@@ -26,80 +28,28 @@ export function getWsUrl(): string {
   return `${explicit}${sep}token=${encodeURIComponent(DASHBOARD_TOKEN)}`
 }
 
-type TaskState =
-  | 'pending'
-  | 'planning'
-  | 'plan_review'
-  | 'approved'
-  | 'revision_requested'
-  | 'done'
-  | 'cancelled'
-  | 'blocked'
-
-function normalizeTaskState(state?: string): TaskState {
-  const raw = String(state || '').trim()
-  const allowed: TaskState[] = ['pending', 'planning', 'plan_review', 'approved', 'revision_requested', 'done', 'cancelled', 'blocked']
-  return (allowed as string[]).includes(raw) ? (raw as TaskState) : 'pending'
-}
-
-function normalizeTaskCard(raw: any) {
-  return {
-    taskId: String(raw?.taskId || raw?.id || '').trim(),
-    teamId: String(raw?.teamId || ''),
-    title: String(raw?.title || '未命名任务'),
-    state: normalizeTaskState(raw?.state),
-    updatedAt: Number(raw?.updatedAt || raw?.createdAt || 0),
-    currentDriver: String(raw?.currentDriver || raw?.ownerMemberId || ''),
-    currentMemberKey: String(raw?.currentMemberKey || ''),
-    nextBestAction: String(raw?.nextBestAction || ''),
-    latestReviewVerdict: raw?.latestReviewVerdict || null,
-    latestDecisionType: raw?.latestDecisionType || null,
-    artifactCount: Number(raw?.artifactCount || 0),
-    evidenceCount: Number(raw?.evidenceCount || 0),
-    issueCount: Number(raw?.issueCount || 0),
-    deliverableReady: Boolean(raw?.deliverableReady),
-    humanInterventionReady: Boolean(raw?.humanInterventionReady),
-    deliveryStatus: String(raw?.deliveryStatus || ''),
-    interventionStatus: String(raw?.interventionStatus || ''),
-    requestedNode: String(raw?.requestedNode || ''),
-    actualNode: String(raw?.actualNode || ''),
-    degradedReason: String(raw?.degradedReason || ''),
-    sessionMode: String(raw?.sessionMode || ''),
-    sessionPersistent: typeof raw?.sessionPersistent === 'boolean' ? raw.sessionPersistent : undefined,
-    sessionFallbackReason: String(raw?.sessionFallbackReason || ''),
-    planSummary: String(raw?.planSummary || ''),
-    executiveSummary: String(raw?.executiveSummary || ''),
-    protocolSource: String(raw?.protocolSource || ''),
-    acceptanceState: String(raw?.acceptanceState || ''),
-    recommendedSurface: String(raw?.recommendedSurface || ''),
-  }
-}
-
-function normalizeNodeStats(raw: any = {}) {
-  return {
-    ...raw,
-    controlPlaneOk: typeof raw?.controlPlaneOk === 'boolean' ? raw.controlPlaneOk : raw?.openclawOk,
-    controlPlaneStatus: String(raw?.controlPlaneStatus || raw?.openclawStatus || ''),
-  }
-}
-
-function normalizeConnectivity(raw: any = {}) {
-  return {
-    ...raw,
-    controlBaseUrl: String(raw?.controlBaseUrl || raw?.gatewayBaseUrl || ''),
-    controlHost: String(raw?.controlHost || raw?.gatewayHost || ''),
-    controlPort: Number(raw?.controlPort || raw?.gatewayPort || 0) || undefined,
-  }
-}
 
 export async function fetchDashboard(limit = 50, cursor = 0): Promise<Response> {
   const params = new URLSearchParams({ limit: String(limit) })
   if (cursor > 0) params.set('cursor', String(cursor))
   try {
-    return await fetch(`${API_BASE}/state/team/dashboard?${params}`, {
+    const res = await fetch(`${API_BASE}/state/team/dashboard?${params}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
+    })
+    if (!res.ok) return res
+    const json = await res.json().catch(() => null)
+    if (!json || typeof json !== 'object') {
+      return new Response(JSON.stringify(json), {
+        status: res.status,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      })
+    }
+    const normalized = normalizeDashboardEnvelope(json)
+    return new Response(JSON.stringify(normalized), {
+      status: res.status,
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
   } catch (error) {
     console.error('Dashboard fetch error:', error)
@@ -121,24 +71,9 @@ export async function fetchNodes(): Promise<Response> {
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
       })
     }
-    const payload = json?.payload || json
-    const nodes = payload?.nodes && typeof payload.nodes === 'object'
-      ? Object.fromEntries(Object.entries(payload.nodes).map(([key, value]: [string, any]) => {
-          if (key === 'ts' || !value || typeof value !== 'object') return [key, value]
-          return [key, {
-            ...value,
-            stats: normalizeNodeStats(value?.stats || {}),
-            connectivity: normalizeConnectivity(value?.connectivity || {}),
-          }]
-        }))
-      : payload?.nodes
-    const normalized = {
-      ...json,
-      payload: {
-        ...payload,
-        nodes,
-      },
-    }
+    const normalized = normalizeNodesEnvelope(json, {
+      canonicalLabels: { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' },
+    })
     return new Response(JSON.stringify(normalized), {
       status: res.status,
       headers: { 'Content-Type': 'application/json; charset=utf-8' },

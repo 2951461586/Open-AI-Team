@@ -1,12 +1,22 @@
-# apps/dashboard
+# @ai-team/dashboard-app
 
-This is a placeholder for the future monorepo-managed dashboard application.
+Secondary app-packaging surface for the dashboard line.
 
-Current status:
-- the real dashboard still lives at the repository root: `dashboard/`
-- no files were moved by this scaffold
+## Current status
 
-When migration begins:
-- review Next.js config and env handling first
-- update deployment/build scripts that currently assume `cd dashboard`
-- move in a dedicated commit after CI and release paths are validated
+- the current primary dashboard product authority lives at `dashboard/`
+- `apps/dashboard/` is not the canonical UI implementation path
+- keep this directory secondary until the dashboard authority is actually moved
+
+## Public rule
+
+When documenting the current product:
+- point readers to `dashboard/` first
+- describe `apps/dashboard/` as secondary packaging surface
+- do not let optional plugin/service/electron/project surfaces leak into the dashboard mainline narrative through this directory
+
+## Read next
+
+- `../../README.md`
+- `../../ARCHITECTURE.md`
+- `../../docs/oss/dashboard-observability-surface.md`

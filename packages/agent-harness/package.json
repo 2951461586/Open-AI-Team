@@ -3,7 +3,10 @@
   "type": "module",
   "exports": {
     ".": "./src/index.mjs",
+    "./authoring": "./src/authoring.mjs",
     "./*": "./src/*.mjs"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@ai-team/tools": "workspace:*"
+  }
 }

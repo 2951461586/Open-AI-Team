@@ -23,6 +23,12 @@
 - `team-runtime-adapters/`：宿主无关 runtime adapter / control plane / session substrate adapter
 - `agent-harness-core/`：宿主无关 Harness SDK / contract set / session / desk / plugin / bridge / shell 协议层，以及已产品化的 standalone broker runtime
 
+## Authority statement
+
+- **`src/` is the current canonical implementation authority for the open-source Team Harness line.**
+- `packages/` and `apps/` currently act mainly as export surfaces / migration facades unless a specific package/app has completed migration.
+- Any duplicated runtime logic must resolve in favor of `src/` until migration is finished and the authority docs are updated.
+
 ## 当前整理原则
 
 - 根目录只放“入口骨架”和“跨域注册层”。

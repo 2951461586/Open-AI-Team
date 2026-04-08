@@ -83,7 +83,7 @@ async function waitForHealth() {
   throw new Error('health_timeout');
 }
 
-const child = spawn(NODE_BIN, ['src/index.mjs'], {
+const child = spawn(NODE_BIN, ['apps/api-server/src/index.mjs'], {
   cwd: shadowRoot,
   env: {
     ...process.env,
@@ -197,6 +197,15 @@ try {
   if (!ok) process.exit(1);
 } finally {
   child.kill('SIGTERM');
-  await delay(300);
-  if (!child.killed) child.kill('SIGKILL');
+  const exited = await Promise.race([
+    new Promise((resolve) => child.once('exit', () => resolve(true))),
+    delay(1000).then(() => false),
+  ]);
+  if (!exited) {
+    child.kill('SIGKILL');
+    await Promise.race([
+      new Promise((resolve) => child.once('exit', () => resolve(true))),
+      delay(1000).then(() => false),
+    ]);
+  }
 }

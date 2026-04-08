@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 DASHBOARD_DIR="$ROOT_DIR/dashboard"
 DEFAULT_ENV_ID="opencloud-8g9e4db2eaac0c79"
 LOCAL_STATIC_DIR="${LOCAL_STATIC_DIR:-}"
+LOCAL_STATIC_DIR="${LOCAL_STATIC_DIR%/}"
 CREDENTIALS_FILE="${TENCENT_CREDENTIALS_FILE:-}"
 
 if [[ -f "$CREDENTIALS_FILE" ]]; then
@@ -63,10 +65,19 @@ fi
 cd "$DASHBOARD_DIR"
 
 TEMP_ENV_BACKUP="$(mktemp)"
+TEMP_ENV_LOCAL_BACKUP="$(mktemp)"
 cleanup() {
   if [[ -f "$TEMP_ENV_BACKUP" ]]; then
     cp "$TEMP_ENV_BACKUP" .env.production
     rm -f "$TEMP_ENV_BACKUP"
+  fi
+  if [[ -f "$TEMP_ENV_LOCAL_BACKUP" ]]; then
+    if [[ -s "$TEMP_ENV_LOCAL_BACKUP" ]]; then
+      cp "$TEMP_ENV_LOCAL_BACKUP" .env.local
+    else
+      rm -f .env.local
+    fi
+    rm -f "$TEMP_ENV_LOCAL_BACKUP"
   fi
 }
 trap cleanup EXIT
@@ -76,6 +87,14 @@ if [[ -f .env.production ]]; then
 else
   : > "$TEMP_ENV_BACKUP"
 fi
+
+if [[ -f .env.local ]]; then
+  cp .env.local "$TEMP_ENV_LOCAL_BACKUP"
+else
+  : > "$TEMP_ENV_LOCAL_BACKUP"
+fi
+
+rm -f .env.local
 
 python3 - <<'PY'
 from pathlib import Path
@@ -126,8 +145,14 @@ if [[ ! -d out ]]; then
   exit 1
 fi
 
-install -d -m 755 "$LOCAL_STATIC_DIR"
-rsync -a --delete out/ "$LOCAL_STATIC_DIR"/
+if [[ -n "$LOCAL_STATIC_DIR" ]]; then
+  echo "[deploy] syncing static export to $LOCAL_STATIC_DIR"
+  install -d -m 755 "$LOCAL_STATIC_DIR"
+  rsync -a --delete out/ "$LOCAL_STATIC_DIR"/
+else
+  echo "[deploy] LOCAL_STATIC_DIR not set; skip local static sync"
+fi
+
 tcb hosting deploy out -e "$ENV_ID"
 
 echo "[deploy] done"

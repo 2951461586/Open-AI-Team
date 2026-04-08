@@ -1,60 +1,44 @@
 # Team Source Index
 
-## Runtime Core
+## Current state
 
-- `team-tl-runtime.mjs` — **当前唯一 authority + 编排主链**
-- `tl-runtime/*` — TL runtime 拆出的 execution / follow-up / single-flight / fail-fast / orchestration 细节
+`src/team/` is no longer a single-authority directory.
+It is now a **mixed surface**:
+
+- covered packaged runtime exports live authoritatively in `packages/team-runtime/`
+- remaining non-packaged team surfaces still live here
+
+## Packaged runtime export surface (compatibility shim here)
+
+- `team-tl-runtime.mjs`
+- `tl-runtime/*`
 - `team-store.mjs`
 - `team-policy.mjs`
 - `team-single-flight-guard.mjs`
-- `team-node-health.mjs` — facade
-- `team-node-health-core.mjs` — scoring / placement semantics
-- `team-node-health-probes.mjs` — health probe adapters
+- `team-node-health.mjs`
+- `team-node-health-core.mjs`
+- `team-node-health-probes.mjs`
 - `team-resident-runtime.mjs`
 - `team-governance-runtime.mjs`
 - `team-session-completion-bus.mjs`
 - `event-types.mjs`
 - `event-bus.mjs`
 - `session-bus.mjs`
+- other files mirrored in `packages/team-runtime/src/*.mjs`
+
+## Remaining local team surfaces
+
+- `query-api/*`
+- repo-local docs/index/readme files
+- app-local compatibility seams that intentionally still point toward app/server-owned surfaces
+- any team subdomain not yet moved into package contract surface
 
 ## Deleted Legacy Shell
 
 - 旧 `team-runtime.mjs` / `team-agent-harness.mjs` / `team-multi-node-gateway.mjs` 已物理清退，不再作为 source index 成员
 
-## Config / Deployment / Contracts
+## Entry guidance
 
-- `team-roles-config.mjs`
-- `team-role-deployment.mjs`
-- `team-role-contracts.mjs`
-- `team-role-capability-contracts.mjs`
-- `team-role-task-card.mjs`
-
-## Agent / Session Layer
-
-- `team-agent-critic-session-runner.mjs`
-- `team-delivery-target.mjs`
-- `team-output-receipt-host.mjs`
-- `team-parallel-executor.mjs`
-- `team-native-chat.mjs`
-
-## Routing / Claim / Reroute
-
-- `team-capability-router.mjs`
-- `team-fallback-router.mjs`
-- `team-reroute-ack.mjs`
-- `team-reroute-consumer.mjs`
-- `team-route-claim-guard.mjs`
-- `team-task-claim-runtime.mjs`
-- `team-task-dispatcher.mjs`
-
-## Query API
-
-- `query-api/*`
-
-## 入口判断
-
-- 想看主链：从 `team-tl-runtime.mjs` 开始。
-- 想看执行细节：继续看 `tl-runtime/README.md` 与 `tl-runtime/*`。
-- 想看角色落点：从 `team-role-deployment.mjs` 开始。
-- 想看清退边界：看 `src/team-runtime-adapters/README.md` 与 `docs/architecture/release-preflight-retirement-inventory.md`。
-- 想看外部查询契约：从 `query-api/query-contract.mjs` 开始。
+- packaged orchestration/runtime authority: start from `packages/team-runtime/`
+- remaining local team surfaces: inspect `src/team/` directly
+- host/runtime adapter wiring: inspect `src/team-runtime-adapters/`

@@ -31,9 +31,17 @@ export function probeLabel(probe?: string): string {
 }
 
 export function nodeServiceStatusLabel(opts?: { reachable?: boolean; probe?: string; controlPlaneStatus?: string }) {
-  if (opts?.reachable) return '服务可达'
-  if (String(opts?.controlPlaneStatus || '').toLowerCase() === 'unreachable') return '服务不可达'
+  const status = String(opts?.controlPlaneStatus || '').toLowerCase()
+  if (opts?.reachable || status === 'active' || status === 'reachable') return '服务可达'
+  if (status === 'unreachable' || status === 'inactive' || status === 'failed' || status === 'dead') return '服务不可达'
   return '服务状态未知'
+}
+
+export function resolveHeaderLastUpdate(lastUpdate?: number | null, nodesLastUpdate?: number | null): number | null {
+  const taskTs = Number(lastUpdate || 0)
+  const nodeTs = Number(nodesLastUpdate || 0)
+  const latest = Math.max(taskTs, nodeTs)
+  return latest > 0 ? latest : null
 }
 
 export function nodeHostStatusLabel(host?: string): string {

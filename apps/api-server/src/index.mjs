@@ -1,11 +1,11 @@
 import http from 'node:http';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer } from 'ws';
+import { createDeskApi } from '@ai-team/team-runtime';
 import { createAppContext } from './index-bootstrap.mjs';
 import { loadIndexConfig } from './index-env.mjs';
 import { tryHandleRegisteredRoute } from './route-registrar.mjs';
 import { consumeWebhookEvent } from './webhook-event-router.mjs';
-import { createDeskApi } from '../../../src/team/desk-api.mjs';
 import { dispatchDashboardChat } from './routes/team-route-dispatch-v2.mjs';
 
 function normalizeWsScopeKey(raw = '') {

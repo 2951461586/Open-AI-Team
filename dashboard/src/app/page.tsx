@@ -15,6 +15,7 @@ import { useWebSocket } from '@/hooks/useWebSocket'
 import { fetchDashboard, fetchNodes, fetchThreads, getWsUrl, API_BASE } from '@/lib/api'
 import { TaskState, LiveFlowEvent, ChatTransportStatus } from '@/lib/types'
 import { focusAssignmentId, focusChildTaskId } from '@/lib/task-focus'
+import { resolveHeaderLastUpdate } from '@/lib/utils'
 
 const WS_URL = getWsUrl()
 const WS_ENABLED = !!WS_URL
@@ -195,7 +196,7 @@ function MobileDrawer({ onClose, children }: { onClose: () => void; children: Re
 
 export default function DashboardPage() {
   const { t } = useI18n()
-  const { tasks, nodes, loading, error, lastUpdate, selectedTaskId, setTasks, setNodes, upsertTask, setLoading, setError, setSelectedTaskId } = useTaskStore()
+  const { tasks, nodes, loading, error, lastUpdate, nodesLastUpdate, selectedTaskId, setTasks, setNodes, upsertTask, setLoading, setError, setSelectedTaskId } = useTaskStore()
   const {
     messages,
     sessions,
@@ -300,7 +301,7 @@ export default function DashboardPage() {
       const res = await fetchDashboard(200)
       if (!res.ok) throw new Error(`API error: ${res.status}`)
       const json = await res.json()
-      const dashboard = json?.payload?.dashboard
+      const dashboard = json?.dashboard || json?.payload?.dashboard
       if (!dashboard || typeof dashboard !== 'object') throw new Error('Invalid dashboard payload')
       const cards = Array.isArray(dashboard.cards) ? dashboard.cards : []
       setTasks(cards, {
@@ -320,8 +321,8 @@ export default function DashboardPage() {
       const res = await fetchNodes()
       if (!res.ok) throw new Error(`API error: ${res.status}`)
       const json = await res.json()
-      const rawNodes = json?.payload?.nodes || json?.nodes || {}
-      const deployment = json?.payload?.deployment || json?.deployment || {}
+      const rawNodes = json?.nodes || json?.payload?.nodes || {}
+      const deployment = json?.deployment || json?.payload?.deployment || {}
       const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
       const list = Object.entries(rawNodes)
         .filter(([key, value]) => key !== 'ts' && value && typeof value === 'object')
@@ -808,7 +809,7 @@ export default function DashboardPage() {
   return (
     <div className="flex min-h-screen h-dvh-safe flex-col bg-[var(--background)] pb-[calc(env(safe-area-inset-bottom,0px)+76px)] md:pb-0">
       <Header
-        lastUpdate={lastUpdate}
+        lastUpdate={resolveHeaderLastUpdate(lastUpdate, nodesLastUpdate)}
         onRefresh={() => { loadData(); loadNodes() }}
         loading={loading}
         controlPlaneStatus={Object.values(nodes || {}).find((node: any) => node?.stats?.controlPlaneStatus)?.stats?.controlPlaneStatus || ''}
