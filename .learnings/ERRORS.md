@@ -87,3 +87,24 @@ Before relying on this cron, ensure `mulerun-pool-watch` is installed and availa
 ### Metadata
 - Source: memory-lancedb-pro/self_improvement_log
 ---
+
+
+## [ERR-20260409-001]
+
+**Logged**: 2026-04-09T00:39:49.074Z
+**Priority**: medium
+**Status**: pending
+**Area**: infra
+
+### Summary
+mulerun-pool-watch command unavailable during cron巡检
+
+### Details
+Cron task requested running `mulerun-pool-watch check`, but shell returned `/usr/bin/bash: line 1: mulerun-pool-watch: command not found` (exit 127).
+
+### Suggested Action
+Verify mulerun-pool-watch is installed and on PATH for cron/agent environment, or invoke it via absolute path.
+
+### Metadata
+- Source: memory-lancedb-pro/self_improvement_log
+---

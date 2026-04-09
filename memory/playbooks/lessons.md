@@ -21,3 +21,7 @@
 ### mulerun-pool-watch cron failed because command was not found
 - Action: Before relying on this cron, ensure `mulerun-pool-watch` is installed and available on PATH for the OpenClaw runtime user, or update the cron to invoke the correct absolute path / wrapper script.
 - Source: ERR-20260407-003
+
+### mulerun-pool-watch command unavailable during cron巡检
+- Action: Verify mulerun-pool-watch is installed and on PATH for cron/agent environment, or invoke it via absolute path.
+- Source: ERR-20260409-001
