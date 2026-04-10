@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Bot, Save, Plus, Trash2, ChevronDown, Sparkles } from 'lucide-react';
+import { Bot, Save, Plus, Trash2, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
 
@@ -21,27 +21,14 @@ interface PersonalityPanelProps {
   activePersonality?: string;
   onSave?: (personalities: Personality[]) => void;
   onSelect?: (personalityId: string) => void;
-  apiEndpoint?: string;
 }
-
-const RESPONSE_LENGTH_OPTIONS = [
-  { value: 'short', label: 'Short' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'long', label: 'Long' },
-];
-
-const EMOJI_OPTIONS = [
-  { value: 'none', label: 'None' },
-  { value: 'minimal', label: 'Minimal' },
-  { value: 'auto', label: 'Auto' },
-];
 
 const DEFAULT_PERSONALITIES: Personality[] = [
   {
     id: 'planner',
     name: 'Planner Persona',
     tone: '严谨、偏正式',
-    style: '结构化、分层表达、先结论后展开',
+    style: '结构化、分层表达，先结论后展开',
     traits: ['条理清晰', '风险前置', '喜欢列出假设与边界'],
     responseLength: 'medium',
     emojiPreference: 'minimal',
@@ -74,21 +61,14 @@ export function PersonalityPanel({
   activePersonality,
   onSave,
   onSelect,
-  apiEndpoint = '/api/personality',
 }: PersonalityPanelProps) {
   const { t } = useI18n();
   const [localPersonalities, setLocalPersonalities] = useState(personalities);
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [editingId, setEditingId] = useState<string | null>(null);
   const [hasChanges, setHasChanges] = useState(false);
 
   const toggleExpand = useCallback((id: string) => {
     setExpandedId(prev => prev === id ? null : id);
-  }, []);
-
-  const handleEdit = useCallback((id: string) => {
-    setEditingId(id);
-    setExpandedId(id);
   }, []);
 
   const handleFieldChange = useCallback((
@@ -116,7 +96,6 @@ export function PersonalityPanel({
       guidance: [],
     };
     setLocalPersonalities(prev => [...prev, newPersonality]);
-    setEditingId(newId);
     setExpandedId(newId);
     setHasChanges(true);
   }, []);
@@ -127,20 +106,9 @@ export function PersonalityPanel({
   }, []);
 
   const handleSave = useCallback(async () => {
-    try {
-      if (apiEndpoint) {
-        await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ personalities: localPersonalities }),
-        });
-      }
-      onSave?.(localPersonalities);
-      setHasChanges(false);
-    } catch (error) {
-      console.error('Failed to save personalities:', error);
-    }
-  }, [apiEndpoint, localPersonalities, onSave]);
+    onSave?.(localPersonalities);
+    setHasChanges(false);
+  }, [localPersonalities, onSave]);
 
   const handleTraitChange = useCallback((id: string, value: string) => {
     const traits = value.split(',').map(t => t.trim()).filter(Boolean);
@@ -153,230 +121,148 @@ export function PersonalityPanel({
   }, [handleFieldChange]);
 
   return (
-    <div className="h-full flex flex-col p-6">
+    <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/25">
-            <Sparkles className="h-5 w-5" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <Bot className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">Agent Personalities</h2>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Configure agent behavior templates</p>
+            <h2 className="text-sm font-semibold text-[var(--fg)]">{t('personality.title', 'Agent Personalities')}</h2>
+            <p className="text-xs text-[var(--fg-muted)]">{localPersonalities.length} personalities configured</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleAddPersonality}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-sm transition-all text-sm font-medium text-gray-700 dark:text-gray-200"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] text-sm font-medium text-[var(--fg-secondary)] hover:bg-[var(--surface-subtle)] transition-colors"
           >
             <Plus className="h-4 w-4" />
-            Add
+            {t('personality.add', 'Add')}
           </button>
           {hasChanges && (
             <button
               onClick={handleSave}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 transition-all text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--accent)] text-white text-sm font-medium hover:opacity-90 transition-opacity"
             >
               <Save className="h-4 w-4" />
-              Save
+              {t('personality.save', 'Save')}
             </button>
           )}
         </div>
       </div>
 
-      <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        {localPersonalities.length} personalities configured
-        {activePersonality && (
-          <span className="ml-2">
-            · Active: <span className="font-medium text-gray-700 dark:text-gray-200">{activePersonality}</span>
-          </span>
-        )}
-      </div>
-
-      <div className="flex-1 overflow-auto">
-        <div className="space-y-3">
-          {localPersonalities.map((personality) => (
+      <div className="space-y-3">
+        {localPersonalities.map((personality) => (
+          <div
+            key={personality.id}
+            className={cn(
+              'rounded-xl border transition-all duration-200',
+              expandedId === personality.id
+                ? 'bg-[var(--surface)] border-[var(--accent)]/30'
+                : 'bg-[var(--surface-subtle)] border-transparent hover:border-[var(--border)]'
+            )}
+          >
             <div
-              key={personality.id}
-              className={cn(
-                'rounded-2xl border transition-all duration-200',
-                expandedId === personality.id
-                  ? 'bg-white dark:bg-gray-800 border-blue-200 dark:border-blue-800 shadow-lg shadow-blue-500/10'
-                  : 'bg-white/50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-800 hover:border-gray-200 dark:hover:border-gray-600'
-              )}
+              className="flex items-center justify-between p-4 cursor-pointer"
+              onClick={() => toggleExpand(personality.id)}
             >
-              <div
-                className="flex items-center justify-between p-4 cursor-pointer"
-                onClick={() => toggleExpand(personality.id)}
-              >
-                <div className="flex items-center gap-4">
-                  {expandedId === personality.id ? (
-                    <div className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-                      <ChevronDown className="h-4 w-4" />
-                    </div>
-                  ) : (
-                    <div className="p-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
-                      <ChevronDown className="h-4 w-4 rotate-270" />
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{personality.name}</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                      {personality.tone || 'No tone set'}
-                    </p>
+              <div className="flex items-center gap-4">
+                {expandedId === personality.id ? (
+                  <div className="p-1.5 rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                    <ChevronDown className="h-4 w-4" />
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {activePersonality === personality.id && (
-                    <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-                      Active
-                    </span>
-                  )}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelect?.(personality.id);
-                    }}
-                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 transition-colors"
-                  >
-                    Select
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleEdit(personality.id);
-                    }}
-                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 transition-colors"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(personality.id);
-                    }}
-                    className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 text-red-500 transition-colors"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                ) : (
+                  <div className="p-1.5 rounded-lg bg-[var(--surface-muted)] text-[var(--fg-muted)]">
+                    <ChevronDown className="h-4 w-4 rotate-[-90deg]" />
+                  </div>
+                )}
+                <div>
+                  <h3 className="font-semibold text-[var(--fg)]">{personality.name}</h3>
+                  <p className="text-xs text-[var(--fg-muted)] mt-0.5">
+                    {personality.tone || 'No tone set'}
+                  </p>
                 </div>
               </div>
 
-              {expandedId === personality.id && (
-                <div className="px-4 pb-4 pt-0 border-t border-gray-100 dark:border-gray-700/50 space-y-4">
-                  <div className="grid grid-cols-2 gap-4 pt-4">
-                    <div>
-                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        value={personality.name}
-                        onChange={(e) => handleFieldChange(personality.id, 'name', e.target.value)}
-                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                        Tone
-                      </label>
-                      <input
-                        type="text"
-                        value={personality.tone}
-                        onChange={(e) => handleFieldChange(personality.id, 'tone', e.target.value)}
-                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                        placeholder="e.g., 严谨、偏正式"
-                      />
-                    </div>
-                  </div>
+              <div className="flex items-center gap-2">
+                {activePersonality === personality.id && (
+                  <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-[var(--accent-soft)] text-[var(--accent)]">
+                    Active
+                  </span>
+                )}
+                <button
+                  onClick={(e) => { e.stopPropagation(); onSelect?.(personality.id); }}
+                  className="px-3 py-1.5 text-xs font-medium rounded-lg bg-[var(--surface-muted)] text-[var(--fg-secondary)] hover:bg-[var(--surface)] transition-colors"
+                >
+                  {t('personality.select', 'Select')}
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleDelete(personality.id); }}
+                  className="p-1.5 rounded-lg hover:bg-[var(--danger-soft)] text-[var(--danger)] transition-colors"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
 
+            {expandedId === personality.id && (
+              <div className="px-4 pb-4 pt-0 border-t border-[var(--border)] space-y-4">
+                <div className="grid grid-cols-2 gap-4 pt-4">
                   <div>
-                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                      Style
-                    </label>
-                    <textarea
-                      value={personality.style}
-                      onChange={(e) => handleFieldChange(personality.id, 'style', e.target.value)}
-                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
-                      rows={2}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                        Response Length
-                      </label>
-                      <select
-                        value={personality.responseLength}
-                        onChange={(e) => handleFieldChange(personality.id, 'responseLength', e.target.value)}
-                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                      >
-                        {RESPONSE_LENGTH_OPTIONS.map(opt => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                        Emoji Preference
-                      </label>
-                      <select
-                        value={personality.emojiPreference}
-                        onChange={(e) => handleFieldChange(personality.id, 'emojiPreference', e.target.value)}
-                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                      >
-                        {EMOJI_OPTIONS.map(opt => (
-                          <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                      Traits (comma-separated)
+                    <label className="block text-xs font-medium text-[var(--fg-muted)] mb-1.5">
+                      {t('personality.name', 'Name')}
                     </label>
                     <input
                       type="text"
-                      value={personality.traits.join(', ')}
-                      onChange={(e) => handleTraitChange(personality.id, e.target.value)}
-                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                      placeholder="e.g., 条理清晰, 风险前置"
+                      value={personality.name}
+                      onChange={(e) => handleFieldChange(personality.id, 'name', e.target.value)}
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all"
                     />
                   </div>
-
                   <div>
-                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
-                      Guidance (comma-separated)
+                    <label className="block text-xs font-medium text-[var(--fg-muted)] mb-1.5">
+                      {t('personality.tone', 'Tone')}
                     </label>
-                    <textarea
-                      value={personality.guidance.join(', ')}
-                      onChange={(e) => handleGuidanceChange(personality.id, e.target.value)}
-                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
-                      rows={2}
-                      placeholder="e.g., 优先输出结构和步骤, 避免口语化跳跃"
+                    <input
+                      type="text"
+                      value={personality.tone}
+                      onChange={(e) => handleFieldChange(personality.id, 'tone', e.target.value)}
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all"
+                      placeholder="e.g., 严谨、偏正式"
                     />
                   </div>
                 </div>
-              )}
-            </div>
-          ))}
 
-          {localPersonalities.length === 0 && (
-            <div className="flex flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-500">
-              <Bot className="h-12 w-12 mb-3 opacity-30" />
-              <p>No personalities configured</p>
-              <button
-                onClick={handleAddPersonality}
-                className="mt-3 px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700 transition-all"
-              >
-                Create your first personality
-              </button>
-            </div>
-          )}
-        </div>
+                <div>
+                  <label className="block text-xs font-medium text-[var(--fg-muted)] mb-1.5">
+                    {t('personality.traits', 'Traits')}
+                  </label>
+                  <input
+                    type="text"
+                    value={personality.traits.join(', ')}
+                    onChange={(e) => handleTraitChange(personality.id, e.target.value)}
+                    className="w-full px-3 py-2 text-sm rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all"
+                    placeholder="comma-separated"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {localPersonalities.length === 0 && (
+          <div className="flex flex-col items-center justify-center h-64 text-[var(--fg-muted)]">
+            <Bot className="h-12 w-12 mb-3 opacity-30" />
+            <p>{t('personality.empty', 'No personalities configured')}</p>
+            <button
+              onClick={handleAddPersonality}
+              className="mt-3 px-4 py-2 text-sm font-medium rounded-xl bg-[var(--accent)] text-white hover:opacity-90 transition-opacity"
+            >
+              {t('personality.createFirst', 'Create your first personality')}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
