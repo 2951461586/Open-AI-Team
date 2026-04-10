@@ -6,10 +6,11 @@ import { withTempDir } from '../helpers/test-helpers.mjs';
 
 test('TraceCollector creates nested spans and exports tree', async (t) => {
   await withTempDir(async (dir) => {
-    const traceFile = path.join(dir, `traces-${Date.now()}.jsonl`);
+    const traceFile = path.join(dir, `traces-${Date.now() + Math.random()}.jsonl`);
     const collector = createTraceCollector({
       exporter: new FileTraceExporter(traceFile),
       maxBufferSize: 100,
+      traceLogPath: traceFile,
     });
 
     await collector.withSpan('root', async () => {
@@ -21,7 +22,7 @@ test('TraceCollector creates nested spans and exports tree', async (t) => {
 
     const recent = await collector.listRecent(10);
     assert.equal(recent.ok, true);
-    assert.equal(recent.traces.length, 1);
+    assert.equal(recent.traces.length, 1, `Expected 1 trace but got ${recent.traces.length}`);
     assert.equal(recent.traces[0].tree.length, 1);
     assert.equal(recent.traces[0].tree[0].operationName, 'root');
     assert.equal(recent.traces[0].tree[0].children[0].operationName, 'child');

@@ -178,6 +178,10 @@ export class TraceCollector {
       this.multiExporter = new MultiTraceExporter(options);
     }
 
+    if (options?.exporter && !options?.multiExporter) {
+      this.multiExporter.addExporter(options.exporter);
+    }
+
     const defaultExporter = this.multiExporter.getDefaultExporter();
     this.traceLogPath = defaultExporter?.filePath || String(options?.traceLogPath || path.resolve(process.cwd(), 'state/observability/traces.jsonl'));
     ensureDirSync(this.traceLogPath);

@@ -35,7 +35,8 @@ function createNativeChatDelegatingStub() {
 
 test('TL runtime emits dispatch/planning/orchestration traces for delegated run', async () => {
   await withTempDir(async (dir) => {
-    const collector = createTraceCollector({ exporter: new FileTraceExporter(path.join(dir, 'traces.jsonl')) });
+    const traceFile = path.join(dir, `traces-${Date.now() + Math.random()}.jsonl`);
+    const collector = createTraceCollector({ exporter: new FileTraceExporter(traceFile), traceLogPath: traceFile });
     const teamStore = createInMemoryTeamStore();
     const runtime = createTLRuntime({
       teamStore,
