@@ -39,13 +39,13 @@ test('SkillRegistry loads manifests from directory and executes latest version b
     await fs.writeFile(path.join(v2Dir, 'impl.mjs'), "export default async function(request){ return { echoed: request.payload.value, version: '2.0.0' }; }\n");
 
     const registry = new SkillRegistry();
-    const loaded = await registry.fromDirectory(skillsDir);
-    assert.equal(loaded.length, 2);
+    const dirResult = await registry.fromDirectory(skillsDir);
+    assert.equal(dirResult.loaded?.length, 2);
     assert.equal(registry.list().length, 2);
     assert.equal(registry.list('skill', 'latest').length, 1);
-    const result = await registry.execute('echo', { value: 'hi' }, {});
-    assert.equal(result.ok, true);
-    assert.deepEqual(result.data, { echoed: 'hi', version: '2.0.0' });
+    const execResult = await registry.execute('echo', { value: 'hi' }, {});
+    assert.equal(execResult.ok, true);
+    assert.deepEqual(execResult.data, { echoed: 'hi', version: '2.0.0' });
     const oldResult = await registry.execute('echo', { value: 'hi' }, { version: '1.0.0' });
     assert.equal(oldResult.ok, true);
     assert.deepEqual(oldResult.data, { value: 'hi', version: '1.0.0' });

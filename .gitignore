@@ -112,3 +112,5 @@ packages/state/
 shared/artifacts/
 reports/
 !reports/README.md
+node-compile-cache/
+node_modules/.cache/

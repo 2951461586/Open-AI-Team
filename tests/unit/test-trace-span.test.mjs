@@ -4,10 +4,11 @@ import { createTraceCollector } from '../../src/observability/trace-span.mjs';
 import { FileTraceExporter } from '../../src/observability/trace-exporter.mjs';
 import { withTempDir } from '../helpers/test-helpers.mjs';
 
-test('TraceCollector creates nested spans and exports tree', async () => {
+test('TraceCollector creates nested spans and exports tree', async (t) => {
   await withTempDir(async (dir) => {
+    const traceFile = path.join(dir, `traces-${Date.now()}.jsonl`);
     const collector = createTraceCollector({
-      exporter: new FileTraceExporter(path.join(dir, 'traces.jsonl')),
+      exporter: new FileTraceExporter(traceFile),
       maxBufferSize: 100,
     });
 
@@ -33,10 +34,11 @@ test('TraceCollector creates nested spans and exports tree', async () => {
   });
 });
 
-test('TraceCollector marks errors on failing span', async () => {
+test('TraceCollector marks errors on failing span', async (t) => {
   await withTempDir(async (dir) => {
+    const traceFile = path.join(dir, `traces-error-${Date.now()}.jsonl`);
     const collector = createTraceCollector({
-      exporter: new FileTraceExporter(path.join(dir, 'traces.jsonl')),
+      exporter: new FileTraceExporter(traceFile),
       maxBufferSize: 100,
     });
 

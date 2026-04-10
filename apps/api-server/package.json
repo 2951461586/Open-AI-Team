@@ -12,7 +12,7 @@
     "@ai-team/im-channels": "workspace:*",
     "@ai-team/tools": "workspace:*",
     "@ai-team/skills": "workspace:*",
-    "@ai-team/memory": "workspace:*",
+    "@ai-team/shared": "workspace:*",
     "@ai-team/event-bus": "workspace:*",
     "@cloudbase/node-sdk": "^3.18.1",
     "ws": "^8.19.0",
