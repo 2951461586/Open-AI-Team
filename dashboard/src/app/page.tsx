@@ -7,6 +7,7 @@ import { Sidebar } from '@/components/Sidebar'
 import type { View } from '@/components/Sidebar'
 import { RightPanel, isDetailTab, type DetailTab } from '@/components/RightPanel'
 import { AgentsView } from '@/components/views/AgentsView'
+import { SettingsView } from '@/components/views/SettingsView'
 import { useI18n } from '@/i18n/context'
 import { KanbanView } from '@/components/views/KanbanView'
 import { ChatView } from '@/components/views/ChatView'
@@ -233,7 +234,7 @@ export default function DashboardPage() {
       const taskId = String(params.get('taskId') || '').trim()
       const detailTabParam = String(params.get('detailTab') || '').trim()
       const viewParam = String(params.get('view') || '').trim()
-      if (viewParam === 'kanban' || viewParam === 'chat' || viewParam === 'agents') setView(viewParam as View)
+      if (viewParam === 'kanban' || viewParam === 'chat' || viewParam === 'agents' || viewParam === 'settings') setView(viewParam as View)
       if (isDetailTab(detailTabParam)) setRightPanelDefaultTab(detailTabParam)
       if (taskId) {
         setSelectedTaskId(taskId)
@@ -813,7 +814,7 @@ export default function DashboardPage() {
         onRefresh={() => { loadData(); loadNodes() }}
         loading={loading}
         controlPlaneStatus={Object.values(nodes || {}).find((node: any) => node?.stats?.controlPlaneStatus)?.stats?.controlPlaneStatus || ''}
-        currentViewLabel={view === 'kanban' ? t('nav.kanban') : view === 'chat' ? t('nav.chat') : t('view.agentsWithNodes')}
+        currentViewLabel={view === 'kanban' ? t('nav.kanban') : view === 'chat' ? t('nav.chat') : view === 'settings' ? t('nav.settings') : t('view.agentsWithNodes')}
         currentView={view}
         onSwitchView={setView}
         selectedTask={selectedTask ? {
@@ -878,6 +879,10 @@ export default function DashboardPage() {
 
           {view === 'agents' && (
             <AgentsView />
+          )}
+
+          {view === 'settings' && (
+            <SettingsView />
           )}
         </main>
 

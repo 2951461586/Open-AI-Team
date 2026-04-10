@@ -1,10 +1,10 @@
 'use client'
 
-import { LayoutGrid, MessageSquare, Bot, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { LayoutGrid, MessageSquare, Bot, PanelLeftClose, PanelLeftOpen, Settings } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
 
-export type View = 'kanban' | 'chat' | 'agents'
+export type View = 'kanban' | 'chat' | 'agents' | 'settings'
 
 interface Props {
   currentView: View
@@ -18,6 +18,7 @@ const navItems = [
   { id: 'kanban' as View, icon: LayoutGrid, labelKey: 'nav.kanban' },
   { id: 'chat' as View, icon: MessageSquare, labelKey: 'nav.chat' },
   { id: 'agents' as View, icon: Bot, labelKey: 'nav.agents' },
+  { id: 'settings' as View, icon: Settings, labelKey: 'nav.settings' },
 ]
 
 export function Sidebar({ currentView, onViewChange, taskCount, collapsed = false, onToggle }: Props) {
