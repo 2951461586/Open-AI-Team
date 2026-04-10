@@ -5,12 +5,12 @@
   "description": "AI Team Runtime monorepo. Package/app-owned surfaces are primary where authority exists; compatibility paths and optional integrations remain secondary.",
   "license": "MIT",
   "type": "module",
-  "packageManager": "pnpm@9",
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "scripts": {
+    "preinstall": "corepack enable pnpm",
     "dev": "pnpm -r --if-present run dev",
     "build": "pnpm -r --if-present run build",
     "test": "node scripts/test-runner.mjs",
