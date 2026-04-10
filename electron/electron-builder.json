@@ -52,13 +52,9 @@
       {
         "target": "nsis",
         "arch": ["x64"]
-      },
-      {
-        "target": "portable",
-        "arch": ["x64"]
       }
     ],
-    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
     "publisherName": "AI Team"
   },
   "nsis": {
@@ -68,7 +64,10 @@
     "deleteAppDataOnUninstall": false,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "AI Team Dashboard"
+    "shortcutName": "AI Team Dashboard",
+    "installerIcon": "build/icon.ico",
+    "uninstallerIcon": "build/icon.ico",
+    "installerHeaderIcon": "build/icon.ico"
   },
   "publish": {
     "provider": "generic",
