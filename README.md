@@ -2,244 +2,153 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
-An open-source **team-oriented multi-agent runtime** for planning, delegation, review, and evidence-driven delivery.
-
-It is designed for people building systems that need more than chat:
-- a **TL-first execution model** instead of ad-hoc agent calls
-- **delegation and review loops** across planner / executor / critic / judge roles
-- **artifacts, evidence, and acceptance traces** as first-class outputs
-- a **dashboard/workbench** to observe tasks, timelines, and runtime state
-- a reusable **agent harness** for onboarding independent or third-party agents
+开源的**团队式多 Agent 运行时**，支持规划、委派、评审和基于证据的交付。
 
 ---
 
-## What this repository is
+## 核心能力
 
-This repository is one open-source product family with four clear surfaces:
-
-1. **AI Team Runtime** — the main orchestration/runtime product
-2. **Dashboard** — the operational UI and workbench
-3. **Agent Harness** — a forkable execution substrate for independent agents
-4. **Optional Integrations** — OpenClaw / channel / host-specific adapters
-
-If you are new here, the main story is:
-
-> **AI Team Runtime + Dashboard** are the primary product.
-> **`packages/agent-harness`** is the reusable execution substrate.
-> Optional integrations are intentionally secondary.
-
----
-
-## Core capabilities
-
-### TL-first execution
-All major requests enter a TL (Team Leader) runtime first. TL decides whether to:
-- answer directly
-- confirm task creation
-- partially delegate
-- fully delegate
-- continue an active task/follow-up path
-
-### Team-style delegation
-The runtime supports planner / executor / critic / judge style collaboration, with explicit task decomposition and controlled follow-up.
-
-### Evidence-driven delivery
-Outputs are not just text. The runtime is built around:
-- artifacts
-- evidence
-- deliverables
-- review/judge signals
-- acceptance closure
-
-### Dashboard and workbench visibility
-The dashboard is not just a chat window. It is the observation surface for:
-- task timelines
-- runtime status
-- task/workbench progress
-- artifacts and evidence
-- operator follow-up
-
-### Independent-agent onboarding
-Third-party agents do not need to understand OpenClaw internals. They can integrate through explicit contracts:
-- manifest
-- package
-- provider registry
-- shell / doctor / activation checklist
-- session / desk / bridge / lifecycle contracts
+| 能力 | 说明 |
+|------|------|
+| **TL-first 执行模型** | 所有请求先进入 Team Leader，由 TL 决定直接回答或委派给其他角色 |
+| **团队协作** | 支持 Planner / Executor / Critic / Judge 风格的委派与评审闭环 |
+| **证据驱动交付** | 输出包括 artifacts、evidence、deliverables、acceptance traces |
+| **可观测性** | 内置 LangSmith + Langfuse 追踪 |
+| **Skills 系统** | Markdown SKILL.md 格式，支持渐进加载 |
+| **Sub-Agent 隔离** | 独立上下文，支持动态 spawn |
+| **记忆管理** | 三层记忆 + 衰减 + 语义检索 |
+| **MCP 集成** | 支持 MCP Server 适配器 |
+| **多渠道** | Telegram / Feishu / Slack / WeCom |
+| **桌面应用** | Electron 桌面包装器 |
 
 ---
 
-## Quick start
+## 快速开始
 
-Choose one path.
+### Docker 部署（推荐）
 
-### A. See the main product
+```bash
+docker-compose up -d
+# 访问 http://localhost:3001
+```
+
+### 本地开发
 
 ```bash
 npm install
 cp .env.example .env
-npm run smoke:team
-npm start
+npm run dev
 ```
 
-Then open the dashboard/API entry described in `GETTING-STARTED.md`.
-
-### B. Explore the forkable agent harness
+### 独立 Agent 示例
 
 ```bash
-npm install
 npm run demo:oss-minimal
-npm run doctor:oss-minimal
 ```
 
-Then read:
-- `packages/agent-harness/README.md`
-- `examples/oss-minimal/README.md`
+---
 
-### C. Explore third-party agent onboarding
+## 仓库结构
+
+```
+ai-team/
+├── packages/                 # 核心包
+│   ├── agent-harness/       # 可复用执行基座
+│   ├── team-runtime/        # Team Runtime
+│   ├── team-core/           # Team 核心协议
+│   ├── tools/               # 内置工具集
+│   │   ├── tool-browser.mjs
+│   │   ├── tool-code-executor.mjs
+│   │   ├── tool-database.mjs
+│   │   ├── tool-url-fetcher.mjs
+│   │   └── tool-image-understanding.mjs
+│   ├── skills/              # Skills 系统
+│   │   ├── skill-registry.mjs
+│   │   ├── skill-runtime.mjs
+│   │   └── skills/          # 内置 Skills
+│   │       ├── web-search/
+│   │       ├── research/
+│   │       ├── report-generation/
+│   │       └── code-review/
+│   ├── shared/              # 共享工具
+│   │   ├── config-loader.mjs    # 统一配置加载
+│   │   ├── cron-scheduler.mjs    # 定时任务
+│   │   ├── heartbeat.mjs         # 心跳检测
+│   │   ├── memory-decay.mjs     # 记忆衰减
+│   │   └── semantic-search.mjs   # 语义搜索
+│   ├── im-channels/          # 渠道适配
+│   └── event-bus/            # 事件总线
+│
+├── apps/
+│   └── api-server/           # API 服务器
+│
+├── dashboard/                 # Dashboard UI (Next.js)
+├── electron/                  # Electron 桌面包装器
+├── examples/
+│   ├── oss-minimal/         # 最小可运行示例
+│   └── third-party-agent-sample/
+├── schemas/                   # JSON Schema 定义
+├── scripts/                   # 脚本
+├── src/                       # 兼容层和本地实现
+└── docs/                      # 文档
+```
+
+---
+
+## 部署方式
+
+| 方式 | 命令 | 说明 |
+|------|------|------|
+| **Docker** | `docker-compose up -d` | 生产部署 |
+| **本地** | `npm run dev` | 开发模式 |
+| **桌面** | `cd electron && npm run dev` | Electron 桌面 |
+
+---
+
+## 内置工具
+
+| 工具 | 说明 |
+|------|------|
+| `browser` | 浏览器自动化 |
+| `code-executor` | 代码执行 (JS/Bash) |
+| `database` | SQLite 查询 |
+| `url-fetcher` | URL 内容获取 |
+| `image-understanding` | 图像理解 |
+| `calendar` | 日历 |
+| `email` | 邮件 |
+| `git` | Git 操作 |
+| `reminder` | 提醒 |
+| `weather` | 天气查询 |
+
+---
+
+## 开发
 
 ```bash
+# 安装依赖
 npm install
-npm run validate:third-party-agent
-npm run smoke:third-party-agent
-node examples/third-party-agent-sample/agent-shell.mjs onboarding
-```
 
-Then read:
-- `examples/third-party-agent-sample/README.md`
-- `docs/architecture/independent-agent-onboarding.md`
+# 开发模式
+npm run dev
 
----
+# 测试
+npm test
 
-## Product surfaces
+# 构建 Dashboard
+npm run dashboard:build
 
-### 1) AI Team Runtime
-Primary runtime/orchestration product for planning, delegation, review, and delivery closure.
-
-Key surfaces:
-- `packages/team-runtime/`
-- `src/team/`
-- `src/team-runtime-adapters/`
-- `src/routes/`
-- `apps/api-server/`
-
-### 2) Dashboard
-Primary UI for runtime visibility, task/workbench flow, and operator interaction.
-
-Key surfaces:
-- `dashboard/` — current UI authority
-- `electron/` — desktop wrapper (loads `dashboard/out/` in production)
-
-### 3) Agent Harness
-Reusable, forkable harness substrate for independent agents.
-
-Key surfaces:
-- `packages/agent-harness/`
-- `examples/oss-minimal/`
-- `examples/third-party-agent-sample/`
-- `schemas/`
-
-### 4) Optional Integrations
-Non-primary surfaces such as:
-- `src/integrations/openclaw/`
-- channel adapters
-- host/runtime-specific wiring
-- optional plugin ecosystems under `plugins/`
-- secondary/companion service surfaces under `services/`
-
-These are useful, but they are **not** the default product story.
-Related/experimental side projects under `projects/`, the secondary desktop shell under `electron/`, and low-authority shared/output areas under `shared/` are also outside the default first-read path.
-
----
-
-## Reading order
-
-If you want the shortest correct path through the repo, read in this order:
-
-1. `README.md`
-2. `GETTING-STARTED.md`
-3. `ARCHITECTURE.md`
-4. `dashboard/README.md`
-5. `docs/architecture/product-surface-and-repo-map.md`
-6. `docs/oss/repo-authority.md`
-7. `docs/oss/what-is-ai-team-runtime.md`
-8. `docs/architecture/current-team-runtime-architecture.md`
-9. `docs/architecture/independent-agent-onboarding.md`
-10. `docs/architecture/release-engineering-and-ci.md`
-11. `docs/oss/dashboard-observability-surface.md`
-12. `docs/oss/dashboard-observability-checklist.md`
-13. `docs/oss/open-source-release-engineering.md`
-
----
-
-## Repository map
-
-```text
-packages/
-  agent-harness/     reusable execution substrate
-  team-runtime/      packaged team runtime surface
-  team-core/         platform-neutral team contracts/domain
-  tools/             public tool/provider surface
-  skills/            skills system with registry and runtime
-  shared/             shared utilities (config, scheduler, heartbeat, memory)
-apps/
-  api-server/        current app/server authority surface
-src/
-  team/              mixed runtime surface: packaged shims + remaining local areas
-  team-runtime-adapters/
-  integrations/
-dashboard/           current primary dashboard product UI
-electron/            desktop wrapper (loads dashboard/out/ in production)
-examples/
-  oss-minimal/       runnable minimal harness baseline
-  third-party-agent-sample/
-schemas/             public contracts
-plugins/             optional plugin ecosystem, not mainline core
-services/            optional/companion services, not mainline core
-projects/            related or experimental side projects
+# 代码检查
+npm run lint
 ```
 
 ---
 
-## Why this repo is different
+## 文档
 
-Compared with chat-first agent repos, this project is centered on **execution structure**:
-- TL-first routing
-- delegation and review
-- evidence and acceptance
-- dashboard/workbench observability
-- host-neutral onboarding contracts for independent agents
-
-Compared with host-bound private runtimes, this repo is converging toward a cleaner open-source shape where:
-- the runtime is productized
-- the harness is forkable
-- integrations are optional
-- release boundaries are explicit
-
-## Open-source repository rules
-
-Use these as the default authority assumptions:
-- `dashboard/` is the current dashboard UI authority
-- `packages/agent-harness/` is the execution substrate authority
-- `packages/team-runtime/` is the packaged team-runtime authority
-- `apps/api-server/` is the server entry authority
-- `src/` contains compatibility shims plus still-local runtime areas that have not been moved behind package/app boundaries
-- `plugins/`, `services/`, `electron/`, `projects/`, and `shared/` are secondary/optional/non-mainline surfaces unless explicitly documented otherwise
-
-If you are contributing, land new logic in the owning package/app whenever that authority already exists.
-
----
-
-## Security and deployment note
-
-This repository contains optional integration and host-oriented surfaces, but the mainline open-source story is:
-- host-neutral runtime contracts first
-- public-safe schemas and examples first
-- optional integrations second
-
-For release, publishing, and public-safe boundaries, see:
-- `docs/architecture/release-surface-allowlist.md`
-- `docs/oss/open-source-release-engineering.md`
+- [Getting Started](./GETTING-STARTED.md)
+- [Architecture](./ARCHITECTURE.md)
+- [Docker 部署](./DOCKER.md)
+- [Scripts](./SCRIPTS.md)
 
 ---
 
