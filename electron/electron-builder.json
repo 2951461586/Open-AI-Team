@@ -10,7 +10,8 @@
   "files": [
     "main.mjs",
     "preload.mjs",
-    "package.json"
+    "package.json",
+    "../dashboard/out/**/*"
   ],
   "extraMetadata": {
     "main": "main.mjs"
@@ -64,10 +65,7 @@
     "deleteAppDataOnUninstall": false,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "AI Team Dashboard",
-    "installerIcon": "build/icon.ico",
-    "uninstallerIcon": "build/icon.ico",
-    "installerHeaderIcon": "build/icon.ico"
+    "shortcutName": "AI Team Dashboard"
   },
   "publish": {
     "provider": "generic",
