@@ -1,0 +1,98 @@
+stages:
+  - build
+  - release
+
+variables:
+  APP_NAME: "AI Team Dashboard"
+  VERSION: "${CI_COMMIT_REF_NAME#v}"
+
+.build:
+  stage: build
+  image: node:22
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq python3 make g++ > /dev/null 2>&1 || true
+  script:
+    - npm ci --legacy-peer-deps
+    - cd dashboard && npm ci --legacy-peer-deps && npm run build && cd ..
+    - cd electron && npm ci && npx electron-builder --${ELECTRONBuilder} --dir
+  artifacts:
+    paths:
+      - electron/dist/
+    expire_in: 1 week
+  tags:
+    - shared-windows
+
+build:windows:
+  extends: .build
+  variables:
+    ELECTRONBuilder: win
+  tags:
+    - windows
+  only:
+    - tags
+
+build:mac:
+  extends: .build
+  variables:
+    ELECTRONBuilder: mac
+  tags:
+    - macos
+  only:
+    - tags
+
+build:linux:
+  extends: .build
+  variables:
+    ELECTRONBuilder: linux
+  tags:
+    - docker
+  image: node:22
+  only:
+    - tags
+
+.release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  dependencies:
+    - build:windows
+  script:
+    - echo "Creating release for $APP_NAME v$VERSION"
+  release:
+    tag_name: ${CI_COMMIT_REF_NAME}
+    name: '${APP_NAME} ${CI_COMMIT_REF_NAME}'
+    description: |
+      ## AI Team Dashboard ${CI_COMMIT_REF_NAME}
+
+      ### Downloads
+      - Windows: `AI Team Dashboard-Setup.exe`
+      - macOS: `AI Team Dashboard.dmg`
+      - Linux: `AI Team Dashboard.AppImage`
+    ref: ${CI_COMMIT_SHA}
+    assets:
+      links:
+        - name: Windows Installer (.exe)
+          url: ${CI_PROJECT_URL}/-/jobs/${CI_JOB_ID}/artifacts/electron/dist/${APP_NAME}-Setup.exe
+        - name: macOS DMG
+          url: ${CI_PROJECT_URL}/-/jobs/${CI_JOB_ID}/artifacts/electron/dist/${APP_NAME}.dmg
+        - name: Linux AppImage
+          url: ${CI_PROJECT_URL}/-/jobs/${CI_JOB_ID}/artifacts/electron/dist/${APP_NAME}.AppImage
+  only:
+    - tags
+
+# Alternative: Simple Windows-only build for quick testing
+windows-quick:
+  stage: build
+  image: node:22
+  tags:
+    - windows
+  script:
+    - npm ci
+    - cd dashboard && npm ci && npm run build && cd ..
+    - cd electron && npm ci
+    - npx electron-builder --win --dir
+  artifacts:
+    paths:
+      - electron/dist/
+    expire_in: 1 week
+  only:
+    - main

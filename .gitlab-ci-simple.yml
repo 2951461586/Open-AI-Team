@@ -1,0 +1,59 @@
+stages:
+  - build
+
+# Windows build (recommended for quick testing)
+windows:
+  stage: build
+  tags:
+    - windows
+  script:
+    - echo "Installing dependencies..."
+    - npm ci --legacy-peer-deps
+    - echo "Building dashboard..."
+    - cd dashboard && npm ci --legacy-peer-deps && npm run build && cd ..
+    - echo "Building Electron app..."
+    - cd electron && npm ci
+    - npx electron-builder --win --dir
+    - echo "Build complete!"
+    - ls -la dist/
+  artifacts:
+    paths:
+      - electron/dist/
+    expire_in: 1 week
+  only:
+    - tags
+    - main
+
+# macOS build (requires macOS runner)
+mac:
+  stage: build
+  tags:
+    - macos
+  script:
+    - npm ci --legacy-peer-deps
+    - cd dashboard && npm ci --legacy-peer-deps && npm run build && cd ..
+    - cd electron && npm ci
+    - npx electron-builder --mac --dir
+  artifacts:
+    paths:
+      - electron/dist/
+    expire_in: 1 week
+  only:
+    - tags
+
+# Linux build (requires Docker)
+linux:
+  stage: build
+  image: node:22
+  script:
+    - apt-get update -qq && apt-get install -y -qq python3 make g++ > /dev/null 2>&1
+    - npm ci --legacy-peer-deps
+    - cd dashboard && npm ci --legacy-peer-deps && npm run build && cd ..
+    - cd electron && npm ci
+    - npx electron-builder --linux --dir
+  artifacts:
+    paths:
+      - electron/dist/
+    expire_in: 1 week
+  only:
+    - tags
