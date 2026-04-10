@@ -128,7 +128,7 @@ Primary UI for runtime visibility, task/workbench flow, and operator interaction
 
 Key surfaces:
 - `dashboard/` — current UI authority
-- `apps/dashboard/` — app packaging / transition surface, not the primary UI authority
+- `electron/` — desktop wrapper (loads `dashboard/out/` in production)
 
 ### 3) Agent Harness
 Reusable, forkable harness substrate for independent agents.
@@ -180,23 +180,24 @@ packages/
   team-runtime/      packaged team runtime surface
   team-core/         platform-neutral team contracts/domain
   tools/             public tool/provider surface
+  skills/            skills system with registry and runtime
+  shared/             shared utilities (config, scheduler, heartbeat, memory)
 apps/
   api-server/        current app/server authority surface
-  dashboard/         app packaging surface
 src/
   team/              mixed runtime surface: packaged shims + remaining local areas
   team-runtime-adapters/
   integrations/
 dashboard/           current primary dashboard product UI
+electron/            desktop wrapper (loads dashboard/out/ in production)
 examples/
   oss-minimal/       runnable minimal harness baseline
   third-party-agent-sample/
 schemas/             public contracts
 plugins/             optional plugin ecosystem, not mainline core
 services/            optional/companion services, not mainline core
-electron/            secondary desktop shell
 projects/            related or experimental side projects
-shared/              low-authority shared/output area
+memory/              local continuity surface (README only in repo)
 ```
 
 ---
@@ -220,7 +221,6 @@ Compared with host-bound private runtimes, this repo is converging toward a clea
 
 Use these as the default authority assumptions:
 - `dashboard/` is the current dashboard UI authority
-- `apps/dashboard/` is a secondary app-packaging surface
 - `packages/agent-harness/` is the execution substrate authority
 - `packages/team-runtime/` is the packaged team-runtime authority
 - `apps/api-server/` is the server entry authority

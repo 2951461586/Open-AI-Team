@@ -128,7 +128,7 @@ node examples/third-party-agent-sample/agent-shell.mjs onboarding
 
 关键目录：
 - `dashboard/` —— 当前 UI 主 authority
-- `apps/dashboard/` —— app packaging / transition surface，不是当前主 UI authority
+- `electron/` —— 桌面包装器（生产环境加载 `dashboard/out/`）
 
 ### 3）Agent Harness
 可复用、可 fork 的独立执行基座。
@@ -180,23 +180,24 @@ packages/
   team-runtime/      打包后的 team runtime 表面
   team-core/         平台中立的 team contracts / domain
   tools/             公共 tool/provider 表面
+  skills/            包含 registry 和 runtime 的 skills 系统
+  shared/             共享工具（config、scheduler、heartbeat、memory）
 apps/
   api-server/        当前 app/server authority surface
-  dashboard/         app packaging surface
 src/
   team/              混合 runtime 表面：部分是 package shim，部分仍是本地 runtime 区域
   team-runtime-adapters/
   integrations/
 dashboard/           当前主 dashboard 产品 UI
+electron/            桌面包装器（生产环境加载 dashboard/out/）
 examples/
   oss-minimal/       最小可运行 harness baseline
   third-party-agent-sample/
 schemas/             公共 contracts
 plugins/             可选插件生态，不是主线 core
 services/            可选 / 伴随服务，不是主线 core
-electron/            次级桌面壳
 projects/            相关或实验性旁支项目
-shared/              低 authority shared/output 区域
+memory/              本地 continuity 表面（仓库中仅保留 README）
 ```
 
 ---
@@ -222,7 +223,6 @@ shared/              低 authority shared/output 区域
 
 默认可按以下 authority 假设理解：
 - `dashboard/` 是当前 dashboard UI authority
-- `apps/dashboard/` 是次级 app-packaging 表面
 - `packages/agent-harness/` 是执行基座 authority
 - `packages/team-runtime/` 是 packaged team-runtime authority
 - `apps/api-server/` 是 server entry authority
