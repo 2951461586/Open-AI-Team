@@ -5,31 +5,11 @@ on:
     tags:
       - 'electron-v*'
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to build'
-        required: false
-        type: string
 
 jobs:
-  build-electron:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            platform: linux
-            artifact: AppImage
-          - os: ubuntu-latest
-            platform: linux
-            artifact: deb
-          - os: macos-latest
-            platform: mac
-            artifact: dmg
-          - os: windows-latest
-            platform: win32
-            artifact: nsis
-
+  build-windows:
+    runs-on: windows-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,77 +18,57 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
 
-      - name: Install root deps
-        run: npm ci
-
-      - name: Setup Python
-        if: matrix.platform == 'linux'
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          npm ci
+          cd dashboard
+          npm ci
+          cd ../electron
+          npm ci
 
       - name: Build dashboard
         run: |
-          cd dashboard
-          npm ci
+          cd ../dashboard
           npm run build
 
-      - name: Install Electron deps
+      - name: Build Electron
         run: |
-          cd electron
-          npm ci
-
-      - name: Build Electron app
-        run: |
-          cd electron
-          npm run build
+          cd ../electron
+          npx electron-builder --win --dir
         env:
           ELECTRON_CACHE: /tmp/electron-cache
 
-      - name: Upload Linux artifacts
-        if: matrix.platform == 'linux'
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: electron-${{ matrix.artifact }}-latest
+          name: electron-win32
           path: |
-            electron/dist/linux-unpacked/**
-            electron/dist/*.AppImage
-            electron/dist/*.deb
-
-      - name: Upload macOS artifacts
-        if: matrix.platform == 'mac'
-        uses: actions/upload-artifact@v4
-        with:
-          name: electron-${{ matrix.artifact }}-latest
-          path: electron/dist/mac/**/*.dmg
-
-      - name: Upload Windows artifacts
-        if: matrix.platform == 'win32'
-        uses: actions/upload-artifact@v4
-        with:
-          name: electron-${{ matrix.artifact }}-latest
-          path: electron/dist/win-unpacked/**
+            electron/dist/win-unpacked/**
             electron/dist/*.exe
 
   release:
-    needs: build-electron
+    needs: build-windows
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/electron-v')
 
     steps:
-      - name: Download all artifacts
+      - name: Download artifact
         uses: actions/download-artifact@v4
         with:
+          name: electron-win32
           path: artifacts
+
+      - name: List files
+        run: |
+          ls -la artifacts/
+          find artifacts/ -type f -name "*.exe"
 
       - name: Generate checksums
         run: |
           cd artifacts
-          find . -type f -name "*.AppImage" -o -name "*.deb" -o -name "*.dmg" -o -name "*.exe" | while read f; do
-            sha256sum "$f" >> SHA256SUMS.txt
-          done
+          find . -type f \( -name "*.exe" -o -name "*.dmg" -o -name "*.AppImage" -o -name "*.deb" \) -exec sha256sum {} \; > SHA256SUMS.txt || true
+          cat SHA256SUMS.txt
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -118,8 +78,5 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            artifacts/**/*.AppImage
-            artifacts/**/*.deb
-            artifacts/**/*.dmg
-            artifacts/**/*Setup*.exe
+            artifacts/**/*.exe
             artifacts/**/SHA256SUMS.txt
