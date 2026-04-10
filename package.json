@@ -54,7 +54,8 @@
     "release:notes": "node scripts/team/team-generate-release-notes.mjs",
     "acceptance:three-node-live": "node scripts/acceptance/canonical/team-three-node-live.mjs",
     "acceptance:dashboard-rightpanel-deeplink": "node scripts/acceptance/canonical/team-dashboard-rightpanel-deeplink-smoke.mjs",
-    "smoke:team-node-health-root-fix": "node scripts/smoke/team-node-health-root-fix.mjs"
+     "smoke:team-node-health-root-fix": "node scripts/smoke/team-node-health-root-fix.mjs",
+     "setup": "node scripts/setup/setup-wizard.mjs"
   },
   "keywords": [
     "multi-agent",

@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import fs from 'node:fs/promises';
 import { createStandaloneAgentRuntime, createStandaloneAgentManifest } from './standalone-agent-package.mjs';
 import { SkillRegistry, SkillRuntime } from './skill-registry.mjs';
-import { createTraceCollector } from '../../src/observability/trace-span.mjs';
+import { createTraceCollector } from '../../../src/observability/trace-span.mjs';
 
 export async function runStandaloneAgent({
   manifest,
