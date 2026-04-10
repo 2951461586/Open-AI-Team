@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team.com/schemas/api-v1.schema.json",
+  "title": "AI Team API Specification",
+  "description": "OpenAPI-compatible API specification for AI Team Runtime",
+  "type": "object",
+  "required": ["openapi", "info", "paths"],
+  "properties": {
+    "openapi": {
+      "type": "string",
+      "pattern": "^3\\.\\d+\\.\\d+$"
+    },
+    "info": {
+      "type": "object",
+      "required": ["title", "version"],
+      "properties": {
+        "title": { "type": "string" },
+        "version": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "patternProperties": {
+        "^/": {
+          "type": "object",
+          "properties": {
+            "get": { "$ref": "#/$defs/operation" },
+            "post": { "$ref": "#/$defs/operation" },
+            "put": { "$ref": "#/$defs/operation" },
+            "delete": { "$ref": "#/$defs/operation" }
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "schemas": {
+          "type": "object"
+        },
+        "securitySchemes": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "required": ["responses"],
+      "properties": {
+        "summary": { "type": "string" },
+        "description": { "type": "string" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/parameter" }
+        },
+        "requestBody": { "$ref": "#/$defs/requestBody" },
+        "responses": { "$ref": "#/$defs/responses" },
+        "security": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    },
+    "parameter": {
+      "type": "object",
+      "required": ["name", "in"],
+      "properties": {
+        "name": { "type": "string" },
+        "in": { "type": "string", "enum": ["query", "path", "header", "cookie"] },
+        "required": { "type": "boolean" },
+        "schema": { "type": "object" }
+      }
+    },
+    "requestBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "properties": {
+            "application/json": {
+              "type": "object",
+              "properties": {
+                "schema": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "type": "object",
+      "patternProperties": {
+        "^[0-9]{3}$": {
+          "type": "object",
+          "properties": {
+            "description": { "type": "string" },
+            "content": { "type": "object" }
+          }
+        }
+      }
+    }
+  }
+}
