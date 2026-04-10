@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Bot, Save, Plus, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
+import { Bot, Save, Plus, Trash2, ChevronDown, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
 
@@ -14,11 +14,6 @@ interface Personality {
   responseLength: 'short' | 'medium' | 'long';
   emojiPreference: 'none' | 'minimal' | 'auto';
   guidance: string[];
-  scenarios?: Record<string, {
-    tone?: string;
-    style?: string;
-    responseLength?: string;
-  }>;
 }
 
 interface PersonalityPanelProps {
@@ -158,81 +153,84 @@ export function PersonalityPanel({
   }, [handleFieldChange]);
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <Bot className="h-5 w-5 text-blue-500" />
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
-              {t('personality.title', 'Agent Personalities')}
-            </h2>
+    <div className="h-full flex flex-col p-6">
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-white shadow-lg shadow-violet-500/25">
+            <Sparkles className="h-5 w-5" />
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleAddPersonality}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition"
-            >
-              <Plus className="h-4 w-4" />
-              {t('personality.add', 'Add')}
-            </button>
-            {hasChanges && (
-              <button
-                onClick={handleSave}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-green-50 hover:bg-green-100 text-green-600 rounded-lg transition"
-              >
-                <Save className="h-4 w-4" />
-                {t('personality.save', 'Save')}
-              </button>
-            )}
+          <div>
+            <h2 className="text-lg font-bold text-gray-900 dark:text-white">Agent Personalities</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Configure agent behavior templates</p>
           </div>
         </div>
-
-        <div className="text-sm text-gray-500">
-          {t('personality.count', { count: localPersonalities.length })}
-          {activePersonality && (
-            <span className="ml-2">
-              {t('personality.active', { name: activePersonality })}
-            </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleAddPersonality}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-sm transition-all text-sm font-medium text-gray-700 dark:text-gray-200"
+          >
+            <Plus className="h-4 w-4" />
+            Add
+          </button>
+          {hasChanges && (
+            <button
+              onClick={handleSave}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/25 transition-all text-sm font-medium"
+            >
+              <Save className="h-4 w-4" />
+              Save
+            </button>
           )}
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto p-4">
+      <div className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+        {localPersonalities.length} personalities configured
+        {activePersonality && (
+          <span className="ml-2">
+            · Active: <span className="font-medium text-gray-700 dark:text-gray-200">{activePersonality}</span>
+          </span>
+        )}
+      </div>
+
+      <div className="flex-1 overflow-auto">
         <div className="space-y-3">
           {localPersonalities.map((personality) => (
             <div
               key={personality.id}
               className={cn(
-                'border rounded-lg transition-all',
+                'rounded-2xl border transition-all duration-200',
                 expandedId === personality.id
-                  ? 'border-blue-300 bg-blue-50/30 dark:bg-blue-900/10'
-                  : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
+                  ? 'bg-white dark:bg-gray-800 border-blue-200 dark:border-blue-800 shadow-lg shadow-blue-500/10'
+                  : 'bg-white/50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-700/50 hover:bg-white dark:hover:bg-gray-800 hover:border-gray-200 dark:hover:border-gray-600'
               )}
             >
               <div
-                className="flex items-center justify-between p-3 cursor-pointer"
+                className="flex items-center justify-between p-4 cursor-pointer"
                 onClick={() => toggleExpand(personality.id)}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   {expandedId === personality.id ? (
-                    <ChevronDown className="h-4 w-4 text-gray-400" />
+                    <div className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                      <ChevronDown className="h-4 w-4" />
+                    </div>
                   ) : (
-                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                    <div className="p-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400">
+                      <ChevronDown className="h-4 w-4 rotate-270" />
+                    </div>
                   )}
                   <div>
-                    <h3 className="font-medium text-gray-800 dark:text-white">
-                      {personality.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {personality.tone || t('personality.noTone', 'No tone set')}
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{personality.name}</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {personality.tone || 'No tone set'}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2">
                   {activePersonality === personality.id && (
-                    <span className="px-2 py-0.5 text-xs bg-blue-100 text-blue-600 rounded-full">
-                      {t('personality.active', 'Active')}
+                    <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                      Active
                     </span>
                   )}
                   <button
@@ -240,25 +238,25 @@ export function PersonalityPanel({
                       e.stopPropagation();
                       onSelect?.(personality.id);
                     }}
-                    className="px-2 py-1 text-xs text-blue-600 hover:bg-blue-50 rounded transition"
+                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 transition-colors"
                   >
-                    {t('personality.select', 'Select')}
+                    Select
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEdit(personality.id);
                     }}
-                    className="px-2 py-1 text-xs text-gray-600 hover:bg-gray-100 rounded transition"
+                    className="px-3 py-1.5 text-xs font-medium rounded-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 transition-colors"
                   >
-                    {t('personality.edit', 'Edit')}
+                    Edit
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDelete(personality.id);
                     }}
-                    className="p-1 text-red-500 hover:bg-red-50 rounded transition"
+                    className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30 text-red-500 transition-colors"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -266,54 +264,54 @@ export function PersonalityPanel({
               </div>
 
               {expandedId === personality.id && (
-                <div className="px-4 pb-4 border-t border-gray-100 dark:border-gray-700 pt-3 space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="px-4 pb-4 pt-0 border-t border-gray-100 dark:border-gray-700/50 space-y-4">
+                  <div className="grid grid-cols-2 gap-4 pt-4">
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1">
-                        {t('personality.name', 'Name')}
+                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                        Name
                       </label>
                       <input
                         type="text"
                         value={personality.name}
                         onChange={(e) => handleFieldChange(personality.id, 'name', e.target.value)}
-                        className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1">
-                        {t('personality.tone', 'Tone')}
+                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                        Tone
                       </label>
                       <input
                         type="text"
                         value={personality.tone}
                         onChange={(e) => handleFieldChange(personality.id, 'tone', e.target.value)}
-                        className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                         placeholder="e.g., 严谨、偏正式"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
-                      {t('personality.style', 'Style')}
+                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                      Style
                     </label>
                     <textarea
                       value={personality.style}
                       onChange={(e) => handleFieldChange(personality.id, 'style', e.target.value)}
-                      className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
                       rows={2}
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1">
-                        {t('personality.responseLength', 'Response Length')}
+                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                        Response Length
                       </label>
                       <select
                         value={personality.responseLength}
                         onChange={(e) => handleFieldChange(personality.id, 'responseLength', e.target.value)}
-                        className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                       >
                         {RESPONSE_LENGTH_OPTIONS.map(opt => (
                           <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -321,13 +319,13 @@ export function PersonalityPanel({
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-600 mb-1">
-                        {t('personality.emojiPreference', 'Emoji')}
+                      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                        Emoji Preference
                       </label>
                       <select
                         value={personality.emojiPreference}
                         onChange={(e) => handleFieldChange(personality.id, 'emojiPreference', e.target.value)}
-                        className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                       >
                         {EMOJI_OPTIONS.map(opt => (
                           <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -337,26 +335,26 @@ export function PersonalityPanel({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
-                      {t('personality.traits', 'Traits')} ({t('personality.commaSeparated', 'comma-separated')})
+                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                      Traits (comma-separated)
                     </label>
                     <input
                       type="text"
                       value={personality.traits.join(', ')}
                       onChange={(e) => handleTraitChange(personality.id, e.target.value)}
-                      className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                       placeholder="e.g., 条理清晰, 风险前置"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-gray-600 mb-1">
-                      {t('personality.guidance', 'Guidance')} ({t('personality.commaSeparated', 'comma-separated')})
+                    <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1.5">
+                      Guidance (comma-separated)
                     </label>
                     <textarea
                       value={personality.guidance.join(', ')}
                       onChange={(e) => handleGuidanceChange(personality.id, e.target.value)}
-                      className="w-full px-3 py-1.5 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                      className="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
                       rows={2}
                       placeholder="e.g., 优先输出结构和步骤, 避免口语化跳跃"
                     />
@@ -367,14 +365,14 @@ export function PersonalityPanel({
           ))}
 
           {localPersonalities.length === 0 && (
-            <div className="text-center py-8 text-gray-500">
-              <Bot className="h-12 w-12 mx-auto mb-3 opacity-30" />
-              <p>{t('personality.empty', 'No personalities configured')}</p>
+            <div className="flex flex-col items-center justify-center h-64 text-gray-400 dark:text-gray-500">
+              <Bot className="h-12 w-12 mb-3 opacity-30" />
+              <p>No personalities configured</p>
               <button
                 onClick={handleAddPersonality}
-                className="mt-3 px-4 py-2 text-sm bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition"
+                className="mt-3 px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700 transition-all"
               >
-                {t('personality.createFirst', 'Create your first personality')}
+                Create your first personality
               </button>
             </div>
           )}
