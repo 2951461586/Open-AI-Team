@@ -3,8 +3,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import zh from './locales/zh.json'
 import en from './locales/en.json'
+import ja from './locales/ja.json'
+import ko from './locales/ko.json'
+import zhTW from './locales/zh-TW.json'
 
-type Locale = 'zh' | 'en'
+type Locale = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW'
 type Messages = Record<string, string>
 
 type I18nContextValue = {
@@ -14,7 +17,7 @@ type I18nContextValue = {
 }
 
 const STORAGE_KEY = 'dashboard-locale'
-const dictionaries: Record<Locale, Messages> = { zh, en }
+const dictionaries: Record<Locale, Messages> = { zh, en, ja, ko, 'zh-TW': zhTW }
 
 const I18nContext = createContext<I18nContextValue | null>(null)
 
@@ -24,7 +27,7 @@ export function I18nProvider({ children, defaultLocale = 'zh' }: { children: Rea
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY)
-      if (saved === 'zh' || saved === 'en') setLocaleState(saved)
+      if (saved === 'zh' || saved === 'en' || saved === 'ja' || saved === 'ko' || saved === 'zh-TW') setLocaleState(saved)
     } catch {}
   }, [])
 
