@@ -1,1 +1,1 @@
-export { SkillRuntime } from '../../../src/team/skill-runtime.mjs';
+export { SkillRuntime, createSkillRuntime } from '../../../packages/skills/skill-runtime.mjs';

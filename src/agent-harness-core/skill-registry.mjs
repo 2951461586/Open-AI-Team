@@ -1,1 +1,2 @@
-export * from '../../packages/agent-harness/src/skill-registry.mjs';
+export { SkillRegistry, createSkillRegistry } from '../../packages/skills/skill-registry.mjs';
+export * from '../../packages/skills/skill-protocol.mjs';

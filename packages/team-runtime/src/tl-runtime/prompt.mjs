@@ -1,6 +1,13 @@
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { buildAgentSystemPrompt } from '../agent-personality.mjs';
+import {
+  filterMemoryByIsolation,
+  filterToolsByIsolation,
+  buildIsolatedSandboxConfig,
+  CONTEXT_ISOLATION_LEVELS,
+  isContextIsolationEnabled,
+} from '../sub-agent-context.mjs';
 
 export function createTLPromptHelpers({
   teamStore,
@@ -166,7 +173,7 @@ ${taskSnapshot}
     return path.join(taskWorkspace, '.team-completions', `${safeAssignment}__${safeSession}.json`);
   }
 
-  function buildMemberPrompt({ role, task, taskId, childTaskId, assignmentId, sessionKey = '', objective, acceptance, deliverables, context = '', workItem = {}, resultsByAssignment = {} } = {}) {
+  function buildMemberPrompt({ role, task, taskId, childTaskId, assignmentId, sessionKey = '', objective, acceptance, deliverables, context = '', workItem = {}, resultsByAssignment = {}, subAgentContext = null } = {}) {
     const memberConfig = roleConfig?.roles?.[role] || {};
     const workDirId = childTaskId || taskId;
     const taskWorkspace = `${workspaceRoot}/${String(workDirId).replace(/[^a-zA-Z0-9_:-]/g, '_')}`;
@@ -182,6 +189,19 @@ ${taskSnapshot}
       || ''
     ).trim();
     const baseIdentityPrompt = `你是 AI Team 中的 ${memberConfig.displayName || role}。`;
+
+    const isolationEnabled = isContextIsolationEnabled(subAgentContext);
+    const isolationWarning = isolationEnabled
+      ? `\n\n## ⚠️ 上下文隔离已启用\n当前 Sub-Agent 运行在隔离上下文中。\n`
+        + `- 隔离级别: ${subAgentContext?.isolationLevel || 'partial'}\n`
+        + `- 继承父上下文记忆: ${subAgentContext?.options?.inheritParentMemory !== false ? '是' : '否'}\n`
+        + `- 与其他 Agent 隔离: ${subAgentContext?.options?.isolateFromOtherAgents !== false ? '是' : '否'}\n`
+      : '';
+
+    const filteredMemory = isolationEnabled
+      ? filterMemoryByIsolation(subAgentContext, threeLayerMemory)
+      : threeLayerMemory;
+
     const promptBuild = buildAgentSystemPrompt({
       agentName: memberConfig.displayName || role,
       role,
@@ -193,6 +213,7 @@ ${taskSnapshot}
 
     return {
       memberPrompt: `${promptBuild.systemPrompt}
+${isolationWarning}
 
 ## 任务目标
 ${objective || task}
@@ -206,7 +227,7 @@ ${acceptance || '完成任务并返回可验证结果'}
 ## 交付物
 ${ensureArray(deliverables).length ? ensureArray(deliverables).map((v) => `- ${v}`).join('\n') : '- 无明确交付物，至少返回结构化总结'}
 
-${threeLayerMemory ? `${threeLayerMemory}\n` : ''}
+${filteredMemory ? `${filteredMemory}\n` : ''}
 ${buildRoleCapabilityContractPrompt(role, roleConfig)}
 ${buildExecutionSurfacePrompt(role, workItem, roleConfig)}
 ${buildSearchEvidenceSafetyPrompt({ taskWorkspace, taskId, childTaskId, assignmentId })}
@@ -228,7 +249,7 @@ ${buildSearchEvidenceSafetyPrompt({ taskWorkspace, taskId, childTaskId, assignme
 
 写入内容必须是最终 JSON 结果；推荐命令：
 
-\`mkdir -p "$(dirname \\\"${completionFilePath}\\\")" && cat > "${completionFilePath}" <<'JSON'
+\`mkdir -p "$(dirname \\"${completionFilePath}\\")" && cat > "${completionFilePath}" <<'JSON'
 { ...你的最终 JSON... }
 JSON\`
 
@@ -278,6 +299,9 @@ JSON\`
       taskWorkspace,
       completionFilePath,
       memberConfig,
+      subAgentContext,
+      isolationEnabled,
+      filteredMemory,
     };
   }
 

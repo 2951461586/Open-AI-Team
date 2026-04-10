@@ -4,6 +4,8 @@ import path from 'node:path';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { randomUUID } from 'node:crypto';
 import { FileTraceExporter } from './trace-exporter.mjs';
+import { LangSmithExporter } from './langsmith-exporter.mjs';
+import { LangfuseExporter } from './langfuse-exporter.mjs';
 
 function normalizeStatus(status = 'ok') {
   return String(status || 'ok').toLowerCase() === 'error' ? 'error' : 'ok';
@@ -92,6 +94,75 @@ export class TraceContext {
   }
 }
 
+export class MultiTraceExporter {
+  constructor(options = {}) {
+    this.exporters = [];
+    this.defaultExporter = null;
+    this.addExporter(new FileTraceExporter(String(options?.traceLogPath || path.resolve(process.cwd(), 'state/observability/traces.jsonl'))));
+
+    if (options?.langsmith?.enabled !== false && options?.langsmith?.apiKey) {
+      this.addExporter(new LangSmithExporter(options.langsmith));
+    }
+    if (options?.langfuse?.enabled !== false && options?.langfuse?.publicKey) {
+      this.addExporter(new LangfuseExporter(options.langfuse));
+    }
+  }
+
+  addExporter(exporter) {
+    if (!exporter) return;
+    this.exporters.push(exporter);
+    if (!this.defaultExporter) {
+      this.defaultExporter = exporter;
+    }
+  }
+
+  async export(spans = [], options = {}) {
+    if (spans.length === 0) {
+      return { ok: true, count: 0, skipped: true };
+    }
+
+    const results = await Promise.allSettled(
+      this.exporters.map((exporter) => exporter.export(spans, options))
+    );
+
+    const ok = results.every((r) => r.status === 'fulfilled' && r.value?.ok);
+    const totalCount = results.reduce((sum, r) => sum + (r.value?.count || 0), 0);
+    const errors = results
+      .filter((r) => r.status === 'rejected' || !r.value?.ok)
+      .map((r) => (r.status === 'rejected' ? r.reason?.message || r.reason : r.value?.error));
+
+    return {
+      ok,
+      count: totalCount,
+      errors: errors.filter(Boolean),
+      details: results.map((r, i) => ({
+        exporter: this.exporters[i]?.constructor?.name || 'unknown',
+        status: r.status,
+        result: r.status === 'fulfilled' ? r.value : r.reason?.message,
+      })),
+    };
+  }
+
+  async flush() {
+    const results = await Promise.allSettled(this.exporters.map((exporter) => exporter.flush?.()));
+    return {
+      ok: results.every((r) => r.status === 'fulfilled'),
+      results: results.map((r, i) => ({
+        exporter: this.exporters[i]?.constructor?.name || 'unknown',
+        result: r.status === 'fulfilled' ? r.value : r.reason?.message,
+      })),
+    };
+  }
+
+  getExporter(index = 0) {
+    return this.exporters[index] || null;
+  }
+
+  getDefaultExporter() {
+    return this.defaultExporter;
+  }
+}
+
 export class TraceCollector {
   constructor(options = {}) {
     this.buffer = [];
@@ -100,14 +171,30 @@ export class TraceCollector {
     this.storage = options?.storage || new AsyncLocalStorage();
     this.flushIntervalMs = Math.max(0, Number(options?.flushIntervalMs || 0));
     this.maxBufferSize = Math.max(1, Number(options?.maxBufferSize || 100));
-    this.exporter = options?.exporter || new FileTraceExporter(String(options?.traceLogPath || path.resolve(process.cwd(), 'state/observability/traces.jsonl')));
-    this.traceLogPath = this.exporter?.filePath || String(options?.traceLogPath || path.resolve(process.cwd(), 'state/observability/traces.jsonl'));
+
+    if (options?.multiExporter) {
+      this.multiExporter = options.multiExporter;
+    } else {
+      this.multiExporter = new MultiTraceExporter(options);
+    }
+
+    const defaultExporter = this.multiExporter.getDefaultExporter();
+    this.traceLogPath = defaultExporter?.filePath || String(options?.traceLogPath || path.resolve(process.cwd(), 'state/observability/traces.jsonl'));
     ensureDirSync(this.traceLogPath);
     this.flushTimer = null;
     if (this.flushIntervalMs > 0) {
       this.flushTimer = setInterval(() => { void this.flush(); }, this.flushIntervalMs);
       this.flushTimer.unref?.();
     }
+  }
+
+  addExporter(exporter) {
+    if (!exporter) return;
+    this.multiExporter.addExporter(exporter);
+  }
+
+  getExporters() {
+    return this.multiExporter.exporters;
   }
 
   startSpan(operationName = '', parentContext = null, attributes = {}) {
@@ -183,13 +270,14 @@ export class TraceCollector {
   }
 
   async flush(options = {}) {
-    if (!this.exporter || this.buffer.length === 0) return { ok: true, count: 0, skipped: true };
+    if (this.buffer.length === 0) return { ok: true, count: 0, skipped: true };
     const spans = this.buffer.splice(0, this.buffer.length);
-    return this.exporter.export(spans, options);
+    return this.multiExporter.export(spans, options);
   }
 
   async close() {
     if (this.flushTimer) clearInterval(this.flushTimer);
+    await this.multiExporter.flush();
     return this.flush();
   }
 
@@ -268,10 +356,16 @@ export function createTraceCollector(options = {}) {
   return new TraceCollector(options);
 }
 
+export function createMultiTraceExporter(options = {}) {
+  return new MultiTraceExporter(options);
+}
+
 export default {
   TraceSpan,
   TraceContext,
   TraceCollector,
-  createTraceCollector,
+  MultiTraceExporter,
   buildTraceTree,
+  createTraceCollector,
+  createMultiTraceExporter,
 };

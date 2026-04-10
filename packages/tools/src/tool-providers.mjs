@@ -1,1 +1,1 @@
-export * from '../../../src/agent-harness-core/tool-providers.mjs';
+export * from '../../../packages/agent-harness/src/tool-providers.mjs';

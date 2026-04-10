@@ -21,6 +21,42 @@ export {
   validateAgentCapabilities,
 } from './agent-capabilities.mjs';
 
+export {
+  createStandaloneAgentManifest,
+  createStandaloneAgentContext,
+  createStandaloneAgentRuntime,
+  validateStandaloneAgentManifest,
+  getStandaloneAgentCapabilities,
+} from './standalone-agent-package.mjs';
+
+export { runStandaloneAgent, createAgentFromTemplate } from './standalone-agent-runtime.mjs';
+
+export {
+  PLUGIN_KINDS,
+  PLUGIN_PERMISSION_LEVELS,
+  CONVENTION_BASED_PLUGINS,
+  createPluginManifest,
+  validatePluginManifest,
+  ConventionPluginLoader,
+  createConventionPluginSystem,
+} from './convention-plugin-system.mjs';
+
+export {
+  MODEL_CAPABILITIES,
+  TASK_TYPES,
+  createEnhancedModelRouter,
+} from './enhanced-model-router.mjs';
+
+export {
+  ERROR_CATEGORIES,
+  RECOVERY_STRATEGIES,
+  classifyError,
+  getRecoveryStrategy,
+  createRetryPolicy,
+  createCircuitBreaker,
+  createCheckpointManager,
+} from './fault-tolerance.mjs';
+
 export function createWorkflowPack({ id = '', version = '1.0.0', label = '', buildPlan } = {}) {
   return {
     kind: 'workflow_pack',

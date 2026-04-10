@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-team.com/schemas/standalone-agent-package.schema.json",
+  "title": "AI Team Standalone Agent Package",
+  "type": "object",
+  "required": ["contractVersion", "id", "name", "version"],
+  "properties": {
+    "contractVersion": {
+      "type": "string",
+      "const": "standalone-agent-package.v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "model": {
+          "type": "string"
+        },
+        "maxContextTokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isolationLevel": {
+          "type": "string",
+          "enum": ["none", "partial", "full", "strict"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "personality": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "style": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "tone": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "mission": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "greeting": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}
