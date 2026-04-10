@@ -197,7 +197,6 @@ schemas/             public contracts
 plugins/             optional plugin ecosystem, not mainline core
 services/            optional/companion services, not mainline core
 projects/            related or experimental side projects
-memory/              local continuity surface (README only in repo)
 ```
 
 ---

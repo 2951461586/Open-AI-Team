@@ -197,7 +197,6 @@ schemas/             公共 contracts
 plugins/             可选插件生态，不是主线 core
 services/            可选 / 伴随服务，不是主线 core
 projects/            相关或实验性旁支项目
-memory/              本地 continuity 表面（仓库中仅保留 README）
 ```
 
 ---
