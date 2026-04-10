@@ -2,32 +2,76 @@
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.aiteamharness.desktop",
   "productName": "AI Team Dashboard",
+  "copyright": "Copyright 2024 AI Team",
   "directories": {
-    "output": "dist"
+    "output": "dist",
+    "buildResources": "build"
   },
   "files": [
     "main.mjs",
     "preload.mjs",
-    "package.json",
-    "../dashboard/out/**/*"
+    "package.json"
   ],
   "extraMetadata": {
     "main": "main.mjs"
   },
+  "asar": true,
+  "compression": "maximum",
   "mac": {
     "target": [
-      "dmg"
-    ]
+      {
+        "target": "dmg",
+        "arch": ["x64", "arm64"]
+      }
+    ],
+    "category": "public.app-category.developer-tools",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "darkModeSupport": true,
+    "extendInfo": {
+      "NSHumanReadableCopyright": "Copyright 2024 AI Team"
+    }
   },
   "linux": {
     "target": [
-      "AppImage"
+      {
+        "target": "AppImage",
+        "arch": ["x64"]
+      },
+      {
+        "target": "deb",
+        "arch": ["x64"]
+      }
     ],
-    "category": "Utility"
+    "category": "Utility",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "maintainer": "AI Team",
+    "vendor": "AI Team"
   },
   "win": {
     "target": [
-      "nsis"
-    ]
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      }
+    ],
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "publisherName": "AI Team"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "AI Team Dashboard"
+  },
+  "publish": {
+    "provider": "generic",
+    "url": "https://example.com/releases/"
   }
 }
