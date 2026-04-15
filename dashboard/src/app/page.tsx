@@ -8,6 +8,7 @@ import type { View } from '@/components/Sidebar'
 import { RightPanel, isDetailTab, type DetailTab } from '@/components/RightPanel'
 import { AgentsView } from '@/components/views/AgentsView'
 import { SettingsView } from '@/components/views/SettingsView'
+import { WelcomeScreen } from '@/components/views/WelcomeScreen'
 import { useI18n } from '@/i18n/context'
 import { KanbanView } from '@/components/views/KanbanView'
 import { ChatView } from '@/components/views/ChatView'
@@ -212,6 +213,7 @@ export default function DashboardPage() {
   } = useChatStore()
   const { addEvent } = useLiveStore()
   const [view, setView] = useState<View>('kanban')
+  const [showWelcome, setShowWelcome] = useState(false)
   const [deliverablesRefreshKey, setDeliverablesRefreshKey] = useState(0)
   const [chatTransport, setChatTransport] = useState<ChatTransportStatus>(WS_ENABLED ? 'connecting' : 'fallback')
   const hasWsEverOpenedRef = useRef(false)
@@ -258,7 +260,33 @@ export default function DashboardPage() {
       setSidebarWidth(Math.min(240, Math.max(56, savedSidebarWidth || 72)))
       setRightPanelWidth(Math.min(860, Math.max(320, savedRightWidth || 440)))
       setRightPanelCollapsed(forcedTaskId ? false : savedRightCollapsed === '1')
+      const hasSeenWelcome = localStorage.getItem('dashboard:welcomed')
+      if (!hasSeenWelcome) setShowWelcome(true)
     } catch {}
+  }, [])
+
+  const handleWelcomeComplete = useCallback(() => {
+    try { localStorage.setItem('dashboard:welcomed', '1') } catch {}
+    setShowWelcome(false)
+  }, [])
+
+  const handleStartChat = useCallback(() => {
+    handleWelcomeComplete()
+    setView('chat')
+  }, [handleWelcomeComplete])
+
+  const handleOpenSettings = useCallback(() => {
+    handleWelcomeComplete()
+    setView('settings')
+  }, [handleWelcomeComplete])
+
+  const handleQuickStart = useCallback(() => {
+    handleWelcomeComplete()
+    setView('chat')
+  }, [handleWelcomeComplete])
+
+  const handleViewDocs = useCallback(() => {
+    window.open('/docs', '_blank')
   }, [])
 
   useEffect(() => {
@@ -808,6 +836,16 @@ export default function DashboardPage() {
   }, [loadData, loadNodes, loadThreads, selectedTaskId])
 
   return (
+    <>
+      {showWelcome && (
+        <WelcomeScreen
+          onStartChat={handleStartChat}
+          onOpenSettings={handleOpenSettings}
+          onViewDocs={handleViewDocs}
+          onQuickStart={handleQuickStart}
+        />
+      )}
+      {!showWelcome && (
     <div className="flex min-h-screen h-dvh-safe flex-col bg-[var(--background)] pb-[calc(env(safe-area-inset-bottom,0px)+76px)] md:pb-0">
       <Header
         lastUpdate={resolveHeaderLastUpdate(lastUpdate, nodesLastUpdate)}
@@ -951,6 +989,8 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+      )}
+    </>
   )
 }

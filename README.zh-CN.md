@@ -27,26 +27,62 @@
 
 ## 快速开始
 
-### Docker 部署（推荐）
+### 1. 检查环境（推荐）
 
 ```bash
-docker-compose up -d
-# 访问 http://localhost:3001
+make doctor
 ```
 
-### 本地开发
-
-```bash
-npm install
-cp .env.example .env
-npm run dev
-```
-
-### 安装向导
+### 2. 配置（首次使用）
 
 ```bash
 make setup-wizard
 ```
+
+或手动配置：
+
+```bash
+cp .env.example .env
+# 编辑 .env 添加你的 API keys
+```
+
+### 3. 启动
+
+**Docker 部署（推荐）**
+
+```bash
+make docker-start
+# 访问 http://localhost:3001
+```
+
+**本地开发**
+
+```bash
+pnpm install
+pnpm run dev
+```
+
+---
+
+## 部署说明
+
+> **重要**: 本项目**仅支持从源码构建部署**。不提供预编译的 dashboard-static-export 包。
+
+| 方式 | 命令 | 说明 |
+|------|------|------|
+| **Docker** | `make docker-start` | 生产部署（推荐） |
+| **本地** | `pnpm run dev` | 开发模式 |
+| **桌面** | `cd electron && npm run dev` | Electron 桌面开发 |
+
+---
+
+## 文档
+
+- [Getting Started](./GETTING-STARTED.md)
+- [Architecture](./ARCHITECTURE.md)
+- [Installation](./INSTALL.md)
+- [Docker 部署](./DOCKER.md)
+- [Scripts](./SCRIPTS.md)
 
 ---
 
@@ -207,8 +243,8 @@ ai-team/
 
 | 方式 | 命令 | 说明 |
 |------|------|------|
-| **Docker** | `docker-compose up -d` | 生产部署 |
-| **本地** | `npm run dev` | 开发模式 |
+| **Docker** | `make docker-start` | 生产部署（推荐） |
+| **本地** | `pnpm run dev` | 开发模式 |
 | **桌面** | `cd electron && npm run dev` | Electron 桌面开发 |
 | **打包桌面应用** | `cd electron && npm run package` | 生成 .dmg / .exe |
 
@@ -230,17 +266,20 @@ ai-team/
 ## 开发
 
 ```bash
-# 安装依赖
-npm install
+# 检查环境健康状态
+make doctor
 
-# 检查环境
+# 检查环境前提条件
 make check
 
 # 运行安装向导
 make setup-wizard
 
+# 安装依赖
+pnpm install
+
 # 开发模式
-npm run dev
+pnpm run dev
 
 # 测试
 npm test

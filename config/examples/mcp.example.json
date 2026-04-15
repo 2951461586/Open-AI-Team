@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "AI Team Harness MCP",
+  "serverVersion": "1.0.0",
+  "transport": "both",
+  "host": "127.0.0.1",
+  "port": 7331,
+  "teamDbPath": "data/team.db",
+  "expose": {
+    "tools": ["*"],
+    "resources": ["*"],
+    "prompts": ["*"],
+    "resourceTemplates": ["team://{scope}/tasks", "team://{scope}/status", "team://{scope}/members", "team://{scope}/board"]
+  },
+  "auth": {
+    "enabled": false,
+    "bearerToken": "",
+    "allowLocalhostWithoutAuth": true
+  },
+  "allowlist": {
+    "tools": ["team.task.list", "team.task.get", "team.task.create", "team.task.update_state", "team.agent.roles", "team.agent.members", "team.mailbox.list", "team.mailbox.append"],
+    "resources": ["team://config/roles", "team://{scope}/tasks"],
+    "prompts": ["team_task", "code_review"]
+  },
+  "session": {
+    "idleTtlMs": 3600000,
+    "persist": false
+  },
+  "clients": []
+}

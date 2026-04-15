@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { MemoryStick, RefreshCw, Trash2, Filter, Clock, Activity } from 'lucide-react';
+import { MemoryStick, RefreshCw, Trash2, Filter, Clock, Activity, Timeline, List, BarChart3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
 
@@ -84,6 +84,7 @@ export function MemoryDecayPanel({
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState<'decay' | 'importance' | 'recency'>('decay');
   const [filterMinValue, setFilterMinValue] = useState(0);
+  const [viewMode, setViewMode] = useState<'list' | 'timeline'>('list');
 
   const fetchMemoryData = useCallback(async () => {
     setLoading(true);
@@ -134,6 +135,29 @@ export function MemoryDecayPanel({
         >
           <RefreshCw className={cn('h-4 w-4 text-[var(--fg-muted)]', loading && 'animate-spin')} />
         </button>
+        
+        <div className="flex items-center gap-1 p-1 rounded-lg bg-[var(--surface-subtle)]">
+          <button
+            onClick={() => setViewMode('list')}
+            className={cn(
+              'p-1.5 rounded-md transition-colors',
+              viewMode === 'list' ? 'bg-[var(--surface)] shadow-sm' : 'hover:bg-[var(--surface-muted)]'
+            )}
+            title="List view"
+          >
+            <List className="h-4 w-4 text-[var(--fg-muted)]" />
+          </button>
+          <button
+            onClick={() => setViewMode('timeline')}
+            className={cn(
+              'p-1.5 rounded-md transition-colors',
+              viewMode === 'timeline' ? 'bg-[var(--surface)] shadow-sm' : 'hover:bg-[var(--surface-muted)]'
+            )}
+            title="Timeline view"
+          >
+            <Timeline className="h-4 w-4 text-[var(--fg-muted)]" />
+          </button>
+        </div>
       </div>
 
       {stats && (
@@ -200,8 +224,50 @@ export function MemoryDecayPanel({
         </button>
       </div>
 
-      <div className="space-y-2">
-        {sortedEntries.map((entry) => (
+      {viewMode === 'timeline' ? (
+        <div className="space-y-3">
+          <div className="relative">
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[var(--accent)] via-[var(--accent)] to-transparent" />
+            {sortedEntries.map((entry, index) => (
+              <div key={entry.key} className="relative pl-10 pb-4">
+                <div 
+                  className={cn(
+                    'absolute left-2.5 top-1.5 w-3 h-3 rounded-full border-2 border-white dark:border-[var(--surface)]',
+                    getDecayColor(entry.decayValue).replace('bg-', 'bg-')
+                  )}
+                  style={{ 
+                    backgroundColor: entry.decayValue >= 0.7 ? 'var(--success)' : entry.decayValue >= 0.4 ? 'var(--warning)' : 'var(--danger)'
+                  }}
+                />
+                <div 
+                  onClick={() => onEntryClick?.(entry)}
+                  className="p-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] transition-all cursor-pointer"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-[var(--fg)] truncate">{entry.key}</span>
+                    <span className="text-xs text-[var(--fg-muted)]">{formatRelativeTime(entry.lastAccessedAt)}</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-xs text-[var(--fg-muted)]">
+                    <span>Access: {entry.accessCount}</span>
+                    <span>Importance: {entry.importance.toFixed(2)}</span>
+                  </div>
+                  <div className="mt-2 h-1.5 bg-[var(--surface-subtle)] rounded-full overflow-hidden">
+                    <div 
+                      className="h-full rounded-full"
+                      style={{ 
+                        width: `${entry.decayValue * 100}%`,
+                        backgroundColor: entry.decayValue >= 0.7 ? 'var(--success)' : entry.decayValue >= 0.4 ? 'var(--warning)' : 'var(--danger)'
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {sortedEntries.map((entry) => (
           <div
             key={entry.key}
             onClick={() => onEntryClick?.(entry)}
@@ -249,6 +315,7 @@ export function MemoryDecayPanel({
           </div>
         )}
       </div>
+      )}
     </div>
   );
 }

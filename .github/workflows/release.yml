@@ -53,10 +53,6 @@ jobs:
           npm run dashboard:build
           npm run dashboard:check-bundle
 
-      - name: Export dashboard static site
-        working-directory: dashboard
-        run: npx next export
-
       - name: OSS minimal validation
         run: |
           npm run smoke:oss-minimal
@@ -79,7 +75,6 @@ jobs:
           rm -rf .release-bundles
           mkdir -p .release-bundles
           tar -czf .release-bundles/public-contracts.tar.gz -C .release-artifacts public-contracts
-          tar -czf .release-bundles/dashboard-static-export.tar.gz -C .release-artifacts dashboard-static-export
           tar -czf .release-bundles/oss-minimal-evidence.tar.gz -C .release-artifacts oss-minimal
           tar -czf .release-bundles/third-party-agent-sample.tar.gz -C .release-artifacts third-party-agent-sample
           tar -czf .release-bundles/source-docs.tar.gz -C .release-artifacts source-docs
@@ -100,7 +95,6 @@ jobs:
           body_path: .release-artifacts/RELEASE-NOTES.md
           files: |
             .release-bundles/public-contracts.tar.gz
-            .release-bundles/dashboard-static-export.tar.gz
             .release-bundles/oss-minimal-evidence.tar.gz
             .release-bundles/third-party-agent-sample.tar.gz
             .release-bundles/source-docs.tar.gz

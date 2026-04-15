@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Bot, Save, Plus, Trash2, ChevronDown } from 'lucide-react';
+import { Bot, Save, Plus, Trash2, ChevronDown, Eye, MessageSquare, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
+import { AgentAvatar, AgentStatusBadge, AgentStatus } from '@/components/ui/AgentAvatar';
 
 interface Personality {
   id: string;
@@ -264,6 +265,85 @@ export function PersonalityPanel({
           </div>
         )}
       </div>
+
+      {expandedId && (
+        <div className="mt-6 border-t border-[var(--border)] pt-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Eye className="h-4 w-4 text-[var(--accent)]" />
+            <h3 className="text-sm font-semibold text-[var(--fg)]">{t('personality.preview', 'Live Preview')}</h3>
+          </div>
+          
+          {(() => {
+            const previewPersonality = localPersonalities.find(p => p.id === expandedId);
+            if (!previewPersonality) return null;
+            
+            return (
+              <div className="rounded-xl bg-[var(--surface-subtle)] p-4">
+                <div className="flex items-start gap-4 mb-4">
+                  <AgentAvatar 
+                    name={previewPersonality.name} 
+                    status="thinking" 
+                    size="lg"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-semibold text-[var(--fg)]">{previewPersonality.name}</span>
+                      <AgentStatusBadge status="thinking" size="sm" />
+                    </div>
+                    <p className="text-xs text-[var(--fg-muted)] italic">
+                      {previewPersonality.tone || 'No tone set'}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex flex-wrap gap-1.5">
+                    {previewPersonality.traits.map((trait, i) => (
+                      <span 
+                        key={i}
+                        className="px-2 py-0.5 text-xs rounded-full bg-[var(--accent-soft)] text-[var(--accent)]"
+                      >
+                        {trait}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="rounded-lg bg-[var(--surface)] p-3 border border-[var(--border)]">
+                    <div className="flex items-center gap-2 mb-2">
+                      <MessageSquare className="h-3 w-3 text-[var(--fg-muted)]" />
+                      <span className="text-xs text-[var(--fg-muted)]">
+                        {t('personality.sampleResponse', 'Sample Response')}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[var(--fg)] italic">
+                      "{previewPersonality.style || 'Response style not configured'}"
+                    </p>
+                  </div>
+                  
+                  {previewPersonality.guidance.length > 0 && (
+                    <div className="rounded-lg bg-[var(--surface)] p-3 border border-[var(--border)]">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="h-3 w-3 text-[var(--accent)]" />
+                        <span className="text-xs text-[var(--fg-muted)]">
+                          {t('personality.guidance', 'Guidance')}
+                        </span>
+                      </div>
+                      <ul className="text-xs text-[var(--fg-secondary)] space-y-1">
+                        {previewPersonality.guidance.slice(0, 3).map((g, i) => (
+                          <li key={i} className="flex items-start gap-1.5">
+                            <span className="text-[var(--accent)]">•</span>
+                            <span>{g}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      )}
     </div>
   );
 }

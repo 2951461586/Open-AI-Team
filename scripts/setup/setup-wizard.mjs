@@ -324,13 +324,14 @@ async function main() {
   console.log('========================================\n');
   
   console.log('Next steps:');
-  console.log('  1. Edit .env and add your API keys');
-  console.log('  2. Run: pnpm install');
-  console.log('  3. Run: pnpm run dev\n');
+  console.log('  1. Run: make doctor       # Check your environment');
+  console.log('  2. Edit .env and add your API keys');
+  console.log('  3. Run: pnpm install');
+  console.log('  4. Run: make docker-start  # Or: pnpm run dev\n');
   
   console.log('For more information, see:');
-  console.log('  - INSTALL.md for detailed setup guide');
-  console.log('  - README.md for project overview\n');
+  console.log('  - README.md for project overview');
+  console.log('  - INSTALL.md for detailed setup guide\n');
 }
 
 main().catch((error) => {

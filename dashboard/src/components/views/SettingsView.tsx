@@ -1,14 +1,15 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Settings, Bot, MemoryStick, Palette } from 'lucide-react'
+import { Settings, Bot, MemoryStick, Palette, Desk } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
 import { PersonalityPanel } from '@/components/panels/PersonalityPanel'
 import { MemoryDecayPanel } from '@/components/panels/MemoryDecayPanel'
 import { SkillMarketplace } from '@/components/panels/SkillMarketplace'
+import { DeskPanel } from '@/components/panels/DeskPanel'
 
-export type SettingsTab = 'personality' | 'memory' | 'skills'
+export type SettingsTab = 'personality' | 'memory' | 'skills' | 'desk'
 
 interface SettingsViewProps {
   defaultTab?: SettingsTab
@@ -18,6 +19,7 @@ const TABS: { id: SettingsTab; icon: typeof Bot; labelKey: string }[] = [
   { id: 'personality', icon: Bot, labelKey: 'personality.title' },
   { id: 'memory', icon: MemoryStick, labelKey: 'memory.title' },
   { id: 'skills', icon: Palette, labelKey: 'skills.marketplace' },
+  { id: 'desk', icon: Desk, labelKey: 'desk.title' },
 ]
 
 export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) {
@@ -32,6 +34,8 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
         return <MemoryDecayPanel />
       case 'skills':
         return <SkillMarketplace />
+      case 'desk':
+        return <DeskPanel />
       default:
         return <PersonalityPanel />
     }

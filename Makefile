@@ -2,7 +2,7 @@ COMPOSE ?= docker compose
 COMPOSE_FILE ?= docker-compose.yml
 DEV_COMPOSE_FILES = -f docker-compose.yml -f docker-compose.dev.yml
 
-.PHONY: help install check setup-wizard docker-build docker-start docker-stop docker-restart docker-logs docker-ps docker-dev docker-dev-build docker-dev-stop docker-shell
+.PHONY: help install check doctor setup-wizard docker-build docker-start docker-stop docker-restart docker-logs docker-ps docker-dev docker-dev-build docker-dev-stop docker-shell deploy
 
 help:
 	@echo "AI Team Runtime - Make Commands"
@@ -10,7 +10,12 @@ help:
 	@echo "Installation:"
 	@echo "  make install          - Install dependencies (requires pnpm 9.x)"
 	@echo "  make check           - Check prerequisites"
+	@echo "  make doctor          - Check system health and configuration"
 	@echo "  make setup-wizard    - Run interactive setup wizard"
+	@echo ""
+	@echo "Quick Deploy:"
+	@echo "  make deploy          - One-click deploy to Docker (production)"
+	@echo "  make deploy DEV=1    - One-click deploy (development mode)"
 	@echo ""
 	@echo "Docker (Production):"
 	@echo "  make docker-start    - Start all services (builds if needed)"
@@ -48,6 +53,10 @@ check:
 	@pnpm --version 2>/dev/null | grep -q "^9" && echo "✓ pnpm OK" || echo "✗ pnpm 9.x required"
 	@docker --version > /dev/null 2>&1 && echo "✓ Docker OK" || echo "✗ Docker not found"
 	@docker compose version > /dev/null 2>&1 && echo "✓ Docker Compose OK" || echo "✗ Docker Compose not found"
+
+doctor:
+	@echo "Running AI Team Health Check..."
+	node scripts/setup/doctor.mjs
 
 setup-wizard:
 	@echo "Running AI Team Setup Wizard..."
@@ -89,3 +98,12 @@ dashboard-build:
 
 dashboard-dev:
 	cd dashboard && pnpm install && pnpm run dev
+
+deploy:
+	@if [ "$(DEV)" = "1" ]; then \
+		echo "Deploying in development mode..."; \
+		bash scripts/deploy/deploy.sh dev; \
+	else \
+		echo "Deploying in production mode..."; \
+		bash scripts/deploy/deploy.sh production; \
+	fi

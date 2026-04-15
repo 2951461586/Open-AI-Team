@@ -105,18 +105,14 @@ jobs:
         working-directory: dashboard
         run: npm run scan:bundle
 
-      - name: Export dashboard static site
-        working-directory: dashboard
-        run: npx next export
-
       - name: Stage release artifacts (dashboard)
         run: npm run release:stage-artifacts -- dashboard
 
-      - name: Upload dashboard static export bundle
+      - name: Upload dashboard bundle
         uses: actions/upload-artifact@v4
         with:
-          name: dashboard-static-export-bundle
-          path: .release-artifacts/dashboard-static-export
+          name: dashboard-build-artifact
+          path: dashboard/out
 
   oss-minimal:
     runs-on: ubuntu-latest

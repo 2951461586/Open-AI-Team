@@ -16,8 +16,11 @@ services:
       BIND: ${BIND:-0.0.0.0}
       TEAM_DB_PATH: ${TEAM_DB_PATH:-/app/state/team-runtime.db}
       TEAM_TASK_WORKSPACE_ROOT: ${TEAM_TASK_WORKSPACE_ROOT:-/app/task_workspaces}
+      MCP_PORT: ${MCP_PORT:-7331}
+      MCP_ENABLED: ${MCP_ENABLED:-true}
     ports:
       - "${PORT:-3001}:${PORT:-3001}"
+      - "${MCP_PORT:-7331}:${MCP_PORT:-7331}"
     volumes:
       - ./state:/app/state
       - ./task_workspaces:/app/task_workspaces
