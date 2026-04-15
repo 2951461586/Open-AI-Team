@@ -44,30 +44,34 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
   return (
     <div className="flex h-full flex-col bg-[var(--surface)]">
       <div className="flex items-center gap-3 border-b border-[var(--border)] px-6 py-4">
-        <Settings className="h-5 w-5 text-[var(--accent)]" />
-        <h1 className="text-base font-semibold text-[var(--fg)]">{t('nav.settings', 'Settings')}</h1>
+        <div className="max-w-6xl mx-auto flex items-center gap-3 w-full">
+          <Settings className="h-5 w-5 text-[var(--accent)]" />
+          <h1 className="text-base font-semibold text-[var(--fg)]">{t('nav.settings', 'Settings')}</h1>
+        </div>
       </div>
 
       <div className="flex border-b border-[var(--border)] px-6">
-        {TABS.map((tab) => {
-          const Icon = tab.icon
-          const active = activeTab === tab.id
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={cn(
-                'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors',
-                active
-                  ? 'border-[var(--accent)] text-[var(--accent)]'
-                  : 'border-transparent text-[var(--fg-muted)] hover:text-[var(--fg)]'
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              {t(tab.labelKey, tab.id)}
-            </button>
-          )
-        })}
+        <div className="max-w-6xl mx-auto flex w-full">
+          {TABS.map((tab) => {
+            const Icon = tab.icon
+            const active = activeTab === tab.id
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors',
+                  active
+                    ? 'border-[var(--accent)] text-[var(--accent)]'
+                    : 'border-transparent text-[var(--fg-muted)] hover:text-[var(--fg)]'
+                )}
+              >
+                <Icon className="h-4 w-4" />
+                {t(tab.labelKey, tab.id)}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       <div className="flex-1 overflow-auto panel-scroll">
