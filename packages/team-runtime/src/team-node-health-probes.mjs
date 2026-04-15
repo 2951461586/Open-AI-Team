@@ -1,4 +1,5 @@
-import { spawn, spawnSync, execSync } from 'node:child_process';
+import { spawn, execSync } from 'node:child_process';
+import fs from 'node:fs';
 import os from 'node:os';
 
 export async function ping(fetchImpl = globalThis.fetch, url = '', timeoutMs = 1500) {
@@ -21,6 +22,11 @@ export function pingPeerRelayViaSsh({ host = '', port = 18080, timeoutMs = 2500 
   return new Promise((resolve) => {
     if (!host) {
       resolve({ ok: false, error: 'peer_host_missing' });
+      return;
+    }
+    const inContainer = isRunningInContainer();
+    if (inContainer) {
+      resolve({ ok: false, error: 'ssh_not_available_in_container' });
       return;
     }
     const started = Date.now();
@@ -52,21 +58,39 @@ export function pingPeerRelayViaSsh({ host = '', port = 18080, timeoutMs = 2500 
   });
 }
 
-function isRunningInContainer() {
+export function isRunningInContainer() {
   try {
-    return fs.existsSync('/.dockerenv') || process.env.IN_DOCKER === '1';
+    return fs.existsSync('/.dockerenv') || process.env.IN_DOCKER === '1' || !!process.env.CONTAINER;
   } catch {
     return false;
   }
 }
 
-function isSystemctlAvailable() {
+export function isSystemdAvailable() {
   try {
-    const result = spawnSync('which', ['systemctl'], { encoding: 'utf8', timeout: 500 });
-    return result.status === 0;
+    if (process.platform !== 'linux') return false;
+    const result = execSync('which systemctl 2>/dev/null', { encoding: 'utf8', timeout: 500 });
+    return result.trim() === 'systemctl';
   } catch {
     return false;
   }
+}
+
+export function getControlPlaneStatus() {
+  const inContainer = isRunningInContainer();
+  const hasSystemd = isSystemdAvailable();
+  if (inContainer || !hasSystemd) {
+    return {
+      controlPlaneOk: true,
+      controlPlaneStatus: 'healthy',
+      controlPlaneNote: 'container_runtime',
+    };
+  }
+  return {
+    controlPlaneOk: null,
+    controlPlaneStatus: 'unknown',
+    controlPlaneNote: 'systemd_available',
+  };
 }
 
 export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
@@ -83,47 +107,7 @@ export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
       diskTotal = Number(parts[1] || 0) * 1024;
       diskUsed = Number(parts[2] || 0) * 1024;
     } catch {}
-    let controlPlaneStatus = 'not_applicable';
-    let controlPlaneOk = false;
-    const inContainer = isRunningInContainer();
-    const hasSystemctl = isSystemctlAvailable();
-    if (inContainer || !hasSystemctl) {
-      controlPlaneStatus = 'not_applicable';
-      controlPlaneOk = true;
-    } else {
-      try {
-        const unit = String(controlPlaneSystemdUnit || 'control-plane').trim() || 'control-plane';
-        const probeArgsList = [
-          ['show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
-          ['--user', 'show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
-        ];
-        let matchedProbe = null;
-        for (const args of probeArgsList) {
-          const probe = spawnSync(
-            'systemctl',
-            args,
-            { encoding: 'utf8', timeout: 1500, killSignal: 'SIGKILL' },
-          );
-          if (probe.error?.code === 'ETIMEDOUT') {
-            controlPlaneStatus = 'control_probe_timeout';
-            matchedProbe = probe;
-            break;
-          }
-          if (probe.status === 0) {
-            matchedProbe = probe;
-            break;
-          }
-        }
-        if (matchedProbe?.status === 0) {
-          const activeState = String((String(matchedProbe.stdout || '').match(/ActiveState=(.+)/) || [])[1] || '').trim();
-          const mainPid = Number(String((String(matchedProbe.stdout || '').match(/MainPID=(.+)/) || [])[1] || '0').trim() || 0);
-          controlPlaneStatus = activeState || 'unknown';
-          controlPlaneOk = activeState === 'active' && mainPid > 0;
-        } else if (controlPlaneStatus !== 'control_probe_timeout') {
-          controlPlaneStatus = 'control_probe_failed';
-        }
-      } catch {}
-    }
+    const { controlPlaneOk, controlPlaneStatus, controlPlaneNote } = getControlPlaneStatus();
     return {
       host: os.hostname(),
       load1: Number(load[0]?.toFixed?.(2) || 0),
@@ -139,6 +123,7 @@ export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
       uptimeHuman: `${Math.floor(os.uptime() / 3600)}h ${Math.floor((os.uptime() % 3600) / 60)}m`,
       controlPlaneOk,
       controlPlaneStatus,
+      controlPlaneNote,
     };
   } catch {
     return null;
@@ -148,6 +133,24 @@ export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
 export function readRemoteStatsViaSsh({ host = '', timeoutMs = 5000 } = {}) {
   return new Promise((resolve) => {
     if (!host) return resolve(null);
+    const inContainer = isRunningInContainer();
+    if (inContainer) {
+      return resolve({
+        host,
+        load1: 0,
+        load5: 0,
+        load15: 0,
+        cpuPercent: undefined,
+        memoryTotalMb: undefined,
+        memoryUsedMb: undefined,
+        memoryUsedPercent: undefined,
+        diskTotalGb: undefined,
+        diskUsedGb: undefined,
+        diskUsedPercent: undefined,
+        uptimeHuman: '--',
+        note: 'ssh_unavailable_in_container',
+      });
+    }
     const remoteCmd = [
       'LOAD=$(cat /proc/loadavg 2>/dev/null | awk \'{print $1" "$2" "$3}\')',
       'MEM=$(awk \'/MemTotal|MemAvailable/ {print $2}\' /proc/meminfo 2>/dev/null | xargs)',

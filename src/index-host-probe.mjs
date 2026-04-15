@@ -8,6 +8,25 @@ export const DEFAULT_SERVICE_ENV_UNIT = '';
 
 let serviceEnvCache = new Map();
 
+function isRunningInContainer() {
+  try {
+    return fs.existsSync('/.dockerenv') || process.env.IN_DOCKER === '1' || !!process.env.CONTAINER;
+  } catch {
+    return false;
+  }
+}
+
+function isSystemdAvailable() {
+  if (isRunningInContainer()) return false;
+  try {
+    if (process.platform !== 'linux') return false;
+    const result = execSync('which systemctl 2>/dev/null', { encoding: 'utf8', timeout: 500 });
+    return result.trim() === 'systemctl';
+  } catch {
+    return false;
+  }
+}
+
 export function clearHostProbeCache() {
   serviceEnvCache = new Map();
 }
@@ -16,6 +35,10 @@ export function readServiceEnv(serviceUnit = DEFAULT_SERVICE_ENV_UNIT) {
   const unit = String(serviceUnit || DEFAULT_SERVICE_ENV_UNIT).trim() || DEFAULT_SERVICE_ENV_UNIT;
   if (serviceEnvCache.has(unit)) return serviceEnvCache.get(unit);
   const out = {};
+  if (!isSystemdAvailable()) {
+    serviceEnvCache.set(unit, out);
+    return out;
+  }
   try {
     const raw = String(execSync(`systemctl --user show ${unit} --property=Environment --no-pager`, { encoding: 'utf8' }) || '');
     const line = raw.split(/\r?\n/).find((x) => x.startsWith('Environment=')) || '';
@@ -54,6 +77,7 @@ export function resolveListeningPid(port = 0) {
 export function resolveServiceMainPid(serviceUnit = '') {
   const unit = String(serviceUnit || '').trim();
   if (!unit) return '';
+  if (!isSystemdAvailable()) return '';
   try {
     return String(execSync(`systemctl --user show -p MainPID --value ${unit}`, { encoding: 'utf8' }) || '').trim();
   } catch {

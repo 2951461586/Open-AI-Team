@@ -16,15 +16,16 @@ services:
       - .env
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-      PORT: ${PORT:-3001}
+      PORT: ${PORT:-19090}
       BIND: ${BIND:-0.0.0.0}
       TEAM_DB_PATH: ${TEAM_DB_PATH:-/app/state/team-runtime.db}
       TEAM_TASK_WORKSPACE_ROOT: ${TEAM_TASK_WORKSPACE_ROOT:-/app/task_workspaces}
       MCP_PORT: ${MCP_PORT:-7331}
       MCP_ENABLED: ${MCP_ENABLED:-true}
       IN_DOCKER: "1"
+      CONTAINER: "1"
     ports:
-      - "${PORT:-3001}:${PORT:-3001}"
+      - "${PORT:-19090}:${PORT:-19090}"
       - "${MCP_PORT:-7331}:${MCP_PORT:-7331}"
     volumes:
       - ./state:/app/state
