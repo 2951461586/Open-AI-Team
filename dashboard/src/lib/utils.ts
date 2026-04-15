@@ -37,6 +37,7 @@ export function nodeServiceStatusLabel(opts?: { reachable?: boolean; probe?: str
   if (status === 'control_probe_failed') return '探测失败'
   if (status === 'control_probe_pending') return '探测中'
   if (status === 'not_configured') return '未配置'
+  if (status === 'not_applicable') return '不适用'
   return '服务状态未知'
 }
 

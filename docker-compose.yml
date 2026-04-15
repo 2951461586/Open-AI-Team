@@ -22,6 +22,7 @@ services:
       TEAM_TASK_WORKSPACE_ROOT: ${TEAM_TASK_WORKSPACE_ROOT:-/app/task_workspaces}
       MCP_PORT: ${MCP_PORT:-7331}
       MCP_ENABLED: ${MCP_ENABLED:-true}
+      IN_DOCKER: "1"
     ports:
       - "${PORT:-3001}:${PORT:-3001}"
       - "${MCP_PORT:-7331}:${MCP_PORT:-7331}"

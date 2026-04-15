@@ -52,6 +52,23 @@ export function pingPeerRelayViaSsh({ host = '', port = 18080, timeoutMs = 2500 
   });
 }
 
+function isRunningInContainer() {
+  try {
+    return fs.existsSync('/.dockerenv') || process.env.IN_DOCKER === '1';
+  } catch {
+    return false;
+  }
+}
+
+function isSystemctlAvailable() {
+  try {
+    const result = spawnSync('which', ['systemctl'], { encoding: 'utf8', timeout: 500 });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
+}
+
 export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
   try {
     const load = os.loadavg();
@@ -66,40 +83,47 @@ export function readLocalStats({ controlPlaneSystemdUnit = '' } = {}) {
       diskTotal = Number(parts[1] || 0) * 1024;
       diskUsed = Number(parts[2] || 0) * 1024;
     } catch {}
-    let controlPlaneStatus = 'unknown';
+    let controlPlaneStatus = 'not_applicable';
     let controlPlaneOk = false;
-    try {
-      const unit = String(controlPlaneSystemdUnit || 'control-plane').trim() || 'control-plane';
-      const probeArgsList = [
-        ['show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
-        ['--user', 'show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
-      ];
-      let matchedProbe = null;
-      for (const args of probeArgsList) {
-        const probe = spawnSync(
-          'systemctl',
-          args,
-          { encoding: 'utf8', timeout: 1500, killSignal: 'SIGKILL' },
-        );
-        if (probe.error?.code === 'ETIMEDOUT') {
-          controlPlaneStatus = 'control_probe_timeout';
-          matchedProbe = probe;
-          break;
+    const inContainer = isRunningInContainer();
+    const hasSystemctl = isSystemctlAvailable();
+    if (inContainer || !hasSystemctl) {
+      controlPlaneStatus = 'not_applicable';
+      controlPlaneOk = true;
+    } else {
+      try {
+        const unit = String(controlPlaneSystemdUnit || 'control-plane').trim() || 'control-plane';
+        const probeArgsList = [
+          ['show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
+          ['--user', 'show', unit, '-p', 'ActiveState', '-p', 'MainPID'],
+        ];
+        let matchedProbe = null;
+        for (const args of probeArgsList) {
+          const probe = spawnSync(
+            'systemctl',
+            args,
+            { encoding: 'utf8', timeout: 1500, killSignal: 'SIGKILL' },
+          );
+          if (probe.error?.code === 'ETIMEDOUT') {
+            controlPlaneStatus = 'control_probe_timeout';
+            matchedProbe = probe;
+            break;
+          }
+          if (probe.status === 0) {
+            matchedProbe = probe;
+            break;
+          }
         }
-        if (probe.status === 0) {
-          matchedProbe = probe;
-          break;
+        if (matchedProbe?.status === 0) {
+          const activeState = String((String(matchedProbe.stdout || '').match(/ActiveState=(.+)/) || [])[1] || '').trim();
+          const mainPid = Number(String((String(matchedProbe.stdout || '').match(/MainPID=(.+)/) || [])[1] || '0').trim() || 0);
+          controlPlaneStatus = activeState || 'unknown';
+          controlPlaneOk = activeState === 'active' && mainPid > 0;
+        } else if (controlPlaneStatus !== 'control_probe_timeout') {
+          controlPlaneStatus = 'control_probe_failed';
         }
-      }
-      if (matchedProbe?.status === 0) {
-        const activeState = String((String(matchedProbe.stdout || '').match(/ActiveState=(.+)/) || [])[1] || '').trim();
-        const mainPid = Number(String((String(matchedProbe.stdout || '').match(/MainPID=(.+)/) || [])[1] || '0').trim() || 0);
-        controlPlaneStatus = activeState || 'unknown';
-        controlPlaneOk = activeState === 'active' && mainPid > 0;
-      } else if (controlPlaneStatus !== 'control_probe_timeout') {
-        controlPlaneStatus = 'control_probe_failed';
-      }
-    } catch {}
+      } catch {}
+    }
     return {
       host: os.hostname(),
       load1: Number(load[0]?.toFixed?.(2) || 0),
