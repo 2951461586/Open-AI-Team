@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Desk, Plus, Upload, File, FileText, Image, Trash2, Download, FolderOpen, Clock, CheckCircle2, MessageSquare, Eye } from 'lucide-react';
+import { LayoutDashboard, Plus, Upload, File, FileText, Image, Trash2, Download, FolderOpen, Clock, CheckCircle2, MessageSquare, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
 
@@ -13,6 +13,7 @@ interface DeskFile {
   createdAt: string;
   updatedAt: string;
   preview?: string;
+  status?: 'draft' | 'published';
 }
 
 interface DeskNote {
@@ -100,7 +101,7 @@ export function DeskPanel({
       <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
-            <Desk className="h-5 w-5" />
+            <LayoutDashboard className="h-5 w-5" />
           </div>
           <div>
             <h2 className="text-sm font-semibold text-[var(--fg)]">{t('desk.title', 'Desk')}</h2>
@@ -145,8 +146,9 @@ export function DeskPanel({
       </div>
 
       <div className="flex-1 overflow-auto p-6">
-        {activeTab === 'files' ? (
-          <div className="space-y-2">
+        <div className="max-w-4xl mx-auto">
+          {activeTab === 'files' ? (
+            <div className="space-y-2">
             {files.map((file) => {
               const Icon = getFileIcon(file.type);
               return (
@@ -253,12 +255,13 @@ export function DeskPanel({
               {notes.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-48 text-[var(--fg-muted)]">
                   <MessageSquare className="h-12 w-12 mb-3 opacity-30" />
-                  <p>{t('desk.noNotes', 'No notes yet')}</p>
+                  <p>{t('desk.noNotes', '暂无笔记')}</p>
                 </div>
               )}
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );

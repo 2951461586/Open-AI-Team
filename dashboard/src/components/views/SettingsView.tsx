@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Settings, Bot, MemoryStick, Palette, Desk } from 'lucide-react'
+import { Settings, Bot, MemoryStick, Palette, LayoutDashboard } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
 import { PersonalityPanel } from '@/components/panels/PersonalityPanel'
@@ -19,7 +19,7 @@ const TABS: { id: SettingsTab; icon: typeof Bot; labelKey: string }[] = [
   { id: 'personality', icon: Bot, labelKey: 'personality.title' },
   { id: 'memory', icon: MemoryStick, labelKey: 'memory.title' },
   { id: 'skills', icon: Palette, labelKey: 'skills.marketplace' },
-  { id: 'desk', icon: Desk, labelKey: 'desk.title' },
+  { id: 'desk', icon: LayoutDashboard, labelKey: 'desk.title' },
 ]
 
 export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) {
@@ -71,7 +71,9 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
       </div>
 
       <div className="flex-1 overflow-auto panel-scroll">
-        {renderContent()}
+        <div className="max-w-6xl mx-auto px-6 py-6">
+          {renderContent()}
+        </div>
       </div>
     </div>
   )

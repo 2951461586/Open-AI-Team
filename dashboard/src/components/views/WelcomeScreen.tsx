@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Sparkles, Rocket, BookOpen, MessageCircle, Settings, ChevronRight, CheckCircle2, Bot, Zap } from 'lucide-react';
+import { Sparkles, Rocket, BookOpen, MessageCircle, Settings, ChevronRight, CheckCircle2, Bot, Zap, Key } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useI18n } from '@/i18n/context';
 
@@ -23,41 +23,33 @@ interface Step {
 const DEFAULT_STEPS: Step[] = [
   {
     id: 'api-key',
-    title: 'Configure API Key',
-    description: 'Set up your LLM provider credentials',
+    title: '配置 API Key',
+    description: '设置您的 LLM 提供商凭证',
     icon: Key,
     completed: false,
   },
   {
     id: 'model',
-    title: 'Select Model',
-    description: 'Choose your preferred AI model',
+    title: '选择模型',
+    description: '选择您偏好的 AI 模型',
     icon: Bot,
     completed: false,
   },
   {
     id: 'personality',
-    title: 'Choose Personality',
-    description: 'Pick an agent personality that suits your needs',
+    title: '选择人格',
+    description: '挑选适合您需求的 Agent 人格',
     icon: Sparkles,
     completed: false,
   },
   {
     id: 'first-task',
-    title: 'Try First Task',
-    description: 'Start with a simple task to get familiar',
+    title: '尝试首个任务',
+    description: '从简单任务开始熟悉系统',
     icon: Rocket,
     completed: false,
   },
 ];
-
-function Key({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
-    </svg>
-  );
-}
 
 export function WelcomeScreen({
   onStartChat,
@@ -80,18 +72,18 @@ export function WelcomeScreen({
   const tips = [
     {
       id: 'tl-first',
-      title: 'TL-First Architecture',
-      content: 'All messages go through Team Leader first. TL decides whether to answer directly or delegate to specialized agents.',
+      title: 'TL-First 架构',
+      content: '所有消息首先经过团队领导处理。TL 决定是直接回答还是委托给专业 Agent。',
     },
     {
       id: 'skills',
-      title: 'Skills System',
-      content: 'Use /skills command to browse available capabilities. Skills are loaded progressively to keep context lean.',
+      title: '技能系统',
+      content: '使用 /skills 命令浏览可用功能。技能采用渐进式加载以保持上下文精简。',
     },
     {
       id: 'memory',
-      title: 'Memory Decay',
-      content: 'Agent memory naturally decays over time. Recent interactions are kept sharp while older ones fade.',
+      title: '记忆衰减',
+      content: 'Agent 记忆会随时间自然衰减。近期交互保持清晰，而较早的记忆会逐渐淡忘。',
     },
   ];
 
@@ -240,10 +232,10 @@ export function WelcomeScreen({
           <span>{t('welcome.hint', 'Press Ctrl+/ to focus chat input')}</span>
           <div className="flex items-center gap-4">
             <button onClick={onViewDocs} className="hover:text-[var(--fg)] transition-colors">
-              Documentation
+              文档
             </button>
             <button onClick={onOpenSettings} className="hover:text-[var(--fg)] transition-colors">
-              Settings
+              设置
             </button>
           </div>
         </div>

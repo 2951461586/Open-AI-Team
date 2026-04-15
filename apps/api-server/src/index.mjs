@@ -1,4 +1,6 @@
 import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { WebSocketServer } from 'ws';
 import { createDeskApi } from '@ai-team/team-runtime';
@@ -8,11 +10,79 @@ import { tryHandleRegisteredRoute } from './route-registrar.mjs';
 import { consumeWebhookEvent } from './webhook-event-router.mjs';
 import { dispatchDashboardChat } from './routes/team-route-dispatch-v2.mjs';
 
+const DASHBOARD_OUT_DIR = '/app/dashboard/out';
+const DASHBOARD_OUT_PUBLIC_DIR = DASHBOARD_OUT_DIR;
+
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript',
+  '.mjs': 'application/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf',
+  '.eot': 'application/vnd.ms-fontobject',
+  '.webmanifest': 'application/manifest+json',
+  '.txt': 'text/plain',
+};
+
+function serveStaticFile(req, res, filePath) {
+  try {
+    const data = fs.readFileSync(filePath);
+    const ext = path.extname(filePath).toLowerCase();
+    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    res.writeHead(200, { 'Content-Type': contentType });
+    res.end(data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function serveDashboardIndex(req, res) {
+  const indexPath = path.join(DASHBOARD_OUT_PUBLIC_DIR, 'index.html');
+  return serveStaticFile(req, res, indexPath);
+}
+
+function handleDashboardRoute(req, res) {
+  const urlStr = String(req.url || '/');
+  const urlPath = urlStr.split('?')[0];
+
+  if (urlPath === '/' || urlPath === '') {
+    return serveDashboardIndex(req, res);
+  }
+
+  if (urlPath.startsWith('/_next/')) {
+    const filePath = path.join(DASHBOARD_OUT_PUBLIC_DIR, urlPath);
+    if (serveStaticFile(req, res, filePath)) return true;
+    res.writeHead(404);
+    res.end('Not found');
+    return true;
+  }
+
+  if (urlPath.startsWith('/') && !urlPath.startsWith('/api') && !urlPath.startsWith('/state') && !urlPath.startsWith('/internal') && !urlPath.startsWith('/ws') && !urlPath.startsWith('/health')) {
+    let filePath = path.join(DASHBOARD_OUT_PUBLIC_DIR, urlPath);
+    if (!path.extname(filePath)) {
+      filePath = path.join(filePath, 'index.html');
+    }
+    if (serveStaticFile(req, res, filePath)) return true;
+    return serveDashboardIndex(req, res);
+  }
+
+  return false;
+}
+
 function normalizeWsScopeKey(raw = '') {
   const scopeKey = String(raw || '').trim();
   return scopeKey || 'dashboard:main:chat:default';
 }
-
 function parseRequestUrl(req) {
   try {
     return new URL(req.url || '/', 'http://localhost');
@@ -137,8 +207,8 @@ export async function createServer(config = loadIndexConfig()) {
       return;
     }
 
-    if (tryHandleRegisteredRoute(req, res, baseRouteCtx)) return;
-
+    if (await tryHandleRegisteredRoute(req, res, baseRouteCtx)) return;
+    if (handleDashboardRoute(req, res)) return;
     sendJson(res, 404, { ok: false, error: 'not_found' });
   });
 

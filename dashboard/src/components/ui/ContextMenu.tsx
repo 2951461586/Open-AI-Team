@@ -14,12 +14,11 @@ interface MenuItem {
   action?: () => void;
 }
 
-interface ContextMenuProps {
-  items: MenuItem[];
+interface ContextMenuProviderProps {
   children: React.ReactNode;
 }
 
-export function ContextMenuProvider({ children }: { children: React.ReactNode }) {
+export function ContextMenuProvider({ children }: ContextMenuProviderProps) {
   const [contextMenu, setContextMenu] = useState<{
     x: number;
     y: number;

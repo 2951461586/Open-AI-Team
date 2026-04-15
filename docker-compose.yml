@@ -6,6 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
+      args:
+        DASHBOARD_TOKEN: ${DASHBOARD_TOKEN:-}
+        NEXT_PUBLIC_ENABLE_REALTIME: ${NEXT_PUBLIC_ENABLE_REALTIME:-}
+        NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL:-}
     image: ai-team-harness:latest
     restart: unless-stopped
     env_file:

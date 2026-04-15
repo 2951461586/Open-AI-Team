@@ -7,6 +7,7 @@ import { TaskState } from '@/lib/types'
 import type { View } from './Sidebar'
 import { stateLabel, nodeServiceStatusLabel } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
+import type { Locale } from '@/i18n/context'
 
 interface Props {
   lastUpdate: number | null
@@ -21,9 +22,9 @@ interface Props {
   controlPlaneStatus?: string
 }
 
-function formatLastUpdate(lastUpdate: number | null, locale: 'zh' | 'en', unsyncedLabel: string) {
+function formatLastUpdate(lastUpdate: number | null, locale: Locale, unsyncedLabel: string) {
   if (!lastUpdate) return unsyncedLabel
-  return new Date(lastUpdate).toLocaleTimeString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+  return new Date(lastUpdate).toLocaleTimeString(locale === 'zh' ? 'zh-CN' : locale === 'en' ? 'en-US' : locale === 'ja' ? 'ja-JP' : locale === 'ko' ? 'ko-KR' : 'zh-TW', {
     hour: '2-digit',
     minute: '2-digit',
   })
@@ -75,6 +76,7 @@ export function Header({
     kanban: t('nav.kanban'),
     chat: t('nav.chat'),
     agents: t('nav.agents'),
+    settings: t('nav.settings'),
   }
 
   const currentTaskPill = selectedTask?.taskId

@@ -39,11 +39,11 @@ function NodeCard({ nodeKey, node }: { nodeKey: string; node: NodeSummary }) {
   const stats = (node.stats || {}) as { load1?: number; memoryUsedPercent?: number; diskUsedPercent?: number }
   const load1 = Number(stats.load1 || 0)
   const mem = Number(stats.memoryUsedPercent || 0)
-  const capLabel = node.reachable && Number(node.activeResidentCount || 0) > 0 ? 'Active' : node.reachable ? 'Standby' : 'Offline'
+  const capLabel = node.reachable && Number(node.activeResidentCount || 0) > 0 ? '活跃' : node.reachable ? '待机' : '离线'
   const capTone = node.reachable && Number(node.activeResidentCount || 0) > 0 ? 'success' as const : node.reachable ? 'accent' as const : 'warning' as const
-  const pressLabel = load1 >= 2 || mem >= 85 ? 'High' : load1 >= 1 || mem >= 70 ? 'Medium' : load1 > 0 || mem > 0 ? 'Low' : 'Idle'
+  const pressLabel = load1 >= 2 || mem >= 85 ? '高' : load1 >= 1 || mem >= 70 ? '中' : load1 > 0 || mem > 0 ? '低' : '空闲'
   const pressTone = load1 >= 2 || mem >= 85 ? 'danger' as const : load1 >= 1 || mem >= 70 ? 'warning' as const : 'success' as const
-  const roles = (node.activeResidentRoles || []).map(r => roleLabel(r)).join(', ') || 'None'
+  const roles = (node.activeResidentRoles || []).map(r => roleLabel(r)).join(', ') || '无'
 
   return (
     <article className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all">
@@ -66,12 +66,12 @@ function NodeCard({ nodeKey, node }: { nodeKey: string; node: NodeSummary }) {
             <Chip value={capLabel} tone={capTone} />
           </div>
           <div className="flex flex-wrap gap-2">
-            <Chip label="Latency" value={probeLatencyLabel(node.latencyMs)} />
-            <Chip label="Active" value={`${Number(node.activeResidentCount || 0)}`} tone={Number(node.activeResidentCount || 0) > 0 ? 'success' : 'default'} />
-            <Chip label="Load" value={pressLabel} tone={pressTone} />
+            <Chip label="延迟" value={probeLatencyLabel(node.latencyMs)} />
+            <Chip label="活跃" value={`${Number(node.activeResidentCount || 0)}`} tone={Number(node.activeResidentCount || 0) > 0 ? 'success' : 'default'} />
+            <Chip label="负载" value={pressLabel} tone={pressTone} />
           </div>
           <div className="mt-2 text-xs text-[var(--fg-muted)]">
-            <span className="font-medium">Roles:</span> {roles}
+            <span className="font-medium">角色:</span> {roles}
           </div>
         </div>
       </div>
@@ -106,10 +106,10 @@ const MOCK_AGENTS: AgentRuntime[] = [
 ]
 
 function statusInfo(s: AgentRuntime['status']) {
-  return s === 'active' ? { label: 'Active', tone: 'success' as const }
-    : s === 'busy' ? { label: 'Busy', tone: 'accent' as const }
-    : s === 'degraded' ? { label: 'Degraded', tone: 'danger' as const }
-    : { label: 'Idle', tone: 'default' as const }
+  return s === 'active' ? { label: '活跃', tone: 'success' as const }
+    : s === 'busy' ? { label: '忙碌', tone: 'accent' as const }
+    : s === 'degraded' ? { label: '降级', tone: 'danger' as const }
+    : { label: '空闲', tone: 'default' as const }
 }
 
 function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
@@ -129,7 +129,7 @@ function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
       </div>
 
       <div className="mb-4">
-        <div className="text-xs text-[var(--fg-muted)] mb-2">Roles</div>
+        <div className="text-xs text-[var(--fg-muted)] mb-2">角色</div>
         <div className="flex flex-wrap gap-1.5">
           {agent.roles.map((r) => (
             <span key={r} className="px-2.5 py-1 rounded-lg bg-[var(--surface-subtle)] text-xs font-medium text-[var(--fg-secondary)] border border-[var(--border)]">
@@ -140,19 +140,19 @@ function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <MetricBox icon={<Heart size={12} />} label="Heartbeat" value={agent.heartbeatMs ? `${agent.heartbeatMs}ms` : '—'} />
-        <MetricBox icon={<Server size={12} />} label="Memory" value={agent.memorySize ? `${agent.memorySize}` : '—'} />
-        <MetricBox icon={<Zap size={12} />} label="Last Active" value={ago} />
+        <MetricBox icon={<Heart size={12} />} label="心跳" value={agent.heartbeatMs ? `${agent.heartbeatMs}ms` : '—'} />
+        <MetricBox icon={<Server size={12} />} label="内存" value={agent.memorySize ? `${agent.memorySize}` : '—'} />
+        <MetricBox icon={<Zap size={12} />} label="最后活跃" value={ago} />
       </div>
 
       <div className="mt-3 grid grid-cols-2 gap-2">
-        <MetricBox icon={<Puzzle size={12} />} label="Skills" value={agent.skillsInstalled ?? '—'} />
-        <MetricBox icon={<Activity size={12} />} label="Status" value={st.label} />
+        <MetricBox icon={<Puzzle size={12} />} label="技能" value={agent.skillsInstalled ?? '—'} />
+        <MetricBox icon={<Activity size={12} />} label="状态" value={st.label} />
       </div>
 
       {agent.config && (
         <div className="mt-4 p-3 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border-subtle)]">
-          <div className="text-xs font-medium text-[var(--fg-muted)] mb-1.5">Runtime Config</div>
+          <div className="text-xs font-medium text-[var(--fg-muted)] mb-1.5">运行时配置</div>
           <div className="space-y-1 font-mono text-xs text-[var(--fg-secondary)]">
             {agent.config.workflowPackId && <div>workflow: {agent.config.workflowPackId}</div>}
             {agent.config.policyPackId && <div>policy: {agent.config.policyPackId}</div>}
@@ -180,8 +180,9 @@ export function AgentsView() {
       const rawNodes = json?.nodes || json?.payload?.nodes || {}
       const deployment = json?.deployment || json?.payload?.deployment || {}
       const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
+      const legacyAliases = ['laoda', 'authority', 'violet', 'observer', 'lebang', 'reviewer']
       const list = Object.entries(rawNodes)
-        .filter(([key, value]) => key !== 'ts' && value && typeof value === 'object')
+        .filter(([key, value]) => key !== 'ts' && !legacyAliases.includes(key) && value && typeof value === 'object')
         .map(([key, value]: [string, any]) => ({
           key,
           label: canonicalLabels[key] || value?.label || key,
@@ -238,8 +239,8 @@ export function AgentsView() {
               <Server className="h-5 w-5" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-[var(--fg)]">Agent Runtime</h1>
-              <p className="text-xs text-[var(--fg-muted)]">Monitor and manage agent instances</p>
+              <h1 className="text-base font-bold text-[var(--fg)]">Agent 运行时</h1>
+              <p className="text-xs text-[var(--fg-muted)]">监控和管理 Agent 实例</p>
             </div>
           </div>
           <button
@@ -252,8 +253,8 @@ export function AgentsView() {
 
         <div className="flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit">
           {([
-            { id: 'runtime' as AgentTab, label: 'Runtime', icon: Bot },
-            { id: 'nodes' as AgentTab, label: 'Nodes', icon: Server },
+            { id: 'runtime' as AgentTab, label: '运行时', icon: Bot },
+            { id: 'nodes' as AgentTab, label: '节点', icon: Server },
           ]).map((t) => {
             const Icon = t.icon
             const active = tab === t.id
@@ -277,42 +278,44 @@ export function AgentsView() {
       </div>
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="mb-4 flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-[var(--fg-muted)]">Active:</span>
-            <span className="px-2.5 py-1 rounded-lg bg-[var(--success-soft)] font-semibold text-[var(--success)]">
-              {tab === 'runtime' ? agentMet.active : nodeMet.online}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[var(--fg-muted)]">Total:</span>
-            <span className="px-2.5 py-1 rounded-lg bg-[var(--surface-subtle)] font-semibold text-[var(--fg-secondary)]">
-              {tab === 'runtime' ? agentMet.total : nodeMet.total}
-            </span>
-          </div>
-          {tab === 'nodes' && (
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-4 flex items-center gap-4 text-sm">
             <div className="flex items-center gap-2">
-              <span className="text-[var(--fg-muted)]">Residents:</span>
-              <span className="px-2.5 py-1 rounded-lg bg-[var(--accent-soft)] font-semibold text-[var(--accent)]">
-                {nodeMet.resident}
+              <span className="text-[var(--fg-muted)]">活跃:</span>
+              <span className="px-2.5 py-1 rounded-lg bg-[var(--success-soft)] font-semibold text-[var(--success)]">
+                {tab === 'runtime' ? agentMet.active : nodeMet.online}
               </span>
             </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--fg-muted)]">总数:</span>
+              <span className="px-2.5 py-1 rounded-lg bg-[var(--surface-subtle)] font-semibold text-[var(--fg-secondary)]">
+                {tab === 'runtime' ? agentMet.total : nodeMet.total}
+              </span>
+            </div>
+            {tab === 'nodes' && (
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--fg-muted)]">常驻:</span>
+                <span className="px-2.5 py-1 rounded-lg bg-[var(--accent-soft)] font-semibold text-[var(--accent)]">
+                  {nodeMet.resident}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {tab === 'runtime' && (
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {agents.map((a) => <AgentRuntimeCard key={a.agentId} agent={a} />)}
+            </div>
+          )}
+
+          {tab === 'nodes' && (
+            loading && entries.length === 0
+              ? <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">正在加载节点...</div>
+              : entries.length === 0
+                ? <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">暂无节点数据</div>
+                : <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{entries.map((n) => <NodeCard key={n.key} nodeKey={n.key} node={n} />)}</div>
           )}
         </div>
-
-        {tab === 'runtime' && (
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {agents.map((a) => <AgentRuntimeCard key={a.agentId} agent={a} />)}
-          </div>
-        )}
-
-        {tab === 'nodes' && (
-          loading && entries.length === 0
-            ? <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">Loading nodes...</div>
-            : entries.length === 0
-              ? <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">No node data</div>
-              : <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{entries.map((n) => <NodeCard key={n.key} nodeKey={n.key} node={n} />)}</div>
-        )}
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
 import { normalizeDashboardEnvelope, normalizeNodesEnvelope } from '@ai-team/team-core'
 
-const DEFAULT_LOCAL_API_BASE = 'http://127.0.0.1:19090'
-
-export const API_BASE = String(process.env.NEXT_PUBLIC_API_BASE || '').trim() || DEFAULT_LOCAL_API_BASE
+export const API_BASE = String(process.env.NEXT_PUBLIC_API_BASE || '').trim() || ''
 
 const DASHBOARD_TOKEN = process.env.NEXT_PUBLIC_DASHBOARD_TOKEN || ''
 
@@ -22,10 +20,15 @@ export function getWsUrl(): string {
   const realtimeEnabled = String(process.env.NEXT_PUBLIC_ENABLE_REALTIME || '').trim() === '1'
   if (!realtimeEnabled) return ''
   const explicit = String(process.env.NEXT_PUBLIC_WS_URL || '').trim()
-  if (!explicit) return ''
-  if (!DASHBOARD_TOKEN) return explicit
-  const sep = explicit.includes('?') ? '&' : '?'
-  return `${explicit}${sep}token=${encodeURIComponent(DASHBOARD_TOKEN)}`
+  if (explicit) {
+    const sep = explicit.includes('?') ? '&' : '?'
+    return DASHBOARD_TOKEN ? `${explicit}${sep}token=${encodeURIComponent(DASHBOARD_TOKEN)}` : explicit
+  }
+  if (typeof window === 'undefined') return ''
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+  const host = window.location.host
+  const wsUrl = `${protocol}//${host}/ws/chat`
+  return DASHBOARD_TOKEN ? `${wsUrl}?token=${encodeURIComponent(DASHBOARD_TOKEN)}` : wsUrl
 }
 
 

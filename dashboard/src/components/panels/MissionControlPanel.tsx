@@ -223,8 +223,8 @@ export function MissionControlPanel({ task, liveEvents = [], messages = [], task
       const entry = map.get(key) || { index: key, roles: [], workItems: [] }
       const content = String(ev.content || '')
       const itemTokens = content.split(',').map(v => v.trim()).filter(Boolean)
-      entry.workItems = Array.from(new Set([...entry.workItems, ...itemTokens]))
-      entry.roles = Array.from(new Set([...entry.roles, ...itemTokens.map(v => v.split('(')[0]).filter(Boolean)]))
+      entry.workItems = Array.from(new Set(entry.workItems.concat(itemTokens)))
+      entry.roles = Array.from(new Set(entry.roles.concat(itemTokens.map(v => v.split('(')[0]).filter(Boolean))))
       if (ev.eventKind === 'execution.layer.started') entry.started = ev
       if (ev.eventKind === 'execution.layer.completed') entry.completed = ev
       map.set(key, entry)

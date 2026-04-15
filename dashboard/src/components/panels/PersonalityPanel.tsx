@@ -123,16 +123,17 @@ export function PersonalityPanel({
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
-            <Bot className="h-5 w-5" />
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
+              <Bot className="h-5 w-5" />
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold text-[var(--fg)]">{t('personality.title', 'Agent 人格')}</h2>
+              <p className="text-xs text-[var(--fg-muted)]">已配置 {localPersonalities.length} 个人格</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-sm font-semibold text-[var(--fg)]">{t('personality.title', 'Agent Personalities')}</h2>
-            <p className="text-xs text-[var(--fg-muted)]">{localPersonalities.length} personalities configured</p>
-          </div>
-        </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleAddPersonality}
@@ -344,6 +345,7 @@ export function PersonalityPanel({
           })()}
         </div>
       )}
+      </div>
     </div>
   );
 }

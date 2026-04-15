@@ -7,13 +7,13 @@ import ja from './locales/ja.json'
 import ko from './locales/ko.json'
 import zhTW from './locales/zh-TW.json'
 
-type Locale = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW'
+export type Locale = 'zh' | 'en' | 'ja' | 'ko' | 'zh-TW'
 type Messages = Record<string, string>
 
 type I18nContextValue = {
   locale: Locale
   setLocale: (locale: Locale) => void
-  t: (key: string) => string
+  t: (key: string, fallback?: string) => string
 }
 
 const STORAGE_KEY = 'dashboard-locale'
@@ -42,8 +42,8 @@ export function I18nProvider({ children, defaultLocale = 'zh' }: { children: Rea
     setLocaleState(next)
   }, [])
 
-  const t = useCallback((key: string) => {
-    return dictionaries[locale][key] ?? dictionaries.zh[key] ?? key
+  const t = useCallback((key: string, fallback?: string) => {
+    return dictionaries[locale][key] ?? dictionaries.zh[key] ?? fallback ?? key
   }, [locale])
 
   const value = useMemo(() => ({ locale, setLocale, t }), [locale, setLocale, t])

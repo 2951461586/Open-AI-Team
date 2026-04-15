@@ -34,6 +34,9 @@ export function nodeServiceStatusLabel(opts?: { reachable?: boolean; probe?: str
   const status = String(opts?.controlPlaneStatus || '').toLowerCase()
   if (opts?.reachable || status === 'active' || status === 'reachable') return '服务可达'
   if (status === 'unreachable' || status === 'inactive' || status === 'failed' || status === 'dead') return '服务不可达'
+  if (status === 'control_probe_failed') return '探测失败'
+  if (status === 'control_probe_pending') return '探测中'
+  if (status === 'not_configured') return '未配置'
   return '服务状态未知'
 }
 

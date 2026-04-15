@@ -47,6 +47,8 @@ export {
   createEnhancedModelRouter,
 } from './enhanced-model-router.mjs';
 
+export { createStandaloneProductRuntime } from './standalone-product-runtime.mjs';
+
 export {
   ERROR_CATEGORIES,
   RECOVERY_STRATEGIES,

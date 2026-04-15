@@ -28,12 +28,12 @@ interface SkillMarketplaceProps {
 }
 
 const CATEGORIES: Category[] = [
-  { id: 'all', name: 'All Skills' },
-  { id: 'research', name: 'Research' },
-  { id: 'development', name: 'Development' },
-  { id: 'productivity', name: 'Productivity' },
-  { id: 'data', name: 'Data' },
-  { id: 'creative', name: 'Creative' },
+  { id: 'all', name: '全部技能' },
+  { id: 'research', name: '研究' },
+  { id: 'development', name: '开发' },
+  { id: 'productivity', name: '生产力' },
+  { id: 'data', name: '数据' },
+  { id: 'creative', name: '创意' },
 ]
 
 const SKILLS: Skill[] = [
@@ -70,7 +70,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
   const handleInstall = useCallback(async (skillId: string) => {
     setInstalling(skillId)
     setTimeout(() => {
-      setInstalledSkills(prev => new Set([...prev, skillId]))
+      setInstalledSkills(prev => new Set(Array.from(prev).concat(skillId)))
       setInstalling(null)
       onInstall?.(skillId)
     }, 1000)
@@ -78,26 +78,27 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
 
   return (
     <div className="p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
-          <Package className="h-5 w-5" />
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <Package className="h-5 w-5" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-sm font-semibold text-[var(--fg)]">{t('skills.title', '技能中心')}</h2>
+            <p className="text-xs text-[var(--fg-muted)]">{t('skills.available', '可用技能')}</p>
+          </div>
         </div>
-        <div className="flex-1">
-          <h2 className="text-sm font-semibold text-[var(--fg)]">{t('skills.title', 'Skills')}</h2>
-          <p className="text-xs text-[var(--fg-muted)]">{t('skills.available', 'Available Skills')}</p>
-        </div>
-      </div>
 
-      <div className="relative mb-4">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--fg-muted)]" />
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search skills..."
-          className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all text-sm"
-        />
-      </div>
+        <div className="relative mb-4">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--fg-muted)]" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="搜索技能..."
+            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all text-sm"
+          />
+        </div>
 
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
         {CATEGORIES.map((cat) => (
@@ -223,9 +224,10 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
         {filteredSkills.length === 0 && (
           <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">
             <Package className="h-12 w-12 mb-3 opacity-30" />
-            <p>No skills found</p>
+            <p>未找到技能</p>
           </div>
         )}
+      </div>
       </div>
     </div>
   )

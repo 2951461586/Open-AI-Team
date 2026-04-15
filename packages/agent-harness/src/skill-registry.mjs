@@ -1,3 +1,3 @@
-export { SkillRegistry, createSkillRegistry } from '../../../packages/skills/skill-registry.mjs';
-export { SkillRuntime, createSkillRuntime } from '../../../packages/skills/skill-runtime.mjs';
-export * from '../../../packages/skills/skill-protocol.mjs';
+export { SkillRegistry, createSkillRegistry } from '../../../packages/skills/src/skill-registry.mjs';
+export { SkillRuntime, createSkillRuntime } from '../../../packages/skills/src/skill-runtime.mjs';
+export * from '../../../packages/skills/src/skill-protocol.mjs';
