@@ -44,14 +44,14 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
   return (
     <div className="flex h-full flex-col bg-[var(--surface)]">
       <div className="flex items-center gap-3 border-b border-[var(--border)] px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center gap-3 w-full">
+        <div className="flex items-center gap-3 w-full">
           <Settings className="h-5 w-5 text-[var(--accent)]" />
           <h1 className="text-base font-semibold text-[var(--fg)]">{t('nav.settings', 'Settings')}</h1>
         </div>
       </div>
 
       <div className="flex border-b border-[var(--border)] px-6">
-        <div className="max-w-6xl mx-auto flex w-full">
+        <div className="flex w-full">
           {TABS.map((tab) => {
             const Icon = tab.icon
             const active = activeTab === tab.id
@@ -75,7 +75,7 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
       </div>
 
       <div className="flex-1 overflow-auto panel-scroll">
-        <div className="max-w-6xl mx-auto px-6 py-6">
+        <div className="px-6 py-6">
           {renderContent()}
         </div>
       </div>

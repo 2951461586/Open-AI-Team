@@ -233,7 +233,7 @@ export function AgentsView() {
   return (
     <div className="flex flex-col h-full bg-[var(--bg)]">
       <div className="shrink-0 px-6 py-4 border-b border-[var(--border)] bg-[var(--surface)]">
-        <div className="max-w-6xl mx-auto flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
               <Server className="h-5 w-5" />
@@ -251,7 +251,7 @@ export function AgentsView() {
           </button>
         </div>
 
-        <div className="max-w-6xl mx-auto flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit">
+        <div className="flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit">
           {([
             { id: 'runtime' as AgentTab, label: '运行时', icon: Bot },
             { id: 'nodes' as AgentTab, label: '节点', icon: Server },
@@ -278,7 +278,7 @@ export function AgentsView() {
       </div>
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="max-w-6xl mx-auto">
+        <div>
           <div className="mb-4 flex items-center gap-4 text-sm">
             <div className="flex items-center gap-2">
               <span className="text-[var(--fg-muted)]">活跃:</span>
