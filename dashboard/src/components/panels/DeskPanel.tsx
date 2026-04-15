@@ -146,8 +146,7 @@ export function DeskPanel({
       </div>
 
       <div className="flex-1 overflow-auto p-6">
-        <div className="max-w-4xl mx-auto">
-          {activeTab === 'files' ? (
+        {activeTab === 'files' ? (
             <div className="space-y-2">
             {files.map((file) => {
               const Icon = getFileIcon(file.type);
@@ -261,7 +260,6 @@ export function DeskPanel({
             </div>
           </div>
         )}
-        </div>
       </div>
     </div>
   );

@@ -170,7 +170,6 @@ export function MemoryDecayPanel({
 
   return (
     <div className="p-6">
-      <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
@@ -431,7 +430,6 @@ export function MemoryDecayPanel({
           )}
         </div>
       )}
-      </div>
     </div>
   );
 }

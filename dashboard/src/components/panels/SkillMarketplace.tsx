@@ -78,7 +78,6 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
 
   return (
     <div className="p-6">
-      <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
             <Package className="h-5 w-5" />
@@ -227,7 +226,6 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
             <p>未找到技能</p>
           </div>
         )}
-      </div>
       </div>
     </div>
   )
