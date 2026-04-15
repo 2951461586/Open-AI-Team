@@ -52,7 +52,9 @@ cp .env.example .env
 
 ```bash
 make docker-start
-# 访问 http://localhost:3001
+# 或使用一键部署
+make deploy
+# 访问 http://localhost:19090
 ```
 
 **本地开发**
@@ -70,7 +72,8 @@ pnpm run dev
 
 | 方式 | 命令 | 说明 |
 |------|------|------|
-| **Docker** | `make docker-start` | 生产部署（推荐） |
+| **Docker 一键部署** | `make deploy` | 一键部署（推荐） |
+| **Docker** | `make docker-start` | 生产部署 |
 | **本地** | `pnpm run dev` | 开发模式 |
 | **桌面** | `cd electron && npm run dev` | Electron 桌面开发 |
 
