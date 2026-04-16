@@ -8,6 +8,9 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
+  server: {
+    allowedHosts: ['.monkeycode-ai.online'],
+  },
   webpack: (config) => {
     config.resolve = config.resolve || {}
     config.resolve.alias = config.resolve.alias || {}
