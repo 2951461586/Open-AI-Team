@@ -69,6 +69,6 @@
   },
   "publish": {
     "provider": "generic",
-    "url": "https://example.com/releases/"
+    "url": "${GITHUB_RELEASES_URL:-https://github.com/2951461586/Open-AI-Team/releases/download/v}"
   }
 }
