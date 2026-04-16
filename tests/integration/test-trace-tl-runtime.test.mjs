@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { createTLRuntime } from '../../src/team/team-tl-runtime.mjs';
 import { createTraceCollector } from '../../src/observability/trace-span.mjs';
 import { FileTraceExporter } from '../../src/observability/trace-exporter.mjs';

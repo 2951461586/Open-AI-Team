@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { createAgentDesk } from '../../src/team/agent-desk.mjs';
 import { createEventBusStub, withTempDir } from '../helpers/test-helpers.mjs';
 

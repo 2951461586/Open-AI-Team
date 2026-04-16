@@ -14,7 +14,6 @@
     "@ai-team/skills": "workspace:*",
     "@ai-team/shared": "workspace:*",
     "@ai-team/event-bus": "workspace:*",
-    "@cloudbase/node-sdk": "^3.18.1",
     "ws": "^8.19.0",
     "xml2js": "^0.6.2"
   }

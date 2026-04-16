@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { createSandboxCore } from '../../src/agent-harness-core/sandbox-core.mjs';
 import { withTempDir } from '../helpers/test-helpers.mjs';
 

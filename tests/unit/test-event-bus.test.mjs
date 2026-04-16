@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { createEventBus } from '../../src/team/event-bus.mjs';
 import { TEAM_EVENT_TYPES } from '../../src/team/event-types.mjs';
 import { withTempDir } from '../helpers/test-helpers.mjs';

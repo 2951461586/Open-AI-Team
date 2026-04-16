@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { createLocalToolRuntime } from '../../src/agent-harness-core/tool-runtime.mjs';
 import { createSandboxCore } from '../../src/agent-harness-core/sandbox-core.mjs';
 import { withTempDir, createEventBusStub, exists, readJson } from '../helpers/test-helpers.mjs';

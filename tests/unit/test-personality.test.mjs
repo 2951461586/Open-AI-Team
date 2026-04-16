@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import test from 'node:test';
 import { buildAgentSystemPrompt, getPersonalityTemplate, resolveAgentPersonality } from '../../src/team/agent-personality.mjs';
 
 const registryPath = path.resolve('tests/fixtures/personalities-fixture.json');

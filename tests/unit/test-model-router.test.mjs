@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import test from 'node:test';
 import { ModelRouter, estimateComplexity } from '../../src/agent-harness-core/model-router.mjs';
 
 test('ModelRouter routes short simple text to utility', () => {

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import test from 'node:test';
 import { createTLRuntime } from '../../src/team/team-tl-runtime.mjs';
 import { createInMemoryTeamStore, createNativeChatStub, createIdGenerator } from '../helpers/test-helpers.mjs';
 

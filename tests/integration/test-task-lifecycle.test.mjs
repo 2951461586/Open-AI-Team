@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import test from 'node:test';
 import { createAgentLifecycleManager } from '../../src/team/team-agent-lifecycle.mjs';
 
 test('Agent lifecycle manager tracks register, drain, heartbeat, and expiry', () => {
