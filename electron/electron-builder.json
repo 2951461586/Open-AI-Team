@@ -18,16 +18,20 @@
     "main": "main.mjs"
   },
   "asar": true,
-  "compression": "maximum",
+  "compression": "normal",
   "mac": {
     "target": [
       {
         "target": "dmg",
         "arch": ["x64", "arm64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "arm64"]
       }
     ],
     "category": "public.app-category.developer-tools",
-    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "artifactName": "${productName}-${version}-mac-${arch}.${ext}",
     "darkModeSupport": true,
     "extendInfo": {
       "NSHumanReadableCopyright": "Copyright 2024-2026 AI Team"
@@ -40,12 +44,12 @@
         "arch": ["x64"]
       },
       {
-        "target": "deb",
+        "target": "tar.gz",
         "arch": ["x64"]
       }
     ],
     "category": "Utility",
-    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "artifactName": "${productName}-${version}-linux-${arch}.${ext}",
     "maintainer": "AI Team",
     "vendor": "AI Team"
   },
@@ -54,9 +58,17 @@
       {
         "target": "nsis",
         "arch": ["x64"]
+      },
+      {
+        "target": "portable",
+        "arch": ["x64"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64"]
       }
     ],
-    "artifactName": "${productName}-Setup-${version}.${ext}",
+    "artifactName": "${productName}-${version}-win-${arch}.${ext}",
     "publisherName": "AI Team"
   },
   "nsis": {
@@ -66,11 +78,10 @@
     "deleteAppDataOnUninstall": false,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "AI Team",
-    "installerIcon": "build/icon.ico",
-    "uninstallerIcon": "build/icon.ico",
-    "installerHeaderIcon": "build/icon.ico",
-    "license": "LICENSE"
+    "shortcutName": "AI Team"
+  },
+  "portable": {
+    "artifactName": "${productName}-${version}-win-portable.${ext}"
   },
   "publish": {
     "provider": "generic",
