@@ -24,7 +24,7 @@ test('SkillRegistry loads manifests from directory and executes latest version b
       tags: ['test'],
       dependencies: [],
     }, null, 2));
-    await fs.writeFile(path.join(v1Dir, 'impl.mjs'), "export async function execute(request){ return { ok: true, data: { value: request.payload.value, version: '1.0.0' } }; }\n");
+    await fs.writeFile(path.join(v1Dir, 'impl.mjs'), "export async function execute(request){ return { value: request.value, version: '1.0.0' }; }\n");
     await fs.writeFile(path.join(v2Dir, 'skill.manifest.json'), JSON.stringify({
       id: 'echo',
       name: 'Echo',
@@ -36,7 +36,7 @@ test('SkillRegistry loads manifests from directory and executes latest version b
       tags: ['test', 'latest'],
       dependencies: [],
     }, null, 2));
-    await fs.writeFile(path.join(v2Dir, 'impl.mjs'), "export default async function(request){ return { echoed: request.payload.value, version: '2.0.0' }; }\n");
+    await fs.writeFile(path.join(v2Dir, 'impl.mjs'), "export default async function(request){ return { echoed: request.value, version: '2.0.0' }; }\n");
 
     const registry = new SkillRegistry();
     const dirResult = await registry.fromDirectory(skillsDir);
@@ -80,8 +80,8 @@ export default async function execute(){ return { label: ${JSON.stringify(label)
     const registry = new SkillRegistry();
     const runtime = new SkillRuntime({ registry });
     await fs.writeFile(stateFile, '');
-    await registry.register(await writeSkill('1.0.0', 'v1'), { rootDir: skillDir });
-    await registry.register(await writeSkill('2.0.0', 'v2'), { rootDir: skillDir });
+    await runtime.register(await writeSkill('1.0.0', 'v1'), { rootDir: skillDir });
+    await runtime.register(await writeSkill('2.0.0', 'v2'), { rootDir: skillDir });
     assert.equal(runtime.listLoaded('hot-skill').length, 2);
     await runtime.hotReload(await writeSkill('2.0.0', 'v2b'), { rootDir: skillDir });
     assert.equal(runtime.listLoaded('hot-skill').length, 2);

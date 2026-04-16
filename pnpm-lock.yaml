@@ -59,9 +59,6 @@ importers:
       '@ai-team/api-server':
         specifier: workspace:*
         version: link:../api-server
-      '@ai-team/skills':
-        specifier: workspace:*
-        version: link:../../packages/skills
 
   packages/agent-harness:
     dependencies:

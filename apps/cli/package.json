@@ -10,7 +10,6 @@
   },
   "description": "Retired secondary CLI scaffold for developer convenience wrappers only.",
   "dependencies": {
-    "@ai-team/api-server": "workspace:*",
-    "@ai-team/skills": "workspace:*"
+    "@ai-team/api-server": "workspace:*"
   }
 }

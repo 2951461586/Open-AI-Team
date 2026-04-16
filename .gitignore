@@ -81,6 +81,7 @@ plugins/
 projects/
 services/
 skills/
+!packages/skills/
 tmp/
 reports/pool-manager/
 memory/*.md

@@ -1,0 +1,19 @@
+{
+  "name": "@ai-team/skills",
+  "version": "1.0.0",
+  "description": "Skills system for AI Team - registry, runtime, and built-in skills",
+  "type": "module",
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./skill-registry": "./src/skill-registry.mjs",
+    "./skill-runtime": "./src/skill-runtime.mjs",
+    "./skill-protocol": "./src/skill-protocol.mjs"
+  },
+  "scripts": {
+    "test": "node --test src/*.test.mjs"
+  },
+  "keywords": ["ai-team", "skills", "agent"],
+  "license": "MIT",
+  "dependencies": {}
+}
