@@ -1,0 +1,152 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-team-harness
+  labels:
+    app: ai-team-harness
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-team-harness
+  template:
+    metadata:
+      labels:
+        app: ai-team-harness
+    spec:
+      containers:
+        - name: ai-team
+          image: ai-team-harness:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 19090
+              protocol: TCP
+            - name: mcp
+              containerPort: 7331
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: ai-team-config
+            - secretRef:
+                name: ai-team-secrets
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "19090"
+            - name: MCP_PORT
+              value: "7331"
+            - name: BIND
+              value: "0.0.0.0"
+            - name: IN_DOCKER
+              value: "1"
+            - name: CONTAINER
+              value: "1"
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "512Mi"
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 6
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: state
+              mountPath: /app/state
+            - name: task-workspaces
+              mountPath: /app/task_workspaces
+            - name: config-team
+              mountPath: /app/config/team
+              readOnly: true
+      volumes:
+        - name: state
+          persistentVolumeClaim:
+            claimName: ai-team-state
+        - name: task-workspaces
+          persistentVolumeClaim:
+            claimName: ai-team-task-workspaces
+        - name: config-team
+          configMap:
+            name: ai-team-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-team-harness
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 19090
+      targetPort: http
+      protocol: TCP
+    - name: mcp
+      port: 7331
+      targetPort: mcp
+      protocol: TCP
+  selector:
+    app: ai-team-harness
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-team-config
+data:
+  TEAM_DB_PATH: "/app/state/team-runtime.db"
+  TEAM_TASK_WORKSPACE_ROOT: "/app/task_workspaces"
+  MCP_ENABLED: "true"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ai-team-secrets
+type: Opaque
+stringData:
+  DASHBOARD_TOKEN: "change-me-in-production"
+  ORCH_KICK_TOKEN: "change-me-in-production"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-team-state
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-team-task-workspaces
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-team-configmap
+data:
+  channels.json: |
+    {}

@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'ai-team-harness'
+    static_configs:
+      - targets: ['ai-team:19090']
+    metrics_path: '/metrics'
+    scheme: 'http'
+
+  - job_name: 'ai-team-mcp'
+    static_configs:
+      - targets: ['ai-team:7331']
+    metrics_path: '/metrics'
+    scheme: 'http'
