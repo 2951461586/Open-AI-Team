@@ -44,7 +44,6 @@ _tmp/
 # Runtime data (never commit)
 memory/
 logs/
-logs/
 *.log
 
 # Local tooling / credential state

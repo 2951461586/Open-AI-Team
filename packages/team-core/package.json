@@ -4,6 +4,5 @@
   "exports": {
     ".": "./src/index.mjs",
     "./*": "./src/*.mjs"
-  },
-  "dependencies": {}
+  }
 }

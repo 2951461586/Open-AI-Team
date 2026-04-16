@@ -33,7 +33,7 @@ services:
       - ./config/team:/app/config/team:ro
       - ./.env:/app/.env:ro
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:${PORT:-3001}/health || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:${PORT:-19090}/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 6

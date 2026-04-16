@@ -117,9 +117,9 @@ kind: Secret
 metadata:
   name: ai-team-secrets
 type: Opaque
-stringData:
-  DASHBOARD_TOKEN: "change-me-in-production"
-  ORCH_KICK_TOKEN: "change-me-in-production"
+# NOTE: These must be replaced with actual values before deployment
+# Use: kubectl create secret generic ai-team-secrets --from-literal=DASHBOARD_TOKEN='your-token' --from-literal=ORCH_KICK_TOKEN='your-token'
+# Or use external secrets management (e.g., Vault, AWS Secrets Manager)
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

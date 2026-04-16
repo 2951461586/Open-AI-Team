@@ -3,6 +3,5 @@
   "type": "module",
   "exports": {
     ".": "./src/index.mjs"
-  },
-  "dependencies": {}
+  }
 }

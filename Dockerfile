@@ -50,7 +50,7 @@ RUN mkdir -p /app/state /app/task_workspaces /app/config/team \
 FROM base AS runtime
 WORKDIR /app
 ENV NODE_ENV=production \
-    PORT=3001 \
+    PORT=19090 \
     MCP_PORT=7331 \
     BIND=0.0.0.0 \
     CI=true
@@ -82,7 +82,7 @@ RUN apt-get update \
 
 USER appuser
 
-EXPOSE 3001 7331
+EXPOSE 19090 7331
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=6 \
   CMD curl -fsS http://127.0.0.1:${PORT}/health || exit 1
