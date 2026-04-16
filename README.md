@@ -21,7 +21,7 @@
 | **多渠道** | Telegram / Feishu / QQ / WeChat 完整支持 |
 | **Bot 命令** | /help /status /skills /reset /language /model |
 | **人格系统** | 可视化人格配置面板 |
-| **桌面应用** | Electron 桌面包装器，支持 .dmg / .exe / AppImage |
+| **桌面应用** | Electron 桌面包装器，支持 .exe / .dmg / AppImage |
 
 ---
 
@@ -34,12 +34,6 @@ make doctor
 ```
 
 ### 2. 配置（首次使用）
-
-```bash
-make setup-wizard
-```
-
-或手动配置：
 
 ```bash
 cp .env.example .env
@@ -66,9 +60,23 @@ pnpm run dev
 
 ---
 
-## 部署说明
+## 下载安装
 
-> **重要**: 本项目**仅支持从源码构建部署**。不提供预编译的 dashboard-static-export 包。
+### 直接下载 (exe / zip / dmg)
+
+从 GitHub Releases 下载最新版本：
+
+| 平台 | 安装包 | 便携版 (无需安装) |
+|------|--------|-------------------|
+| **Windows** | [AI Team Setup.exe](https://github.com/ai-team/ai-team/releases) | [AI Team win-portable.zip](https://github.com/ai-team/ai-team/releases) |
+| **macOS** | [AI Team.dmg](https://github.com/ai-team/ai-team/releases) | [AI Team mac.zip](https://github.com/ai-team/ai-team/releases) |
+| **Linux** | [AI Team.AppImage](https://github.com/ai-team/ai-team/releases) | [AI Team linux.tar.gz](https://github.com/ai-team/ai-team/releases) |
+
+详细说明见 [electron/DOWNLOAD.md](./electron/DOWNLOAD.md)
+
+---
+
+## 部署说明
 
 | 方式 | 命令 | 说明 |
 |------|------|------|
@@ -76,6 +84,7 @@ pnpm run dev
 | **Docker** | `make docker-start` | 生产部署 |
 | **本地** | `pnpm run dev` | 开发模式 |
 | **桌面** | `cd electron && npm run dev` | Electron 桌面开发 |
+| **打包桌面应用** | `cd electron && npm run package` | 生成 .exe / .dmg |
 
 ---
 
@@ -86,6 +95,7 @@ pnpm run dev
 - [Installation](./INSTALL.md)
 - [Docker 部署](./DOCKER.md)
 - [Scripts](./SCRIPTS.md)
+- [桌面应用下载](./electron/DOWNLOAD.md)
 
 ---
 
@@ -141,130 +151,66 @@ pnpm run dev
 
 ---
 
+## API 架构
+
+统一 REST API，前缀 `/api/v1/`：
+
+| 类别 | 端点 |
+|------|------|
+| **聊天** | `POST /api/v1/team/chat` - 创建对话 |
+| | `POST /api/v1/team/chat/task` - 任务内聊天 |
+| **任务** | `POST /api/v1/team/tasks/:taskId/control` - 任务控制 |
+| | `GET /api/v1/team/tasks/:taskId/files` - 任务文件 |
+| **状态** | `GET /api/v1/state/team` - 团队概览 |
+| | `GET /api/v1/state/team/summary` - 任务摘要 |
+| | `GET /api/v1/state/team/workbench` - 工作台 |
+| | `GET /api/v1/state/team/artifacts` - 产物列表 |
+| | `GET /api/v1/state/team/evidence` - 证据列表 |
+| | `GET /api/v1/state/team/threads` - 线程列表 |
+| **内部** | `POST /api/v1/internal/team/dispatch` - 消息分发 |
+| | `POST /api/v1/internal/team/control` - 内部控制 |
+
+详细 API 文档见 [docs/api/](./docs/api/)
+
+---
+
 ## 仓库结构
 
 ```
 ai-team/
 ├── packages/                 # 核心包
 │   ├── agent-harness/       # 可复用执行基座
-│   │   ├── standalone-agent-package.mjs
-│   │   ├── enhanced-model-router.mjs
-│   │   ├── convention-plugin-system.mjs
-│   │   └── fault-tolerance.mjs
 │   ├── team-runtime/        # Team Runtime
-│   │   ├── sub-agent-context.mjs    # Sub-Agent 隔离
-│   │   ├── context-compression.mjs  # 上下文压缩
-│   │   ├── channel-adapters/        # 渠道适配
-│   │   │   ├── channel-manager.mjs   # 渠道管理
-│   │   │   ├── bot-commands.mjs      # Bot 命令
-│   │   │   ├── channel-telegram.mjs
-│   │   │   ├── channel-feishu.mjs
-│   │   │   ├── channel-qq.mjs
-│   │   │   └── channel-wechat.mjs
-│   │   ├── desk-storage.mjs
-│   │   └── migrations/               # SQLite 迁移
 │   ├── team-core/           # Team 核心协议
 │   ├── tools/              # 内置工具集
-│   │   ├── tool-browser.mjs
-│   │   ├── tool-code-executor.mjs
-│   │   ├── tool-database.mjs
-│   │   ├── tool-url-fetcher.mjs
-│   │   └── tool-image-understanding.mjs
-│   ├── skills/              # Skills 系统
-│   │   ├── skill-registry.mjs
-│   │   ├── skill-runtime.mjs
-│   │   ├── skill-installer.mjs      # 技能安装器
-│   │   ├── SKILL.md.template        # SKILL.md 模板
-│   │   ├── marketplace.json          # 技能市场数据
-│   │   └── skills/                  # 内置 Skills (11个)
-│   │       ├── web-search/
-│   │       ├── research/
-│   │       ├── report-generation/
-│   │       ├── code-review/
-│   │       ├── image-generation/
-│   │       ├── chart-visualization/
-│   │       ├── slide-creation/
-│   │       ├── document/
-│   │       ├── translation/
-│   │       ├── data-analysis/
-│   │       └── skill-creator/
+│   ├── skills/              # Skills 系统 (11个内置)
 │   ├── shared/              # 共享工具
-│   │   ├── config-loader.mjs
-│   │   ├── cron-scheduler.mjs
-│   │   ├── heartbeat.mjs
-│   │   ├── memory-decay.mjs
-│   │   └── semantic-search.mjs
 │   ├── im-channels/          # 渠道适配
 │   └── event-bus/            # 事件总线
 │
 ├── apps/
-│   ├── api-server/           # API 服务器
-│   │   └── src/routes/skills/  # Skills API 路由
-│   └── cli/
+│   ├── api-server/           # API 服务器 (Hono)
+│   │   └── src/routes/v1/    # 统一 API v1 路由
+│   └── cli/                  # CLI 工具
 │
 ├── dashboard/                 # Dashboard UI (Next.js)
-│   └── src/components/
-│       ├── panels/
-│       │   ├── PersonalityPanel.tsx   # 人格配置面板
-│       │   ├── MemoryDecayPanel.tsx   # 记忆衰减面板
-│       │   └── SkillMarketplace.tsx   # 技能商店
-│       └── views/
-│           └── SettingsView.tsx       # 设置视图
+│   └── src/components/        # React 组件
 │
 ├── electron/                  # Electron 桌面
-│   ├── main.mjs             # 主进程 (完整菜单栏)
-│   ├── electron-builder.json  # 多平台打包配置
-│   └── preload.mjs
+│   ├── main.mjs             # 主进程
+│   ├── preload.mjs           # 预加载脚本
+│   ├── electron-builder.json # 多平台打包配置
+│   └── DOWNLOAD.md           # 下载说明
 │
 ├── src/                      # 兼容层和本地实现
 │   ├── observability/        # 可观测性
-│   │   ├── langsmith-exporter.mjs
-│   │   ├── langfuse-exporter.mjs
-│   │   ├── trace-span.mjs
-│   │   └── trace-exporter.mjs
 │   └── ...
-│
-├── examples/
-│   ├── oss-minimal/          # 最小可运行示例
-│   └── third-party-agent-sample/
 │
 ├── schemas/                   # JSON Schema 定义
-├── scripts/
-│   ├── setup/
-│   │   └── setup-wizard.mjs  # 交互式安装向导
-│   └── ...
-│
-├── .github/workflows/
-│   ├── ci.yml               # CI
-│   └── electron-release.yml  # Electron 发布
-│
-└── docs/
+├── scripts/                   # 脚本工具
+├── examples/                  # 示例配置
+└── docs/                      # 文档
 ```
-
----
-
-## 部署方式
-
-| 方式 | 命令 | 说明 |
-|------|------|------|
-| **Docker 一键部署** | `make deploy` | 一键部署（推荐） |
-| **Docker** | `make docker-start` | 生产部署 |
-| **本地** | `pnpm run dev` | 开发模式 |
-| **桌面** | `cd electron && npm run dev` | Electron 桌面开发 |
-| **打包桌面应用** | `cd electron && npm run package` | 生成 .dmg / .exe |
-
----
-
-## 内置工具
-
-| 工具 | 说明 |
-|------|------|
-| `browser` | 浏览器自动化 |
-| `code-executor` | 代码执行 (JS/Bash) |
-| `database` | SQLite 查询 |
-| `url-fetcher` | URL 内容获取 |
-| `image-understanding` | 图像理解 |
-| `mcp` | MCP Server 适配 |
 
 ---
 
@@ -273,12 +219,6 @@ ai-team/
 ```bash
 # 检查环境健康状态
 make doctor
-
-# 检查环境前提条件
-make check
-
-# 运行安装向导
-make setup-wizard
 
 # 安装依赖
 pnpm install
@@ -292,25 +232,12 @@ npm test
 # 构建 Dashboard
 npm run dashboard:build
 
-# 代码检查
-npm run lint
-
 # Electron 开发
 cd electron && npm run dev
 
 # Electron 打包
 cd electron && npm run package
 ```
-
----
-
-## 文档
-
-- [Getting Started](./GETTING-STARTED.md)
-- [Architecture](./ARCHITECTURE.md)
-- [Installation](./INSTALL.md)
-- [Docker 部署](./DOCKER.md)
-- [Scripts](./SCRIPTS.md)
 
 ---
 
@@ -327,6 +254,33 @@ cd electron && npm run package
 | Electron | ✅ | ❌ | ✅ |
 | SQLite 持久化 | ✅ | ❌ | ✅ |
 | Bot 命令 | ✅ | ❌ | ❌ |
+| API 统一 | ✅ Hono | ❌ | ❌ |
+| exe 便携版 | ✅ | ❌ | ✅ |
+
+---
+
+## 更新日志
+
+### v2.0 (2026-04-16)
+
+**架构重构**
+
+- 引入 Hono 框架，统一 API 路由 `/api/v1/`
+- 前后端配置统一管理
+- Electron 集成 Hono Server，支持 exe 便携版
+
+**API 统一**
+
+- 所有端点统一使用 `/api/v1/` 前缀
+- 统一使用 camelCase 命名
+- 标准化响应格式 (Envelope)
+
+**性能优化**
+
+- 全站压测通过 (100% 成功率，P95 < 11ms)
+- 支持高并发请求处理
+
+详细变更见 [.monkeycode/docs/refactor-v1.md](./.monkeycode/docs/refactor-v1.md)
 
 ---
 
