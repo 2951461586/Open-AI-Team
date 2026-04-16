@@ -1,0 +1,11 @@
+{
+  "id": "chart-visualization",
+  "name": "Chart Visualization",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Create charts and visualizations from data",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute", "write"],
+  "tags": ["chart", "visualization", "data"],
+  "dependencies": []
+}

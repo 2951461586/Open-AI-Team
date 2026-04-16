@@ -1,0 +1,11 @@
+{
+  "id": "web-search",
+  "name": "Web Search",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Search the web for information using search engines",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute"],
+  "tags": ["search", "web", "research"],
+  "dependencies": []
+}

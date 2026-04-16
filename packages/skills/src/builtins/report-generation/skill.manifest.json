@@ -1,0 +1,11 @@
+{
+  "id": "report-generation",
+  "name": "Report Generation",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Generate structured reports from research findings or data",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute", "write"],
+  "tags": ["report", "document", "output"],
+  "dependencies": []
+}

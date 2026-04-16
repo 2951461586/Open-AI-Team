@@ -1,0 +1,11 @@
+{
+  "id": "slide-creation",
+  "name": "Slide Creation",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Create presentation slides from content",
+  "entry": "./impl.mjs",
+  "capabilities": ["execute", "write"],
+  "tags": ["slides", "presentation", "output"],
+  "dependencies": []
+}

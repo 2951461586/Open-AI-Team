@@ -1,0 +1,11 @@
+{
+  "id": "translation",
+  "name": "Translation",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Translate text between languages",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute"],
+  "tags": ["translation", "language", "text"],
+  "dependencies": []
+}

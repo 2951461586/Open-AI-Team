@@ -1,0 +1,11 @@
+{
+  "id": "research",
+  "name": "Research",
+  "version": "1.0.0",
+  "type": "compound",
+  "description": "Comprehensive research workflow combining web search, data analysis, and report generation",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute", "write"],
+  "tags": ["research", "workflow", "analysis"],
+  "dependencies": ["web-search", "data-analysis", "report-generation"]
+}

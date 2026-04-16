@@ -1,0 +1,11 @@
+{
+  "id": "image-generation",
+  "name": "Image Generation",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Generate images from text descriptions using AI",
+  "entry": "./impl.mjs",
+  "capabilities": ["execute", "write"],
+  "tags": ["image", "generation", "ai"],
+  "dependencies": []
+}

@@ -1,0 +1,11 @@
+{
+  "id": "skill-creator",
+  "name": "Skill Creator",
+  "version": "1.0.0",
+  "type": "meta",
+  "description": "Create new skills dynamically based on specifications",
+  "entry": "./impl.mjs",
+  "capabilities": ["execute", "write"],
+  "tags": ["meta", "creator", "dynamic"],
+  "dependencies": []
+}

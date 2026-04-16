@@ -1,6 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
 
 export const SKILL_TYPES = {
   SKILL: 'skill',
@@ -33,6 +36,11 @@ export class SkillRegistry {
     }
 
     return { loaded, errors };
+  }
+
+  async fromBuiltins() {
+    const builtinDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'builtins');
+    return this.fromDirectory(builtinDir);
   }
 
   async register(manifest, { rootDir } = {}) {

@@ -1,0 +1,11 @@
+{
+  "id": "data-analysis",
+  "name": "Data Analysis",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Analyze and extract insights from data",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute"],
+  "tags": ["data", "analysis", "insights"],
+  "dependencies": []
+}

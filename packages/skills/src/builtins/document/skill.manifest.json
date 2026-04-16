@@ -1,0 +1,11 @@
+{
+  "id": "document",
+  "name": "Document Processing",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Process and transform documents (PDF, Word, Text)",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute", "write"],
+  "tags": ["document", "processing", "transform"],
+  "dependencies": []
+}

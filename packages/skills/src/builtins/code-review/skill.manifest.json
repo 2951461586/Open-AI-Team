@@ -1,0 +1,11 @@
+{
+  "id": "code-review",
+  "name": "Code Review",
+  "version": "1.0.0",
+  "type": "skill",
+  "description": "Perform automated code review for quality, security, and best practices",
+  "entry": "./impl.mjs",
+  "capabilities": ["read", "execute"],
+  "tags": ["code", "review", "quality"],
+  "dependencies": []
+}
