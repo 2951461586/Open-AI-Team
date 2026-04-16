@@ -1,8 +1,10 @@
 import { normalizeDashboardEnvelope, normalizeNodesEnvelope } from '@ai-team/team-core'
+import { API_CONFIG, buildApiUrl } from './api-config.mjs'
 
 export const API_BASE = String(process.env.NEXT_PUBLIC_API_BASE || '').trim() || ''
-
 const DASHBOARD_TOKEN = process.env.NEXT_PUBLIC_DASHBOARD_TOKEN || ''
+
+const API_V1_BASE = API_BASE.replace('/api/', '/api/v1/') || API_BASE
 
 function authHeaders(): Record<string, string> {
   if (!DASHBOARD_TOKEN) return {}
@@ -31,12 +33,27 @@ export function getWsUrl(): string {
   return DASHBOARD_TOKEN ? `${wsUrl}?token=${encodeURIComponent(DASHBOARD_TOKEN)}` : wsUrl
 }
 
+function buildUrl(path: string, params: Record<string, string | number> = {}): string {
+  let url = `${API_BASE}${path}`
+  for (const [key, value] of Object.entries(params)) {
+    url = url.replace(`:${key}`, encodeURIComponent(String(value)))
+  }
+  return url
+}
+
+function buildV1Url(path: string, params: Record<string, string | number> = {}): string {
+  let url = `${API_V1_BASE}${path}`
+  for (const [key, value] of Object.entries(params)) {
+    url = url.replace(`:${key}`, encodeURIComponent(String(value)))
+  }
+  return url
+}
 
 export async function fetchDashboard(limit = 50, cursor = 0): Promise<Response> {
   const params = new URLSearchParams({ limit: String(limit) })
   if (cursor > 0) params.set('cursor', String(cursor))
   try {
-    const res = await fetch(`${API_BASE}/state/team/dashboard?${params}`, {
+    const res = await fetch(buildUrl('/api/v1/state/team/dashboard', {}).replace(API_BASE, API_V1_BASE) + `?${params}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -62,7 +79,7 @@ export async function fetchDashboard(limit = 50, cursor = 0): Promise<Response> 
 
 export async function fetchNodes(): Promise<Response> {
   try {
-    const res = await fetch(`${API_BASE}/state/team/nodes`, {
+    const res = await fetch(buildV1Url('/state/team/nodes'), {
       cache: 'no-store',
       mode: 'cors',
     })
@@ -89,7 +106,7 @@ export async function fetchNodes(): Promise<Response> {
 
 export async function fetchContracts(): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/contracts`, {
+    return await fetch(buildV1Url('/state/team/contracts'), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -102,7 +119,7 @@ export async function fetchContracts(): Promise<Response> {
 
 export async function fetchTaskArtifacts(taskId: string, limit = 200): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/artifacts?taskId=${encodeURIComponent(taskId)}&limit=${limit}`, {
+    return await fetch(buildV1Url('/state/team/artifacts', { taskId }) + `&limit=${limit}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -115,7 +132,7 @@ export async function fetchTaskArtifacts(taskId: string, limit = 200): Promise<R
 
 export async function fetchTaskArtifactFile(artifactId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/artifact-file?artifactId=${encodeURIComponent(artifactId)}`, {
+    return await fetch(buildUrl('/state/team/artifact-file', { artifactId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -128,7 +145,7 @@ export async function fetchTaskArtifactFile(artifactId: string): Promise<Respons
 
 export async function fetchWorkbench(taskId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/workbench?taskId=${encodeURIComponent(taskId)}`, {
+    return await fetch(buildV1Url('/state/team/workbench', { taskId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -141,7 +158,7 @@ export async function fetchWorkbench(taskId: string): Promise<Response> {
 
 export async function fetchSummary(taskId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/summary?taskId=${encodeURIComponent(taskId)}`, {
+    return await fetch(buildV1Url('/state/team/summary', { taskId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -154,7 +171,7 @@ export async function fetchSummary(taskId: string): Promise<Response> {
 
 export async function fetchControl(taskId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/control?taskId=${encodeURIComponent(taskId)}`, {
+    return await fetch(buildV1Url('/state/team/control', { taskId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -167,7 +184,7 @@ export async function fetchControl(taskId: string): Promise<Response> {
 
 export async function fetchPipeline(taskId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/pipeline?taskId=${encodeURIComponent(taskId)}`, {
+    return await fetch(buildV1Url('/state/team/pipeline', { taskId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -180,7 +197,7 @@ export async function fetchPipeline(taskId: string): Promise<Response> {
 
 export async function fetchArchive(limit = 100): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/archive?limit=${limit}`, {
+    return await fetch(buildV1Url('/state/team/archive') + `?limit=${limit}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -193,7 +210,7 @@ export async function fetchArchive(limit = 100): Promise<Response> {
 
 export async function fetchTaskEvidence(taskId: string, limit = 200): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/evidence?taskId=${encodeURIComponent(taskId)}&limit=${limit}`, {
+    return await fetch(buildV1Url('/state/team/evidence', { taskId }) + `&limit=${limit}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -206,7 +223,7 @@ export async function fetchTaskEvidence(taskId: string, limit = 200): Promise<Re
 
 export async function fetchTimeline(taskId: string, limit = 100): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/mailbox?taskId=${encodeURIComponent(taskId)}&limit=${limit}`, {
+    return await fetch(buildV1Url('/state/team/mailbox', { taskId }) + `&limit=${limit}`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -219,7 +236,7 @@ export async function fetchTimeline(taskId: string, limit = 100): Promise<Respon
 
 export async function postTaskAction(taskId: string, action: string, reason = ''): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/api/dashboard/control`, {
+    return await fetch(buildV1Url('/team/tasks/:taskId/control', { taskId }), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify({ taskId, action, reason }),
@@ -232,7 +249,7 @@ export async function postTaskAction(taskId: string, action: string, reason = ''
 
 export async function fetchResidents(teamId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/residents?teamId=${encodeURIComponent(teamId)}&ensure=true`, {
+    return await fetch(buildV1Url('/state/team/residents') + `?teamId=${encodeURIComponent(teamId)}&ensure=true`, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -261,7 +278,7 @@ export async function sendTaskChat(
     if (options?.targetRole) body.targetRole = options.targetRole
     if (options?.assignmentId) body.assignmentId = options.assignmentId
     if (options?.childTaskId) body.childTaskId = options.childTaskId
-    return await fetch(`${API_BASE}/api/chat/task`, {
+    return await fetch(buildV1Url('/team/chat/task'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(body),
@@ -274,7 +291,7 @@ export async function sendTaskChat(
 
 export async function fetchTaskFiles(taskId: string): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/api/task/${encodeURIComponent(taskId)}/files`, {
+    return await fetch(buildV1Url('/team/tasks/:taskId/files', { taskId }), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -286,34 +303,38 @@ export async function fetchTaskFiles(taskId: string): Promise<Response> {
 }
 
 export async function fetchThreads(taskId?: string): Promise<Response> {
-  const params = new URLSearchParams()
-  if (taskId) params.set('taskId', taskId)
-  const query = params.toString()
-  return await fetch(`${API_BASE}/state/team/threads${query ? `?${query}` : ''}`, {
-    cache: 'no-store',
-    mode: 'cors',
-    headers: authHeaders(),
-  })
+  const query = taskId ? `?taskId=${encodeURIComponent(taskId)}` : ''
+  try {
+    return await fetch(buildV1Url('/state/team/threads') + query, {
+      cache: 'no-store',
+      mode: 'cors',
+      headers: authHeaders(),
+    })
+  } catch (error) {
+    console.error('Threads fetch error:', error)
+    throw error
+  }
 }
 
 export async function fetchThreadSummary(threadId: string): Promise<Response> {
-  return await fetch(`${API_BASE}/state/team/thread-summary?threadId=${encodeURIComponent(threadId)}`, {
-    cache: 'no-store',
-    mode: 'cors',
-    headers: authHeaders(),
-  })
+  try {
+    return await fetch(buildUrl('/state/team/thread-summary', { threadId }), {
+      cache: 'no-store',
+      mode: 'cors',
+      headers: authHeaders(),
+    })
+  } catch (error) {
+    console.error('Thread summary fetch error:', error)
+    throw error
+  }
 }
 
 export async function fetchWorkbenchState(taskId: string): Promise<Response> {
-  return await fetch(`${API_BASE}/state/team/workbench?taskId=${encodeURIComponent(taskId)}`, {
-    cache: 'no-store',
-    mode: 'cors',
-    headers: authHeaders(),
-  })
+  return fetchWorkbench(taskId)
 }
 
 export async function submitWorkbenchApproval(taskId: string, action: 'approve' | 'reject' | 'request_revision', reason = ''): Promise<Response> {
-  return await fetch(`${API_BASE}/api/dashboard/control`, {
+  return await fetch(buildV1Url('/team/tasks/:taskId/control', { taskId }), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify({
@@ -331,8 +352,6 @@ export async function fetchWorkbenchArtifacts(taskId: string): Promise<Response>
 export async function fetchWorkbenchEvidence(taskId: string): Promise<Response> {
   return fetchTaskEvidence(taskId)
 }
-
-// ─── Agent Lifecycle ────────────────────────────────────────────────
 
 export interface AgentInfo {
   memberId: string
@@ -371,7 +390,7 @@ export async function fetchAgents(opts?: { role?: string; node?: string; activeO
   if (opts?.activeOnly) params.set('activeOnly', 'true')
   const query = params.toString()
   try {
-    return await fetch(`${API_BASE}/state/team/agents${query ? `?${query}` : ''}`, {
+    return await fetch(buildV1Url('/state/team/agents') + (query ? `?${query}` : ''), {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),
@@ -384,7 +403,7 @@ export async function fetchAgents(opts?: { role?: string; node?: string; activeO
 
 export async function fetchAgentLifecycle(): Promise<Response> {
   try {
-    return await fetch(`${API_BASE}/state/team/agents?activeOnly=false`, {
+    return await fetch(buildV1Url('/state/team/agents') + '?activeOnly=false', {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),

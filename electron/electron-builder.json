@@ -1,8 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "com.aiteamharness.desktop",
-  "productName": "AI Team Dashboard",
-  "copyright": "Copyright 2024 AI Team",
+  "appId": "com.ai-team.desktop",
+  "productName": "AI Team",
+  "copyright": "Copyright 2024-2026 AI Team",
   "directories": {
     "output": "dist",
     "buildResources": "build"
@@ -11,6 +11,7 @@
     "main.mjs",
     "preload.mjs",
     "package.json",
+    "../apps/api-server/src/**/*",
     "../dashboard/out/**/*"
   ],
   "extraMetadata": {
@@ -29,7 +30,7 @@
     "artifactName": "${productName}-${version}-${arch}.${ext}",
     "darkModeSupport": true,
     "extendInfo": {
-      "NSHumanReadableCopyright": "Copyright 2024 AI Team"
+      "NSHumanReadableCopyright": "Copyright 2024-2026 AI Team"
     }
   },
   "linux": {
@@ -65,10 +66,14 @@
     "deleteAppDataOnUninstall": false,
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
-    "shortcutName": "AI Team Dashboard"
+    "shortcutName": "AI Team",
+    "installerIcon": "build/icon.ico",
+    "uninstallerIcon": "build/icon.ico",
+    "installerHeaderIcon": "build/icon.ico",
+    "license": "LICENSE"
   },
   "publish": {
     "provider": "generic",
-    "url": "${GITHUB_RELEASES_URL:-https://github.com/2951461586/Open-AI-Team/releases/download/v}"
+    "url": "${GITHUB_RELEASES_URL:-https://github.com/ai-team/releases/download/v}"
   }
 }

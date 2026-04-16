@@ -3,7 +3,13 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.mjs"
+    ".": "./src/index.mjs",
+    "./hono": "./src/index-hono.mjs"
+  },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "start:hono": "node src/index-hono.mjs",
+    "dev": "NODE_ENV=development node src/index.mjs"
   },
   "dependencies": {
     "@ai-team/team-runtime": "workspace:*",
@@ -14,6 +20,8 @@
     "@ai-team/skills": "workspace:*",
     "@ai-team/shared": "workspace:*",
     "@ai-team/event-bus": "workspace:*",
+    "hono": "^4.7.0",
+    "@hono/node-server": "^1.13.0",
     "ws": "^8.19.0",
     "xml2js": "^0.6.2"
   }

@@ -18,12 +18,42 @@ const rootDir = path.resolve(__dirname, '..');
 const dashboardDir = path.join(rootDir, 'dashboard');
 const dashboardOutDir = path.join(dashboardDir, 'out');
 const dashboardIndexFile = path.join(dashboardOutDir, 'index.html');
+const apiServerDir = path.join(rootDir, 'apps', 'api-server');
 
 const isDev = process.env.ELECTRON_DEV === '1' || process.env.NODE_ENV === 'development';
 const devServerUrl = process.env.ELECTRON_RENDERER_URL || 'http://localhost:3000';
+const API_SERVER_PORT = process.env.API_SERVER_PORT || 19090;
 
 let mainWindow = null;
 let tray = null;
+let apiServerProcess = null;
+
+async function startApiServer() {
+  if (isDev) {
+    console.log('[electron] skipping api-server in dev mode');
+    return;
+  }
+
+  try {
+    const { createServer } = await import(path.join(apiServerDir, 'src', 'index.mjs'));
+    apiServerProcess = await createServer({
+      PORT: API_SERVER_PORT,
+      BIND: '127.0.0.1',
+      DASHBOARD_CORS_ORIGIN: '*',
+    });
+    console.log(`[electron] api-server started on port ${API_SERVER_PORT}`);
+  } catch (error) {
+    console.error('[electron] failed to start api-server:', error);
+  }
+}
+
+function stopApiServer() {
+  if (apiServerProcess?.server) {
+    apiServerProcess.server.close();
+    apiServerProcess = null;
+    console.log('[electron] api-server stopped');
+  }
+}
 
 function createMenu() {
   const template = [
@@ -36,8 +66,8 @@ function createMenu() {
             dialog.showMessageBox(mainWindow, {
               type: 'info',
               title: 'About AI Team',
-              message: 'AI Team Dashboard',
-              detail: `Version: ${app.getVersion()}\nElectron: ${process.versions.electron}\nNode: ${process.versions.node}`,
+              message: 'AI Team Desktop',
+              detail: `Version: ${app.getVersion()}\nElectron: ${process.versions.electron}\nNode: ${process.versions.node}\nAPI Server: localhost:${API_SERVER_PORT}`,
             });
           },
         },
@@ -147,7 +177,7 @@ function createTray() {
 
   const icon = nativeImage.createEmpty();
   tray = new Tray(icon);
-  tray.setToolTip('AI Team Dashboard');
+  tray.setToolTip('AI Team');
 
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -216,6 +246,7 @@ function createTray() {
       label: 'Quit',
       click: () => {
         app.isQuitting = true;
+        stopApiServer();
         app.quit();
       }
     }
@@ -239,7 +270,12 @@ async function loadRenderer(window) {
     return;
   }
 
-  await window.loadFile(dashboardIndexFile);
+  const apiBase = `http://127.0.0.1:${API_SERVER_PORT}`;
+  const indexPath = dashboardIndexFile;
+
+  await window.loadFile(indexPath, {
+    query: { apiBase }
+  });
 }
 
 function createMainWindow() {
@@ -248,7 +284,7 @@ function createMainWindow() {
     height: 840,
     minWidth: 960,
     minHeight: 640,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,
@@ -281,7 +317,7 @@ function showNativeNotification({ title, body }) {
   }
 
   const notification = new Notification({
-    title: title || 'AI Team Dashboard',
+    title: title || 'AI Team',
     body: body || ''
   });
   notification.show();
@@ -305,7 +341,25 @@ ipcMain.handle('electron:file:save', async (_event, options = {}) => {
   return result;
 });
 
-app.whenReady().then(() => {
+ipcMain.handle('electron:api-server:status', async () => {
+  return {
+    running: !!apiServerProcess,
+    port: API_SERVER_PORT,
+    url: `http://127.0.0.1:${API_SERVER_PORT}`
+  };
+});
+
+ipcMain.handle('electron:app:version', async () => {
+  return {
+    version: app.getVersion(),
+    electron: process.versions.electron,
+    node: process.versions.node,
+    platform: process.platform,
+  };
+});
+
+app.whenReady().then(async () => {
+  await startApiServer();
   createMenu();
   createMainWindow();
   createTray();
@@ -322,10 +376,10 @@ app.whenReady().then(() => {
 
 app.on('before-quit', () => {
   app.isQuitting = true;
+  stopApiServer();
 });
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    // Keep tray app alive unless the user explicitly quits.
   }
 });
