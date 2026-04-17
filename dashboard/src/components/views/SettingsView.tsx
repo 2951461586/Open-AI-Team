@@ -1,27 +1,21 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Settings, Bot, MemoryStick, Palette, LayoutDashboard, Globe, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { Settings, Bot, Globe, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
 import { PersonalityPanel } from '@/components/panels/PersonalityPanel'
-import { MemoryDecayPanel } from '@/components/panels/MemoryDecayPanel'
-import { SkillMarketplace } from '@/components/panels/SkillMarketplace'
-import { DeskPanel } from '@/components/panels/DeskPanel'
 import { ApiConfigPanel } from '@/components/panels/ApiConfigPanel'
 
-export type SettingsTab = 'api' | 'personality' | 'memory' | 'skills' | 'desk'
+export type SettingsTab = 'api' | 'personality'
 
 interface SettingsViewProps {
   defaultTab?: SettingsTab
 }
 
-const TABS: { id: SettingsTab; icon: typeof Bot; label: string }[] = [
-  { id: 'api', icon: Globe, label: 'API 配置' },
-  { id: 'personality', icon: Bot, label: '人格配置' },
-  { id: 'memory', icon: MemoryStick, label: '记忆监控' },
-  { id: 'skills', icon: Palette, label: '技能市场' },
-  { id: 'desk', icon: LayoutDashboard, label: '工作台' },
+const TABS: { id: SettingsTab; icon: typeof Bot; labelKey: string }[] = [
+  { id: 'api', icon: Globe, labelKey: 'api.config' },
+  { id: 'personality', icon: Bot, labelKey: 'personality.title' },
 ]
 
 export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
@@ -37,12 +31,6 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
         return <ApiConfigPanel />
       case 'personality':
         return <PersonalityPanel />
-      case 'memory':
-        return <MemoryDecayPanel />
-      case 'skills':
-        return <SkillMarketplace />
-      case 'desk':
-        return <DeskPanel />
       default:
         return <ApiConfigPanel />
     }
@@ -92,7 +80,7 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
                           )}
                         >
                           <Icon className="h-4 w-4 shrink-0" />
-                          <span className="text-xs font-medium">{tab.label}</span>
+                          <span className="text-xs font-medium">{t(tab.labelKey, tab.labelKey)}</span>
                         </button>
                       )
                     })}
@@ -111,7 +99,7 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
                   <Settings className="h-4 w-4 text-[var(--accent)]" />
                   <span className="text-sm font-semibold text-[var(--fg)]">{t('nav.settings', '设置')}</span>
                   <span>·</span>
-                  <span>{activeTabMeta?.label}</span>
+                  <span>{activeTabMeta ? t(activeTabMeta.labelKey, activeTabMeta.labelKey) : ''}</span>
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-1">
@@ -144,7 +132,7 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
                     )}
                   >
                     <Icon className="h-3.5 w-3.5" />
-                    <span>{tab.label}</span>
+                    <span>{t(tab.labelKey, tab.labelKey)}</span>
                   </button>
                 )
               })}
