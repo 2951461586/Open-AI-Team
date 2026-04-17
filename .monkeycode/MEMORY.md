@@ -64,3 +64,21 @@ Agent 在任务执行过程中发现的条目应遵循以下格式：
   - 参考 OpenHanako 使用 Hono 框架
   - 支持 exe 安装部署方式
   - 前后端分离但统一管理
+
+[Dashboard UI 重构 - AgentsView 和 SettingsView]
+- Date: 2026-04-17
+- Context: Agent 执行 Dashboard UI 重构任务
+- Category: 代码模式
+- Instructions:
+  - AgentsView 重构：
+    - 使用 surface-card-hero 和 hover-lift CSS 类实现卡片样式
+    - 使用 soft-label 替代自定义 Chip 组件
+    - 使用 metric-tile 替代自定义 MetricBox
+    - 改进 Header 设计：紧凑的 metrics 显示 + 刷新按钮
+    - 标签导航使用药丸形状按钮（pill-style tabs）
+  - SettingsView 重构：
+    - 类似的 Header 设计：图标 + 标题 + 描述
+    - 药丸形状标签导航
+    - 一致的间距和排版
+  - i18n 翻译：
+    - 添加缺失的 key：api.config、skills.marketplace、desk.title
