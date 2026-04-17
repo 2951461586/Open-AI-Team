@@ -6,6 +6,7 @@ import { KanbanColumn } from '@/components/KanbanColumn'
 import { useTaskStore } from '@/lib/store'
 import { TaskState, KANBAN_ORDER, groupTasksByState } from '@/lib/types'
 import { fetchDashboard } from '@/lib/api'
+import { useI18n } from '@/i18n/context'
 
 const PRIMARY_STAGES: TaskState[] = ['pending', 'planning', 'plan_review', 'approved', 'revision_requested']
 const SECONDARY_STAGES: TaskState[] = ['blocked', 'done', 'cancelled']
@@ -47,6 +48,7 @@ interface Props {
 }
 
 export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: Props) {
+  const { t } = useI18n()
   const { tasks, selectedTaskId, setSelectedTaskId, hasMore, cursor, totalCount } = useTaskStore()
   const onTaskSelect = useCallback((taskId: string | null) => setSelectedTaskId(taskId), [setSelectedTaskId])
 
@@ -159,7 +161,7 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="搜索任务…"
+              placeholder={t('kanban.searchPlaceholder', '搜索任务…')}
               className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface)] py-1.5 pl-8 pr-8 text-[12px] text-[var(--fg)] outline-none placeholder:text-[var(--fg-ghost)] focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/20"
             />
             {query && (
@@ -193,7 +195,7 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
                 onClick={clearFilter}
                 className="touch-manipulation inline-flex shrink-0 items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--surface)] px-2 py-1 text-[10px] text-[var(--fg-ghost)] hover:bg-[var(--surface-subtle)]"
               >
-                <Filter className="h-3 w-3" />重置
+                <Filter className="h-3 w-3" />{t('kanban.filterReset', '重置')}
               </button>
             )}
           </div>
@@ -204,10 +206,10 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
               type="button"
               onClick={onToggleRightPanel}
               className="hidden 2xl:inline-flex items-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1.5 text-[11px] font-medium text-[var(--fg-secondary)] transition hover:bg-[var(--surface-subtle)]"
-              aria-label={rightPanelCollapsed ? '显示详情' : '隐藏详情'}
+              aria-label={rightPanelCollapsed ? t('kanban.showDetail', '显示详情') : t('kanban.hideDetail', '隐藏详情')}
             >
               {rightPanelCollapsed ? <PanelRightOpen className="h-3.5 w-3.5" /> : <PanelRightClose className="h-3.5 w-3.5" />}
-              {rightPanelCollapsed ? '详情' : '收起'}
+              {rightPanelCollapsed ? t('kanban.showDetail', '详情') : t('kanban.hideDetail', '收起')}
             </button>
           )}
         </div>
@@ -221,8 +223,8 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
             {stateFilter ? (
               <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
                 <SectionHeader
-                  title={`筛选 · ${KANBAN_LABELS[stateFilter]}`}
-                  desc="当前仅展示单一阶段"
+                  title={`${t('kanban.filterSingle', '筛选')} · ${KANBAN_LABELS[stateFilter]}`}
+                  desc={t('kanban.filterSingleDesc', '当前仅展示单一阶段')}
                   count={(grouped[stateFilter] || []).length}
                   tone="accent"
                 />
@@ -240,8 +242,8 @@ export function KanbanView({ rightPanelCollapsed = false, onToggleRightPanel }: 
                 {primaryVisibleGroups.length > 0 && (
                   <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
                     <SectionHeader
-                      title="主线"
-                      desc="待处理到执行前的任务"
+                      title={t('kanban.mainLine', '主线')}
+                      desc={t('kanban.mainLineDesc', '待处理到执行前的任务')}
                       count={primaryCount}
                       tone="accent"
                     />
