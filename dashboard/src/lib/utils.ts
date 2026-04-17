@@ -9,16 +9,16 @@ export function cn(...inputs: ClassValue[]) {
 // ─── Shared labels ──────────────────────────────────────────────────
 
 export const NODE_LABELS: Record<string, string> = {
-  'node-a': 'Node A',
-  'node-b': 'Node B',
-  'node-c': 'Node C',
+  'node-a': '节点 A',
+  'node-b': '节点 B',
+  'node-c': '节点 C',
   // Legacy fallback keys — remove once API consumers fully migrate
-  laoda: 'Node A',
-  authority: 'Node A',
-  violet: 'Node B',
-  observer: 'Node B',
-  lebang: 'Node C',
-  reviewer: 'Node C',
+  laoda: '节点 A',
+  authority: '节点 A',
+  violet: '节点 B',
+  observer: '节点 B',
+  lebang: '节点 C',
+  reviewer: '节点 C',
 }
 
 export function probeLabel(probe?: string): string {

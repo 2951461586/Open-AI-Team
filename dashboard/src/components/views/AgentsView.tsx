@@ -202,7 +202,7 @@ export function AgentsView() {
       const json = await res.json()
       const rawNodes = json?.nodes || json?.payload?.nodes || {}
       const deployment = json?.deployment || json?.payload?.deployment || {}
-      const canonicalLabels: Record<string, string> = { 'node-a': 'Local', 'node-b': 'Observer', 'node-c': 'Review' }
+      const canonicalLabels: Record<string, string> = { 'node-a': '本地', 'node-b': '观察者', 'node-c': '评审' }
       const legacyAliases = ['laoda', 'authority', 'violet', 'observer', 'lebang', 'reviewer']
       const list = Object.entries(rawNodes)
         .filter(([key, value]) => key !== 'ts' && !legacyAliases.includes(key) && value && typeof value === 'object')
