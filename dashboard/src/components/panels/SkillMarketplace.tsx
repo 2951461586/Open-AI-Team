@@ -28,12 +28,12 @@ interface SkillMarketplaceProps {
 }
 
 const CATEGORIES: Category[] = [
-  { id: 'all', name: '全部技能' },
-  { id: 'research', name: '研究' },
-  { id: 'development', name: '开发' },
-  { id: 'productivity', name: '生产力' },
-  { id: 'data', name: '数据' },
-  { id: 'creative', name: '创意' },
+  { id: 'all', name: 'skills.all' },
+  { id: 'research', name: 'skills.research' },
+  { id: 'development', name: 'skills.development' },
+  { id: 'productivity', name: 'skills.productivity' },
+  { id: 'data', name: 'skills.data' },
+  { id: 'creative', name: 'skills.creative' },
 ]
 
 const SKILLS: Skill[] = [
@@ -94,7 +94,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="搜索技能..."
+            placeholder={t('skills.searchPlaceholder', '搜索技能...')}
             className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--surface-subtle)] focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent outline-none transition-all text-sm"
           />
         </div>
@@ -111,14 +111,14 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
                 : 'bg-[var(--surface-subtle)] text-[var(--fg-secondary)] hover:bg-[var(--surface-muted)]'
             )}
           >
-            {cat.name}
+            {t(cat.name, cat.name)}
           </button>
         ))}
       </div>
 
       {selectedCategory === 'all' && !searchQuery && featuredSkills.length > 0 && (
         <div className="mb-6">
-          <h3 className="text-xs font-semibold text-[var(--fg-muted)] mb-3">Featured</h3>
+          <h3 className="text-xs font-semibold text-[var(--fg-muted)] mb-3">{t('skills.featured', 'Featured')}</h3>
           <div className="grid gap-3 md:grid-cols-2">
             {featuredSkills.slice(0, 2).map((skill) => (
               <div
@@ -158,7 +158,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
                       className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-[var(--accent)] text-white disabled:opacity-50 transition-opacity"
                     >
                       <Download className="h-3 w-3" />
-                      {installing === skill.id ? 'Installing...' : t('skills.install', 'Install')}
+                      {installing === skill.id ? t('skills.installing', 'Installing...') : t('skills.install', 'Install')}
                     </button>
                   )}
                 </div>
@@ -170,7 +170,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
 
       <div>
         <h3 className="text-xs font-semibold text-[var(--fg-muted)] mb-3">
-          {selectedCategory === 'all' ? 'All Skills' : CATEGORIES.find(c => c.id === selectedCategory)?.name}
+          {selectedCategory === 'all' ? t('skills.all', 'All Skills') : t(CATEGORIES.find(c => c.id === selectedCategory)?.name || 'skills.all', CATEGORIES.find(c => c.id === selectedCategory)?.name || 'All Skills')}
         </h3>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {filteredSkills.map((skill) => (
@@ -212,7 +212,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-xl bg-[var(--fg)] text-[var(--bg)] hover:opacity-90 disabled:opacity-50 transition-all"
                   >
                     <Download className="h-3.5 w-3.5" />
-                    {installing === skill.id ? 'Installing...' : t('skills.install', 'Install')}
+                    {installing === skill.id ? t('skills.installing', 'Installing...') : t('skills.install', 'Install')}
                   </button>
                 )}
               </div>
@@ -223,7 +223,7 @@ export function SkillMarketplace({ onInstall }: SkillMarketplaceProps) {
         {filteredSkills.length === 0 && (
           <div className="flex items-center justify-center h-48 text-[var(--fg-muted)]">
             <Package className="h-12 w-12 mb-3 opacity-30" />
-            <p>未找到技能</p>
+            <p>{t('skills.notFound', '未找到技能')}</p>
           </div>
         )}
       </div>

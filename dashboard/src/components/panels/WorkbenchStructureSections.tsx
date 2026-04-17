@@ -2,6 +2,7 @@ import { ArrowRightCircle, Clock, FolderOpen, PackageOpen, RefreshCcw, RotateCcw
 import { FocusTarget } from '@/lib/types'
 import { formatDateTime, nodeLabel, roleLabel, stateLabel } from '@/lib/utils'
 import { pickTaskFocusRef } from '@/lib/task-focus'
+import { useI18n } from '@/i18n/context'
 
 export function WorkbenchReplanSection({
   latestReplanResult,
@@ -14,20 +15,21 @@ export function WorkbenchReplanSection({
   replanStructureRows: any[]
   onFocusTarget?: (target: FocusTarget) => void
 }) {
+  const { t } = useI18n()
   if (!latestReplanResult) return null
   return (
     <section className="surface-card p-4 md:p-5">
       <div className="flex items-center gap-2 text-[13px] font-semibold text-[var(--fg)]">
-        <RefreshCcw className="h-4 w-4 text-[var(--accent)]" /> 最近重排
+        <RefreshCcw className="h-4 w-4 text-[var(--accent)]" /> {t('workbench.recentReplan', '最近重排')}
       </div>
       <div className="mt-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-subtle)] p-3">
         <div className="flex flex-wrap items-center gap-2 text-[11px] text-[var(--fg-muted)]">
-          <span className="soft-label border-[var(--border)] bg-[var(--surface)] text-[var(--fg-secondary)]">局部重排记录</span>
-          {latestReplanResult?.payload?.workItemCount ? <span className="soft-label border-[var(--accent)]/25 bg-[var(--accent-soft)] text-[var(--accent)]">{latestReplanResult.payload.workItemCount} 个新执行项</span> : null}
+          <span className="soft-label border-[var(--border)] bg-[var(--surface)] text-[var(--fg-secondary)]">{t('workbench.partialReplanRecord', '局部重排记录')}</span>
+          {latestReplanResult?.payload?.workItemCount ? <span className="soft-label border-[var(--accent)]/25 bg-[var(--accent-soft)] text-[var(--accent)]">{latestReplanResult.payload.workItemCount} {t('workbench.newExecutionItems', '个新执行项')}</span> : null}
           {latestReplanResult?.createdAt ? <span>{formatDateTime(latestReplanResult.createdAt)}</span> : null}
         </div>
-        <div className="mt-2 text-[13px] font-medium leading-6 text-[var(--fg)]">{latestReplanResult?.payload?.summary || '总控已给出新的局部规划。'}</div>
-        {latestReplanResult?.payload?.reason ? <div className="mt-1 text-[12px] leading-5 text-[var(--fg-secondary)]">原因：{latestReplanResult.payload.reason}</div> : null}
+        <div className="mt-2 text-[13px] font-medium leading-6 text-[var(--fg)]">{latestReplanResult?.payload?.summary || t('workbench.newLocalPlan', '总控已给出新的局部规划')}</div>
+        {latestReplanResult?.payload?.reason ? <div className="mt-1 text-[12px] leading-5 text-[var(--fg-secondary)]">{t('workbench.reason', '原因：')}{latestReplanResult.payload.reason}</div> : null}
 
         <div className="mt-3 flex flex-wrap gap-2">
           <button type="button" onClick={() => onFocusTarget?.({ intent: 'replan', sourceKind: 'replan', openTab: 'timeline', ...pickTaskFocusRef(latestReplanResult?.payload), summary: latestReplanResult?.payload?.summary, replanCreatedAt: Number(latestReplanResult?.createdAt || 0) || undefined })} className="inline-flex items-center gap-1 rounded-lg border border-[var(--accent)]/25 bg-[var(--accent-soft)] px-3 py-1.5 text-[11px] font-medium text-[var(--accent)] transition hover:opacity-90"><Clock className="h-3.5 w-3.5" /> 在脉络中定位</button>

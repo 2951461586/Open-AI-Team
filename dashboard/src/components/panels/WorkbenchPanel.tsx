@@ -16,6 +16,7 @@ import { PanelEmptyState, PanelErrorState, PanelLoadingState, PanelWarningState 
 import { WorkbenchChildTasksSection, WorkbenchExecutionSurfaceSection, WorkbenchLiveFeedSection, WorkbenchMemorySection, WorkbenchPeopleSection, WorkbenchReplanSection } from '@/components/panels/WorkbenchStructureSections'
 import { ArtifactPreview } from '@/components/panels/ArtifactPreview'
 import { DeliveryTimeline } from '@/components/panels/DeliveryTimeline'
+import { useI18n } from '@/i18n/context'
 
 function activeStageDuration(events: LiveFlowEvent[], currentState: string): string {
   if (currentState === 'done' || currentState === 'cancelled' || currentState === 'blocked') return ''
@@ -87,6 +88,7 @@ function SubtaskProgressPanel({ taskId }: { taskId: string }) {
 }
 
 export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusTarget }: Props) {
+  const { t } = useI18n()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [workbench, setWorkbench] = useState<any>(null)
@@ -217,7 +219,7 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
         })
       }
 
-      setActionFeedback({ tone: 'success', text: `已执行「${meta.label}」，工作台正在刷新到最新状态。` })
+      setActionFeedback({ tone: 'success', text: t('workbench.executedAction', `已执行「${meta.label}」，工作台正在刷新到最新状态`) })
       await loadWorkbenchData()
     } catch (err: any) {
       setActionFeedback({ tone: 'error', text: `执行失败：${err?.message || '未知错误'}` })
@@ -257,7 +259,7 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
 
   const coreFacts = [
     { label: '协作阶段', value: stateLabel((task?.state || currentState) as any) },
-    { label: '当前角色', value: roleLabel(summary.currentDriver || task?.currentDriver) },
+    { label: t('workbench.currentRole', '当前角色'), value: roleLabel(summary.currentDriver || task?.currentDriver) },
     { label: '下一棒', value: nextBestActionLabel(summary.nextBestAction || task?.nextBestAction) },
     { label: '交付状态', value: deliveryStatusLabel(summary.deliveryStatus || task?.deliveryStatus) },
     { label: '人工介入', value: interventionStatusLabel(task?.interventionStatus) },
@@ -483,12 +485,12 @@ export function WorkbenchPanel({ taskId, teamId, task, liveEvents = [], onFocusT
         {!taskId && (
           <PanelEmptyState
             icon={ClipboardList}
-            title="先从左侧选一条任务"
-            body="工作台会按交付、动作、结构三层给你收口。"
+            title={t('workbench.pleaseSelectTask', '先从左侧选一条任务')}
+            body={t('workbench.tip', '工作台会按交付、动作、结构三层给你收口')}
           />
         )}
 
-        {taskId && loading && <PanelLoadingState text="正在加载工作台…" />}
+        {taskId && loading && <PanelLoadingState text={t('workbench.loadingWorkbench', '正在加载工作台...')} />}
 
         {taskId && error && <PanelErrorState text={error} />}
 
