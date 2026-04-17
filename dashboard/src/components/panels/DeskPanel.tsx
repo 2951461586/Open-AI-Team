@@ -53,10 +53,10 @@ function formatRelativeTime(isoString: string): string {
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
-  if (days > 0) return `${days}d ago`;
-  if (hours > 0) return `${hours}h ago`;
-  if (minutes > 0) return `${minutes}m ago`;
-  return 'just now';
+  if (days > 0) return `${days}天前`;
+  if (hours > 0) return `${hours}小时前`;
+  if (minutes > 0) return `${minutes}分钟前`;
+  return '刚刚';
 }
 
 function formatFileSize(bytes?: number): string {
@@ -170,14 +170,14 @@ export function DeskPanel({
                     <button
                       onClick={() => onFileDownload?.(file.id)}
                       className="p-2 rounded-lg hover:bg-[var(--surface)] text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors"
-                      title="Download"
+                      title={t('desk.download', '下载')}
                     >
                       <Download className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => onFileDelete?.(file.id)}
                       className="p-2 rounded-lg hover:bg-[var(--danger-soft)] text-[var(--fg-muted)] hover:text-[var(--danger)] transition-colors"
-                      title="Delete"
+                      title={t('desk.delete', '删除')}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -233,9 +233,9 @@ export function DeskPanel({
                           : 'bg-[var(--warning-soft)] text-[var(--warning)]'
                       )}>
                         {note.status === 'published' ? (
-                          <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" /> Published</span>
+                          <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" />{t('desk.published', '已发布')}</span>
                         ) : (
-                          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> Draft</span>
+                          <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{t('desk.draft', '草稿')}</span>
                         )}
                       </span>
                       <span className="text-xs text-[var(--fg-muted)]">{formatRelativeTime(note.updatedAt)}</span>

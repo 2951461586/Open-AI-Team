@@ -60,10 +60,10 @@ function formatRelativeTime(isoString: string): string {
   const minutes = Math.floor(diff / 60000);
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
-  if (days > 0) return `${days}d ago`;
-  if (hours > 0) return `${hours}h ago`;
-  if (minutes > 0) return `${minutes}m ago`;
-  return "just now";
+  if (days > 0) return `${days}天前`;
+  if (hours > 0) return `${hours}小时前`;
+  if (minutes > 0) return `${minutes}分钟前`;
+  return "刚刚";
 }
 
 const MOCK_ENTRIES: MemoryEntry[] = [
@@ -187,7 +187,7 @@ export function MemoryDecayPanel({
         <button
           onClick={fetchMemoryData}
           className="p-2 rounded-lg hover:bg-[var(--surface-subtle)] transition-colors"
-          title="Refresh"
+          title={t("common.refresh", "刷新")}
         >
           <RefreshCw
             className={cn(
@@ -206,7 +206,7 @@ export function MemoryDecayPanel({
                 ? "bg-[var(--surface)] shadow-sm"
                 : "hover:bg-[var(--surface-muted)]",
             )}
-            title="List view"
+            title={t("memory.listView", "列表视图")}
           >
             <List className="h-4 w-4 text-[var(--fg-muted)]" />
           </button>
@@ -218,7 +218,7 @@ export function MemoryDecayPanel({
                 ? "bg-[var(--surface)] shadow-sm"
                 : "hover:bg-[var(--surface-muted)]",
             )}
-            title="Timeline view"
+            title={t("memory.timelineView", "时间线视图")}
           >
             <GitCommit className="h-4 w-4 text-[var(--fg-muted)]" />
           </button>
@@ -252,7 +252,7 @@ export function MemoryDecayPanel({
             </div>
           </div>
           <div className="rounded-xl bg-[var(--surface-subtle)] p-3">
-            <div className="text-xs text-[var(--fg-muted)] mb-1">Hit/Miss</div>
+            <div className="text-xs text-[var(--fg-muted)] mb-1">{t("memory.hitMiss", "命中/未命中")}</div>
             <div className="text-lg font-semibold text-[var(--fg)]">
               {stats.hits}/{stats.misses}
             </div>
@@ -278,9 +278,9 @@ export function MemoryDecayPanel({
         </label>
         <div className="flex gap-1 ml-auto">
           {[
-            { key: "decay" as const, label: "Decay" },
-            { key: "importance" as const, label: "Importance" },
-            { key: "recency" as const, label: "Recent" },
+            { key: "decay" as const, label: t("memory.sortByDecay", "衰减") },
+            { key: "importance" as const, label: t("memory.sortByImportance", "重要性") },
+            { key: "recency" as const, label: t("memory.sortByRecency", "最近") },
           ].map(({ key, label }) => (
             <button
               key={key}
@@ -338,8 +338,8 @@ export function MemoryDecayPanel({
                     </span>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-[var(--fg-muted)]">
-                    <span>Access: {entry.accessCount}</span>
-                    <span>Importance: {entry.importance.toFixed(2)}</span>
+                    <span>{t("memory.access", "访问")}: {entry.accessCount}</span>
+                    <span>{t("memory.importance", "重要性")}: {entry.importance.toFixed(2)}</span>
                   </div>
                   <div className="mt-2 h-1.5 bg-[var(--surface-subtle)] rounded-full overflow-hidden">
                     <div

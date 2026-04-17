@@ -62,9 +62,9 @@ export function ApiConfigPanel() {
   }, [config, apiKey])
 
   const roles: { key: keyof ApiConfigState; label: string; desc: string }[] = [
-    { key: 'chat', label: 'Chat Model', desc: 'Main conversation model' },
-    { key: 'utility', label: 'Utility Model', desc: 'Lightweight tasks like summarization' },
-    { key: 'reasoning', label: 'Reasoning Model', desc: 'Deep analysis and memory compilation' },
+    { key: 'chat', label: t('api.chatModel', '对话模型'), desc: t('api.chatModelDesc', '主对话模型，用于日常交流和任务协作') },
+    { key: 'utility', label: t('api.utilityModel', '工具模型'), desc: t('api.utilityModelDesc', '轻量级任务，如摘要生成') },
+    { key: 'reasoning', label: t('api.reasoningModel', '推理模型'), desc: t('api.reasoningModelDesc', '深度分析和记忆整合') },
   ]
 
   return (
