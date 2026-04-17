@@ -28,6 +28,7 @@ interface TaskSlice {
   setLoading: (loading: boolean) => void
   setLoadingMore: (loading: boolean) => void
   setError: (error: string | null) => void
+  touchLastUpdate: () => void
   upsertSubtaskEntry: (taskId: string, entry: SubtaskEntry) => void
   clearSubtaskEntries: (taskId: string) => void
 }
@@ -76,6 +77,7 @@ export const useTaskStore = create<TaskSlice>((set) => ({
   setLoading: (loading) => set({ loading }),
   setLoadingMore: (loading) => set({ loadingMore: loading }),
   setError: (error) => set({ error }),
+  touchLastUpdate: () => set({ lastUpdate: Date.now() }),
   upsertSubtaskEntry: (taskId, entry) => set((state) => {
     const taskEntries = { ...(state.subtaskState[taskId] || {}) }
     // If transitioning from retrying to done/failed, keep highest round

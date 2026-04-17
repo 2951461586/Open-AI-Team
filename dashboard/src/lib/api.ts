@@ -26,10 +26,9 @@ export function getWsUrl(): string {
     const sep = explicit.includes('?') ? '&' : '?'
     return DASHBOARD_TOKEN ? `${explicit}${sep}token=${encodeURIComponent(DASHBOARD_TOKEN)}` : explicit
   }
-  if (typeof window === 'undefined') return ''
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const host = window.location.host
-  const wsUrl = `${protocol}//${host}/ws/chat`
+  if (!API_BASE) return ''
+  const wsBase = API_BASE.replace(/^http/, 'ws').replace(/^https/, 'wss')
+  const wsUrl = `${wsBase}/ws/chat`
   return DASHBOARD_TOKEN ? `${wsUrl}?token=${encodeURIComponent(DASHBOARD_TOKEN)}` : wsUrl
 }
 
@@ -53,7 +52,8 @@ export async function fetchDashboard(limit = 50, cursor = 0): Promise<Response> 
   const params = new URLSearchParams({ limit: String(limit) })
   if (cursor > 0) params.set('cursor', String(cursor))
   try {
-    const res = await fetch(buildUrl('/api/v1/state/team/dashboard', {}).replace(API_BASE, API_V1_BASE) + `?${params}`, {
+    const url = `${API_V1_BASE}/state/team?${params}`
+    const res = await fetch(url, {
       cache: 'no-store',
       mode: 'cors',
       headers: authHeaders(),

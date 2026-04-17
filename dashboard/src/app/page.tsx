@@ -340,6 +340,7 @@ export default function DashboardPage() {
       })
     } catch (err) {
       setError(err instanceof Error ? err.message : '加载失败')
+      useTaskStore.getState().touchLastUpdate()
     } finally {
       setLoading(false)
     }
@@ -376,6 +377,7 @@ export default function DashboardPage() {
       setNodes(list)
     } catch (err) {
       console.error('Nodes load failed:', err)
+      useTaskStore.getState().touchLastUpdate()
     }
   }, [setNodes])
 

@@ -1,33 +1,37 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Settings, Bot, MemoryStick, Palette, LayoutDashboard } from 'lucide-react'
+import { Settings, Bot, MemoryStick, Palette, LayoutDashboard, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/i18n/context'
 import { PersonalityPanel } from '@/components/panels/PersonalityPanel'
 import { MemoryDecayPanel } from '@/components/panels/MemoryDecayPanel'
 import { SkillMarketplace } from '@/components/panels/SkillMarketplace'
 import { DeskPanel } from '@/components/panels/DeskPanel'
+import { ApiConfigPanel } from '@/components/panels/ApiConfigPanel'
 
-export type SettingsTab = 'personality' | 'memory' | 'skills' | 'desk'
+export type SettingsTab = 'api' | 'personality' | 'memory' | 'skills' | 'desk'
 
 interface SettingsViewProps {
   defaultTab?: SettingsTab
 }
 
 const TABS: { id: SettingsTab; icon: typeof Bot; labelKey: string }[] = [
+  { id: 'api', icon: Globe, labelKey: 'api.config' },
   { id: 'personality', icon: Bot, labelKey: 'personality.title' },
   { id: 'memory', icon: MemoryStick, labelKey: 'memory.title' },
   { id: 'skills', icon: Palette, labelKey: 'skills.marketplace' },
   { id: 'desk', icon: LayoutDashboard, labelKey: 'desk.title' },
 ]
 
-export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) {
+export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
   const { t } = useI18n()
   const [activeTab, setActiveTab] = useState<SettingsTab>(defaultTab)
 
   const renderContent = useCallback(() => {
     switch (activeTab) {
+      case 'api':
+        return <ApiConfigPanel />
       case 'personality':
         return <PersonalityPanel />
       case 'memory':
@@ -37,7 +41,7 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
       case 'desk':
         return <DeskPanel />
       default:
-        return <PersonalityPanel />
+        return <ApiConfigPanel />
     }
   }, [activeTab])
 
@@ -51,7 +55,7 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
       </div>
 
       <div className="flex border-b border-[var(--border)] px-6">
-        <div className="flex w-full">
+        <div className="flex w-full overflow-x-auto">
           {TABS.map((tab) => {
             const Icon = tab.icon
             const active = activeTab === tab.id
@@ -60,7 +64,7 @@ export function SettingsView({ defaultTab = 'personality' }: SettingsViewProps) 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors',
+                  'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap',
                   active
                     ? 'border-[var(--accent)] text-[var(--accent)]'
                     : 'border-transparent text-[var(--fg-muted)] hover:text-[var(--fg)]'
