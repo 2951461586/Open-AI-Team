@@ -2,35 +2,26 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import {
-  Bot, RefreshCw, Server, Heart, Activity, Puzzle, Zap
+  Bot, RefreshCw, Server, Heart, Activity, Puzzle, Zap, Cpu, Wifi, WifiOff
 } from 'lucide-react'
 import { cn, roleLabel, nodeLabel, probeLatencyLabel, formatTime } from '@/lib/utils'
 import { useTaskStore } from '@/lib/store'
 import { fetchNodes } from '@/lib/api'
 import { NodeSummary } from '@/lib/types'
 
-function Chip({ label, value, tone = 'default' }: { label?: string; value: string; tone?: 'default' | 'success' | 'warning' | 'accent' | 'danger' }) {
-  const cls = tone === 'success' ? 'border-[var(--success)] bg-[var(--success-soft)] text-[var(--success)]'
-    : tone === 'warning' ? 'border-[var(--warning)] bg-[var(--warning-soft)] text-[var(--warning)]'
-    : tone === 'accent' ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)]'
-    : tone === 'danger' ? 'border-[var(--danger)] bg-[var(--danger-soft)] text-[var(--danger)]'
-    : 'border-[var(--border)] bg-[var(--surface-subtle)] text-[var(--fg-secondary)]'
+function MetricTile({ icon, label, value, tone }: { icon?: React.ReactNode; label: string; value: string | number; tone?: 'default' | 'success' | 'warning' | 'accent' | 'danger' }) {
+  const textCls = tone === 'success' ? 'text-[var(--success)]'
+    : tone === 'warning' ? 'text-[var(--warning)]'
+    : tone === 'accent' ? 'text-[var(--accent)]'
+    : tone === 'danger' ? 'text-[var(--danger)]'
+    : 'text-[var(--fg)]'
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-medium ${cls}`}>
-      {label && <span className="text-[var(--fg-ghost)]">{label}</span>}
-      <span>{value}</span>
-    </span>
-  )
-}
-
-function MetricBox({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string | number }) {
-  return (
-    <div className="rounded-xl bg-[var(--surface-subtle)] p-3">
-      <div className="flex items-center gap-1.5 text-xs text-[var(--fg-muted)] mb-1">
+    <div className="metric-tile">
+      <div className="flex items-center gap-1.5 text-xs text-[var(--fg-muted)] mb-1.5">
         {icon}
         <span>{label}</span>
       </div>
-      <div className="text-sm font-semibold text-[var(--fg)]">{value}</div>
+      <div className={cn('text-sm font-semibold', textCls)}>{value}</div>
     </div>
   )
 }
@@ -44,34 +35,58 @@ function NodeCard({ nodeKey, node }: { nodeKey: string; node: NodeSummary }) {
   const pressLabel = load1 >= 2 || mem >= 85 ? '高' : load1 >= 1 || mem >= 70 ? '中' : load1 > 0 || mem > 0 ? '低' : '空闲'
   const pressTone = load1 >= 2 || mem >= 85 ? 'danger' as const : load1 >= 1 || mem >= 70 ? 'warning' as const : 'success' as const
   const roles = (node.activeResidentRoles || []).map(r => roleLabel(r)).join(', ') || '无'
+  const nodeColor = nodeKey === 'node-a' ? 'bg-[var(--node-laoda)]' : nodeKey === 'node-b' ? 'bg-[var(--node-violet)]' : nodeKey === 'node-c' ? 'bg-[var(--node-lebang)]' : 'bg-[var(--fg-muted)]'
 
   return (
-    <article className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all">
+    <article className="surface-card-hero p-5 hover-lift">
       <div className="flex items-start gap-4">
         <div className={cn(
           'h-12 w-12 shrink-0 rounded-xl flex items-center justify-center text-white text-sm font-bold',
-          nodeKey === 'node-a' ? 'bg-[var(--node-laoda)]' :
-          nodeKey === 'node-b' ? 'bg-[var(--node-violet)]' :
-          nodeKey === 'node-c' ? 'bg-[var(--node-lebang)]' : 'bg-[var(--fg-muted)]'
+          nodeColor
         )}>
           {nodeLabel(nodeKey).slice(0, 1)}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-3">
             <div className={cn(
               'w-2 h-2 rounded-full',
               node.reachable ? 'bg-[var(--success)] animate-pulse' : 'bg-[var(--fg-ghost)]'
             )} />
             <span className="text-sm font-bold text-[var(--fg)]">{nodeLabel(nodeKey)}</span>
-            <Chip value={capLabel} tone={capTone} />
+            <span className={cn(
+              'soft-label',
+              capTone === 'success' ? 'border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]' :
+              capTone === 'accent' ? 'border-[var(--accent)]/30 bg-[var(--accent-soft)] text-[var(--accent)]' :
+              'border-[var(--warning)]/30 bg-[var(--warning-soft)] text-[var(--warning)]'
+            )}>
+              {capLabel}
+            </span>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <Chip label="延迟" value={probeLatencyLabel(node.latencyMs)} />
-            <Chip label="活跃" value={`${Number(node.activeResidentCount || 0)}`} tone={Number(node.activeResidentCount || 0) > 0 ? 'success' : 'default'} />
-            <Chip label="负载" value={pressLabel} tone={pressTone} />
+          <div className="flex flex-wrap gap-1.5">
+            <span className="soft-label">
+              <Wifi size={10} className="mr-1" />
+              {probeLatencyLabel(node.latencyMs)}
+            </span>
+            <span className={cn(
+              'soft-label',
+              Number(node.activeResidentCount || 0) > 0
+                ? 'border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]'
+                : ''
+            )}>
+              <Cpu size={10} className="mr-1" />
+              {Number(node.activeResidentCount || 0)}
+            </span>
+            <span className={cn(
+              'soft-label',
+              pressTone === 'danger' ? 'border-[var(--danger)]/30 bg-[var(--danger-soft)] text-[var(--danger)]' :
+              pressTone === 'warning' ? 'border-[var(--warning)]/30 bg-[var(--warning-soft)] text-[var(--warning)]' :
+              'border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]'
+            )}>
+              {pressLabel}
+            </span>
           </div>
-          <div className="mt-2 text-xs text-[var(--fg-muted)]">
-            <span className="font-medium">角色:</span> {roles}
+          <div className="mt-3 text-xs text-[var(--fg-muted)]">
+            <span className="font-medium text-[var(--fg-secondary)]">角色:</span> {roles}
           </div>
         </div>
       </div>
@@ -114,17 +129,25 @@ function statusInfo(s: AgentRuntime['status']) {
 
 function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
   const st = statusInfo(agent.status)
-  const ago = agent.lastActiveAt ? formatTime(Date.now() - agent.lastActiveAt) + ' ago' : '—'
+  const ago = agent.lastActiveAt ? formatTime(Date.now() - agent.lastActiveAt) : '—'
 
   return (
-    <article className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)]/30 transition-all">
+    <article className="surface-card-hero p-5 hover-lift">
       <div className="flex items-center gap-3 mb-4">
         <div className="h-10 w-10 shrink-0 rounded-xl bg-[var(--accent-soft)] flex items-center justify-center text-[var(--accent)]">
           <Bot size={18} />
         </div>
         <div className="min-w-0 flex-1">
           <span className="block text-sm font-semibold text-[var(--fg)] truncate">{agent.displayName}</span>
-          <Chip value={st.label} tone={st.tone} />
+          <span className={cn(
+            'soft-label mt-1',
+            st.tone === 'success' ? 'border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]' :
+            st.tone === 'accent' ? 'border-[var(--accent)]/30 bg-[var(--accent-soft)] text-[var(--accent)]' :
+            st.tone === 'danger' ? 'border-[var(--danger)]/30 bg-[var(--danger-soft)] text-[var(--danger)]' :
+            'border-[var(--fg-ghost)]/30 bg-[var(--surface-subtle)] text-[var(--fg-muted)]'
+          )}>
+            {st.label}
+          </span>
         </div>
       </div>
 
@@ -132,7 +155,7 @@ function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
         <div className="text-xs text-[var(--fg-muted)] mb-2">角色</div>
         <div className="flex flex-wrap gap-1.5">
           {agent.roles.map((r) => (
-            <span key={r} className="px-2.5 py-1 rounded-lg bg-[var(--surface-subtle)] text-xs font-medium text-[var(--fg-secondary)] border border-[var(--border)]">
+            <span key={r} className="soft-label">
               {roleLabel(r)}
             </span>
           ))}
@@ -140,14 +163,14 @@ function AgentRuntimeCard({ agent }: { agent: AgentRuntime }) {
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <MetricBox icon={<Heart size={12} />} label="心跳" value={agent.heartbeatMs ? `${agent.heartbeatMs}ms` : '—'} />
-        <MetricBox icon={<Server size={12} />} label="内存" value={agent.memorySize ? `${agent.memorySize}` : '—'} />
-        <MetricBox icon={<Zap size={12} />} label="最后活跃" value={ago} />
+        <MetricTile icon={<Heart size={12} />} label="心跳" value={agent.heartbeatMs ? `${agent.heartbeatMs}ms` : '—'} />
+        <MetricTile icon={<Server size={12} />} label="内存" value={agent.memorySize ? `${agent.memorySize}` : '—'} />
+        <MetricTile icon={<Zap size={12} />} label="活跃" value={ago} />
       </div>
 
       <div className="mt-3 grid grid-cols-2 gap-2">
-        <MetricBox icon={<Puzzle size={12} />} label="技能" value={agent.skillsInstalled ?? '—'} />
-        <MetricBox icon={<Activity size={12} />} label="状态" value={st.label} />
+        <MetricTile icon={<Puzzle size={12} />} label="技能" value={agent.skillsInstalled ?? '—'} />
+        <MetricTile icon={<Activity size={12} />} label="状态" value={st.label} tone={st.tone === 'success' ? 'success' : st.tone === 'accent' ? 'accent' : st.tone === 'danger' ? 'danger' : 'default'} />
       </div>
 
       {agent.config && (
@@ -232,26 +255,53 @@ export function AgentsView() {
 
   return (
     <div className="flex flex-col h-full bg-[var(--bg)]">
-      <div className="shrink-0 px-6 py-4 border-b border-[var(--border)] bg-[var(--surface)]">
-        <div className="flex items-center justify-between mb-4">
+      <div className="shrink-0 border-b border-[var(--border)] bg-[var(--surface)]/95 px-4 py-3">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
-              <Server className="h-5 w-5" />
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
+              <Server className="h-4 w-4" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-[var(--fg)]">Agent 运行时</h1>
-              <p className="text-xs text-[var(--fg-muted)]">监控和管理 Agent 实例</p>
+              <h1 className="text-sm font-semibold text-[var(--fg)]">Agent 运行时</h1>
+              <p className="text-[11px] text-[var(--fg-muted)]">监控和管理 Agent 实例</p>
             </div>
           </div>
-          <button
-            onClick={loadNodes}
-            className="p-2 rounded-xl hover:bg-[var(--surface-subtle)] transition-colors"
-          >
-            <RefreshCw className={cn('h-4 w-4 text-[var(--fg-muted)]', loading && 'animate-spin')} />
-          </button>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
+              {tab === 'runtime' ? (
+                <>
+                  <span className="soft-label border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]">
+                    活跃 {agentMet.active}
+                  </span>
+                  <span className="soft-label">
+                    总数 {agentMet.total}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="soft-label border-[var(--success)]/30 bg-[var(--success-soft)] text-[var(--success)]">
+                    在线 {nodeMet.online}
+                  </span>
+                  <span className="soft-label">
+                    总数 {nodeMet.total}
+                  </span>
+                  <span className="soft-label border-[var(--accent)]/30 bg-[var(--accent-soft)] text-[var(--accent)]">
+                    常驻 {nodeMet.resident}
+                  </span>
+                </>
+              )}
+            </div>
+            <button
+              onClick={loadNodes}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--fg-secondary)] transition hover:bg-[var(--surface-subtle)]"
+              title="刷新节点"
+            >
+              <RefreshCw className={cn('h-3.5 w-3.5', loading && 'animate-spin')} />
+            </button>
+          </div>
         </div>
 
-        <div className="flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit">
+        <div className="flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit mt-3">
           {([
             { id: 'runtime' as AgentTab, label: '运行时', icon: Bot },
             { id: 'nodes' as AgentTab, label: '节点', icon: Server },
@@ -263,13 +313,13 @@ export function AgentsView() {
                 key={t.id}
                 onClick={() => setTab(t.id)}
                 className={cn(
-                  'flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-all',
+                  'flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all',
                   active
-                    ? 'bg-[var(--accent)] text-white shadow-md'
+                    ? 'bg-[var(--accent)] text-white shadow-sm'
                     : 'text-[var(--fg-secondary)] hover:bg-[var(--surface-muted)]'
                 )}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5" />
                 <span>{t.label}</span>
               </button>
             )
@@ -277,34 +327,15 @@ export function AgentsView() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto p-6">
-        <div>
-          <div className="mb-4 flex items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-[var(--fg-muted)]">活跃:</span>
-              <span className="px-2.5 py-1 rounded-lg bg-[var(--success-soft)] font-semibold text-[var(--success)]">
-                {tab === 'runtime' ? agentMet.active : nodeMet.online}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-[var(--fg-muted)]">总数:</span>
-              <span className="px-2.5 py-1 rounded-lg bg-[var(--surface-subtle)] font-semibold text-[var(--fg-secondary)]">
-                {tab === 'runtime' ? agentMet.total : nodeMet.total}
-              </span>
-            </div>
-            {tab === 'nodes' && (
-              <div className="flex items-center gap-2">
-                <span className="text-[var(--fg-muted)]">常驻:</span>
-                <span className="px-2.5 py-1 rounded-lg bg-[var(--accent-soft)] font-semibold text-[var(--accent)]">
-                  {nodeMet.resident}
-                </span>
-              </div>
-            )}
-          </div>
-
+      <div className="flex-1 overflow-auto panel-scroll">
+        <div className="p-4 md:p-5">
           {tab === 'runtime' && (
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {agents.map((a) => <AgentRuntimeCard key={a.agentId} agent={a} />)}
+              {agents.length === 0 ? (
+                <div className="col-span-full flex items-center justify-center h-48 text-[var(--fg-muted)]">暂无运行时数据</div>
+              ) : (
+                agents.map((a) => <AgentRuntimeCard key={a.agentId} agent={a} />)
+              )}
             </div>
           )}
 

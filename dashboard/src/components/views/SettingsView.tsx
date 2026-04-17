@@ -46,16 +46,21 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
   }, [activeTab])
 
   return (
-    <div className="flex h-full flex-col bg-[var(--surface)]">
-      <div className="flex items-center gap-3 border-b border-[var(--border)] px-6 py-4">
-        <div className="flex items-center gap-3 w-full">
-          <Settings className="h-5 w-5 text-[var(--accent)]" />
-          <h1 className="text-base font-semibold text-[var(--fg)]">{t('nav.settings', 'Settings')}</h1>
+    <div className="flex h-full flex-col bg-[var(--bg)]">
+      <div className="shrink-0 border-b border-[var(--border)] bg-[var(--surface)]/95 px-4 py-3">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent)]">
+            <Settings className="h-4 w-4" />
+          </div>
+          <div>
+            <h1 className="text-sm font-semibold text-[var(--fg)]">{t('nav.settings', '设置')}</h1>
+            <p className="text-[11px] text-[var(--fg-muted)]">配置和个性化选项</p>
+          </div>
         </div>
       </div>
 
-      <div className="flex border-b border-[var(--border)] px-6">
-        <div className="flex w-full overflow-x-auto">
+      <div className="shrink-0 border-b border-[var(--border)] bg-[var(--surface)] px-4">
+        <div className="flex gap-1 p-1 bg-[var(--surface-subtle)] rounded-xl w-fit mt-2">
           {TABS.map((tab) => {
             const Icon = tab.icon
             const active = activeTab === tab.id
@@ -64,14 +69,14 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap',
+                  'flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all',
                   active
-                    ? 'border-[var(--accent)] text-[var(--accent)]'
-                    : 'border-transparent text-[var(--fg-muted)] hover:text-[var(--fg)]'
+                    ? 'bg-[var(--accent)] text-white shadow-sm'
+                    : 'text-[var(--fg-secondary)] hover:bg-[var(--surface-muted)]'
                 )}
               >
-                <Icon className="h-4 w-4" />
-                {t(tab.labelKey, tab.id)}
+                <Icon className="h-3.5 w-3.5" />
+                <span>{t(tab.labelKey, tab.id)}</span>
               </button>
             )
           })}
@@ -79,7 +84,7 @@ export function SettingsView({ defaultTab = 'api' }: SettingsViewProps) {
       </div>
 
       <div className="flex-1 overflow-auto panel-scroll">
-        <div className="px-6 py-6">
+        <div className="p-4 md:p-5">
           {renderContent()}
         </div>
       </div>
