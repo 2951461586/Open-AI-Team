@@ -1,5 +1,8 @@
-node_modules
-**/node_modules
+# Allow node_modules from host
+!**/node_modules
+!node_modules
+!packages/*/node_modules
+!apps/*/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -37,7 +40,6 @@ electron
 shared/artifacts
 reports
 memory
-dashboard/out
 .tmp-skill-registry
 .tmp-skill-registry-2
 .tmp
