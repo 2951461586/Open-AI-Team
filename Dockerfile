@@ -52,8 +52,10 @@ COPY --from=runtime-builder /app/task_workspaces ./task_workspaces
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends curl \
+  || true \
   && rm -rf /var/lib/apt/lists/* \
-  && chown -R appuser:appgroup /app || true
+  && mkdir -p /app/tmp /app/packages/state \
+  && chown -R appuser:appgroup /app
 
 USER appuser
 

@@ -31,6 +31,7 @@ export * from './team-policy.mjs';
 export * from './team-resident-runtime.mjs';
 export * from './team-role-contracts.mjs';
 export * from './team-role-deployment.mjs';
+export * from './team-models-config.mjs';
 export * from './team-roles-config.mjs';
 export * from './team-session-completion-bus.mjs';
 export * from './team-single-flight-guard.mjs';

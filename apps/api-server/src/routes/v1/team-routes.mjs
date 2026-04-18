@@ -109,5 +109,26 @@ export function createTeamRoutes(ctx = {}) {
     return c.json({ ok: true, message: 'roles config reloaded' });
   });
 
+  app.get('/config/models', async (c) => {
+    const { loadTeamModelsConfig } = await import('@ai-team/team-runtime');
+    const config = loadTeamModelsConfig();
+    return c.json({ ok: true, config });
+  });
+
+  app.post('/config/models', async (c) => {
+    const body = await c.req.json().catch(() => ({}));
+    const { config, apiKey } = body;
+    if (!config) return c.json({ ok: false, error: 'config_required' }, 400);
+
+    const { saveTeamModelsConfig, loadTeamModelsConfig } = await import('@ai-team/team-runtime');
+    const saved = saveTeamModelsConfig(config);
+    
+    if (apiKey) {
+      process.env.OPENAI_API_KEY = apiKey;
+    }
+    
+    return c.json({ ok: true, config: saved });
+  });
+
   return app;
 }

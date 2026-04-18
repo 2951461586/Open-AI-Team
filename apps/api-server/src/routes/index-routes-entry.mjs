@@ -3,6 +3,7 @@ import { resolveDeliveryTarget } from '../team/team-delivery-target.mjs';
 import { isTeamOutputReceipt, handleTeamOutputReceipt } from '../team/team-output-receipt-host.mjs';
 import { PersonalAgent } from '../../../../src/personal-agent/personal-agent.mjs';
 import { loadPersonalConfig, savePersonalConfig } from '../../../../src/personal-agent/personal-agent-config.mjs';
+import { loadTeamModelsConfig, saveTeamModelsConfig } from '@ai-team/team-runtime';
 
 const DEFAULT_PERSONAL_CONFIG_PATH = path.resolve(process.cwd(), 'config', 'personal-agent.json');
 const personalAgentRegistry = new Map();
@@ -413,6 +414,36 @@ export function tryHandleEntryRoute(req, res, ctx = {}) {
     } catch (e) {
       sendJson(res, 400, { ok: false, error: String(e) });
     }
+    return true;
+  }
+
+  if (req.method === 'GET' && (req.url === '/api/v1/team/config/models' || req.url.startsWith('/api/v1/team/config/models?'))) {
+    try {
+      const config = loadTeamModelsConfig();
+      sendJson(res, 200, { ok: true, config });
+    } catch (e) {
+      sendJson(res, 400, { ok: false, error: String(e) });
+    }
+    return true;
+  }
+
+  if (req.method === 'POST' && req.url === '/api/v1/team/config/models') {
+    readJsonBody(req, res, sendJson, async (body) => {
+      try {
+        const { config, apiKey } = body;
+        if (!config) {
+          sendJson(res, 400, { ok: false, error: 'config_required' });
+          return;
+        }
+        const saved = saveTeamModelsConfig(config);
+        if (apiKey) {
+          process.env.OPENAI_API_KEY = String(apiKey);
+        }
+        sendJson(res, 200, { ok: true, config: saved });
+      } catch (e) {
+        sendJson(res, 400, { ok: false, error: String(e) });
+      }
+    });
     return true;
   }
 
