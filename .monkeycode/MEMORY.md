@@ -82,3 +82,34 @@ Agent 在任务执行过程中发现的条目应遵循以下格式：
     - 一致的间距和排版
   - i18n 翻译：
     - 添加缺失的 key：api.config、skills.marketplace、desk.title
+
+[Docker 部署与代理配置]
+- Date: 2026-04-18
+- Context: Agent 部署 AI Team Runtime 到 Docker 时发现
+- Category: 环境配置
+- Instructions:
+  - Docker BuildKit 会传递代理环境变量到构建上下文，导致 apt-get 尝试连接 127.0.0.1:7890（容器内不存在）
+  - 解决：使用 DOCKER_BUILDKIT=0 并清除代理环境变量
+  - Mihomo (Clash Meta) 代理配置在 /root/.clash-meta/config.yaml
+  - 启动命令：/root/.clash-meta/mihomo -f /root/.clash-meta/config.yaml
+
+[API 路由实现]
+- Date: 2026-04-18
+- Context: Agent 修复 settings page model configuration 404 错误时发现
+- Category: 代码模式
+- Instructions:
+  - API server 有两个实现：Hono-based (index-hono.mjs) 和 function-based (index.mjs)
+  - 当前运行的服务器使用 function-based API，路由在 index-routes-entry.mjs
+  - Dashboard 调用 /api/v1/team/config/models 获取/保存模型配置
+  - 模型配置保存在 config/team/models.json
+  - loadTeamModelsConfig/saveTeamModelsConfig 函数在 packages/team-runtime/src/team-models-config.mjs
+
+[容器多服务启动]
+- Date: 2026-04-18
+- Context: Agent 配置容器同时启动多个服务时发现
+- Category: 构建方法
+- Instructions:
+  - 主 API 服务器：node src/index.mjs（端口 19090）
+  - MCP 服务器：node /app/scripts/start-mcp.mjs --http --host 0.0.0.0（端口 7331）
+  - Dockerfile CMD 使用：node src/index.mjs & node /app/scripts/start-mcp.mjs --http --host 0.0.0.0 & wait
+  - wait 命令确保前台进程保持运行，容器不会退出
