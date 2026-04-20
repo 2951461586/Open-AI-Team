@@ -1,56 +1,41 @@
 COMPOSE ?= docker compose
 COMPOSE_FILE ?= docker-compose.yml
-DEV_COMPOSE_FILES = -f docker-compose.yml -f docker-compose.dev.yml
+DEV_COMPOSE_FILE ?= docker-compose.dev.yml
 
-.PHONY: help install check doctor setup-wizard docker-build docker-start docker-stop docker-restart docker-logs docker-ps docker-dev docker-dev-build docker-dev-stop docker-shell deploy
+.PHONY: help install check doctor setup-wizard docker-up docker-down docker-dev docker-dev-down docker-logs docker-ps deploy
 
 help:
 	@echo "AI Team Runtime - Make Commands"
 	@echo ""
-	@echo "Installation:"
-	@echo "  make install          - Install dependencies (requires pnpm 9.x)"
-	@echo "  make check           - Check prerequisites"
-	@echo "  make doctor          - Check system health and configuration"
-	@echo "  make setup-wizard    - Run interactive setup wizard"
-	@echo ""
-	@echo "Quick Deploy:"
-	@echo "  make deploy          - One-click deploy to Docker (production)"
-	@echo "  make deploy DEV=1    - One-click deploy (development mode)"
+	@echo "Quick Start:"
+	@echo "  make install          - Install dependencies"
+	@echo "  make setup-wizard     - Run setup wizard"
 	@echo ""
 	@echo "Docker (Production):"
-	@echo "  make docker-start    - Start all services (builds if needed)"
-	@echo "  make docker-stop     - Stop all services"
-	@echo "  make docker-restart  - Restart all services"
-	@echo "  make docker-logs     - View logs (follow mode)"
-	@echo "  make docker-ps       - Show running containers"
-	@echo "  make docker-shell     - Open shell in app container"
+	@echo "  make docker-up        - Start services (builds if needed)"
+	@echo "  make docker-down      - Stop services"
+	@echo "  make docker-restart   - Restart services"
+	@echo "  make docker-logs      - View logs"
+	@echo "  make docker-ps        - Show containers"
 	@echo ""
 	@echo "Docker (Development):"
-	@echo "  make docker-dev      - Start dev mode with hot reload"
-	@echo "  make docker-dev-build - Build and start dev mode"
-	@echo "  make docker-dev-stop  - Stop dev mode"
+	@echo "  make docker-dev       - Start dev mode with hot reload"
+	@echo "  make docker-dev-down  - Stop dev mode"
 	@echo ""
-	@echo "Local Development:"
-	@echo "  pnpm run dev         - Start in local mode (no Docker)"
-	@echo "  pnpm run start       - Start API server"
-	@echo "  pnpm run test        - Run tests"
+	@echo "Deploy:"
+	@echo "  make deploy           - One-click deploy (production)"
 	@echo ""
-	@echo "Dashboard:"
-	@echo "  make dashboard-build - Build dashboard UI"
-	@echo "  make dashboard-dev   - Start dashboard dev server"
-	@echo ""
-	@echo "See INSTALL.md for detailed installation instructions."
+	@echo "See INSTALL.md for detailed instructions."
 
 install:
 	@echo "Installing dependencies..."
 	@which pnpm > /dev/null || (echo "pnpm not found. Run: corepack enable pnpm" && exit 1)
-	@pnpm --version | grep -q "^9" || echo "Warning: pnpm 9.x recommended"
 	pnpm install
 
 check:
 	@echo "Checking prerequisites..."
 	@node --version | grep -q "^v1[89]" && echo "✓ Node.js OK" || echo "✗ Node.js 18+ required"
-	@pnpm --version 2>/dev/null | grep -q "^9" && echo "✓ pnpm OK" || echo "✗ pnpm 9.x required"
+	@pnpm --version 2>/dev/null && echo "✓ pnpm OK" || echo "✗ pnpm required"
 	@docker --version > /dev/null 2>&1 && echo "✓ Docker OK" || echo "✗ Docker not found"
 	@docker compose version > /dev/null 2>&1 && echo "✓ Docker Compose OK" || echo "✗ Docker Compose not found"
 
@@ -62,18 +47,13 @@ setup-wizard:
 	@echo "Running AI Team Setup Wizard..."
 	node scripts/setup/setup-wizard.mjs
 
-docker-build:
-	$(COMPOSE) -f $(COMPOSE_FILE) build
-
-docker-start:
+docker-up:
 	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
 
-docker-stop:
+docker-down:
 	$(COMPOSE) -f $(COMPOSE_FILE) down
 
-docker-restart:
-	$(COMPOSE) -f $(COMPOSE_FILE) down
-	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
+docker-restart: docker-down docker-up
 
 docker-logs:
 	$(COMPOSE) -f $(COMPOSE_FILE) logs -f
@@ -82,28 +62,15 @@ docker-ps:
 	$(COMPOSE) -f $(COMPOSE_FILE) ps
 
 docker-dev:
-	$(COMPOSE) $(DEV_COMPOSE_FILES) up
+	$(COMPOSE) -f $(DEV_COMPOSE_FILE) up --build
 
-docker-dev-build:
-	$(COMPOSE) $(DEV_COMPOSE_FILES) up --build
-
-docker-dev-stop:
-	$(COMPOSE) $(DEV_COMPOSE_FILES) down
-
-docker-shell:
-	$(COMPOSE) -f $(COMPOSE_FILE) exec ai-team sh
-
-dashboard-build:
-	cd dashboard && pnpm install && pnpm run build
-
-dashboard-dev:
-	cd dashboard && pnpm install && pnpm run dev
+docker-dev-down:
+	$(COMPOSE) -f $(DEV_COMPOSE_FILE) down
 
 deploy:
-	@if [ "$(DEV)" = "1" ]; then \
-		echo "Deploying in development mode..."; \
-		bash scripts/deploy/deploy.sh dev; \
-	else \
-		echo "Deploying in production mode..."; \
-		bash scripts/deploy/deploy.sh production; \
-	fi
+	$(COMPOSE) -f $(COMPOSE_FILE) up -d --build
+	@echo ""
+	@echo "Deployment complete!"
+	@echo "Access: http://localhost:$${PORT:-19090}"
+	@echo "Logs:   make docker-logs"
+	@echo "Stop:   make docker-down"

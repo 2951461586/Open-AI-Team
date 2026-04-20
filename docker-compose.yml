@@ -6,56 +6,27 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-      args:
-        DASHBOARD_TOKEN: ${DASHBOARD_TOKEN:-}
-        NEXT_PUBLIC_ENABLE_REALTIME: ${NEXT_PUBLIC_ENABLE_REALTIME:-}
-        NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL:-}
     image: ai-team-harness:latest
     restart: unless-stopped
     env_file:
       - .env
     environment:
-      NODE_ENV: ${NODE_ENV:-production}
-      PORT: ${PORT:-19090}
-      BIND: ${BIND:-0.0.0.0}
-      TEAM_DB_PATH: ${TEAM_DB_PATH:-/app/state/team-runtime.db}
-      TEAM_TASK_WORKSPACE_ROOT: ${TEAM_TASK_WORKSPACE_ROOT:-/app/task_workspaces}
-      MCP_PORT: ${MCP_PORT:-7331}
-      MCP_ENABLED: ${MCP_ENABLED:-true}
+      NODE_ENV: production
       IN_DOCKER: "1"
-      CONTAINER: "1"
     ports:
       - "${PORT:-19090}:${PORT:-19090}"
-      - "${MCP_PORT:-7331}:${MCP_PORT:-7331}"
     volumes:
       - ./state:/app/state
       - ./task_workspaces:/app/task_workspaces
       - ./config/team:/app/config/team:ro
-      - ./.env:/app/.env:ro
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:${PORT:-19090}/health || exit 1"]
       interval: 30s
       timeout: 10s
-      retries: 6
-      start_period: 30s
-    deploy:
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 512M
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
+      retries: 3
+      start_period: 20s
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
-    networks:
-      - ai-team-net
-
-networks:
-  ai-team-net:
-    driver: bridge

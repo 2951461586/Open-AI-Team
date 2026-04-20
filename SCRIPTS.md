@@ -2,31 +2,39 @@
 
 This repository uses the root `package.json` as the operator entry surface.
 
-## Default commands
+## Quick Start
 
-### Main product
 ```bash
+# Default commands
 npm install
 cp .env.example .env
-npm run smoke:team
 npm start
+# Access http://localhost:19090
 ```
 
-### Agent harness baseline
+## API Endpoints
+
+All API endpoints use the `/api/v1/` prefix:
+
+```
+POST /api/v1/team/chat          — Create conversation
+POST /api/v1/team/chat/task     — Task conversation
+GET  /api/v1/state/team         — Team overview
+GET  /api/v1/state/team/summary — Task summary
+POST /api/v1/team/tasks/:id/control — Task control
+GET  /health                    — Health check
+POST /mcp                       — MCP JSON-RPC
+```
+
+## Smoke Tests
+
 ```bash
-npm install
-npm run demo:oss-minimal
-npm run doctor:oss-minimal
+npm run smoke:team
+npm run smoke:oss-minimal
+npm run smoke:team:batch
 ```
 
-### Third-party agent onboarding
-```bash
-npm install
-npm run validate:third-party-agent
-npm run smoke:third-party-agent
-```
-
-## Repo safety / release checks
+## Safety & Release Checks
 
 ```bash
 npm run audit:repo-hygiene
@@ -36,7 +44,7 @@ npm run smoke:dashboard-public-contract
 npm run smoke:release-engineering
 ```
 
-## Build and packaging
+## Build and Packaging
 
 ```bash
 npm run build
@@ -44,15 +52,24 @@ npm run dashboard:build
 npm run release:stage-artifacts -- public-contracts source-docs dashboard oss-minimal third-party
 ```
 
-## Authority rules for scripts
+## Authority Rules
 
 - `npm start` -> `apps/api-server/src/index.mjs`
 - `dashboard/` is the current UI authority
-- `apps/dashboard/` is secondary packaging surface
 - package-owned logic should run from `packages/*`
-- compatibility paths under `src/*` should not become the default place for new operator flows
+- legacy routes under `src/routes/` return 410 and redirect to `/api/v1/`
 
-## Notes
+## Legacy Route Retirement
 
-- This file documents current runnable commands.
-- Historical migration plans and phase notes belong under `docs/archive/` and are not the default operator reading path.
+The following legacy routes have been retired and return 410 Gone:
+
+| Legacy Path | New Path |
+|-------------|----------|
+| `/state/team` | `/api/v1/state/team` |
+| `/state/*` | `/api/v1/state/*` |
+| `/internal/team/task` | `/api/v1/internal/team/task` |
+| `/internal/team/ingress` | `/api/v1/team/chat` |
+| `/internal/debate/*` | `/api/v1/team/chat (TL-driven)` |
+| `/roles` | `/api/v1/team/config/roles` |
+| `/api/personal` | Retired — use `/api/v1/team/chat` |
+| `/desks/*` | `/api/v1/state/team/workbench` |

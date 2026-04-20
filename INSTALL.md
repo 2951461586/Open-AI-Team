@@ -9,22 +9,30 @@
 | Docker | 24.0 | 25.x |
 | Docker Compose | 2.0 | 2.x |
 
-## 安装方式
+## 快速部署
 
-### 方式一：Docker 部署（推荐）
+### 方式一：Docker 一键部署（推荐）
 
 ```bash
-# 克隆项目
+# 1. 克隆项目
 git clone https://github.com/2951461586/Open-AI-Team.git
 cd Open-AI-Team
 
-# 复制环境变量
+# 2. 配置环境变量
 cp .env.example .env
+# 编辑 .env，填入 LLM API Key（如 OPENAI_API_KEY）
 
+# 3. 一键部署
+make deploy
+# 访问 http://localhost:19090
+```
+
+### 方式二：Docker Compose
+
+```bash
+cp .env.example .env
 # 编辑 .env 配置 API Keys
-# 至少需要配置一个 LLM provider
 
-# 启动所有服务
 docker compose up -d
 
 # 查看服务状态
@@ -34,84 +42,74 @@ docker compose ps
 docker compose logs -f
 ```
 
-访问 http://localhost:19090
-
----
-
-### 方式二：本地开发
+### 方式三：本地开发
 
 ```bash
 # 克隆项目
 git clone https://github.com/2951461586/Open-AI-Team.git
 cd Open-AI-Team
 
-# 安装依赖（需要 pnpm 9.x）
+# 安装依赖
 corepack enable
 pnpm install
 
-# 复制环境变量
+# 配置
 cp .env.example .env
-
 # 编辑 .env 配置 API Keys
 
-# 开发模式启动
+# 启动开发服务
 pnpm run dev
-
-# 或单独启动 API Server
-pnpm run start
 ```
 
----
-
-### 方式三：Docker 开发模式
+### 方式四：Docker 开发模式（热重载）
 
 ```bash
-# 启动开发模式（代码挂载，热更新）
-docker compose -f docker-compose.dev.yml up
-
-# 或使用 Makefile
+cp .env.example .env
 make docker-dev
+# 代码修改会自动重载
 ```
-
----
 
 ## 环境变量配置
 
-编辑 `.env` 文件：
+编辑 `.env` 文件，至少配置一个 LLM Provider：
 
 ```bash
-# LLM Provider（至少配置一个）
+# LLM Provider（必填，至少一个）
+LLM_PROVIDER=openai
+LLM_MODEL=gpt-4o-mini
 OPENAI_API_KEY=sk-...
-# 或
-DEEPSEEK_API_KEY=sk-...
 
-# 可选配置
-PORT=3001
-NODE_ENV=development
+# 或 Anthropic
+# LLM_PROVIDER=anthropic
+# ANTHROPIC_API_KEY=...
+
+# 或 DeepSeek
+# LLM_PROVIDER=deepseek
+# DEEPSEEK_API_KEY=...
+
+# 服务器配置
+PORT=19090
+NODE_ENV=production
 ```
 
----
-
-## 验证安装
+## 验证部署
 
 ```bash
+# 检查健康状态
+curl http://localhost:19090/health
+
 # 运行冒烟测试
 pnpm run smoke:team
-
-# 或测试独立 Agent
-pnpm run demo:oss-minimal
 ```
-
----
 
 ## 常见问题
 
-### Q: docker-compose 启动失败？
+### Q: Docker 启动失败？
 
 ```bash
 # 检查 Docker 是否运行
 docker --version
-docker compose --version
+docker compose version
 
 # 清理并重启
 docker compose down -v
@@ -128,30 +126,19 @@ pnpm --version  # 应显示 9.x
 
 ### Q: 端口被占用？
 
+编辑 `.env`：
 ```bash
-# 修改 .env 中的 PORT
-PORT=3002
-
-# 或修改 docker-compose.yml 中的端口映射
+PORT=19091
 ```
 
----
-
-## 快速命令参考
+## 常用命令
 
 | 命令 | 说明 |
 |------|------|
-| `docker compose up -d` | 生产部署 |
-| `docker compose -f docker-compose.dev.yml up` | 开发模式 |
-| `make docker-start` | Docker 启动 |
-| `make docker-stop` | Docker 停止 |
+| `make deploy` | 一键部署 |
+| `docker compose up -d` | 启动服务 |
+| `docker compose down` | 停止服务 |
+| `make docker-logs` | 查看日志 |
+| `make docker-dev` | 开发模式（热重载） |
 | `pnpm run dev` | 本地开发 |
-| `pnpm run smoke:team` | 运行冒烟测试 |
-
----
-
-## 下一步
-
-- 阅读 [GETTING-STARTED.md](./GETTING-STARTED.md) 快速开始
-- 阅读 [ARCHITECTURE.md](./ARCHITECTURE.md) 了解架构
-- 阅读 [DOCKER.md](./DOCKER.md) Docker 部署详情
+| `npm test` | 运行测试 |
