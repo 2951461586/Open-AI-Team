@@ -25,16 +25,16 @@ cp .env.example .env
 # 至少需要配置一个 LLM provider
 
 # 启动所有服务
-docker-compose up -d
+docker compose up -d
 
 # 查看服务状态
-docker-compose ps
+docker compose ps
 
 # 查看日志
-docker-compose logs -f
+docker compose logs -f
 ```
 
-访问 http://localhost:3001
+访问 http://localhost:19090
 
 ---
 
@@ -67,7 +67,7 @@ pnpm run start
 
 ```bash
 # 启动开发模式（代码挂载，热更新）
-docker-compose -f docker-compose.dev.yml up
+docker compose -f docker-compose.dev.yml up
 
 # 或使用 Makefile
 make docker-dev
@@ -111,11 +111,11 @@ pnpm run demo:oss-minimal
 ```bash
 # 检查 Docker 是否运行
 docker --version
-docker-compose --version
+docker compose --version
 
 # 清理并重启
-docker-compose down -v
-docker-compose up -d
+docker compose down -v
+docker compose up -d
 ```
 
 ### Q: pnpm install 失败？
@@ -141,12 +141,12 @@ PORT=3002
 
 | 命令 | 说明 |
 |------|------|
-| `docker-compose up -d` | 生产部署 |
-| `docker-compose -f docker-compose.dev.yml up` | 开发模式 |
+| `docker compose up -d` | 生产部署 |
+| `docker compose -f docker-compose.dev.yml up` | 开发模式 |
 | `make docker-start` | Docker 启动 |
 | `make docker-stop` | Docker 停止 |
 | `pnpm run dev` | 本地开发 |
-| `pnpm run smoke:team` | 运行测试 |
+| `pnpm run smoke:team` | 运行冒烟测试 |
 
 ---
 
